@@ -5,7 +5,7 @@ import { DBTest } from './dbtest/test-component.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home' },
-  { path: 'dbtest', component: DBTest, title: 'DBTest' },
+  { path: 'test', component: DBTest, title: 'test' },
   { path: '', component: HomeComponent, title: 'Home' },
 ];
 @NgModule({

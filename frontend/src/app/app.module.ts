@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatComponentsModule } from './mat-components/mat-components.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // custom imports
 import { HomeComponent } from './home/home.component';
@@ -18,6 +19,7 @@ import { DBTest } from './dbtest/test-component.component';
     BrowserAnimationsModule,
     MatComponentsModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

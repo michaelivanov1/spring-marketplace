@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-test-component',
@@ -10,9 +11,15 @@ export class DBTest {
 
   text: String | undefined;
 
-  handleClick() {
-    console.log('text:', this.text);
-    // db
-  }
+  constructor(private http: HttpClient) { }
 
+  handleClick() {
+    const body = { text: this.text };
+    this.http.post('http://localhost:8080/api/test', body, { responseType: 'text' })
+      .subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.error('not added to db: ', error);
+      });
+  }
 }
