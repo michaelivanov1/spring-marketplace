@@ -1,0 +1,34 @@
+<mat-card align="center">
+  <div class="main-container">
+    <mat-card-title>
+      Spring Marketplace
+    </mat-card-title>
+    <div class="form-container">
+      <h2>Please register an account</h2>
+      <form [formGroup]="registrationForm" (ngSubmit)="onFormSubmit()">
+        <div>
+          <label for="username">
+            username
+          </label>
+          <input id="username" type="text" formControlName="username">
+        </div>
+        <div>
+          <label for="email">
+            email
+          </label>
+          <input id="email" type="email" formControlName="email">
+        </div>
+        <div>
+          <label for="password">
+            password
+          </label>
+          <input id="password" type="password" formControlName="password">
+        </div>
+        <button class="formSubmitButton" type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+  <mat-card-footer align="end" class="my-accent-text margin-right-2">
+    &copy;Spring Marketplace - 2023
+  </mat-card-footer>
+</mat-card>
