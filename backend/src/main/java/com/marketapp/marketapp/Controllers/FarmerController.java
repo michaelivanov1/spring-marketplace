@@ -31,17 +31,17 @@ public class FarmerController {
         return new ResponseEntity<List<Farmer>>(farmerService.allFarmers(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Farmer>> getSingleFarmerById(@PathVariable ObjectId id) { //converts var passed in to objectId
+    @GetMapping("/farmer/{id}")
+    public ResponseEntity<Optional<Farmer>> getSingleFarmerById(@PathVariable ObjectId id) {
         return new ResponseEntity<Optional<Farmer>>(farmerService.singleFarmerById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{accountName}")
+    @GetMapping("/farmer/name/{accountName}")
     public ResponseEntity<Optional<Farmer>> getSingleFarmerByAccountName(@PathVariable String accountName) {
         return new ResponseEntity<Optional<Farmer>>(farmerService.singleFarmerByName(accountName), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/farmer")
     public ResponseEntity<Farmer> createFarmer(@RequestBody Map<String, String> payload) {
         return new ResponseEntity<Farmer>(farmerService.createFarmer(payload.get("accountName"),
                 payload.get("profileName"), payload.get("email"), payload.get("phoneNumber"),
