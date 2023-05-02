@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -9,7 +10,7 @@ import { FormBuilder } from '@angular/forms';
 
 export class RegistrationComponent {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 
   registrationForm = this.formBuilder.group({
     username: '',
@@ -18,7 +19,18 @@ export class RegistrationComponent {
   });
 
   onFormSubmit() {
-    console.log(`form data: ${JSON.stringify(this.registrationForm.value)}`);
+    const body = {
+      username: this.registrationForm.value.username,
+      email: this.registrationForm.value.email,
+      password: this.registrationForm.value.password
+    };
+
+    this.http.post('http://localhost:8080/api/registration', body, { responseType: 'text' })
+      .subscribe((response: any) => {
+        console.log(response);
+      }, (error: any) => {
+        console.error('not added to db: ', error);
+      });
   }
 
 }

@@ -4,7 +4,7 @@
  * Date Created: 2023-03-01
  */
 
-package com.marketapp.marketapp;
+package com.marketapp.marketapp.Controllers;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
