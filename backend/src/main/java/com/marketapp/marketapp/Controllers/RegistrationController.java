@@ -31,7 +31,7 @@ public class RegistrationController {
                 .append("email", email)
                 .append("password", password);
 
-        mongoTemplate.insert(document, "testCollection");
+        mongoTemplate.insert(document, "accounts");
 
         return "data inserted into db";
     }
