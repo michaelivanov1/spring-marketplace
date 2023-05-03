@@ -1,15 +1,14 @@
 package com.marketapp.marketapp.Controllers;
 
 import java.util.Map;
+import java.util.UUID;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -20,16 +19,24 @@ public class RegistrationController {
     private MongoTemplate mongoTemplate;
 
     @PostMapping("/registration")
-    public String test(@RequestBody Map<String, String> payload) {
 
+    public String register(@RequestBody Map<String, String> payload) {
         String username = payload.get("username");
         String email = payload.get("email");
         String password = payload.get("password");
 
+        //Hash password
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(password);
+
+        //Generate unique Id
+        String uniqueId = UUID.randomUUID().toString();
+
         Document document = new Document()
                 .append("username", username)
                 .append("email", email)
-                .append("password", password);
+                .append("password", encodedPassword)
+                .append("account_id", uniqueId);
 
         mongoTemplate.insert(document, "accounts");
 
