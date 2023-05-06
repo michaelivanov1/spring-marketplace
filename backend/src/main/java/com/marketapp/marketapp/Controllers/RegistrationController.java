@@ -3,9 +3,13 @@ package com.marketapp.marketapp.Controllers;
 import java.util.Map;
 import java.util.UUID;
 
+import com.marketapp.marketapp.DAL.RegistrationService;
+import com.marketapp.marketapp.ViewModels.Account;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +19,26 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:8080")
 public class RegistrationController {
 
-    @Autowired
+    /*@Autowired
     private MongoTemplate mongoTemplate;
 
-    @PostMapping("/registration")
+     */
 
-    public String register(@RequestBody Map<String, String> payload) {
-        String username = payload.get("username");
+    @Autowired
+    private RegistrationService registrationService;
+
+    @PostMapping("/registration")
+    public ResponseEntity<Account> register(@RequestBody Map<String, String> payload) {
+
+        //Hash password
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(payload.get("password"));
+
+        return new ResponseEntity<Account>(registrationService.createAccount(payload.get("username"),
+                payload.get("email"), encodedPassword), HttpStatus.CREATED);
+
+
+        /*String username = payload.get("username");
         String email = payload.get("email");
         String password = payload.get("password");
 
@@ -29,17 +46,24 @@ public class RegistrationController {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(password);
 
-        //Generate unique Id
-        String uniqueId = UUID.randomUUID().toString();
 
         Document document = new Document()
                 .append("username", username)
                 .append("email", email)
-                .append("password", encodedPassword)
-                .append("account_id", uniqueId);
+                .append("password", encodedPassword);
 
         mongoTemplate.insert(document, "accounts");
 
         return "data inserted into db";
+
+         */
     }
+
+    /*
+    public ResponseEntity<Farmer> createFarmer(@RequestBody Map<String, String> payload) {
+        return new ResponseEntity<Farmer>(farmerService.createFarmer(payload.get("accountName"),
+                payload.get("profileName"), payload.get("email"), payload.get("phoneNumber"),
+                payload.get("profileImageURI"), payload.get("bannerImageURI")), HttpStatus.CREATED);
+    }
+     */
 }
