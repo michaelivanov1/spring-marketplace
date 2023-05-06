@@ -19,11 +19,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:8080")
 public class RegistrationController {
 
-    /*@Autowired
-    private MongoTemplate mongoTemplate;
-
-     */
-
     @Autowired
     private RegistrationService registrationService;
 
@@ -37,33 +32,7 @@ public class RegistrationController {
         return new ResponseEntity<Account>(registrationService.createAccount(payload.get("username"),
                 payload.get("email"), encodedPassword), HttpStatus.CREATED);
 
-
-        /*String username = payload.get("username");
-        String email = payload.get("email");
-        String password = payload.get("password");
-
-        //Hash password
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(password);
-
-
-        Document document = new Document()
-                .append("username", username)
-                .append("email", email)
-                .append("password", encodedPassword);
-
-        mongoTemplate.insert(document, "accounts");
-
-        return "data inserted into db";
-
-         */
     }
 
-    /*
-    public ResponseEntity<Farmer> createFarmer(@RequestBody Map<String, String> payload) {
-        return new ResponseEntity<Farmer>(farmerService.createFarmer(payload.get("accountName"),
-                payload.get("profileName"), payload.get("email"), payload.get("phoneNumber"),
-                payload.get("profileImageURI"), payload.get("bannerImageURI")), HttpStatus.CREATED);
-    }
-     */
+   
 }
