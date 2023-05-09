@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ValidateEmail } from '../validators/email.validator';
 import { ValidateUsername } from '../validators/username.validator';
 import { ValidatePassword } from '../validators/password.validator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +20,7 @@ export class RegistrationComponent {
   password: FormControl;
   hidePassword = true;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
     this.username = new FormControl('', Validators.compose([Validators.required, ValidateUsername])),
       this.email = new FormControl('', Validators.compose([Validators.required, ValidateEmail])),
       this.password = new FormControl('', Validators.compose([Validators.required, ValidatePassword])),
@@ -30,18 +31,6 @@ export class RegistrationComponent {
       })
   }
 
-  // registrationForm = new FormGroup({
-  //   username: new FormControl(''),
-  //   email: new FormControl('', Validators.compose([Validators.required, ValidateEmail])),
-  //   password: new FormControl(''),
-  // });
-
-
-  // registrationForm = this.formBuilder.group({
-  //   username: '',
-  //   email: '',
-  //   password: ''
-  // });
 
   onFormSubmit() {
     const body = {
@@ -53,9 +42,14 @@ export class RegistrationComponent {
     this.http.post('http://localhost:8080/api/registration', body, { responseType: 'text' })
       .subscribe((response: any) => {
         console.log(response);
+        this.navigateToComponent();
       }, (error: any) => {
         console.error('not added to db: ', error);
       });
+  }
+
+  navigateToComponent() {
+    this.router.navigate(['/registration-finish']);
   }
 
 }

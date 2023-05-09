@@ -10,9 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 // custom imports
 import { RegistrationComponent } from './registration/registration.component';
 import { DBTest } from './dbtest/test-component.component';
+import { MarketplaceComponent } from './marketplace/marketplace.component';
+import { RegistrationFinishComponent } from './registration-finish/registration-finish.component';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent, DBTest],
+  declarations: [AppComponent, RegistrationComponent, DBTest, MarketplaceComponent, RegistrationFinishComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

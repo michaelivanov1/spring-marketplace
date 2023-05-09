@@ -1,12 +1,93 @@
+$primary-color: #3f51b5;
+$accent-color: #ff4081;
+
 .main-container {
-    height: 80vh;
+    width: 90%;
+    max-width: 500px;
+    margin: 2rem auto;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #444;
+    font-family: Roboto, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 .form-container {
-    padding: 20px;
-    width: 60%;
-    height: 30vh;
-    border: 1px solid black;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 1rem;
+}
+
+mat-card-title {
+    font-family: Roboto, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: $primary-color;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: $primary-color;
+    margin-bottom: 1rem;
+}
+
+button {
+    background-color: $primary-color;
+    color: #fff;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: darken($primary-color, 10%);
+    }
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+mat-error {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #d50000;
+}
+
+mat-icon-button {
+    background-color: transparent;
+    border: none;
+    margin-right: -1.5rem;
+    margin-top: -0.5rem;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+mat-card-footer {
+    background-color: $accent-color;
+    color: #fff;
+    font-family: Roboto, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 8px 8px;
+    margin-top: 2rem;
 }
