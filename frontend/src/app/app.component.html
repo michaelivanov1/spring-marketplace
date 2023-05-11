@@ -7,8 +7,13 @@
 </mat-toolbar>
 
 <mat-menu #appMenu="matMenu">
-  <a mat-menu-item [routerLink]="['register']" (click)="setTitle('register')">register</a>
+  <a mat-menu-item [routerLink]="['register']" (click)="setTitle('register')"
+    >register</a
+  >
   <a mat-menu-item [routerLink]="['test']" (click)="setTitle('test')">dbtest</a>
+  <a mat-menu-item [routerLink]="['profile']" (click)="setTitle('profile')"
+    >profile</a
+  >
 </mat-menu>
 
 <router-outlet></router-outlet>

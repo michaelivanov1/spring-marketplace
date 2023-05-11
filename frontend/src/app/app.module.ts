@@ -10,9 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 // custom imports
 import { RegistrationComponent } from './registration/registration.component';
 import { DBTest } from './dbtest/test-component.component';
+import { ProfileComponent } from './profile/profile-home/profile-home.component';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent, DBTest],
+  declarations: [AppComponent, RegistrationComponent, DBTest, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,5 +26,4 @@ import { DBTest } from './dbtest/test-component.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}
