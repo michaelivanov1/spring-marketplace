@@ -32,8 +32,8 @@ public class FarmerController {
     }
 
     @GetMapping("/farmer/{id}")
-    public ResponseEntity<Optional<Farmer>> getSingleFarmerById(@PathVariable ObjectId id) {
-        return new ResponseEntity<Optional<Farmer>>(farmerService.singleFarmerById(id), HttpStatus.OK);
+    public ResponseEntity<Optional<Farmer>> getSingleFarmerById(@PathVariable String id) {
+        return new ResponseEntity<Optional<Farmer>>(farmerService.singleFarmerById(new ObjectId(id)), HttpStatus.OK);
     }
 
     @GetMapping("/farmer/name/{accountName}")
