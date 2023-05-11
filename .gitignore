@@ -398,4 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 # constants files
-frontend/src/constants.ts
+constants.ts
