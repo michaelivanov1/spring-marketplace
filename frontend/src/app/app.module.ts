@@ -11,9 +11,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './registration/registration.component';
 import { DBTest } from './dbtest/test-component.component';
 import { ProfileComponent } from './profile/profile-home/profile-home.component';
+import { MarketplaceComponent } from './marketplace/marketplace.component';
+import { RegistrationFinishComponent } from './registration-finish/registration-finish.component';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent, DBTest, ProfileComponent],
+  declarations: [
+    AppComponent,
+    RegistrationComponent,
+    DBTest,
+    ProfileComponent,
+    MarketplaceComponent,
+    RegistrationFinishComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

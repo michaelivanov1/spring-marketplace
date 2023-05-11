@@ -3,9 +3,13 @@ package com.marketapp.marketapp.Controllers;
 import java.util.Map;
 import java.util.UUID;
 
+import com.marketapp.marketapp.DAL.RegistrationService;
+import com.marketapp.marketapp.ViewModels.Account;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -16,30 +20,19 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
 
     @Autowired
-    private MongoTemplate mongoTemplate;
+    private RegistrationService registrationService;
 
     @PostMapping("/registration")
-
-    public String register(@RequestBody Map<String, String> payload) {
-        String username = payload.get("username");
-        String email = payload.get("email");
-        String password = payload.get("password");
+    public ResponseEntity<Account> register(@RequestBody Map<String, String> payload) {
 
         //Hash password
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(payload.get("password"));
 
-        //Generate unique Id
-        String uniqueId = UUID.randomUUID().toString();
+        return new ResponseEntity<Account>(registrationService.createAccount(payload.get("username"),
+                payload.get("email"), encodedPassword), HttpStatus.CREATED);
 
-        Document document = new Document()
-                .append("username", username)
-                .append("email", email)
-                .append("password", encodedPassword)
-                .append("account_id", uniqueId);
-
-        mongoTemplate.insert(document, "accounts");
-
-        return "data inserted into db";
     }
+
+   
 }

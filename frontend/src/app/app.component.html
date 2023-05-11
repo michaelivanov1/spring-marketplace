@@ -14,6 +14,18 @@
   <a mat-menu-item [routerLink]="['profile']" (click)="setTitle('profile')"
     >profile</a
   >
+  <a
+    mat-menu-item
+    [routerLink]="['registration-finish']"
+    (click)="setTitle('temp')"
+    >temp</a
+  >
+  <a
+    mat-menu-item
+    [routerLink]="['marketplace']"
+    (click)="setTitle('marketplace')"
+    >marketplace</a
+  >
 </mat-menu>
 
 <router-outlet></router-outlet>
