@@ -26,7 +26,7 @@ public class FarmerController {
     @Autowired
     private FarmerService farmerService;
 
-    @GetMapping("/farmers")
+    @GetMapping("/farmer")
     public ResponseEntity<List<Farmer>> getAllFarmers() {
         return new ResponseEntity<List<Farmer>>(farmerService.allFarmers(), HttpStatus.OK);
     }

@@ -1,10 +1,16 @@
-.form-container {
-  padding: 20px;
-  width: 60%;
-  height: 30vh;
-  border: 1px solid black;
-  margin-left: auto;
-  margin-right: auto;
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.img-container .account-details-container {
+  height: 50%;
+}
+
+.account-misc-container {
+  height: 50%;
+  width: 100%;
 }
 
 ul.no-bullets {

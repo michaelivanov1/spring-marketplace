@@ -11,16 +11,43 @@ import { Profile } from '../profile';
   styleUrls: ['./profile-home.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  profile?: Observable<Profile[]>;
+  profile?: Observable<Profile>;
   msg: string;
-
+  userProfile: Profile;
   constructor(private profileService: ProfileService) {
     this.msg = '';
+    this.userProfile = {
+      id: {
+        date: '',
+        timestamp: '',
+      },
+      accountName: '',
+      profileName: '',
+      email: '',
+      phoneNumber: '',
+      profileImageURI: '',
+      profileBannerURI: '',
+    };
   }
 
   ngOnInit(): void {
-    // (this.profile = this.profileService.getSome('642794e00626870d47168e69')),
-    //   catchError((err) => (this.msg = err.message));
-    // console.log(this.profile.subscribe());
+    (this.profile = this.profileService.getOne('642794e00626870d47168e69')),
+      catchError((err) => (this.msg = err.message));
+    this.profile.forEach((x) => {
+      console.log(x);
+      this.userProfile = {
+        id: {
+          date: x.id.date,
+          timestamp: x.id.timestamp,
+        },
+        accountName: x.accountName,
+        profileName: x.profileName,
+        email: x.email,
+        phoneNumber: x.phoneNumber,
+        profileImageURI: x.profileImageURI,
+        profileBannerURI: x.profileBannerURI,
+      };
+    });
+    //console.log(this.profile);
   }
 }

@@ -32,6 +32,11 @@ export class GenericHttpService<T> {
       .get<T[]>(`${BASEURL}${this.entity}/${id}`)
       .pipe(retry(2), catchError(this.handleError));
   } // getSome
+  public getOne(id: any): Observable<T> {
+    return this.httpClient
+      .get<T>(`${BASEURL}${this.entity}/${id}`)
+      .pipe(retry(2), catchError(this.handleError));
+  } // getOne
   public delete(id: any): Observable<number> {
     return this.httpClient
       .delete<number>(`${BASEURL}${this.entity}/${id}`)
