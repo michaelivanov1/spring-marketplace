@@ -1,0 +1,36 @@
+.grid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid-item {
+    width: 200px;
+    height: 200px;
+    // space between divs
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+
+    &.selected {
+        // eventually change to whatever when user clicks on product
+        .product-image {
+            width: 200px; 
+            height: 200px; 
+        }
+    }
+}
+
+.product-image {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.product-name {
+    font-weight: bold;
+}
