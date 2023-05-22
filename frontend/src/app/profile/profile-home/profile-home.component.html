@@ -3,20 +3,24 @@
   <mat-card-content class="container"
     ><div class="img-container">
       <img
-        src="{{ this.userProfile.profileBannerURI }}"
+        src="http://s30.postimg.org/x0ne0p5wx/bootsrap.png"
         alt="Farmer's banner"
       />
+      <!--      
+        <img
+        src="{{ this.userProfile.profileBannerURI }}"
+        alt="Farmer's banner"
+      />-->
       <img
         src="{{ this.userProfile.profileImageURI }}"
         alt="Farmer's Profile"
-        width="500"
-        height="300"
       />
     </div>
     <div class="account-details-container">
       <ul class="no-bullets">
         <li>
-          <strong>Account Name:</strong> {{ this.userProfile.accountName }}
+          <strong class="my-accent-text">Account Name:</strong>
+          {{ this.userProfile.accountName }}
         </li>
         <li>
           <strong>Profile Name:</strong> {{ this.userProfile.profileName }}
@@ -26,8 +30,26 @@
         <li><strong>Phone:</strong> {{ this.userProfile.phoneNumber }}</li>
       </ul>
     </div>
-    <div class="account-misc-container"></div
-  ></mat-card-content>
+  </mat-card-content>
+  <mat-card-content>
+    <div class="account-misc-container">
+      <h4>About:</h4>
+      <p>
+        Sed facilisi pede ullamcorper magnis tempus penatibus mauris hendrerit,
+        feugiat ligula auctor nulla montes dapibus natoque. Mauris tortor
+        dictumst vivamus quis etiam dignissim sapien viverra Est adipiscing
+        vestibulum placerat. Nisl. Mi. Lacus. Parturient vulputate erat cursus
+        ornare iaculis tristique conubia leo ultrices, eu. Dignissim Neque
+        dignissim eu posuere luctus malesuada senectus aenean dui ornare augue
+        natoque hac nunc laoreet venenatis lacinia. Porta aptent facilisis
+        turpis. Sit. Ridiculus hac enim platea lacinia natoque pellentesque.
+        Conubia cum accumsan et. Erat faucibus molestie nunc id. Interdum in
+        elit. Aptent integer etiam sed dolor litora. Pulvinar a ac scelerisque
+        tellus ac sollicitudin. Ut enim.
+      </p>
+    </div>
+  </mat-card-content>
+
   <mat-card-footer align="end" class="my-accent-text margin-right-2">
     &copy;Spring Marketplace - 2023
   </mat-card-footer>

@@ -1,49 +1,105 @@
 <mat-card align="center">
   <div class="main-container">
-    <mat-card-title>
-      Spring Marketplace
-    </mat-card-title>
+    <mat-card-title> Spring Marketplace </mat-card-title>
     <div class="form-container">
       <h2>Please register an account</h2>
       <form [formGroup]="registrationForm">
-
         <div layout="row">
           <mat-form-field flex>
-            <input matInput placeholder="Username" type="text" required formControlName="username">
-            <mat-error *ngIf="username.errors && (username.dirty || username.touched)" align="end">
+            <input
+              matInput
+              placeholder="Username"
+              type="text"
+              required
+              formControlName="username"
+            />
+            <mat-error
+              *ngIf="username.errors && (username.dirty || username.touched)"
+              align="end"
+            >
               <p *ngIf="username.hasError('required')">Username is required.</p>
-              <p *ngIf="!username.hasError('required') && username.hasError('invalidUsername')">min characters: 4</p>
+              <p
+                *ngIf="
+                  !username.hasError('required') &&
+                  username.hasError('invalidUsername')
+                "
+              >
+                min characters: 4
+              </p>
             </mat-error>
           </mat-form-field>
         </div>
 
         <div layout="row">
           <mat-form-field flex>
-            <input matInput placeholder="Email" type="email" required formControlName="email">
-            <mat-error *ngIf="email.errors && (email.dirty || email.touched)" align="end">
+            <input
+              matInput
+              placeholder="Email"
+              type="email"
+              required
+              formControlName="email"
+            />
+            <mat-error
+              *ngIf="email.errors && (email.dirty || email.touched)"
+              align="end"
+            >
               <p *ngIf="email.hasError('required')">Email is required.</p>
-              <p *ngIf="!email.hasError('required') && email.hasError('invalidEmail')">needs format -
-                xx@xx.xx</p>
+              <p
+                *ngIf="
+                  !email.hasError('required') && email.hasError('invalidEmail')
+                "
+              >
+                needs format - xx@xx.xx
+              </p>
             </mat-error>
           </mat-form-field>
         </div>
 
         <div layout="row">
           <mat-form-field flex>
-            <input matInput placeholder="Password" type="{{ hidePassword ? 'password' : 'text' }}" required formControlName="password">
-            <mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="hidePassword ? 'Hide password' : 'Show password'">
-              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            <input
+              matInput
+              placeholder="Password"
+              type="{{ hidePassword ? 'password' : 'text' }}"
+              required
+              formControlName="password"
+            />
+            <mat-icon-button
+              matSuffix
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="
+                hidePassword ? 'Hide password' : 'Show password'
+              "
+            >
+              <mat-icon>{{
+                hidePassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
             </mat-icon-button>
-            <mat-error *ngIf="password.errors && (password.dirty || password.touched)" align="end">
+            <mat-error
+              *ngIf="password.errors && (password.dirty || password.touched)"
+              align="end"
+            >
               <p *ngIf="password.hasError('required')">Password is required.</p>
-              <p *ngIf="!password.hasError('required') && password.hasError('invalidPassword')">min characters: 4</p>
+              <p
+                *ngIf="
+                  !password.hasError('required') &&
+                  password.hasError('invalidPassword')
+                "
+              >
+                min characters: 4
+              </p>
             </mat-error>
           </mat-form-field>
         </div>
 
         <div>
           <span>
-            <button mat-raised-button type="button" (click)="onFormSubmit()" [disabled]="!registrationForm.valid">
+            <button
+              mat-raised-button
+              type="button"
+              (click)="onFormSubmit()"
+              [disabled]="!registrationForm.valid"
+            >
               Register
             </button>
           </span>
@@ -51,7 +107,7 @@
       </form>
     </div>
   </div>
-  <mat-card-footer align="end" class="my-accent-text margin-right-2">
+  <mat-card-footer align="end" class="margin-right-2">
     &copy;Spring Marketplace - 2023
   </mat-card-footer>
 </mat-card>

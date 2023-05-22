@@ -1,27 +1,121 @@
+$primary-color: #3f51b5;
+$accent-color: #ff4081;
+
 .container {
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
-.img-container .account-details-container {
-  height: 50%;
+.center-img {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-grow: 1;
+
+  @media (min-width: 768px) {
+    align-items: center;
+    justify-content: center;
+    flex-grow: 0;
+  }
+}
+
+.img-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+
+  img {
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-right: 20px;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}
+
+.account-details-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+
+  ul.no-bullets {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+
+      strong {
+        color: $accent-color;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 0;
+    margin-left: 20px;
+  }
 }
 
 .account-misc-container {
-  height: 50%;
-  width: 100%;
+  display: flex;
+  flex-grow: 1;
+
+  /* Add your custom styles for the account misc container */
 }
 
-ul.no-bullets {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.my-accent-text {
+  color: $accent-color;
 }
 
-img {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-  height: auto;
+.margin-right-2 {
+  margin-right: 2px;
 }
+
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   height: 100%;
+// }
+
+// .img-container .account-details-container {
+//   height: 50%;
+// }
+
+// .account-misc-container {
+//   height: 50%;
+//   width: 100%;
+// }
+
+// ul.no-bullets {
+//   list-style-type: none;
+//   margin: 0;
+//   padding: 0;
+// }
+
+// img {
+//   display: block;
+//   margin: 0 auto;
+//   max-width: 100%;
+//   height: auto;
+// }
