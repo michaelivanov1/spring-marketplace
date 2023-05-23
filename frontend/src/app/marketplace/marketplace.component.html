@@ -1,1 +1,8 @@
-<p>main marketplace component</p>
+<div class="grid-container">
+    <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ 'cursor': getCursor() }"
+        (click)="onProductClick(product)" *ngFor="let product of products"
+        [ngClass]="{ 'selected': product === selectedProduct }">
+        <img [src]="product.image" class="product-image" />
+        <div class="product-name">{{ product.name }}</div>
+    </div>
+</div>
