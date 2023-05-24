@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RegistrationService {
@@ -15,6 +16,10 @@ public class RegistrationService {
 
     public List<Account> allAccounts() {
         return registrationRepository.findAll();
+    }
+
+    public Account singleAccountByEmail(String email) {
+        return registrationRepository.findAccountByEmail(email);
     }
 
     public Account createAccount(String username, String email, String password) {
