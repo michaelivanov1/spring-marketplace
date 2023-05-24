@@ -2,9 +2,69 @@
 
 html,
 body {
+  background-image: url("assets/background.png");
   height: 100%;
-}
-body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 0;
+  /* prevent vertical scrolling */
+  overflow-y: hidden;
 }
+
+/* override all mat-card instances to use this instead of default white color */
+mat-card {
+  background-image: url("assets/background.png") !important;
+  box-shadow: none !important;
+}
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .content {
+    flex: 1;
+
+    .header {
+      background-color: #222222;
+      // #140000;
+      color: black;
+      height: 110px;
+      margin-bottom: 30px;
+
+      .logo {
+        width: 350px;
+        height: 350px;
+        padding-left: 15%;
+        padding-bottom: 90px;
+      }
+
+      .app-menu {
+        color: #FFDE59;
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    background-color: #222222;
+    color: white;
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    width: 1936px;
+    height: 100px;
+    margin-top: auto;
+    left: 0;
+    right: 0;
+
+    .footer-text {
+      margin-top: 30px;
+      color: #FFDE59;
+
+    }
+  }
+}
+
+/* header styles */

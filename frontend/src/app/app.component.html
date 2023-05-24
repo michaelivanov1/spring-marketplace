@@ -1,31 +1,26 @@
-<mat-toolbar color="primary">
-  <span>Untitled_Marketplace - {{ title }}</span>
-  <span style="flex: 1 1 auto"></span>
-  <button mat-button [matMenuTriggerFor]="appMenu" align="end">
-    <mat-icon>menu</mat-icon>
-  </button>
-</mat-toolbar>
+<div class="container">
+  <div class="content">
+    <mat-toolbar class="header">
+      <img src="../assets/logo.png" class="logo">
+      <!-- <span class="title-text">Spring Marketplace </span> -->
+      <span style="flex: 1 1 auto"></span>
+      <button class="app-menu" mat-button [matMenuTriggerFor]="appMenu" align="end">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
 
-<mat-menu #appMenu="matMenu">
-  <a mat-menu-item [routerLink]="['register']" (click)="setTitle('register')"
-    >register</a
-  >
-  <a mat-menu-item [routerLink]="['test']" (click)="setTitle('test')">dbtest</a>
-  <a mat-menu-item [routerLink]="['profile']" (click)="setTitle('profile')"
-    >profile</a
-  >
-  <a
-    mat-menu-item
-    [routerLink]="['registration-finish']"
-    (click)="setTitle('temp')"
-    >temp</a
-  >
-  <a
-    mat-menu-item
-    [routerLink]="['marketplace']"
-    (click)="setTitle('marketplace')"
-    >marketplace</a
-  >
-</mat-menu>
+    <mat-menu #appMenu="matMenu">
+      <a mat-menu-item [routerLink]="['register']" (click)="setTitle('register')">register</a>
+      <a mat-menu-item [routerLink]="['test']" (click)="setTitle('test')">dbtest</a>
+      <a mat-menu-item [routerLink]="['profile']" (click)="setTitle('profile')">profile</a>
+      <a mat-menu-item [routerLink]="['registration-finish']" (click)="setTitle('temp')">temp</a>
+      <a mat-menu-item [routerLink]="['marketplace']" (click)="setTitle('marketplace')">marketplace</a>
+    </mat-menu>
 
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+  </div>
+
+  <mat-card-footer class="footer">
+    <p class="footer-text"> &copy;Spring Marketplace - 2023</p>
+  </mat-card-footer>
+</div>

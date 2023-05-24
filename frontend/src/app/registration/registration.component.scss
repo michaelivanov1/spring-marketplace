@@ -1,15 +1,13 @@
-$primary-color: #3f51b5;
-$accent-color: #ff4081;
+$primary-color: #00BF63;
 
 .main-container {
-    width: 90%;
     max-width: 500px;
-    margin: 2rem auto;
-    background-color: #fff;
+    height: 500px;
+    margin: auto;
+    background-color: rgba(140,195,63,0.1);
     border-radius: 8px;
     padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: #444;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     font-family: Roboto, sans-serif;
     font-size: 1rem;
     font-weight: 400;
@@ -25,6 +23,7 @@ mat-card-title {
     font-weight: 500;
     margin-bottom: 1rem;
     color: $primary-color;
+    padding-top: 30px;
 }
 
 h2 {
@@ -79,15 +78,4 @@ mat-icon-button {
     &:focus {
         outline: none;
     }
-}
-
-mat-card-footer {
-    background-color: $accent-color;
-    color: #fff;
-    font-family: Roboto, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    padding: 0.5rem 1rem;
-    border-radius: 0 0 8px 8px;
-    margin-top: 2rem;
 }
