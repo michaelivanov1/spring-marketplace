@@ -2,6 +2,7 @@ package com.marketapp.marketapp.DAL;
 
 import com.marketapp.marketapp.ViewModels.Account;
 import com.marketapp.marketapp.ViewModels.Farmer;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,10 @@ public class RegistrationService {
 
     public Account singleAccountByEmail(String email) {
         return registrationRepository.findAccountByEmail(email);
+    }
+
+    public Optional<Account> singleAccountById(ObjectId id) {
+        return registrationRepository.findById(id);
     }
 
     public Account createAccount(String username, String email, String password) {

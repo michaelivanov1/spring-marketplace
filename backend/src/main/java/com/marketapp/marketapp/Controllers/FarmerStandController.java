@@ -9,6 +9,7 @@ package com.marketapp.marketapp.Controllers;
 import com.marketapp.marketapp.DAL.FarmerStandService;
 import com.marketapp.marketapp.DAL.RegistrationService;
 import com.marketapp.marketapp.ViewModels.*;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,11 +39,12 @@ public class FarmerStandController {
     @PostMapping("/farmer_stand")
     public ResponseEntity<FarmerStand> createFarmerStand(@RequestBody FarmerStandRequest request) {
 
-        //find an account by email
-        Account account = registrationService.singleAccountByEmail(request.getEmail());
+        //find an account by id
+        Optional<Account> accountOp = registrationService.singleAccountById(new ObjectId(request.getId()));
 
-        return new ResponseEntity<FarmerStand>(farmerStandService.createFarmerStand(
-                account, request.getProduceList()), HttpStatus.CREATED);
+        return accountOp.map(account -> new ResponseEntity<>(farmerStandService.createFarmerStand(
+                account, request.getProduceList()), HttpStatus.CREATED)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
     }
 
 }
