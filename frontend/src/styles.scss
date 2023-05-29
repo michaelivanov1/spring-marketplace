@@ -16,8 +16,6 @@ mat-card {
   box-shadow: none !important;
 }
 
-
-
 .container {
   display: flex;
   flex-direction: column;
@@ -28,20 +26,19 @@ mat-card {
 
     .header {
       background-color: #222222;
-      // #140000;
+      /* #140000 */
       color: black;
       height: 110px;
-      margin-bottom: 30px;
+      margin: auto;
 
       .logo {
         width: 350px;
         height: 350px;
-        padding-left: 15%;
         padding-bottom: 90px;
       }
 
       .app-menu {
-        color: #FFDE59;
+        color: #ffde59;
       }
     }
   }
@@ -51,18 +48,14 @@ mat-card {
     background-color: #222222;
     color: white;
     font-family: Roboto, sans-serif;
-    font-size: 20px;
+    font-size: 1.25vw; /* Equivalent to 20px */
     font-weight: 400;
-    width: 1936px;
-    height: 100px;
-    margin-top: auto;
-    left: 0;
-    right: 0;
+    height: 5.25vw; /* Equivalent to 100px */
+    margin: 0vh 0vw 0vh 0vw;
 
     .footer-text {
-      margin-top: 30px;
-      color: #FFDE59;
-
+      margin-top: 2.23vh; /* Equivalent to 30px */
+      color: #ffde59;
     }
   }
 }

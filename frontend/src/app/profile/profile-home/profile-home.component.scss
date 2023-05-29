@@ -1,5 +1,4 @@
-$primary-color: #3f51b5;
-$accent-color: #ff4081;
+$primary-color: #00bf63;
 
 .container {
   display: flex;
@@ -28,7 +27,6 @@ $accent-color: #ff4081;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-bottom: 20px;
 
   img {
     width: 100%;
@@ -61,10 +59,6 @@ $accent-color: #ff4081;
 
     li {
       margin-bottom: 10px;
-
-      strong {
-        color: $accent-color;
-      }
     }
   }
 
@@ -82,10 +76,6 @@ $accent-color: #ff4081;
   flex-grow: 1;
 
   /* Add your custom styles for the account misc container */
-}
-
-.my-accent-text {
-  color: $accent-color;
 }
 
 .margin-right-2 {
