@@ -10,8 +10,12 @@ export class RegistrationFinishComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  onMarketplaceRedirectClick() {
+  onMarketplaceClick() {
     this.router.navigate(['/marketplace']);
+  }
+
+  onFinishRegistrationClick() {
+    this.router.navigate(['/profile'])
   }
 
   ngOnInit(): void {

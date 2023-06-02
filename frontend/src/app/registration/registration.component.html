@@ -6,24 +6,13 @@
       <form [formGroup]="registrationForm">
         <div layout="row">
           <mat-form-field flex>
-            <input
-              matInput
-              placeholder="Username"
-              type="text"
-              required
-              formControlName="username"
-            />
-            <mat-error
-              *ngIf="username.errors && (username.dirty || username.touched)"
-              align="end"
-            >
+            <input matInput placeholder="Username" type="text" required formControlName="username" />
+            <mat-error *ngIf="username.errors && (username.dirty || username.touched)" align="end">
               <p *ngIf="username.hasError('required')">Username is required.</p>
-              <p
-                *ngIf="
+              <p *ngIf="
                   !username.hasError('required') &&
                   username.hasError('invalidUsername')
-                "
-              >
+                ">
                 min characters: 4
               </p>
             </mat-error>
@@ -32,23 +21,12 @@
 
         <div layout="row">
           <mat-form-field flex>
-            <input
-              matInput
-              placeholder="Email"
-              type="email"
-              required
-              formControlName="email"
-            />
-            <mat-error
-              *ngIf="email.errors && (email.dirty || email.touched)"
-              align="end"
-            >
+            <input matInput placeholder="Email" type="email" required formControlName="email" />
+            <mat-error *ngIf="email.errors && (email.dirty || email.touched)" align="end">
               <p *ngIf="email.hasError('required')">Email is required.</p>
-              <p
-                *ngIf="
+              <p *ngIf="
                   !email.hasError('required') && email.hasError('invalidEmail')
-                "
-              >
+                ">
                 needs format - xx@xx.xx
               </p>
             </mat-error>
@@ -57,35 +35,21 @@
 
         <div layout="row">
           <mat-form-field flex>
-            <input
-              matInput
-              placeholder="Password"
-              type="{{ hidePassword ? 'password' : 'text' }}"
-              required
-              formControlName="password"
-            />
-            <mat-icon-button
-              matSuffix
-              (click)="hidePassword = !hidePassword"
-              [attr.aria-label]="
+            <input matInput placeholder="Password" type="{{ hidePassword ? 'password' : 'text' }}" required
+              formControlName="password" />
+            <mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="
                 hidePassword ? 'Hide password' : 'Show password'
-              "
-            >
+              ">
               <mat-icon>{{
                 hidePassword ? "visibility_off" : "visibility"
-              }}</mat-icon>
+                }}</mat-icon>
             </mat-icon-button>
-            <mat-error
-              *ngIf="password.errors && (password.dirty || password.touched)"
-              align="end"
-            >
+            <mat-error *ngIf="password.errors && (password.dirty || password.touched)" align="end">
               <p *ngIf="password.hasError('required')">Password is required.</p>
-              <p
-                *ngIf="
+              <p *ngIf="
                   !password.hasError('required') &&
                   password.hasError('invalidPassword')
-                "
-              >
+                ">
                 min characters: 4
               </p>
             </mat-error>
@@ -94,12 +58,7 @@
 
         <div>
           <span>
-            <button
-              mat-raised-button
-              type="button"
-              (click)="onFormSubmit()"
-              [disabled]="!registrationForm.valid"
-            >
+            <button mat-raised-button type="button" (click)="onFormSubmit()" [disabled]="!registrationForm.valid">
               Register
             </button>
           </span>
