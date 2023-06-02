@@ -21,7 +21,7 @@ import java.util.Optional;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FarmerStand { //we don't need a stand name / farm name because it will be linked accordingly
+public class FarmerStand { // we don't need a stand name / farm name because it will be linked accordingly
 
     @Id
     private ObjectId id;

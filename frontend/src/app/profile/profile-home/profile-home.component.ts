@@ -4,6 +4,8 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
+import { FarmerStandService } from '@app/farmer-stand/farmer-stand.service';
+import { farmerStand } from '@app/farmer-stand/farmer-stand';
 
 @Component({
   selector: 'app-profile',
