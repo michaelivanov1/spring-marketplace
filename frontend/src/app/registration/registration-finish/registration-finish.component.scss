@@ -1,3 +1,5 @@
+$primary-color: #00BF63;
+
 .mat-card {
     width: 400px;
     margin: 0 auto;
@@ -20,21 +22,23 @@
 
         p {
             font-size: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             color: #555;
         }
 
         button {
+            width: 400px;
+            margin: 10px;
             font-size: 16px;
             padding: 10px 20px;
             border-radius: 4px;
             border: none;
-            margin-right: 10px;
             color: #fff;
-            background-color: #2196f3;
+            background-color: $primary-color;
 
             &:hover {
-                background-color: #0d8bf2;
+                background-color: darken($primary-color, 10%);
+                cursor: pointer;
             }
         }
     }

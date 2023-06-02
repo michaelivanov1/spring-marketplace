@@ -4,7 +4,9 @@
     align-items: center;
     flex-wrap: wrap;
     max-width: 1200px;
+    max-height: 706px;
     margin: 0 auto;
+    overflow-y: auto;
 }
 
 .grid-item {

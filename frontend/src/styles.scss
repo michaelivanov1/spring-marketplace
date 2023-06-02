@@ -25,15 +25,14 @@ mat-card {
 
     .header {
       background-color: #222222;
-      /* #140000 */
       color: black;
-      height: 6.55vw;
+      height: 6vw;
       margin: auto;
 
       .logo {
-        width: 25vw;
-        height: 25vw;
-        padding-bottom: 6.5vw;
+        width: 20vw;
+        height: 20vw;
+        padding-bottom: 5.5vw;
       }
 
       .app-menu {
@@ -47,13 +46,14 @@ mat-card {
     background-color: #222222;
     color: white;
     font-family: Roboto, sans-serif;
-    font-size: 1.25vw; /* Equivalent to 20px */
+    font-size: 1.25vw;
+    /* Equivalent to 20px */
     font-weight: 400;
-    height: 5.25vw; /* Equivalent to 100px */
-    margin: 0vh 0vw 0vh 0vw;
+    height: 4vw;
+    margin: 0vh;
 
     .footer-text {
-      margin-top: 2.23vh; /* Equivalent to 30px */
+      margin-top: 2.5vh;
       color: #ffde59;
     }
   }
