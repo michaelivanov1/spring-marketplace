@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
 import { FarmerStandService } from '@app/farmer-stand/farmer-stand.service';
-import { farmerStand } from '@app/farmer-stand/farmer-stand';
+import { FarmerStand } from '@app/farmer-stand/farmer-stand';
 
 @Component({
   selector: 'app-profile',
@@ -14,9 +14,14 @@ import { farmerStand } from '@app/farmer-stand/farmer-stand';
 })
 export class ProfileComponent implements OnInit {
   profile?: Observable<Profile>;
+  farmerStand?: Observable<FarmerStand[]>;
   msg: string;
   userProfile: Profile;
-  constructor(private profileService: ProfileService) {
+  userStand: FarmerStand;
+  constructor(
+    private profileService: ProfileService,
+    private farmerStandService: FarmerStandService
+  ) {
     this.msg = '';
     this.userProfile = {
       id: {
@@ -30,6 +35,22 @@ export class ProfileComponent implements OnInit {
       profileImageURI: '',
       profileBannerURI: '',
     };
+    this.userStand = {
+      id: {
+        date: '',
+        timestamp: '',
+      },
+      account: {
+        id: {
+          date: '',
+          timestamp: '',
+        },
+        username: '',
+        email: '',
+        password: '',
+      },
+      produceList: [],
+    };
   }
 
   ngOnInit(): void {
@@ -37,19 +58,10 @@ export class ProfileComponent implements OnInit {
       catchError((err) => (this.msg = err.message));
     this.profile.forEach((x) => {
       console.log(x);
-      this.userProfile = {
-        id: {
-          date: x.id.date,
-          timestamp: x.id.timestamp,
-        },
-        accountName: x.accountName,
-        profileName: x.profileName,
-        email: x.email,
-        phoneNumber: x.phoneNumber,
-        profileImageURI: x.profileImageURI,
-        profileBannerURI: x.profileBannerURI,
-      };
+      this.userProfile = x;
     });
-    //console.log(this.profile);
+    (this.farmerStand = this.farmerStandService.get()),
+      catchError((err) => (this.msg = err.message));
+    this.farmerStand.forEach((y) => {});
   }
 }

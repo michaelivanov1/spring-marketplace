@@ -2,14 +2,10 @@ import { NgModule } from '@angular/core';
 /**
  * profile - interface for account details
  */
-export interface farmerStand {
+export interface FarmerStand {
   id: ObjectId;
   account: Account;
-  profileName: Produce[];
-  email: String;
-  phoneNumber: String;
-  profileImageURI: String;
-  profileBannerURI: String;
+  produceList: Produce[];
 }
 
 interface Account {
