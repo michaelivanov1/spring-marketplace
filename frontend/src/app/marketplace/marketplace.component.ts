@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FarmerStandService } from '../farmer-stand/farmer-stand.service';
-import { farmerStand } from '../farmer-stand/farmer-stand';
+import { FarmerStand } from '../farmer-stand/farmer-stand';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,9 +11,9 @@ import { Observable } from 'rxjs';
 
 export class MarketplaceComponent {
   selectedProduct: any;
-  farmerStand?: Observable<farmerStand[]>;
-  farmerStandProfile: farmerStand;
-  farmerStandProfiles: farmerStand[] = [];
+  farmerStand?: Observable<FarmerStand[]>;
+  farmerStandProfile: FarmerStand;
+  farmerStandProfiles: FarmerStand[] = [];
 
 
   constructor(private farmerStandService: FarmerStandService) {
@@ -49,24 +49,18 @@ export class MarketplaceComponent {
       //   qty: 0,
       //   harvestDate: ''
       // }],
-      email: '',
-      phoneNumber: '',
-      profileImageURI: '',
-      profileBannerURI: '',
-
-
     }
   }
 
   ngOnInit(): void {
 
     this.farmerStand = this.farmerStandService.get();
-    this.farmerStand?.subscribe((farmers: farmerStand[]) => {
+    this.farmerStand?.subscribe((farmers: FarmerStand[]) => {
       // populate farmer stand profiles array
       this.farmerStandProfiles = farmers;
 
-      farmers.forEach((farmer: farmerStand) => {
-        console.log(farmer.profileImageURI);
+      farmers.forEach((farmer: FarmerStand) => {
+       
         // farmer.produceList.forEach((produce) => {
         //   console.log(produce.foodName, produce.qty, produce.harvestDate);
         // });
@@ -76,7 +70,7 @@ export class MarketplaceComponent {
   }
 
 
-  onProductClick(farmer: farmerStand, produce: any) {
+  onProductClick(farmer: FarmerStand, produce: any) {
     console.log(`clicked on: ${produce.foodName} sold by ${farmer.account.username}`);
   }
 
