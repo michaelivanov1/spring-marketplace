@@ -1,8 +1,47 @@
+<!--each item is seperate in this html. not grouped by farmer-->
+
 <div class="grid-container">
-    <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ 'cursor': getCursor() }"
-        (click)="onProductClick(product)" *ngFor="let product of products"
-        [ngClass]="{ 'selected': product === selectedProduct }">
-        <img [src]="product.image" class="product-image" />
-        <div class="product-name">{{ product.name }}</div>
-    </div>
+    <ng-container *ngFor="let farmer of farmerStandProfiles">
+        <ng-container *ngFor="let produce of farmer?.produceList">
+            <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()"
+                [ngStyle]="{ 'cursor': getCursor() }" (click)="onProductClick(farmer, produce) "
+                [ngClass]="{ 'selected': farmer === selectedProduct }">
+
+
+                <div class="item-data">
+                    <img class="product-image" src="assets/Pumpkin.jpg">
+                    <p class="product-name">{{ produce?.foodName }}</p>
+                
+                    <p class="product-harvestdate">Harvested on: {{ produce?.harvestDate }}</p>
+                    <p class="product-qty">{{ produce?.qty }}x</p>
+                    <div class="product-seller-container">
+                        <p class="product-seller">Seller: {{ farmer.account.username }}</p>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </ng-container>
+    </ng-container>
 </div>
+
+
+
+
+<!--this is html for filtering by farmers. this is grouped by farmers-->
+
+<!-- <div class="grid-container" >
+    <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ 'cursor': getCursor() }"
+
+        (click)="onProductClick(farmer)" *ngFor="let farmer of farmerStandProfiles"
+        [ngClass]="{ 'selected': farmer === selectedProduct }">
+       
+
+        <div class="product-name">{{ farmer.account.username }}</div>
+        <div *ngFor="let produce of farmer?.produceList">
+            <p>Food Name: {{ produce?.foodName }}</p>
+            <p>Quantity: {{ produce?.qty }}</p>
+            <p>Harvest Date: {{ produce?.harvestDate }}</p>
+        </div>
+    </div>
+</div> -->
