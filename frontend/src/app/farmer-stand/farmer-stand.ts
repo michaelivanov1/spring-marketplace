@@ -5,7 +5,8 @@ import { NgModule } from '@angular/core';
 export interface farmerStand {
   id: ObjectId;
   account: Account;
-  profileName: Produce[];
+  produceList: Produce[];
+  // profileName: Produce[];
   email: String;
   phoneNumber: String;
   profileImageURI: String;
@@ -20,7 +21,7 @@ interface Account {
 }
 
 interface Produce {
-  // id: ObjectId;
+  id: ObjectId;
   foodName: String;
   qty: Number;
   harvestDate: String;

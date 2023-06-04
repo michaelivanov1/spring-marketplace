@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { productData } from './product-data';
+import { FarmerStandService } from '../farmer-stand/farmer-stand.service';
+import { farmerStand } from '../farmer-stand/farmer-stand';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-marketplace',
@@ -8,25 +10,87 @@ import { productData } from './product-data';
 })
 
 export class MarketplaceComponent {
-
   selectedProduct: any;
-  products = productData;
-  isHovered = false;
+  farmerStand?: Observable<farmerStand[]>;
+  farmerStandProfile: farmerStand;
+  farmerStandProfiles: farmerStand[] = [];
 
-  // eventually will open modal or new page for more product info/purchase product
-  onProductClick(product: any) {
-    console.log(`clicked on: ${product.name}`);
-    return this.selectedProduct === product ? this.selectedProduct = null : this.selectedProduct = product;
+
+  constructor(private farmerStandService: FarmerStandService) {
+    this.farmerStandProfile = {
+      id: {
+        date: '',
+        timestamp: '',
+      },
+      account: {
+        id: {
+          date: '',
+          timestamp: '',
+        },
+        username: '',
+        email: '',
+        password: '',
+      },
+      produceList: [{
+        id: {
+          date: '',
+          timestamp: '',
+        },
+        foodName: '',
+        qty: 0,
+        harvestDate: '',
+      }],
+      // profileName: [{
+      //   id: {
+      //     date: '',
+      //     timestamp: '',
+      //   },
+      //   foodName: '',
+      //   qty: 0,
+      //   harvestDate: ''
+      // }],
+      email: '',
+      phoneNumber: '',
+      profileImageURI: '',
+      profileBannerURI: '',
+
+
+    }
   }
 
-  // change cursor on hover 
+  ngOnInit(): void {
+
+    this.farmerStand = this.farmerStandService.get();
+    this.farmerStand?.subscribe((farmers: farmerStand[]) => {
+      // populate farmer stand profiles array
+      this.farmerStandProfiles = farmers;
+
+      farmers.forEach((farmer: farmerStand) => {
+        console.log(farmer.profileImageURI);
+        // farmer.produceList.forEach((produce) => {
+        //   console.log(produce.foodName, produce.qty, produce.harvestDate);
+        // });
+      });
+
+    });
+  }
+
+
+  onProductClick(farmer: farmerStand, produce: any) {
+    console.log(`clicked on: ${produce.foodName} sold by ${farmer.account.username}`);
+  }
+
   onHover() {
-    this.isHovered = true;
+    this.selectedProduct = true;
   }
+
   onLeave() {
-    this.isHovered = false;
+    this.selectedProduct = false;
   }
+
   getCursor(): string {
-    return this.isHovered ? 'pointer' : 'default';
+    return this.selectedProduct ? 'pointer' : 'default';
   }
+
+
 }
