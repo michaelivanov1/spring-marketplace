@@ -1,11 +1,11 @@
 <mat-card align="center">
-  <mat-card-header class="center-img"></mat-card-header>
-  <mat-card-content class=""
+  <mat-card-header></mat-card-header>
+  <mat-card-content class="main-container"
     ><div class="img-container">
-      <img
+      <!-- <img
         src="../../../assets/somi-jaiswal-unsplash.jpg"
         alt="Farmer's banner"
-      />
+      /> -->
       <!--      
         <img
         src="{{ this.userProfile.profileBannerURI }}"
@@ -34,10 +34,7 @@
         <li><strong>Phone:</strong> {{ this.userProfile.phoneNumber }}</li>
       </ul>
     </div>
-  </mat-card-content>
-  <mat-card-content>
     <div class="account-misc-container">
-      <h4>About:</h4>
       <p>
         Sed facilisi pede ullamcorper magnis tempus penatibus mauris hendrerit,
         feugiat ligula auctor nulla montes dapibus natoque. Mauris tortor
@@ -51,6 +48,18 @@
         elit. Aptent integer etiam sed dolor litora. Pulvinar a ac scelerisque
         tellus ac sollicitudin. Ut enim.
       </p>
+    </div>
+  </mat-card-content>
+  <mat-card-content>
+    <div class="produce-container">
+      <h2>Produce</h2>
+      <div class="grid-container">
+        <div
+          class="grid-item"
+          (mouseenter)="onHover()"
+          (mouseleave)="onLeave()"
+        ></div>
+      </div>
     </div>
   </mat-card-content>
 </mat-card>

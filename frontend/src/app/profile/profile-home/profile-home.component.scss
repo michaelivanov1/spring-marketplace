@@ -1,12 +1,18 @@
 $primary-color: #00bf63;
 
-.container {
-  display: flex;
-  height: 100%;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
+.main-container {
+  max-width: 80vw;
+  height: 500px;
+  margin: auto;
+  background-color: rgba(140, 195, 63, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  display: grid;
+  flex-wrap: nowrap;
 }
 
 .center-img {
@@ -24,17 +30,18 @@ $primary-color: #00bf63;
 
 .img-container {
   display: flex;
-  align-items: flex-start;
   justify-content: flex-start;
+  grid-column: 1;
+  grid-row: 1;
 
   img {
     width: 100%;
     height: auto;
     margin: 0;
+    border-radius: 40px;
   }
 
   @media (min-width: 768px) {
-    align-items: center;
     justify-content: center;
     margin-bottom: 0;
     margin-right: 20px;
@@ -51,6 +58,8 @@ $primary-color: #00bf63;
   align-items: flex-start;
   justify-content: flex-start;
   margin-bottom: 20px;
+  grid-column: 2;
+  grid-row: 1;
 
   ul.no-bullets {
     list-style-type: none;
@@ -73,38 +82,19 @@ $primary-color: #00bf63;
 .account-misc-container {
   display: flex;
   flex-grow: 1;
-
-  /* Add your custom styles for the account misc container */
+  grid-column: 1 / span 2;
+  grid-row: 2;
 }
 
-.margin-right-2 {
-  margin-right: 2px;
+.produce-container {
+  max-width: 80vw;
+
+  margin: auto;
+  background-color: rgba(140, 195, 63, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
 }
-
-// .container {
-//   display: flex;
-//   flex-direction: column;
-//   height: 100%;
-// }
-
-// .img-container .account-details-container {
-//   height: 50%;
-// }
-
-// .account-misc-container {
-//   height: 50%;
-//   width: 100%;
-// }
-
-// ul.no-bullets {
-//   list-style-type: none;
-//   margin: 0;
-//   padding: 0;
-// }
-
-// img {
-//   display: block;
-//   margin: 0 auto;
-//   max-width: 100%;
-//   height: auto;
-// }

@@ -18,11 +18,13 @@ export class ProfileComponent implements OnInit {
   msg: string;
   userProfile: Profile;
   userStand: FarmerStand;
+  isHovered: boolean;
   constructor(
     private profileService: ProfileService,
     private farmerStandService: FarmerStandService
   ) {
     this.msg = '';
+    this.isHovered = false;
     this.userProfile = {
       id: {
         date: '',
@@ -57,11 +59,29 @@ export class ProfileComponent implements OnInit {
     (this.profile = this.profileService.getOne('642794e00626870d47168e69')),
       catchError((err) => (this.msg = err.message));
     this.profile.forEach((x) => {
-      console.log(x);
       this.userProfile = x;
     });
     (this.farmerStand = this.farmerStandService.get()),
       catchError((err) => (this.msg = err.message));
-    this.farmerStand.forEach((y) => {});
+    this.farmerStand.forEach((y) => {
+      console.log(y);
+    });
+  }
+  // onProductClick(product: any) {
+  //   console.log(`clicked on: ${product.name}`);
+  //   return this.selectedProduct === product
+  //     ? (this.selectedProduct = null)
+  //     : (this.selectedProduct = product);
+  // }
+
+  // change cursor on hover
+  onHover() {
+    this.isHovered = true;
+  }
+  onLeave() {
+    this.isHovered = false;
+  }
+  getCursor(): string {
+    return this.isHovered ? 'pointer' : 'default';
   }
 }
