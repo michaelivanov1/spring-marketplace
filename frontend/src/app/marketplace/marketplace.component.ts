@@ -18,18 +18,11 @@ export class MarketplaceComponent {
 
   constructor(private farmerStandService: FarmerStandService) {
     this.farmerStandProfile = {
+      accountName: '',
+      profileName: '',
       id: {
         date: '',
         timestamp: '',
-      },
-      account: {
-        id: {
-          date: '',
-          timestamp: '',
-        },
-        username: '',
-        email: '',
-        password: '',
       },
       produceList: [{
         id: {
@@ -39,6 +32,7 @@ export class MarketplaceComponent {
         foodName: '',
         qty: 0,
         harvestDate: '',
+        price: 0.0,
       }],
       // profileName: [{
       //   id: {
@@ -71,7 +65,7 @@ export class MarketplaceComponent {
 
 
   onProductClick(farmer: FarmerStand, produce: any) {
-    console.log(`clicked on: ${produce.foodName} sold by ${farmer.account.username}`);
+    console.log(`clicked on: ${produce.foodName} sold by ${farmer.profileName}`);
   }
 
   onHover() {

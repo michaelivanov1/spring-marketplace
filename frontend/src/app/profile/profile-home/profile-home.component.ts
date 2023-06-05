@@ -42,15 +42,8 @@ export class ProfileComponent implements OnInit {
         date: '',
         timestamp: '',
       },
-      account: {
-        id: {
-          date: '',
-          timestamp: '',
-        },
-        username: '',
-        email: '',
-        password: '',
-      },
+      profileName: '',
+      accountName: '',
       produceList: [],
     };
   }

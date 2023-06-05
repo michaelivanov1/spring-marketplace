@@ -30,25 +30,31 @@
                 text-transform: capitalize;
                 font-size: 20px;
                 font-weight: 550;
+                margin-bottom: 4px;
             }
 
-            .product-harvestdate {}
+            .product-price {
+                font-weight: 500;
+                margin: 0;
+            }
 
             .product-qty {
                 text-align: left;
                 margin-left: 6px;
                 margin-bottom: 0px;
-                font-weight: 500;
+                font-weight: 400;
             }
+            
 
             .product-seller-container {
                 background-color: rgba(36, 45, 24, 0.212);
-                height: 30px;
+                height: 50px;
                 padding-top: 10px;
 
-                .product-seller {
+                .product-seller, .product-harvestdate {
                     font-weight: 550;
-                    font-size: 16px;
+                    font-size: 14px;
+                    margin: 0;
                 }
             }
         }
