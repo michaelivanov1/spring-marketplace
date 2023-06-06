@@ -30,19 +30,11 @@ public class FarmerStandController {
     private FarmerStandService farmerStandService;
 
     @Autowired
-    private RegistrationService registrationService;
-
-    @Autowired
     private FarmerService farmerService;
 
     @GetMapping("/farmer_stand")
     public ResponseEntity<List<FarmerStand>> getAllFarmerStands() {
         return new ResponseEntity<List<FarmerStand>>(farmerStandService.allFarmerStands(), HttpStatus.OK);
-    }
-
-    @GetMapping("/farmer_stand/{id}")
-    public ResponseEntity<Optional<FarmerStand>> getSingleFarmerById(@PathVariable String id) {
-        return new ResponseEntity<Optional<FarmerStand>>(farmerStandService.singleFarmerStandById(new ObjectId(id)), HttpStatus.OK);
     }
 
     @GetMapping("/farmer_stand/{accountName}")
