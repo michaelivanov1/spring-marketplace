@@ -54,11 +54,31 @@
     <div class="produce-container">
       <h2>Produce</h2>
       <div class="grid-container">
-        <div
-          class="grid-item"
-          (mouseenter)="onHover()"
-          (mouseleave)="onLeave()"
-        ></div>
+        <ng-container *ngFor="let produce of userStand.produceList">
+          <div
+            class="grid-item"
+            (mouseenter)="onHover()"
+            (mouseleave)="onLeave()"
+            [ngStyle]="{ cursor: getCursor() }"
+            (click)="onProductClick(userStand, produce)"
+            [ngClass]="{ selected: userStand === selectedProduct }"
+          >
+            <div class="item-data">
+              <img class="product-image" src="assets/Pumpkin.jpg" />
+              <p class="product-name">{{ produce.foodName }}</p>
+              <p class="product-price">${{ produce.price }}</p>
+              <p class="product-qty">{{ produce.qty }}x</p>
+              <div class="product-seller-container">
+                <p class="product-seller">
+                  Seller: {{ userProfile.profileName }}
+                </p>
+                <p class="product-harvestdate">
+                  Harvested: {{ produce.harvestDate }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
       </div>
     </div>
   </mat-card-content>
