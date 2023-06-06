@@ -10,7 +10,8 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FarmerStandRequest {
-    private String id;
+    //private String id;
+    private String accountName;
     private ArrayList<Produce> produceList;
 
     // Getters and setters

@@ -27,6 +27,10 @@ public class RegistrationService {
         return registrationRepository.findById(id);
     }
 
+    public Account singleAccountByUsername(String username) {
+        return registrationRepository.findAccountByUsername(username);
+    }
+
     public Account createAccount(String username, String email, String password) {
         Account account = registrationRepository.insert(new Account(username, email, password));
         return account;

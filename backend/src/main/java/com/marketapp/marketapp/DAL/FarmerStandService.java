@@ -7,6 +7,7 @@
 package com.marketapp.marketapp.DAL;
 
 import com.marketapp.marketapp.ViewModels.Account;
+import com.marketapp.marketapp.ViewModels.Farmer;
 import com.marketapp.marketapp.ViewModels.FarmerStand;
 import com.marketapp.marketapp.ViewModels.Produce;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class FarmerStandService {
         return farmerStandRepository.findAll();
     }
 
-    public FarmerStand createFarmerStand(Account account, ArrayList<Produce> produceList) {
-        FarmerStand farmerStand = farmerStandRepository.insert(new FarmerStand(account, produceList));
+    public FarmerStand createFarmerStand(Farmer farmer, ArrayList<Produce> produceList) {
+        FarmerStand farmerStand = farmerStandRepository.insert(new FarmerStand(farmer, produceList));
         return farmerStand;
     }
 }

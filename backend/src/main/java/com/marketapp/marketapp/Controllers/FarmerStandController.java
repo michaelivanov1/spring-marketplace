@@ -6,6 +6,7 @@
 
 package com.marketapp.marketapp.Controllers;
 
+import com.marketapp.marketapp.DAL.FarmerService;
 import com.marketapp.marketapp.DAL.FarmerStandService;
 import com.marketapp.marketapp.DAL.RegistrationService;
 import com.marketapp.marketapp.ViewModels.*;
@@ -31,6 +32,9 @@ public class FarmerStandController {
     @Autowired
     private RegistrationService registrationService;
 
+    @Autowired
+    private FarmerService farmerService;
+
     @GetMapping("/farmer_stand")
     public ResponseEntity<List<FarmerStand>> getAllFarmerStands() {
         return new ResponseEntity<List<FarmerStand>>(farmerStandService.allFarmerStands(), HttpStatus.OK);
@@ -40,10 +44,22 @@ public class FarmerStandController {
     public ResponseEntity<FarmerStand> createFarmerStand(@RequestBody FarmerStandRequest request) {
 
         //find an account by id
-        Optional<Account> accountOp = registrationService.singleAccountById(new ObjectId(request.getId()));
+        //Optional<Account> accountOp = registrationService.singleAccountById(new ObjectId(request.getId()));
 
-        return accountOp.map(account -> new ResponseEntity<>(farmerStandService.createFarmerStand(
+        /*return accountOp.map(account -> new ResponseEntity<>(farmerStandService.createFarmerStand(
                 account, request.getProduceList()), HttpStatus.CREATED)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+         */
+
+        //Account account = registrationService.singleAccountByUsername(request.getAccountName());
+        Optional<Farmer> farmerOp = farmerService.singleFarmerByName(request.getAccountName());
+        Farmer farmer = null;
+        if (farmerOp.isPresent()) {
+            farmer = farmerOp.get();
+        }
+
+        return new ResponseEntity<>(farmerStandService.createFarmerStand(farmer, request.getProduceList()),
+                HttpStatus.CREATED);
 
     }
 

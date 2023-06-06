@@ -20,11 +20,13 @@ public class Produce {
     private String foodName;
     private int qty;
     private String harvestDate; //TODO: Will change to be a proper date object so its uniform
+    private double price;
 
-    public Produce(String foodName, int qty, String harvestDate) {
+    public Produce(String foodName, int qty, String harvestDate, double price) {
         this.foodName = foodName;
         this.qty = qty;
         this.harvestDate = harvestDate;
+        this.price = price;
     }
 
 }

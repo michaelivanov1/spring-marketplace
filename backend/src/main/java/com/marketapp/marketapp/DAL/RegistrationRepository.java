@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface RegistrationRepository extends MongoRepository<Account, ObjectId> {
     Account findAccountByEmail(String email);
 
+    Account findAccountByUsername(String username);
+
 }
