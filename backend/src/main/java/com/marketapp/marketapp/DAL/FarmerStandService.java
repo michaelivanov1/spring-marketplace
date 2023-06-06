@@ -10,6 +10,7 @@ import com.marketapp.marketapp.ViewModels.Account;
 import com.marketapp.marketapp.ViewModels.Farmer;
 import com.marketapp.marketapp.ViewModels.FarmerStand;
 import com.marketapp.marketapp.ViewModels.Produce;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,13 @@ public class FarmerStandService {
     public FarmerStand createFarmerStand(Farmer farmer, ArrayList<Produce> produceList) {
         FarmerStand farmerStand = farmerStandRepository.insert(new FarmerStand(farmer, produceList));
         return farmerStand;
+    }
+
+    public Optional<FarmerStand> singleFarmerStandById(ObjectId id) {
+        return farmerStandRepository.findById(id);
+    }
+
+    public Optional<FarmerStand> singleFarmerStandByAccountName(String accountName) {
+        return farmerStandRepository.findFarmerStandByAccountName(accountName);
     }
 }

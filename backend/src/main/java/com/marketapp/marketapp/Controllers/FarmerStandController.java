@@ -40,18 +40,19 @@ public class FarmerStandController {
         return new ResponseEntity<List<FarmerStand>>(farmerStandService.allFarmerStands(), HttpStatus.OK);
     }
 
+    @GetMapping("/farmer_stand/{id}")
+    public ResponseEntity<Optional<FarmerStand>> getSingleFarmerById(@PathVariable String id) {
+        return new ResponseEntity<Optional<FarmerStand>>(farmerStandService.singleFarmerStandById(new ObjectId(id)), HttpStatus.OK);
+    }
+
+    @GetMapping("/farmer_stand/{accountName}")
+    public ResponseEntity<Optional<FarmerStand>> getSingleFarmerStandByAccountName(@PathVariable String accountName) {
+        return new ResponseEntity<Optional<FarmerStand>>(farmerStandService.singleFarmerStandByAccountName(accountName), HttpStatus.OK);
+    }
+
     @PostMapping("/farmer_stand")
     public ResponseEntity<FarmerStand> createFarmerStand(@RequestBody FarmerStandRequest request) {
 
-        //find an account by id
-        //Optional<Account> accountOp = registrationService.singleAccountById(new ObjectId(request.getId()));
-
-        /*return accountOp.map(account -> new ResponseEntity<>(farmerStandService.createFarmerStand(
-                account, request.getProduceList()), HttpStatus.CREATED)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
-         */
-
-        //Account account = registrationService.singleAccountByUsername(request.getAccountName());
         Optional<Farmer> farmerOp = farmerService.singleFarmerByName(request.getAccountName());
         Farmer farmer = null;
         if (farmerOp.isPresent()) {
