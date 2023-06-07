@@ -14,11 +14,12 @@ import { FarmerStand } from '@app/farmer-stand/farmer-stand';
 })
 export class ProfileComponent implements OnInit {
   profile?: Observable<Profile>;
-  farmerStand?: Observable<FarmerStand[]>;
+  farmerStand?: Observable<FarmerStand>;
   msg: string;
   userProfile: Profile;
   userStand: FarmerStand;
   isHovered: boolean;
+  selectedProduct: any;
   constructor(
     private profileService: ProfileService,
     private farmerStandService: FarmerStandService
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
       accountName: '',
       produceList: [],
     };
+    this.selectedProduct = '';
   }
 
   ngOnInit(): void {
@@ -54,18 +56,19 @@ export class ProfileComponent implements OnInit {
     this.profile.forEach((x) => {
       this.userProfile = x;
     });
-    (this.farmerStand = this.farmerStandService.get()),
+    (this.farmerStand = this.farmerStandService.getOne('johndoe')),
       catchError((err) => (this.msg = err.message));
     this.farmerStand.forEach((y) => {
+      this.userStand = y;
       console.log(y);
     });
   }
-  // onProductClick(product: any) {
-  //   console.log(`clicked on: ${product.name}`);
-  //   return this.selectedProduct === product
-  //     ? (this.selectedProduct = null)
-  //     : (this.selectedProduct = product);
-  // }
+  onProductClick(farmer: FarmerStand, product: any) {
+    console.log(`clicked on: ${product.name}`);
+    return this.selectedProduct === product
+      ? (this.selectedProduct = null)
+      : (this.selectedProduct = product);
+  }
 
   // change cursor on hover
   onHover() {
