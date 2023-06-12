@@ -5,10 +5,12 @@ import { DBTest } from './dbtest/test-component.component';
 import { ProfileComponent } from './profile/profile-home/profile-home.component';
 import { RegistrationFinishComponent } from './registration/registration-finish/registration-finish.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: RegistrationComponent, title: 'register' },
   { path: 'register', component: RegistrationComponent, title: 'register' },
+  { path: 'login', component: LoginComponent, title: 'login' },
   { path: 'test', component: DBTest, title: 'test' },
   { path: 'profile', component: ProfileComponent, title: 'profile' },
   {
