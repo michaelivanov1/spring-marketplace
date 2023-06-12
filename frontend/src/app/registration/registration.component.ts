@@ -48,13 +48,35 @@ export class RegistrationComponent {
   }
 
   onFormSubmit() {
+
     const body = {
-      username: this.registrationForm.value.username,
       email: this.registrationForm.value.email,
       password: this.registrationForm.value.password,
     };
 
     this.http
+      .post('http://localhost:8080/api/auth/register', body, {
+          responseType: 'json',
+      })
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+          localStorage.setItem('jwtToken', response.token);
+          this.navigateToComponent();
+        },
+        (error: any) => {
+          console.error('not added to db: ', error);
+        }
+      );
+
+    /*const body = {
+      username: this.registrationForm.value.username,
+      email: this.registrationForm.value.email,
+      password: this.registrationForm.value.password,
+    };*/
+
+
+    /*this.http
       .post('http://localhost:8080/api/registration', body, {
         responseType: 'text',
       })
@@ -66,7 +88,7 @@ export class RegistrationComponent {
         (error: any) => {
           console.error('not added to db: ', error);
         }
-      );
+      );*/
   }
 
   navigateToComponent() {
