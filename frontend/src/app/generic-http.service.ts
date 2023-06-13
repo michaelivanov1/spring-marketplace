@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { BASEURL } from '@app/constants';
@@ -23,8 +23,13 @@ export class GenericHttpService<T> {
       .pipe(retry(2), catchError(this.handleError));
   } // update
   public get(): Observable<T[]> {
+
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${sessionStorage.getItem("jwtToken")}`)
+      .set('Content-Type', 'application/json');
+
     return this.httpClient
-      .get<T[]>(`${BASEURL}${this.entity}`)
+      .get<T[]>(`${BASEURL}${this.entity}`, {headers})
       .pipe(retry(2), catchError(this.handleError));
   } // getAll
   public getSome(id: any): Observable<T[]> {

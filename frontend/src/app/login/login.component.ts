@@ -9,6 +9,7 @@ import {
 import { ValidateUsername } from '../validators/username.validator';
 import { ValidatePassword } from '../validators/password.validator';
 import { Router } from '@angular/router';
+import {ValidateEmail} from "@app/validators/email.validator";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  username: FormControl;
+  email: FormControl;
   password: FormControl;
   hidePassword = true;
 
@@ -26,21 +27,34 @@ export class LoginComponent {
     private http: HttpClient,
     private router: Router
   ) {
-    (this.username = new FormControl('', Validators.compose([Validators.required, ValidateUsername]))),
+    (this.email = new FormControl('', Validators.compose([Validators.required, ValidateEmail]))),
 
       (this.password = new FormControl('', Validators.compose([Validators.required, ValidatePassword]))),
 
       (this.loginForm = new FormGroup({
-        username: this.username, password: this.password,
+        email: this.email, password: this.password,
       }
       ));
   }
 
   onFormSubmit() {
     const body = {
-      username: this.loginForm.value.username,
+      email: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
+
+    this.http
+      .post('http://localhost:8080/api/auth/authenticate', body, {
+        responseType: 'json'
+      })
+      .subscribe((response: any) => {
+        console.log(response.token);
+        sessionStorage.setItem('jwtToken', response.token);
+
+        this.navigateToComponent();
+
+        //TODO: for frontend crew:  let user know when login failed (getting back 403 forbidden)
+      });
 
     // this.http
     //   .post('http://localhost:8080/api/login', body, {
@@ -51,6 +65,10 @@ export class LoginComponent {
     //       console.log(response);
     //     },
     //   );
+  }
+
+  navigateToComponent() {
+    this.router.navigate(['/marketplace']);
   }
 }
 

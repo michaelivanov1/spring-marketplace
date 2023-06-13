@@ -61,7 +61,7 @@ export class RegistrationComponent {
       .subscribe(
         (response: any) => {
           console.log(response);
-          localStorage.setItem('jwtToken', response.token);
+          sessionStorage.setItem('jwtToken', response.token);
           this.navigateToComponent();
         },
         (error: any) => {
