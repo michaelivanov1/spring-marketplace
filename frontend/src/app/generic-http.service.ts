@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { BASEURL } from '@app/constants';
@@ -18,33 +18,48 @@ export class GenericHttpService<T> {
       .pipe(retry(2), catchError(this.handleError));
   } // add
   public update(item: T): Observable<T> {
-    return this.httpClient
-      .put<T>(`${BASEURL}${this.entity}`, item)
-      .pipe(retry(2), catchError(this.handleError));
-  } // update
-  public get(): Observable<T[]> {
-
     const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${sessionStorage.getItem("jwtToken")}`)
+      .set('Authorization', `Bearer ${sessionStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
 
     return this.httpClient
-      .get<T[]>(`${BASEURL}${this.entity}`, {headers})
+      .put<T>(`${BASEURL}${this.entity}`, item, { headers })
+      .pipe(retry(2), catchError(this.handleError));
+  } // update
+  public get(): Observable<T[]> {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${sessionStorage.getItem('jwtToken')}`)
+      .set('Content-Type', 'application/json');
+
+    return this.httpClient
+      .get<T[]>(`${BASEURL}${this.entity}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // getAll
   public getSome(id: any): Observable<T[]> {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${sessionStorage.getItem('jwtToken')}`)
+      .set('Content-Type', 'application/json');
+
     return this.httpClient
-      .get<T[]>(`${BASEURL}${this.entity}/${id}`)
+      .get<T[]>(`${BASEURL}${this.entity}/${id}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // getSome
   public getOne(id: any): Observable<T> {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${sessionStorage.getItem('jwtToken')}`)
+      .set('Content-Type', 'application/json');
+
     return this.httpClient
-      .get<T>(`${BASEURL}${this.entity}/${id}`)
+      .get<T>(`${BASEURL}${this.entity}/${id}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // getOne
   public delete(id: any): Observable<number> {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${sessionStorage.getItem('jwtToken')}`)
+      .set('Content-Type', 'application/json');
+
     return this.httpClient
-      .delete<number>(`${BASEURL}${this.entity}/${id}`)
+      .delete<number>(`${BASEURL}${this.entity}/${id}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // delete
   // Error handling

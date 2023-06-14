@@ -10,6 +10,8 @@ import { ValidateEmail } from '../validators/email.validator';
 import { ValidateUsername } from '../validators/username.validator';
 import { ValidatePassword } from '../validators/password.validator';
 import { Router } from '@angular/router';
+import { UserVerification } from '@app/common-interfaces/user-verification';
+import { RegistrationService } from './reigstration.service';
 
 @Component({
   selector: 'app-registration',
@@ -48,7 +50,6 @@ export class RegistrationComponent {
   }
 
   onFormSubmit() {
-
     const body = {
       email: this.registrationForm.value.email,
       password: this.registrationForm.value.password,
@@ -56,7 +57,7 @@ export class RegistrationComponent {
 
     this.http
       .post('http://localhost:8080/api/auth/register', body, {
-          responseType: 'json',
+        responseType: 'json',
       })
       .subscribe(
         (response: any) => {
@@ -68,27 +69,6 @@ export class RegistrationComponent {
           console.error('not added to db: ', error);
         }
       );
-
-    /*const body = {
-      username: this.registrationForm.value.username,
-      email: this.registrationForm.value.email,
-      password: this.registrationForm.value.password,
-    };*/
-
-
-    /*this.http
-      .post('http://localhost:8080/api/registration', body, {
-        responseType: 'text',
-      })
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-          this.navigateToComponent();
-        },
-        (error: any) => {
-          console.error('not added to db: ', error);
-        }
-      );*/
   }
 
   navigateToComponent() {
