@@ -1,13 +1,18 @@
 package com.marketapp.marketapp.DAL;
 
+import com.marketapp.marketapp.CustomExceptions.EmailAlreadyRegisteredException;
 import com.marketapp.marketapp.Security.JwtService;
 import com.marketapp.marketapp.ViewModels.*;
 import lombok.RequiredArgsConstructor;
 //import lombok.var;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +24,22 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+
+        //make certain email is not already in use
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new EmailAlreadyRegisteredException("Email is already in use", HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date now = new Date();
+        formatter.format(now);
         var user = User.builder()
+                .profileName("")
+                .description("")
+                .phoneNumber("")
+                .profileImage("")
+                .bannerImage("")
+                .creationDate(now)
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
