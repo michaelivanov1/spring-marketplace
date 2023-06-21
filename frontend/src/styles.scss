@@ -6,7 +6,6 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  /* prevent vertical scrolling */
 }
 
 /* override all mat-card instances to use this instead of default white color */
@@ -41,13 +40,50 @@ mat-card {
     }
   }
 
+  .navigation-bar-main {
+    a {
+      font-weight: 400;
+      padding: 8px 16px;
+      color: #0FC263;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #ddd;
+    }
+
+    a.active {
+      background-color: #ccc;
+    }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu-items-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    .navigation-bar-main {}
+  }
+
+  .menu-items-right {
+    display: flex;
+    gap: 10px;
+    color: #ffde59;
+  }
+
   .footer {
     text-align: center;
     background-color: #222222;
     color: white;
     font-family: Roboto, sans-serif;
     font-size: 1.25vw;
-    /* Equivalent to 20px */
     font-weight: 400;
     height: 4vw;
     margin: 0vh;
@@ -58,5 +94,3 @@ mat-card {
     }
   }
 }
-
-/* header styles */

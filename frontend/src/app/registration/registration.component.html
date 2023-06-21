@@ -58,8 +58,17 @@
 
         <div>
           <span>
-            <button mat-raised-button type="button" (click)="onFormSubmit()" [disabled]="!registrationForm.valid">
+            <button class="register-button" mat-raised-button type="button" (click)="onFormSubmit()"
+              [disabled]="!registrationForm.valid">
               Register
+            </button>
+          </span>
+        </div>
+
+        <div>
+          <span>
+            <button class="already-registered-button" (click)="handleAlreadyRegistered()">
+              Already registered? click here
             </button>
           </span>
         </div>

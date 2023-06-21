@@ -56,7 +56,7 @@ export class RegistrationComponent {
 
     this.http
       .post('http://localhost:8080/api/auth/register', body, {
-          responseType: 'json',
+        responseType: 'json',
       })
       .subscribe(
         (response: any) => {
@@ -68,30 +68,13 @@ export class RegistrationComponent {
           console.error('not added to db: ', error);
         }
       );
-
-    /*const body = {
-      username: this.registrationForm.value.username,
-      email: this.registrationForm.value.email,
-      password: this.registrationForm.value.password,
-    };*/
-
-
-    /*this.http
-      .post('http://localhost:8080/api/registration', body, {
-        responseType: 'text',
-      })
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-          this.navigateToComponent();
-        },
-        (error: any) => {
-          console.error('not added to db: ', error);
-        }
-      );*/
   }
 
   navigateToComponent() {
     this.router.navigate(['/registration-finish']);
+  }
+
+  handleAlreadyRegistered() {
+    this.router.navigate(['/login']);
   }
 }
