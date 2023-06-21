@@ -8,17 +8,13 @@ package com.marketapp.marketapp.Controllers;
 
 import com.marketapp.marketapp.DAL.FarmerService;
 import com.marketapp.marketapp.DAL.FarmerStandService;
-import com.marketapp.marketapp.DAL.RegistrationService;
 import com.marketapp.marketapp.ViewModels.*;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
