@@ -2,77 +2,84 @@
   <div class="main-container">
     <mat-card-title> Spring Marketplace </mat-card-title>
     <div class="form-container">
-      <h2>Please register an account</h2>
-      <form [formGroup]="registrationForm">
-        <div layout="row">
-          <mat-form-field flex>
-            <input matInput placeholder="Username" type="text" required formControlName="username" />
-            <mat-error *ngIf="username.errors && (username.dirty || username.touched)" align="end">
-              <p *ngIf="username.hasError('required')">Username is required.</p>
-              <p *ngIf="
+      <ng-container *ngIf="!loading">
+        <h2>Please register an account</h2>
+        <form [formGroup]="registrationForm" (keydown.enter)="onFormSubmit()">
+          <div layout="row">
+            <mat-form-field flex>
+              <input matInput placeholder="Username" type="text" required formControlName="username" />
+              <mat-error *ngIf="username.errors && (username.dirty || username.touched)" align="end">
+                <p *ngIf="username.hasError('required')">Username is required.</p>
+                <p *ngIf="
                   !username.hasError('required') &&
                   username.hasError('invalidUsername')
                 ">
-                min characters: 4
-              </p>
-            </mat-error>
-          </mat-form-field>
-        </div>
+                  min characters: 4
+                </p>
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <div layout="row">
-          <mat-form-field flex>
-            <input matInput placeholder="Email" type="email" required formControlName="email" />
-            <mat-error *ngIf="email.errors && (email.dirty || email.touched)" align="end">
-              <p *ngIf="email.hasError('required')">Email is required.</p>
-              <p *ngIf="
+          <div layout="row">
+            <mat-form-field flex>
+              <input matInput placeholder="Email" type="email" required formControlName="email" />
+              <mat-error *ngIf="email.errors && (email.dirty || email.touched)" align="end">
+                <p *ngIf="email.hasError('required')">Email is required.</p>
+                <p *ngIf="
                   !email.hasError('required') && email.hasError('invalidEmail')
                 ">
-                needs format - xx@xx.xx
-              </p>
-            </mat-error>
-          </mat-form-field>
-        </div>
+                  needs format - xx@xx.xx
+                </p>
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <div layout="row">
-          <mat-form-field flex>
-            <input matInput placeholder="Password" type="{{ hidePassword ? 'password' : 'text' }}" required
-              formControlName="password" />
-            <mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="
+          <div layout="row">
+            <mat-form-field flex>
+              <input matInput placeholder="Password" type="{{ hidePassword ? 'password' : 'text' }}" required
+                formControlName="password" />
+              <mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="
                 hidePassword ? 'Hide password' : 'Show password'
               ">
-              <mat-icon>{{
-                hidePassword ? "visibility_off" : "visibility"
-                }}</mat-icon>
-            </mat-icon-button>
-            <mat-error *ngIf="password.errors && (password.dirty || password.touched)" align="end">
-              <p *ngIf="password.hasError('required')">Password is required.</p>
-              <p *ngIf="
+                <mat-icon>{{
+                  hidePassword ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+              </mat-icon-button>
+              <mat-error *ngIf="password.errors && (password.dirty || password.touched)" align="end">
+                <p *ngIf="password.hasError('required')">Password is required.</p>
+                <p *ngIf="
                   !password.hasError('required') &&
                   password.hasError('invalidPassword')
                 ">
-                min characters: 4
-              </p>
-            </mat-error>
-          </mat-form-field>
-        </div>
+                  min characters: 4
+                </p>
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <div>
-          <span>
-            <button class="register-button" mat-raised-button type="button" (click)="onFormSubmit()"
-              [disabled]="!registrationForm.valid">
-              Register
-            </button>
-          </span>
-        </div>
+          <div>
+            <span>
+              <button class="register-button" mat-raised-button type="button" (click)="onFormSubmit()"
+                [disabled]="!registrationForm.valid">
+                Register
+              </button>
+            </span>
+          </div>
 
-        <div>
-          <span>
-            <button class="already-registered-button" (click)="handleAlreadyRegistered()">
-              Already registered? click here
-            </button>
-          </span>
-        </div>
-      </form>
+          <div>
+            <span>
+              <button class="already-registered-button" (click)="handleAlreadyRegistered()">
+                Already registered? click here
+              </button>
+            </span>
+          </div>
+        </form>
+      </ng-container>
+
+      <div *ngIf="loading">
+        <p style="font-size: 24px; margin-top: 50px">Loading...</p>
+      </div>
+
     </div>
   </div>
 </mat-card>

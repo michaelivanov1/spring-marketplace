@@ -19,7 +19,10 @@ export class LoginComponent {
   email: FormControl;
   password: FormControl;
   decodedToken: any;
+  invalidLoginText: string = 'Invalid credentials. Please try again';
+  loginFailed: Boolean = false;
   hidePassword = true;
+  loading: boolean = false;
 
   constructor(
     private router: Router,
@@ -38,12 +41,23 @@ export class LoginComponent {
   onFormSubmit() {
     const { email, password } = this.loginForm.value;
 
-    this.authService.autoLogin(email, password).subscribe(
+    this.loading = true;
+
+    this.authService.login(email, password).subscribe(
       () => {
         this.navigateToMarketplace();
+        this.loginFailed = false;
       },
       (error: any) => {
+        setTimeout(() => {
+          this.loginFailed = false;
+        }, 2500);
+        this.loginFailed = true;
+        this.loading = false;
         console.error('Login failed:', error);
+      },
+      () => {
+        this.loading = false; 
       }
     );
   }

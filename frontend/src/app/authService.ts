@@ -6,6 +6,7 @@ import { ValidateEmail } from "@app/validators/email.validator";
 import { ValidatePassword } from "@app/validators/password.validator";
 import jwt_decode from "jwt-decode";
 import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -31,11 +32,20 @@ export class AuthService {
         });
     }
 
-    register(email: string, password: string) {
-        this.autoLogin(email, password);
+    register(username: string, email: string, password: string): Observable<any> {
+        return this.http.post<any>('http://localhost:8080/api/auth/register', { username, email, password }, {
+            responseType: 'json',
+        }).pipe(
+            tap((response: any) => {
+                localStorage.setItem('jwtToken', response.token);
+                this.decodedToken = jwt_decode(response.token);
+                let loginEmail = this.decodedToken.sub;
+                console.log(`decoded email: ` + loginEmail);
+            })
+        );
     }
 
-    autoLogin(email: string, password: string) {
+    login(email: string, password: string) {
         return this.http.post<any>('http://localhost:8080/api/auth/authenticate', { email, password }).pipe(
             tap((response: any) => {
                 localStorage.setItem('jwtToken', response.token);
@@ -53,6 +63,6 @@ export class AuthService {
 
     isLoggedIn(): boolean {
         const token = localStorage.getItem('jwtToken');
-        return !!token; 
+        return !!token;
     }
 }
