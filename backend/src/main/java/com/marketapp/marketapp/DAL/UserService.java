@@ -1,6 +1,6 @@
 package com.marketapp.marketapp.DAL;
 
-import com.marketapp.marketapp.ViewModels.Role;
+import com.marketapp.marketapp.Enums.Role;
 import com.marketapp.marketapp.ViewModels.User;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;

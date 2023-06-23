@@ -15,6 +15,5 @@ import java.util.Optional;
 
 @Repository
 public interface FarmerStandRepository extends MongoRepository<FarmerStand, ObjectId> {
-    //
-    Optional<FarmerStand> findFarmerStandByAccountName(String accountName);
+    Optional<FarmerStand> findFarmerStandByEmail(String email);
 }

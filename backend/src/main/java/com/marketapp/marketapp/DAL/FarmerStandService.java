@@ -6,10 +6,7 @@
 
 package com.marketapp.marketapp.DAL;
 
-import com.marketapp.marketapp.ViewModels.Account;
-import com.marketapp.marketapp.ViewModels.Farmer;
-import com.marketapp.marketapp.ViewModels.FarmerStand;
-import com.marketapp.marketapp.ViewModels.Produce;
+import com.marketapp.marketapp.ViewModels.*;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,16 +25,15 @@ public class FarmerStandService {
         return farmerStandRepository.findAll();
     }
 
-    public FarmerStand createFarmerStand(Farmer farmer, ArrayList<Produce> produceList) {
-        FarmerStand farmerStand = farmerStandRepository.insert(new FarmerStand(farmer, produceList));
-        return farmerStand;
+    public FarmerStand createFarmerStand(User user, ArrayList<Produce> produceList) {
+        return farmerStandRepository.insert(new FarmerStand(user, produceList));
     }
 
     public Optional<FarmerStand> singleFarmerStandById(ObjectId id) {
         return farmerStandRepository.findById(id);
     }
 
-    public Optional<FarmerStand> singleFarmerStandByAccountName(String accountName) {
-        return farmerStandRepository.findFarmerStandByAccountName(accountName);
+    public Optional<FarmerStand> singleFarmerStandByEmail(String email) {
+        return farmerStandRepository.findFarmerStandByEmail(email);
     }
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class FarmerStandRequest {
     //private String id;
-    private String accountName;
+    private String email;
     private ArrayList<Produce> produceList;
 
     // Getters and setters
