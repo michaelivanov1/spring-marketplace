@@ -1,6 +1,7 @@
 package com.marketapp.marketapp.ViewModels;
 
 
+import com.marketapp.marketapp.Enums.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;

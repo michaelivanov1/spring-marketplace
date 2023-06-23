@@ -6,10 +6,10 @@
 
 package com.marketapp.marketapp.Controllers;
 
-import com.marketapp.marketapp.DAL.FarmerService;
 import com.marketapp.marketapp.DAL.FarmerStandService;
+import com.marketapp.marketapp.DAL.UserService;
 import com.marketapp.marketapp.ViewModels.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,34 +20,33 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:8080")
+@RequiredArgsConstructor
 public class FarmerStandController {
 
-    @Autowired
-    private FarmerStandService farmerStandService;
+    private final FarmerStandService farmerStandService;
 
-    @Autowired
-    private FarmerService farmerService;
+    private final UserService userService;
 
     @GetMapping("/farmer_stand")
     public ResponseEntity<List<FarmerStand>> getAllFarmerStands() {
         return new ResponseEntity<List<FarmerStand>>(farmerStandService.allFarmerStands(), HttpStatus.OK);
     }
 
-    @GetMapping("/farmer_stand/{accountName}")
-    public ResponseEntity<Optional<FarmerStand>> getSingleFarmerStandByAccountName(@PathVariable String accountName) {
-        return new ResponseEntity<Optional<FarmerStand>>(farmerStandService.singleFarmerStandByAccountName(accountName), HttpStatus.OK);
+    @GetMapping("/farmer_stand/{email}")
+    public ResponseEntity<Optional<FarmerStand>> getSingleFarmerStandByEmail(@PathVariable String email) {
+        return new ResponseEntity<Optional<FarmerStand>>(farmerStandService.singleFarmerStandByEmail(email), HttpStatus.OK);
     }
 
     @PostMapping("/farmer_stand")
     public ResponseEntity<FarmerStand> createFarmerStand(@RequestBody FarmerStandRequest request) {
 
-        Optional<Farmer> farmerOp = farmerService.singleFarmerByName(request.getAccountName());
-        Farmer farmer = null;
-        if (farmerOp.isPresent()) {
-            farmer = farmerOp.get();
+        Optional<User> userOp = userService.singleUserByEmail(request.getEmail());
+        User user = null;
+        if (userOp.isPresent()) {
+            user = userOp.get();
         }
 
-        return new ResponseEntity<>(farmerStandService.createFarmerStand(farmer, request.getProduceList()),
+        return new ResponseEntity<>(farmerStandService.createFarmerStand(user, request.getProduceList()),
                 HttpStatus.CREATED);
 
     }

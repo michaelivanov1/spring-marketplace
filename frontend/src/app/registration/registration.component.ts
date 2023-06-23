@@ -10,8 +10,7 @@ import { ValidateEmail } from '../validators/email.validator';
 import { ValidateUsername } from '../validators/username.validator';
 import { ValidatePassword } from '../validators/password.validator';
 import { Router } from '@angular/router';
-import { UserVerification } from '@app/common-interfaces/user-verification';
-import { RegistrationService } from './reigstration.service';
+import { AuthService } from '../authService';
 
 @Component({
   selector: 'app-registration',
@@ -24,11 +23,13 @@ export class RegistrationComponent {
   email: FormControl;
   password: FormControl;
   hidePassword = true;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     (this.username = new FormControl(
       '',
@@ -50,28 +51,32 @@ export class RegistrationComponent {
   }
 
   onFormSubmit() {
-    const body = {
-      email: this.registrationForm.value.email,
-      password: this.registrationForm.value.password,
-    };
+    this.loading = true;
 
-    this.http
-      .post('http://localhost:8080/api/auth/register', body, {
-        responseType: 'json',
-      })
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-          sessionStorage.setItem('jwtToken', response.token);
-          this.navigateToComponent();
-        },
-        (error: any) => {
-          console.error('not added to db: ', error);
-        }
-      );
+    const username = this.registrationForm.value.username;
+    const email = this.registrationForm.value.email;
+    const password = this.registrationForm.value.password;
+
+    this.authService.register(username, email, password).subscribe(
+      (response: any) => {
+        sessionStorage.setItem('jwtToken', response.token);
+        this.navigateToComponent();
+      },
+      (error: any) => {
+        this.loading = false;
+        console.error('not added to db: ', error);
+      },
+      () => {
+        this.loading = false;
+      }
+    );
   }
 
   navigateToComponent() {
     this.router.navigate(['/registration-finish']);
+  }
+
+  handleAlreadyRegistered() {
+    this.router.navigate(['/login']);
   }
 }

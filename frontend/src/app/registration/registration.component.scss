@@ -4,7 +4,7 @@ $primary-color: #00BF63;
     max-width: 500px;
     height: 500px;
     margin: auto;
-    background-color: rgba(140,195,63,0.1);
+    background-color: rgba(140, 195, 63, 0.1);
     border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -33,7 +33,7 @@ h2 {
     margin-bottom: 1rem;
 }
 
-button {
+.register-button {
     background-color: $primary-color;
     color: #fff;
     font-family: Roboto, sans-serif;
@@ -48,6 +48,19 @@ button {
 
     &:hover {
         background-color: darken($primary-color, 10%);
+    }
+}
+
+.already-registered-button {
+    margin-top: 20px;
+    border: none;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    background: none;
+
+    &:hover {
+        cursor: pointer;
+        font-size: 20px;
     }
 }
 

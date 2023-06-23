@@ -1,6 +1,7 @@
 package com.marketapp.marketapp.DAL;
 
 import com.marketapp.marketapp.CustomExceptions.EmailAlreadyRegisteredException;
+import com.marketapp.marketapp.Enums.Role;
 import com.marketapp.marketapp.Security.JwtService;
 import com.marketapp.marketapp.ViewModels.*;
 import lombok.RequiredArgsConstructor;

@@ -63,6 +63,7 @@ export class ProfileComponent implements OnInit {
       console.log(y);
     });
   }
+  
   onProductClick(farmer: FarmerStand, product: any) {
     console.log(`clicked on: ${product.name}`);
     return this.selectedProduct === product

@@ -2,19 +2,20 @@
     <div class="main-container">
         <mat-card-title> Spring Marketplace </mat-card-title>
         <div class="form-container">
+            <ng-container *ngIf="!loading">
             <h2>Please login to your account</h2>
-            <form [formGroup]="loginForm">
+            <form [formGroup]="loginForm" (keydown.enter)="onFormSubmit()">
 
                 <div layout="row">
                     <mat-form-field flex>
                         <input matInput placeholder="Email" type="text" required formControlName="email" />
                         <mat-error *ngIf="email.errors && (email.dirty || email.touched)" align="end">
-                            <p *ngIf="email.hasError('required')">Username is required.</p>
+                            <p *ngIf="email.hasError('required')">Email is required</p>
                             <p *ngIf="
                     !email.hasError('required') &&
                     email.hasError('invalidEmail')
                   ">
-                                min characters: 4
+                                Format: xx@xx.xx
                             </p>
                         </mat-error>
                     </mat-form-field>
@@ -45,12 +46,19 @@
 
                 <div>
                     <span>
+                        <p *ngIf="loginFailed">{{invalidLoginText}}</p>
                         <button mat-raised-button type="button" (click)="onFormSubmit()" [disabled]="!loginForm.valid">
                             Login
                         </button>
                     </span>
                 </div>
             </form>
+            </ng-container>
+
+            <div *ngIf="loading">
+                <p style="font-size: 24px; margin-top: 50px">Loading...</p>
+            </div>
+
         </div>
     </div>
 </mat-card>
