@@ -5,7 +5,7 @@ import { ObjectId } from '../common-interfaces/id-object';
  */
 export interface Profile {
   id: ObjectId;
-  profileName: String;
+  displayName: String;
   description: String;
   phoneNumber: String;
   profileImage: String;

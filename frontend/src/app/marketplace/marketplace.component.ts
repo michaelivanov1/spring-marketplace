@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FarmerStandService } from '../farmer-stand/farmer-stand.service';
-import { FarmerStand } from '../farmer-stand/farmer-stand';
+import { UserStandService } from '../user-stand/user-stand.service';
+import { UserStand } from '../user-stand/user-stand';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,15 +11,14 @@ import { Observable } from 'rxjs';
 
 export class MarketplaceComponent {
   selectedProduct: any;
-  farmerStand?: Observable<FarmerStand[]>;
-  farmerStandProfile: FarmerStand;
-  farmerStandProfiles: FarmerStand[] = [];
+  userStand?: Observable<UserStand[]>;
+  userStandProfile: UserStand;
+  userStandProfiles: UserStand[] = [];
 
 
-  constructor(private farmerStandService: FarmerStandService) {
-    this.farmerStandProfile = {
-      accountName: '',
-      profileName: '',
+  constructor(private userStandService: UserStandService) {
+    this.userStandProfile = {
+      displayName: '',
       id: {
         date: '',
         timestamp: '',
@@ -48,14 +47,14 @@ export class MarketplaceComponent {
 
   ngOnInit(): void {
 
-    this.farmerStand = this.farmerStandService.get();
-    this.farmerStand?.subscribe((farmers: FarmerStand[]) => {
-      // populate farmer stand profiles array
-      this.farmerStandProfiles = farmers;
+    this.userStand = this.userStandService.get();
+    this.userStand?.subscribe((users: UserStand[]) => {
+      // populate user stand profiles array
+      this.userStandProfiles = users;
 
-      farmers.forEach((farmer: FarmerStand) => {
+      users.forEach((user: UserStand) => {
        
-        // farmer.produceList.forEach((produce) => {
+        // user.produceList.forEach((produce) => {
         //   console.log(produce.foodName, produce.qty, produce.harvestDate);
         // });
       });
@@ -64,8 +63,8 @@ export class MarketplaceComponent {
   }
 
 
-  onProductClick(farmer: FarmerStand, produce: any) {
-    console.log(`clicked on: ${produce.foodName} sold by ${farmer.profileName}`);
+  onProductClick(user: UserStand, produce: any) {
+    console.log(`clicked on: ${produce.foodName} sold by ${user.displayName}`);
   }
 
   onHover() {

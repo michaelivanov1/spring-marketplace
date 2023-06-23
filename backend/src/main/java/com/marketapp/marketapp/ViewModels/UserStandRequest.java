@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FarmerStandRequest {
+public class UserStandRequest {
     //private String id;
     private String email;
     private ArrayList<Produce> produceList;

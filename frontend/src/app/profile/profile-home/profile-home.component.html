@@ -1,33 +1,26 @@
 <mat-card align="center">
   <mat-card-header></mat-card-header>
-  <mat-card-content class="main-container"
-    ><div class="img-container">
+  <mat-card-content class="main-container">
+    <div class="img-container">
       <!-- <img
         src="../../../assets/somi-jaiswal-unsplash.jpg"
-        alt="Farmer's banner"
+        alt="User's banner"
       /> -->
       <!--      
         <img
         src="{{ this.userProfile.profileBannerURI }}"
-        alt="Farmer's banner"
+        alt="User's banner"
       />-->
-      <img
-        src="../../../assets/nate-johnstonunsplash.jpg"
-        alt="Farmer's Profile"
-      />
+      <img src="../../../assets/nate-johnstonunsplash.jpg" alt="User's Profile" />
       <!--      <img
         src="{{ this.userProfile.profileImageURI }}"
-        alt="Farmer's Profile"
+        alt="User's Profile"
       />-->
     </div>
     <div class="account-details-container">
       <ul class="no-bullets">
         <li>
-          <strong class="my-accent-text">Account Name:</strong>
-          {{ this.userProfile.profileName }}
-        </li>
-        <li>
-          <strong>Profile Name:</strong> {{ this.userProfile.profileName }}
+          <strong>Display Name:</strong> {{ this.userProfile.displayName }}
         </li>
         <li><strong>Email:</strong> {{ this.userProfile.email }}</li>
         <li><strong>Location:</strong></li>
@@ -55,14 +48,8 @@
       <h2>Produce</h2>
       <div class="grid-container">
         <ng-container *ngFor="let produce of userStand.produceList">
-          <div
-            class="grid-item"
-            (mouseenter)="onHover()"
-            (mouseleave)="onLeave()"
-            [ngStyle]="{ cursor: getCursor() }"
-            (click)="onProductClick(userStand, produce)"
-            [ngClass]="{ selected: userStand === selectedProduct }"
-          >
+          <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ cursor: getCursor() }"
+            (click)="onProductClick(userStand, produce)" [ngClass]="{ selected: userStand === selectedProduct }">
             <div class="item-data">
               <img class="product-image" src="assets/Pumpkin.jpg" />
               <p class="product-name">{{ produce.foodName }}</p>
@@ -70,7 +57,7 @@
               <p class="product-qty">{{ produce.qty }}x</p>
               <div class="product-seller-container">
                 <p class="product-seller">
-                  Seller: {{ userProfile.profileName }}
+                  Seller: {{ userProfile.displayName }}
                 </p>
                 <p class="product-harvestdate">
                   Harvested: {{ produce.harvestDate }}

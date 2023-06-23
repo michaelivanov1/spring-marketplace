@@ -7,12 +7,12 @@
         <form [formGroup]="registrationForm" (keydown.enter)="onFormSubmit()">
           <div layout="row">
             <mat-form-field flex>
-              <input matInput placeholder="Username" type="text" required formControlName="username" />
-              <mat-error *ngIf="username.errors && (username.dirty || username.touched)" align="end">
-                <p *ngIf="username.hasError('required')">Username is required.</p>
+              <input matInput placeholder="Display Name" type="text" required formControlName="displayname" />
+              <mat-error *ngIf="displayname.errors && (displayname.dirty || displayname.touched)" align="end">
+                <p *ngIf="displayname.hasError('required')">Display name is required.</p>
                 <p *ngIf="
-                  !username.hasError('required') &&
-                  username.hasError('invalidUsername')
+                  !displayname.hasError('required') &&
+                  displayname.hasError('invalidDisplayName')
                 ">
                   min characters: 4
                 </p>

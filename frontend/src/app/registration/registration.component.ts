@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ValidateEmail } from '../validators/email.validator';
-import { ValidateUsername } from '../validators/username.validator';
+import { ValidateDisplayName } from '../validators/displayname.validator';
 import { ValidatePassword } from '../validators/password.validator';
 import { Router } from '@angular/router';
 import { AuthService } from '../authService';
@@ -19,7 +19,7 @@ import { AuthService } from '../authService';
 })
 export class RegistrationComponent {
   registrationForm: FormGroup;
-  username: FormControl;
+  displayname: FormControl;
   email: FormControl;
   password: FormControl;
   hidePassword = true;
@@ -31,9 +31,9 @@ export class RegistrationComponent {
     private router: Router,
     private authService: AuthService
   ) {
-    (this.username = new FormControl(
+    (this.displayname = new FormControl(
       '',
-      Validators.compose([Validators.required, ValidateUsername])
+      Validators.compose([Validators.required, ValidateDisplayName])
     )),
       (this.email = new FormControl(
         '',
@@ -44,7 +44,7 @@ export class RegistrationComponent {
         Validators.compose([Validators.required, ValidatePassword])
       )),
       (this.registrationForm = new FormGroup({
-        username: this.username,
+        displayname: this.displayname,
         email: this.email,
         password: this.password,
       }));
@@ -53,11 +53,11 @@ export class RegistrationComponent {
   onFormSubmit() {
     this.loading = true;
 
-    const username = this.registrationForm.value.username;
+    const displayname = this.registrationForm.value.displayname;
     const email = this.registrationForm.value.email;
     const password = this.registrationForm.value.password;
 
-    this.authService.register(username, email, password).subscribe(
+    this.authService.register(displayname, email, password).subscribe(
       (response: any) => {
         sessionStorage.setItem('jwtToken', response.token);
         this.navigateToComponent();

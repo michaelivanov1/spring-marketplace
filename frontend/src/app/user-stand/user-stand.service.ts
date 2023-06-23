@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FarmerStand } from '@app/farmer-stand/farmer-stand';
+import { UserStand } from '@app/user-stand/user-stand';
 import { GenericHttpService } from '@app/generic-http.service';
 @Injectable({
   providedIn: 'root',
 })
-export class FarmerStandService extends GenericHttpService<FarmerStand> {
+export class UserStandService extends GenericHttpService<UserStand> {
   constructor(httpClient: HttpClient) {
-    super(httpClient, `farmer_stand`);
+    super(httpClient, `user_stand`);
   } // constructor
-} // FarmerStandService
+} // UserStandService

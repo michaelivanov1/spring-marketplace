@@ -4,8 +4,8 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
-import { FarmerStandService } from '@app/farmer-stand/farmer-stand.service';
-import { FarmerStand } from '@app/farmer-stand/farmer-stand';
+import { UserStandService } from '@app/user-stand/user-stand.service';
+import { UserStand } from '@app/user-stand/user-stand';
 import jwt_decode from 'jwt-decode';
 
 @Component({
@@ -15,16 +15,16 @@ import jwt_decode from 'jwt-decode';
 })
 export class ProfileComponent implements OnInit {
   profile?: Observable<Profile>;
-  farmerStand?: Observable<FarmerStand>;
+  subscriberStand?: Observable<UserStand>;
   msg: string;
   userProfile: Profile;
-  userStand: FarmerStand;
+  userStand: UserStand;
   isHovered: boolean;
   selectedProduct: any;
   decodedToken: any;
   constructor(
     private profileService: ProfileService,
-    private farmerStandService: FarmerStandService
+    private userStandService: UserStandService
   ) {
     this.msg = '';
     this.isHovered = false;
@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
         date: '',
         timestamp: '',
       },
-      profileName: '',
+      displayName: '',
       description: '',
       email: '',
       phoneNumber: '',
@@ -46,8 +46,7 @@ export class ProfileComponent implements OnInit {
         date: '',
         timestamp: '',
       },
-      profileName: '',
-      accountName: '',
+      displayName: '',
       produceList: [],
     };
     this.selectedProduct = '';
@@ -59,17 +58,18 @@ export class ProfileComponent implements OnInit {
     (this.profile = this.profileService.getOne(this.decodedToken.sub)),
       catchError((err) => (this.msg = err.message));
     this.profile.forEach((x) => {
+      console.log(this.userProfile);
       this.userProfile = x;
     });
-    (this.farmerStand = this.farmerStandService.getOne('johndoe')),
+    (this.subscriberStand = this.userStandService.getOne('johndoe')),
       catchError((err) => (this.msg = err.message));
-    this.farmerStand.forEach((y) => {
+    this.subscriberStand.forEach((y) => {
       this.userStand = y;
       console.log(y);
     });
   }
 
-  onProductClick(farmer: FarmerStand, product: any) {
+  onProductClick(user: UserStand, product: any) {
     console.log(`clicked on: ${product.name}`);
     return this.selectedProduct === product
       ? (this.selectedProduct = null)

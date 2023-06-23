@@ -1,5 +1,5 @@
 /*
- * File Name: FarmerStand.java
+ * File Name: UserStand.java
  * Author(s): L. Bas, D. Mahyuddin, M. Ivanov
  * Date Created: 2023-05-24
  */
@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
-@Document(collection = "farmer_stands")
+@Document(collection = "user_stands")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-public class FarmerStand { // we don't need a stand name / farm name because it will be linked accordingly
+public class UserStand { // we don't need a stand name / farm name because it will be linked accordingly
 
 
     @Id
@@ -31,7 +31,7 @@ public class FarmerStand { // we don't need a stand name / farm name because it 
     private String profileName;
     private ArrayList<Produce> produceList;
 
-    public FarmerStand(User user, ArrayList<Produce> produceList) {
+    public UserStand(User user, ArrayList<Produce> produceList) {
 
         this.email = user.getEmail();
         this.profileName = user.getProfileName(); //if a non-existent accountName is given, profile name will be null
