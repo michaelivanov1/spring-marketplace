@@ -1,22 +1,11 @@
 import { NgModule } from '@angular/core';
+import { ObjectId } from '@app/common-interfaces/id-object';
+import { Produce } from '@app/common-interfaces/produce';
 /**
- * profile - interface for account details
+ * user-stands - interface for stands details
  */
 export interface UserStand {
   id: ObjectId;
   displayName: String;
   produceList: Produce[];
-}
-
-interface Produce {
-  id: ObjectId;
-  foodName: String;
-  qty: Number;
-  harvestDate: String;
-  price: Number;
-}
-
-interface ObjectId {
-  date: String;
-  timestamp: String;
 }

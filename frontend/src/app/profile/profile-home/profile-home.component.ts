@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.userProfile);
       this.userProfile = x;
     });
-    (this.subscriberStand = this.userStandService.getOne('johndoe')),
+    (this.subscriberStand = this.userStandService.getOne(this.decodedToken)),
       catchError((err) => (this.msg = err.message));
     this.subscriberStand.forEach((y) => {
       this.userStand = y;
