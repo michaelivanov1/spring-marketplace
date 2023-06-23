@@ -25,7 +25,7 @@ export class GenericHttpService<T> {
   public get(): Observable<T[]> {
 
     const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${sessionStorage.getItem("jwtToken")}`)
+      .set('Authorization', `Bearer ${localStorage.getItem("jwtToken")}`)
       .set('Content-Type', 'application/json');
 
     return this.httpClient

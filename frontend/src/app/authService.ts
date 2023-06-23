@@ -37,6 +37,7 @@ export class AuthService {
             responseType: 'json',
         }).pipe(
             tap((response: any) => {
+                console.log('non decoded token: ' + response.token);
                 localStorage.setItem('jwtToken', response.token);
                 this.decodedToken = jwt_decode(response.token);
                 let loginEmail = this.decodedToken.sub;
@@ -48,6 +49,7 @@ export class AuthService {
     login(email: string, password: string) {
         return this.http.post<any>('http://localhost:8080/api/auth/authenticate', { email, password }).pipe(
             tap((response: any) => {
+                console.log('non decoded token: ' + response.token);
                 localStorage.setItem('jwtToken', response.token);
                 this.decodedToken = jwt_decode(response.token);
                 let loginEmail = this.decodedToken.sub;

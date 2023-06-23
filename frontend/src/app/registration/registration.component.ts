@@ -60,7 +60,6 @@ export class RegistrationComponent {
     this.authService.register(username, email, password)
       .subscribe(
         (response: any) => {
-          console.log(response);
           sessionStorage.setItem('jwtToken', response.token);
           this.navigateToComponent();
         },
