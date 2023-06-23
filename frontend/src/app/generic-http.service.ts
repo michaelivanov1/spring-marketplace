@@ -19,7 +19,7 @@ export class GenericHttpService<T> {
   } // add
   public update(item: T): Observable<T> {
     const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${sessionStorage.getItem('jwtToken')}`)
+      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
 
     return this.httpClient
@@ -37,7 +37,7 @@ export class GenericHttpService<T> {
   } // getAll
   public getSome(id: any): Observable<T[]> {
     const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${sessionStorage.getItem('jwtToken')}`)
+      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
 
     return this.httpClient
@@ -46,7 +46,7 @@ export class GenericHttpService<T> {
   } // getSome
   public getOne(id: any): Observable<T> {
     const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${sessionStorage.getItem('jwtToken')}`)
+      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
 
     return this.httpClient
@@ -55,7 +55,7 @@ export class GenericHttpService<T> {
   } // getOne
   public delete(id: any): Observable<number> {
     const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${sessionStorage.getItem('jwtToken')}`)
+      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
 
     return this.httpClient

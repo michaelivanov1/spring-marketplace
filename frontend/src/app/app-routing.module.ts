@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistrationComponent } from './registration/registration.component';
-import { DBTest } from './dbtest/test-component.component';
 import { ProfileComponent } from './profile/profile-home/profile-home.component';
 import { RegistrationFinishComponent } from './registration/registration-finish/registration-finish.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
@@ -11,7 +10,6 @@ const routes: Routes = [
   { path: '', component: RegistrationComponent, title: 'register' },
   { path: 'register', component: RegistrationComponent, title: 'register' },
   { path: 'login', component: LoginComponent, title: 'login' },
-  { path: 'test', component: DBTest, title: 'test' },
   { path: 'profile', component: ProfileComponent, title: 'profile' },
   {
     path: 'registration-finish',
@@ -28,4 +26,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

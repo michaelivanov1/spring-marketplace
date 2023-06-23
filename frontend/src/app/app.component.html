@@ -4,17 +4,42 @@
       <img src="../assets/logo.png" class="logo" />
       <div class="menu-items-center">
         <nav mat-tab-nav-bar class="navigation-bar-main">
-          <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['test']" (click)="setTitle('test')">DB Test</a>
-          <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['profile']" (click)="setTitle('profile')">Profile</a>
-          <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']"
-            (click)="setTitle('marketplace')">Marketplace</a>
+          <a
+            mat-tab-link
+            *ngIf="isLoggedIn()"
+            [routerLink]="['profile']"
+            (click)="setTitle('profile')"
+            >Profile</a
+          >
+          <a
+            mat-tab-link
+            *ngIf="isLoggedIn()"
+            [routerLink]="['marketplace']"
+            (click)="setTitle('marketplace')"
+            >Marketplace</a
+          >
         </nav>
       </div>
       <div class="menu-items-right">
-        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login" (click)="setTitle('login')">Login</a>
-        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register"
-          (click)="setTitle('register')">Register</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
+        <a
+          mat-tab-link
+          *ngIf="!isLoggedIn()"
+          mat-button
+          routerLink="/login"
+          (click)="setTitle('login')"
+          >Login</a
+        >
+        <a
+          mat-tab-link
+          *ngIf="!isLoggedIn()"
+          mat-button
+          routerLink="/register"
+          (click)="setTitle('register')"
+          >Register</a
+        >
+        <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()"
+          >Logout</a
+        >
       </div>
     </mat-toolbar>
 
@@ -25,8 +50,6 @@
     <p class="footer-text">&copy;Spring Marketplace - 2023</p>
   </mat-card-footer>
 </div>
-
-
 
 <!-- <div class="container">
   <div class="content">

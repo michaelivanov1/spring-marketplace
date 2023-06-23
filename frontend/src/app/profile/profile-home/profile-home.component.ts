@@ -6,6 +6,7 @@ import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
 import { FarmerStandService } from '@app/farmer-stand/farmer-stand.service';
 import { FarmerStand } from '@app/farmer-stand/farmer-stand';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,7 @@ export class ProfileComponent implements OnInit {
   userStand: FarmerStand;
   isHovered: boolean;
   selectedProduct: any;
+  decodedToken: any;
   constructor(
     private profileService: ProfileService,
     private farmerStandService: FarmerStandService
@@ -31,12 +33,13 @@ export class ProfileComponent implements OnInit {
         date: '',
         timestamp: '',
       },
-      accountName: '',
       profileName: '',
+      description: '',
       email: '',
       phoneNumber: '',
-      profileImageURI: '',
-      profileBannerURI: '',
+      profileImage: '',
+      bannerImage: '',
+      creationDate: '',
     };
     this.userStand = {
       id: {
@@ -51,7 +54,9 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    (this.profile = this.profileService.getOne('642794e00626870d47168e69')),
+    this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
+    console.log(this.decodedToken);
+    (this.profile = this.profileService.getOne(this.decodedToken.sub)),
       catchError((err) => (this.msg = err.message));
     this.profile.forEach((x) => {
       this.userProfile = x;
@@ -63,7 +68,7 @@ export class ProfileComponent implements OnInit {
       console.log(y);
     });
   }
-  
+
   onProductClick(farmer: FarmerStand, product: any) {
     console.log(`clicked on: ${product.name}`);
     return this.selectedProduct === product

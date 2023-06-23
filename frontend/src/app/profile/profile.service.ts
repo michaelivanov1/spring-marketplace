@@ -7,6 +7,6 @@ import { GenericHttpService } from '@app/generic-http.service';
 })
 export class ProfileService extends GenericHttpService<Profile> {
   constructor(httpClient: HttpClient) {
-    super(httpClient, `farmer`);
+    super(httpClient, `user`);
   } // constructor
 } // ProfileService
