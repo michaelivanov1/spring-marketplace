@@ -1,6 +1,45 @@
 <div class="container">
   <div class="content">
     <mat-toolbar class="header">
+      <div class="menu-items-left">
+        <img src="../assets/logo.png" class="logo" />
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['profile']" (click)="setTitle('profile')">Profile</a>
+      </div>
+      <div class="menu-items-center">
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']"
+          (click)="setTitle('marketplace')">Marketplace</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na']" (click)="setTitle('dummy')">dummyvalue</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na2']" (click)="setTitle('dummy2')">dummyvalue2</a>
+      </div>
+      <div class="menu-items-right">
+        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login" (click)="setTitle('login')">Login</a>
+        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register"
+          (click)="setTitle('register')">Register</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+
+  <mat-card-footer class="footer">
+    <p class="footer-text">&copy;Spring Marketplace - 2023</p>
+  </mat-card-footer>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+  <div class="content">
+    <mat-toolbar class="header">
       <img src="../assets/logo.png" class="logo" />
       <div class="menu-items-center">
         <nav mat-tab-nav-bar class="navigation-bar-main">
@@ -16,33 +55,6 @@
         <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
       </div>
     </mat-toolbar>
-
-    <router-outlet></router-outlet>
-  </div>
-
-  <mat-card-footer class="footer">
-    <p class="footer-text">&copy;Spring Marketplace - 2023</p>
-  </mat-card-footer>
-</div>
-
-<!-- <div class="container">
-  <div class="content">
-    <mat-toolbar class="header">
-      <img src="../assets/logo.png" class="logo" />
-      <span style="flex: 1 1 auto"></span>
-      <button class="app-menu" mat-button [matMenuTriggerFor]="appMenu" align="end">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </mat-toolbar>
-
-    <mat-menu #appMenu="matMenu">
-      <a mat-menu-item [routerLink]="['register']" (click)="setTitle('register')">register</a>
-      <a mat-menu-item [routerLink]="['login']" (click)="setTitle('login')">login</a>
-      <a mat-menu-item [routerLink]="['test']" (click)="setTitle('test')">dbtest</a>
-      <a mat-menu-item [routerLink]="['profile']" (click)="setTitle('profile')">profile</a>
-      <a mat-menu-item [routerLink]="['registration-finish']" (click)="setTitle('temp')">temp</a>
-      <a mat-menu-item [routerLink]="['marketplace']" (click)="setTitle('marketplace')">marketplace</a>
-    </mat-menu>
 
     <router-outlet></router-outlet>
   </div>

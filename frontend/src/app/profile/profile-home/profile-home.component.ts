@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.update(this.userProfile.email, this.updatedProfile)
       .subscribe(
         () => {
-          this.userProfile = this.updatedProfile;
+          this.userProfile = { ...this.updatedProfile};
           console.log('Profile updated successfully.');
         },
         (error) => {
@@ -119,13 +119,10 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleEdit(): void {
-    // if (!this.isEditable) {
-    //   this.userProfile = this.userProfile; 
-    // }
     this.isEditable = !this.isEditable;
     this.updatedProfile.displayName = this.userProfile.displayName;
     this.updatedProfile.phoneNumber = this.userProfile.phoneNumber;
-    // this.updatedProfile.email = this.userProfile.email;
+    this.updatedProfile.email = this.userProfile.email;
   }
 
 

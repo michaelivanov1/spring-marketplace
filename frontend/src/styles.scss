@@ -17,80 +17,165 @@ mat-card {
 .container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+}
 
-  .content {
-    flex: 1;
+.content {
+  flex: 1;
+}
 
-    .header {
-      background-color: #222222;
-      color: black;
-      height: 6vw;
-      margin: auto;
+.header {
+  background-color: #222222;
+  color: black;
+  height: 6vw;
+  margin: auto;
+}
 
-      .logo {
-        width: 20vw;
-        height: 20vw;
-        padding-bottom: 5.5vw;
-      }
+.menu-items-left {
+  display: flex;
+  align-items: center;
+  color: #ffde59;
 
-      .app-menu {
-        color: #ffde59;
-      }
-    }
-  }
-
-  .navigation-bar-main {
-    a {
-      font-weight: 400;
-      padding: 8px 16px;
-      color: #0FC263;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    a:hover {
-      background-color: #ddd;
-    }
-
-    a.active {
-      background-color: #ccc;
-    }
-  }
-
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .menu-items-center {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-
-    .navigation-bar-main {}
-  }
-
-  .menu-items-right {
-    display: flex;
-    gap: 10px;
-    color: #ffde59;
-  }
-
-  .footer {
-    text-align: center;
-    background-color: #222222;
-    color: white;
-    font-family: Roboto, sans-serif;
-    font-size: 1.25vw;
-    font-weight: 400;
-    height: 4vw;
-    margin: 0vh;
-
-    .footer-text {
-      margin-top: 2.5vh;
-      color: #ffde59;
-    }
+  .logo {
+    width: 20vw;
+    height: 20vw;
+    padding-bottom: 5.5vw;
   }
 }
+
+.menu-items-center {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex: 1;
+}
+
+.menu-items-right {
+  display: flex;
+  align-items: center;
+  color: #ffde59;
+}
+
+a {
+  font-weight: 400;
+  color: #0FC263;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  transform: scale(1.10);
+}
+
+.footer {
+  text-align: center;
+  background-color: #222222;
+  color: white;
+  font-family: Roboto, sans-serif;
+  font-size: 1.25vw;
+  font-weight: 400;
+  height: 4vw;
+  margin: 0vh;
+
+  .footer-text {
+    margin-top: 2.5vh;
+    color: #ffde59;
+  }
+}
+
+
+// html,
+// body {
+//   background-image: url("assets/background.png");
+//   height: 100%;
+//   margin: 0;
+//   padding: 0;
+// }
+
+// /* override all mat-card instances to use this instead of default white color */
+// mat-card {
+//   background-image: url("assets/background.png") !important;
+//   box-shadow: none !important;
+// }
+
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 100vh;
+
+//   .content {
+//     flex: 1;
+
+//     .header {
+//       background-color: #222222;
+//       color: black;
+//       height: 6vw;
+//       margin: auto;
+
+//       .logo {
+//         width: 20vw;
+//         height: 20vw;
+//         padding-bottom: 5.5vw;
+//       }
+
+//       .app-menu {
+//         color: #ffde59;
+//       }
+//     }
+//   }
+
+//   .navigation-bar-main {
+//     a {
+//       font-weight: 400;
+//       padding: 8px 16px;
+//       color: #0FC263;
+//       text-decoration: none;
+//       transition: background-color 0.3s ease;
+//     }
+
+
+
+//     a:hover {
+//       background-color: #ddd;
+//     }
+
+//     a.active {
+//       background-color: #ccc;
+//     }
+//   }
+
+//   .header {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//   }
+
+//   .menu-items-center {
+//     flex: 1;
+//     display: flex;
+//     justify-content: center;
+//   }
+
+//   .menu-items-right {
+//     display: flex;
+//     gap: 10px;
+//     color: #ffde59;
+//   }
+
+//   .footer {
+//     text-align: center;
+//     background-color: #222222;
+//     color: white;
+//     font-family: Roboto, sans-serif;
+//     font-size: 1.25vw;
+//     font-weight: 400;
+//     height: 4vw;
+//     margin: 0vh;
+
+//     .footer-text {
+//       margin-top: 2.5vh;
+//       color: #ffde59;
+//     }
+//   }
+// }
