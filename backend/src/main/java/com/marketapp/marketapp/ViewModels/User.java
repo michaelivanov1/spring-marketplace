@@ -29,7 +29,7 @@ public class User implements UserDetails {
     @Id
     private ObjectId id;
 
-    private String profileName;
+    private String displayName;
     private String description;
     private String phoneNumber;
     private String profileImage;

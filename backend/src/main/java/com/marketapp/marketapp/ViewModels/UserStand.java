@@ -28,13 +28,13 @@ public class UserStand { // we don't need a stand name / farm name because it wi
     private ObjectId id;
 
     private String email;
-    private String profileName;
+    private String displayName;
     private ArrayList<Produce> produceList;
 
     public UserStand(User user, ArrayList<Produce> produceList) {
 
         this.email = user.getEmail();
-        this.profileName = user.getProfileName(); //if a non-existent accountName is given, profile name will be null
+        this.displayName = user.getDisplayName(); //if a non-existent accountName is given, profile name will be null
         this.produceList = produceList;
     }
 }

@@ -12,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest { //TODO: here we will add more details when we merge farmer
+    private String displayName;
     private String email;
     private String password;
 }

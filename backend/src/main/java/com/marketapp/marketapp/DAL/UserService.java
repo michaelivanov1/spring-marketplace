@@ -31,7 +31,7 @@ public class UserService {
         User existingUser = userRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("User not found with ID: " + id));
 
-        existingUser.setProfileName(updatedUser.getProfileName());
+        existingUser.setDisplayName(updatedUser.getDisplayName());
         existingUser.setDescription(updatedUser.getDescription());
         existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
         existingUser.setProfileImage(updatedUser.getProfileImage());

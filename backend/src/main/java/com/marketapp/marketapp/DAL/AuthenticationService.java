@@ -35,7 +35,7 @@ public class AuthenticationService {
         Date now = new Date();
         formatter.format(now);
         var user = User.builder()
-                .profileName("")
+                .displayName(request.getDisplayName())
                 .description("")
                 .phoneNumber("")
                 .profileImage("")

@@ -24,21 +24,14 @@ public class UserController {
         return new ResponseEntity<>(userService.allUsers(), HttpStatus.OK);
     }
 
-    // @GetMapping("/user/{id}")
-    // public ResponseEntity<Optional<User>> getSingleUserById(@PathVariable String
-    // id) {
-    // return new ResponseEntity<Optional<User>>(userService.singleUserById(new
-    // ObjectId(id)), HttpStatus.OK);
-    // }
-
     @GetMapping("/user/{email}")
     public ResponseEntity<Optional<User>> getSingleUserByEmail(@PathVariable String email) {
         return new ResponseEntity<Optional<User>>(userService.singleUserByEmail(email), HttpStatus.OK);
     }
 
     @PutMapping("/user/{email}")
-    public ResponseEntity<Boolean> updateUser(@PathVariable ObjectId id, @RequestBody User updatedUser) {
-        User user = userService.updateUser(id, updatedUser);
+    public ResponseEntity<Boolean> updateUser(@PathVariable ObjectId email, @RequestBody User updatedUser) {
+        User user = userService.updateUser(email, updatedUser);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.NO_CONTENT);
     }
 }
