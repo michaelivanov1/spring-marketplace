@@ -19,7 +19,7 @@ import { AuthService } from '../authService';
 })
 export class RegistrationComponent {
   registrationForm: FormGroup;
-  displayname: FormControl;
+  displayName: FormControl;
   email: FormControl;
   password: FormControl;
   hidePassword = true;
@@ -31,7 +31,7 @@ export class RegistrationComponent {
     private router: Router,
     private authService: AuthService
   ) {
-    (this.displayname = new FormControl(
+    (this.displayName = new FormControl(
       '',
       Validators.compose([Validators.required, ValidateDisplayName])
     )),
@@ -44,7 +44,7 @@ export class RegistrationComponent {
         Validators.compose([Validators.required, ValidatePassword])
       )),
       (this.registrationForm = new FormGroup({
-        displayname: this.displayname,
+        displayName: this.displayName,
         email: this.email,
         password: this.password,
       }));
@@ -53,11 +53,11 @@ export class RegistrationComponent {
   onFormSubmit() {
     this.loading = true;
 
-    const displayname = this.registrationForm.value.displayname;
+    const displayName = this.registrationForm.value.displayName;
     const email = this.registrationForm.value.email;
     const password = this.registrationForm.value.password;
 
-    this.authService.register(displayname, email, password).subscribe(
+    this.authService.register(displayName, email, password).subscribe(
       (response: any) => {
         sessionStorage.setItem('jwtToken', response.token);
         this.navigateToComponent();

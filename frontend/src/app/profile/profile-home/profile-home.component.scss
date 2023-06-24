@@ -1,7 +1,7 @@
 $primary-color: #00bf63;
 
 .main-container {
-  max-width: 80vw;
+  max-width: 60vw;
   height: 500px;
   margin: auto;
   margin-bottom: 10px;
@@ -69,6 +69,10 @@ $primary-color: #00bf63;
     li {
       margin-bottom: 10px;
     }
+
+    .display-name-input {
+      font-size: 30px;
+    }
   }
 
   @media (min-width: 768px) {
@@ -89,7 +93,6 @@ $primary-color: #00bf63;
 
 .produce-container {
   max-width: 80vw;
-
   margin: auto;
   background-color: rgba(140, 195, 63, 0.1);
   border-radius: 8px;

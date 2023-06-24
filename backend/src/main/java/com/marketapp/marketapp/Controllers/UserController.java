@@ -29,9 +29,19 @@ public class UserController {
         return new ResponseEntity<Optional<User>>(userService.singleUserByEmail(email), HttpStatus.OK);
     }
 
+
+    // old method using ObjectId email 
+    /* 
     @PutMapping("/user/{email}")
     public ResponseEntity<Boolean> updateUser(@PathVariable ObjectId email, @RequestBody User updatedUser) {
         User user = userService.updateUser(email, updatedUser);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.NO_CONTENT);
+    }
+    */
+
+    @PutMapping("/user/{email}")
+    public ResponseEntity<Boolean> updateUser(@PathVariable String email, @RequestBody User updatedUser) {
+        User user = userService.updateUser(email, updatedUser);
+        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
     }
 }

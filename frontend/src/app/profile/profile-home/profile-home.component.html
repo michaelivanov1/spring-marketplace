@@ -6,7 +6,7 @@
         src="../../../assets/somi-jaiswal-unsplash.jpg"
         alt="User's banner"
       /> -->
-      <!--      
+      <!--
         <img
         src="{{ this.userProfile.profileBannerURI }}"
         alt="User's banner"
@@ -20,13 +20,43 @@
     <div class="account-details-container">
       <ul class="no-bullets">
         <li>
-          <strong>Display Name:</strong> {{ this.userProfile.displayName }}
+          <span *ngIf="isEditable">
+            <strong>Display Name: </strong>
+            <input type="text" [(ngModel)]="updatedProfile.displayName" />
+          </span>
+          <span *ngIf="!isEditable" class="display-name-input">
+            {{ userProfile.displayName }}
+          </span>
         </li>
-        <li><strong>Email:</strong> {{ this.userProfile.email }}</li>
-        <li><strong>Location:</strong></li>
-        <li><strong>Phone:</strong> {{ this.userProfile.phoneNumber }}</li>
+        <li *ngIf="isEditable">
+          <strong>Email: </strong>
+          <span>
+            {{ userProfile.email }}
+          </span>
+        </li>
+        <li *ngIf="isEditable">
+          <strong>Phone: </strong>
+          <span>
+            <input type="text" [(ngModel)]="updatedProfile.phoneNumber" />
+          </span>
+          <span *ngIf="!isEditable">
+            {{ userProfile.phoneNumber }}
+          </span>
+        </li>
       </ul>
+
+      <mat-card-actions align="end">
+        <button mat-raised-button color="warn" *ngIf="isEditable" (click)="cancelEdit()">
+          Cancel
+        </button>
+        <button mat-raised-button color="primary" (click)="isEditable ? saveChanges() : toggleEdit()">
+          {{ isEditable ? 'Save' : 'Edit' }}
+        </button>
+      </mat-card-actions>
+
     </div>
+
+
     <div class="account-misc-container">
       <p>
         Sed facilisi pede ullamcorper magnis tempus penatibus mauris hendrerit,
@@ -43,30 +73,5 @@
       </p>
     </div>
   </mat-card-content>
-  <mat-card-content>
-    <div class="produce-container">
-      <h2>Produce</h2>
-      <div class="grid-container">
-        <ng-container *ngFor="let produce of userStand.produceList">
-          <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ cursor: getCursor() }"
-            (click)="onProductClick(userStand, produce)" [ngClass]="{ selected: userStand === selectedProduct }">
-            <div class="item-data">
-              <img class="product-image" src="assets/Pumpkin.jpg" />
-              <p class="product-name">{{ produce.foodName }}</p>
-              <p class="product-price">${{ produce.price }}</p>
-              <p class="product-qty">{{ produce.qty }}x</p>
-              <div class="product-seller-container">
-                <p class="product-seller">
-                  Seller: {{ userProfile.displayName }}
-                </p>
-                <p class="product-harvestdate">
-                  Harvested: {{ produce.harvestDate }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </mat-card-content>
+
 </mat-card>

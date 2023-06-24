@@ -32,8 +32,8 @@ export class AuthService {
         });
     }
 
-    register(username: string, email: string, password: string): Observable<any> {
-        return this.http.post<any>('http://localhost:8080/api/auth/register', { username, email, password }, {
+    register(displayName: string, email: string, password: string): Observable<any> {
+        return this.http.post<any>('http://localhost:8080/api/auth/register', { displayName, email, password }, {
             responseType: 'json',
         }).pipe(
             tap((response: any) => {

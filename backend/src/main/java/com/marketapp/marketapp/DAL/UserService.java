@@ -27,9 +27,26 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User updateUser(ObjectId id, User updatedUser) {
-        User existingUser = userRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("User not found with ID: " + id));
+    // old updateUser using ObjectId id
+    
+    // public User updateUser(ObjectId id, User updatedUser) {
+    //     User existingUser = userRepository.findById(id)
+    //             .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + id));
+
+    //     existingUser.setDisplayName(updatedUser.getDisplayName());
+    //     existingUser.setDescription(updatedUser.getDescription());
+    //     existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
+    //     existingUser.setProfileImage(updatedUser.getProfileImage());
+    //     existingUser.setBannerImage(updatedUser.getBannerImage());
+    //     existingUser.setCreationDate(existingUser.getCreationDate());
+    //     existingUser.setRole(Role.USER);
+
+    //     return userRepository.save(existingUser);
+    // }
+
+    public User updateUser(String email, User updatedUser) {
+        User existingUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with email: " + email));
 
         existingUser.setDisplayName(updatedUser.getDisplayName());
         existingUser.setDescription(updatedUser.getDescription());

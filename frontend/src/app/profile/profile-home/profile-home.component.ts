@@ -22,12 +22,17 @@ export class ProfileComponent implements OnInit {
   isHovered: boolean;
   selectedProduct: any;
   decodedToken: any;
+  editableFields: string[];
+  updatedProfile: Profile;
+  isEditable: boolean;
+
   constructor(
     private profileService: ProfileService,
     private userStandService: UserStandService
   ) {
     this.msg = '';
     this.isHovered = false;
+    this.editableFields = [];
     this.userProfile = {
       id: {
         date: '',
@@ -49,41 +54,82 @@ export class ProfileComponent implements OnInit {
       displayName: '',
       produceList: [],
     };
+    this.isEditable = false;
     this.selectedProduct = '';
+    this.updatedProfile = { ...this.userProfile };
+  }
+
+  saveChanges() {
+    // const updatedProfile: Profile = {
+    //   id: this.userProfile.id,
+    //   displayName: this.userProfile.displayName,
+    //   description: this.userProfile.description,
+    //   phoneNumber: this.userProfile.phoneNumber,
+    //   profileImage: this.userProfile.profileImage,
+    //   bannerImage: this.userProfile.bannerImage,
+    //   creationDate: this.userProfile.creationDate,
+    //   email: this.userProfile.email,
+    // };
+
+    this.profileService.update(this.userProfile.email, this.updatedProfile)
+      .subscribe(
+        () => {
+          this.userProfile = this.updatedProfile;
+          console.log('Profile updated successfully.');
+        },
+        (error) => {
+          console.error('Error updating profile:', error);
+        }
+      );
   }
 
   ngOnInit(): void {
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
-    console.log(this.decodedToken);
-    (this.profile = this.profileService.getOne(this.decodedToken.sub)),
-      catchError((err) => (this.msg = err.message));
+    // console.log(this.decodedToken);
+
+    this.profile = this.profileService.getOne(this.decodedToken.sub);
+    catchError((err) => (this.msg = err.message));
     this.profile.forEach((x) => {
-      console.log(this.userProfile);
       this.userProfile = x;
     });
-    (this.subscriberStand = this.userStandService.getOne(this.decodedToken)),
-      catchError((err) => (this.msg = err.message));
-    this.subscriberStand.forEach((y) => {
-      this.userStand = y;
-      console.log(y);
-    });
+
+    // this.subscriberStand = this.userStandService.getOne(this.decodedToken.sub);
+    // catchError((err) => (this.msg = err.message));
+    // this.subscriberStand.forEach((x) => {
+    //   console.log(x);
+    //   this.userStand = x;
+    // });
   }
 
-  onProductClick(user: UserStand, product: any) {
-    console.log(`clicked on: ${product.name}`);
-    return this.selectedProduct === product
-      ? (this.selectedProduct = null)
-      : (this.selectedProduct = product);
-  }
-
-  // change cursor on hover
-  onHover() {
+  onHover(): void {
     this.isHovered = true;
   }
-  onLeave() {
+
+  onLeave(): void {
     this.isHovered = false;
   }
+
   getCursor(): string {
     return this.isHovered ? 'pointer' : 'default';
+  }
+
+  onProductClick(userStand: UserStand, produce: any): void {
+    this.selectedProduct = produce;
+    console.log(userStand, produce);
+  }
+
+  toggleEdit(): void {
+    // if (!this.isEditable) {
+    //   this.userProfile = this.userProfile; 
+    // }
+    this.isEditable = !this.isEditable;
+    this.updatedProfile.displayName = this.userProfile.displayName;
+    this.updatedProfile.phoneNumber = this.userProfile.phoneNumber;
+    // this.updatedProfile.email = this.userProfile.email;
+  }
+
+
+  cancelEdit(): void {
+    this.isEditable = false;
   }
 }

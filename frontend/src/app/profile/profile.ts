@@ -11,5 +11,5 @@ export interface Profile {
   profileImage: String;
   bannerImage: String;
   creationDate: String;
-  email: String;
+  email: string;
 }
