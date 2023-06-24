@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   editableFields: string[];
   updatedProfile: Profile;
   isEditable: boolean;
+  dateCreatedFormatted: string;
 
   constructor(
     private profileService: ProfileService,
@@ -57,6 +58,7 @@ export class ProfileComponent implements OnInit {
     this.isEditable = false;
     this.selectedProduct = '';
     this.updatedProfile = { ...this.userProfile };
+    this.dateCreatedFormatted = '';
   }
 
   saveChanges() {
@@ -74,7 +76,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.update(this.userProfile.email, this.updatedProfile)
       .subscribe(
         () => {
-          this.userProfile = { ...this.updatedProfile};
+          this.userProfile = { ...this.updatedProfile };
           console.log('Profile updated successfully.');
         },
         (error) => {
@@ -88,6 +90,20 @@ export class ProfileComponent implements OnInit {
     // console.log(this.decodedToken);
 
     this.profile = this.profileService.getOne(this.decodedToken.sub);
+
+    this.profile.subscribe(
+      (profile) => {
+        this.userProfile = profile;
+        const year = this.userProfile.creationDate.substr(0, 4);
+        const month = this.userProfile.creationDate.substr(5, 2);
+        const day = this.userProfile.creationDate.substr(8, 2);
+        const formattedDate = `${year}-${month}-${day}`;
+        this.dateCreatedFormatted = formattedDate;
+      },
+      (error) => {
+        console.error('Error fetching profile:', error);
+      }
+    );
     catchError((err) => (this.msg = err.message));
     this.profile.forEach((x) => {
       this.userProfile = x;
@@ -109,6 +125,14 @@ export class ProfileComponent implements OnInit {
     this.isHovered = false;
   }
 
+  uploadPhoto() : void {
+    // TODO: photo uploads
+  }
+
+  deleteAccount() : void {
+    // TODO: delete acc
+  }
+
   getCursor(): string {
     return this.isHovered ? 'pointer' : 'default';
   }
@@ -123,8 +147,8 @@ export class ProfileComponent implements OnInit {
     this.updatedProfile.displayName = this.userProfile.displayName;
     this.updatedProfile.phoneNumber = this.userProfile.phoneNumber;
     this.updatedProfile.email = this.userProfile.email;
+    this.updatedProfile.description = this.userProfile.description;
   }
-
 
   cancelEdit(): void {
     this.isEditable = false;

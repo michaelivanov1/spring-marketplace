@@ -1,6 +1,7 @@
 <mat-card align="center">
   <mat-card-header></mat-card-header>
   <mat-card-content class="main-container">
+
     <div class="img-container">
       <!-- <img
         src="../../../assets/somi-jaiswal-unsplash.jpg"
@@ -11,18 +12,28 @@
         src="{{ this.userProfile.profileBannerURI }}"
         alt="User's banner"
       />-->
-      <img src="../../../assets/nate-johnstonunsplash.jpg" alt="User's Profile" />
+      <img src="../../../assets/nate-johnstonunsplash.jpg" alt="User's Profile Pic" />
+      <button mat-raised-button color="primary" class="upload-photo-button" (click)="uploadPhoto()">
+        Upload New Photo
+      </button>
+      <p style="margin-top: 20px; font-size: small">
+        Member since: {{dateCreatedFormatted}}
+      </p>
+      <button class="delete-account-button" (click)="deleteAccount()">
+        Delete account
+      </button>
       <!--      <img
         src="{{ this.userProfile.profileImageURI }}"
         alt="User's Profile"
       />-->
     </div>
+
     <div class="account-details-container">
-      <ul class="no-bullets">
+      <ul style="list-style-type: none">
         <li>
           <span *ngIf="isEditable">
             <strong>Display Name: </strong>
-            <input type="text" [(ngModel)]="updatedProfile.displayName" />
+            <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field" />
           </span>
           <span *ngIf="!isEditable" class="display-name-input">
             {{ userProfile.displayName }}
@@ -37,7 +48,7 @@
         <li *ngIf="isEditable">
           <strong>Phone: </strong>
           <span>
-            <input type="text" [(ngModel)]="updatedProfile.phoneNumber" />
+            <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field" />
           </span>
           <span *ngIf="!isEditable">
             {{ userProfile.phoneNumber }}
@@ -45,7 +56,7 @@
         </li>
       </ul>
 
-      <mat-card-actions align="end">
+      <mat-card-actions align="end" style="margin: 0">
         <button mat-raised-button color="warn" *ngIf="isEditable" (click)="cancelEdit()">
           Cancel
         </button>
@@ -54,24 +65,46 @@
         </button>
       </mat-card-actions>
 
-    </div>
-
-
-    <div class="account-misc-container">
-      <p>
-        Sed facilisi pede ullamcorper magnis tempus penatibus mauris hendrerit,
-        feugiat ligula auctor nulla montes dapibus natoque. Mauris tortor
-        dictumst vivamus quis etiam dignissim sapien viverra Est adipiscing
-        vestibulum placerat. Nisl. Mi. Lacus. Parturient vulputate erat cursus
-        ornare iaculis tristique conubia leo ultrices, eu. Dignissim Neque
-        dignissim eu posuere luctus malesuada senectus aenean dui ornare augue
-        natoque hac nunc laoreet venenatis lacinia. Porta aptent facilisis
-        turpis. Sit. Ridiculus hac enim platea lacinia natoque pellentesque.
-        Conubia cum accumsan et. Erat faucibus molestie nunc id. Interdum in
-        elit. Aptent integer etiam sed dolor litora. Pulvinar a ac scelerisque
-        tellus ac sollicitudin. Ut enim.
-      </p>
+      <div class="account-description-container">
+        <li style="list-style-type: none">
+          <span *ngIf="isEditable">
+            <strong>Description: </strong>
+            <input type="text" [(ngModel)]="updatedProfile.description" class="input-field description" />
+          </span>
+          <span *ngIf="!isEditable">
+            <strong>Description: </strong>
+            {{ userProfile.description }}
+          </span>
+        </li>
+      </div>
     </div>
   </mat-card-content>
+
+  <!-- <mat-card-content>
+    <div class="produce-container">
+      <h2>Produce</h2>
+      <div class="grid-container">
+        <ng-container *ngFor="let produce of userStand.produceList">
+          <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ cursor: getCursor() }"
+            (click)="onProductClick(userStand, produce)" [ngClass]="{ selected: userStand === selectedProduct }">
+            <div class="item-data">
+              <img class="product-image" src="assets/Pumpkin.jpg" />
+              <p class="product-name">{{ produce.foodName }}</p>
+              <p class="product-price">${{ produce.price }}</p>
+              <p class="product-qty">{{ produce.qty }}x</p>
+              <div class="product-seller-container">
+                <p class="product-seller">
+                  Seller: {{ userProfile.displayName }}
+                </p>
+                <p class="product-harvestdate">
+                  Harvested: {{ produce.harvestDate }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </mat-card-content> -->
 
 </mat-card>
