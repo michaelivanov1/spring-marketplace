@@ -29,19 +29,30 @@ public class UserController {
         return new ResponseEntity<Optional<User>>(userService.singleUserByEmail(email), HttpStatus.OK);
     }
 
-
-    // old method using ObjectId email 
-    /* 
-    @PutMapping("/user/{email}")
-    public ResponseEntity<Boolean> updateUser(@PathVariable ObjectId email, @RequestBody User updatedUser) {
-        User user = userService.updateUser(email, updatedUser);
-        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.NO_CONTENT);
-    }
-    */
+    // old method using ObjectId email
+    /*
+     * @PutMapping("/user/{email}")
+     * public ResponseEntity<Boolean> updateUser(@PathVariable ObjectId
+     * email, @RequestBody User updatedUser) {
+     * User user = userService.updateUser(email, updatedUser);
+     * return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.NO_CONTENT);
+     * }
+     */
 
     @PutMapping("/user/{email}")
     public ResponseEntity<Boolean> updateUser(@PathVariable String email, @RequestBody User updatedUser) {
         User user = userService.updateUser(email, updatedUser);
         return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/{email}")
+    public ResponseEntity<Boolean> deleteUserByEmail(@PathVariable String email) {
+        boolean deleted = userService.deleteUserByEmail(email);
+
+        if (deleted) {
+            return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(Boolean.FALSE, HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -59,4 +59,16 @@ public class UserService {
         return userRepository.save(existingUser);
     }
 
+     public boolean deleteUserByEmail(String email) {
+        
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            userRepository.delete(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

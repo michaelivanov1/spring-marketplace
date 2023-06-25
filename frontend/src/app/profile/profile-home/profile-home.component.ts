@@ -7,6 +7,9 @@ import { Profile } from '../profile';
 import { UserStandService } from '@app/user-stand/user-stand.service';
 import { UserStand } from '@app/user-stand/user-stand';
 import jwt_decode from 'jwt-decode';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +33,9 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private userStandService: UserStandService
+    private userStandService: UserStandService,
+    public dialog: MatDialog,
+    private router: Router
   ) {
     this.msg = '';
     this.isHovered = false;
@@ -112,21 +117,34 @@ export class ProfileComponent implements OnInit {
 
     // user's listings
     this.userStandService.getOne(this.decodedToken.sub)
-  .pipe(
-    catchError((err) => {
-      this.msg = err.message;
-      return of(null); // Return an empty observable in case of an error
-    })
-  )
-  .subscribe((data) => {
-    if (data) {
-      this.userStand = data; // Assign the fetched data to 'this.userStand'
-      console.log(this.userStand);
-      this.userStandDataFetched = true; // Set boolean flag to true if data was fetched
-    } else {
-      this.userStandDataFetched = false; // Set boolean flag to false if data was empty or an error occurred
-    }
-  });
+      .pipe(
+        catchError((err) => {
+          this.msg = err.message;
+          return of(null);
+        })
+      )
+      .subscribe((data) => {
+        if (data) {
+          this.userStand = data;
+          console.log(this.userStand);
+          this.userStandDataFetched = true;
+        } else {
+          this.userStandDataFetched = false;
+        }
+      });
+  }
+
+  openConfirmationDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: 'Are you sure you want to permanently delete your account?'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirm') {
+        this.deleteAccount();
+      }
+    });
   }
 
   onHover(): void {
@@ -137,12 +155,26 @@ export class ProfileComponent implements OnInit {
     this.isHovered = false;
   }
 
-  uploadPhoto() : void {
+  uploadPhoto(): void {
     // TODO: photo uploads
   }
 
-  deleteAccount() : void {
-    // TODO: delete acc
+  deleteAccount(): void {
+    console.log('Account deleted');
+    this.profileService.delete(this.decodedToken.sub)
+      .subscribe(
+        () => {
+          this.navigateToRegister()
+        },
+        error => {
+          console.error('Error deleting account:', error);
+        }
+      )
+  }
+
+  navigateToRegister() {
+    localStorage.removeItem('jwtToken');
+    this.router.navigate(['/register'])
   }
 
   getCursor(): string {

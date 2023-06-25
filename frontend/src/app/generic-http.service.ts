@@ -54,12 +54,12 @@ export class GenericHttpService<T> {
       .pipe(retry(2), catchError(this.handleError));
   } // getOne
 
-  public delete(id: any): Observable<number> {
+  public delete(email: any): Observable<T> {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .delete<number>(`${BASEURL}${this.entity}/${id}`, { headers })
+      .delete<T>(`${BASEURL}${this.entity}/${email}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // delete
   
