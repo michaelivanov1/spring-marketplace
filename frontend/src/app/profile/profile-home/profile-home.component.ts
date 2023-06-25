@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ProfileService } from '../profile.service';
@@ -15,7 +15,7 @@ import jwt_decode from 'jwt-decode';
 })
 export class ProfileComponent implements OnInit {
   profile?: Observable<Profile>;
-  subscriberStand?: Observable<UserStand>;
+  subscriberStand: any;
   msg: string;
   userProfile: Profile;
   userStand: UserStand;
@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   updatedProfile: Profile;
   isEditable: boolean;
   dateCreatedFormatted: string;
+  userStandDataFetched: boolean;
 
   constructor(
     private profileService: ProfileService,
@@ -59,6 +60,7 @@ export class ProfileComponent implements OnInit {
     this.selectedProduct = '';
     this.updatedProfile = { ...this.userProfile };
     this.dateCreatedFormatted = '';
+    this.userStandDataFetched = false;
   }
 
   saveChanges() {
@@ -87,7 +89,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
-    // console.log(this.decodedToken);
 
     this.profile = this.profileService.getOne(this.decodedToken.sub);
 
@@ -109,12 +110,23 @@ export class ProfileComponent implements OnInit {
       this.userProfile = x;
     });
 
-    // this.subscriberStand = this.userStandService.getOne(this.decodedToken.sub);
-    // catchError((err) => (this.msg = err.message));
-    // this.subscriberStand.forEach((x) => {
-    //   console.log(x);
-    //   this.userStand = x;
-    // });
+    // user's listings
+    this.userStandService.getOne(this.decodedToken.sub)
+  .pipe(
+    catchError((err) => {
+      this.msg = err.message;
+      return of(null); // Return an empty observable in case of an error
+    })
+  )
+  .subscribe((data) => {
+    if (data) {
+      this.userStand = data; // Assign the fetched data to 'this.userStand'
+      console.log(this.userStand);
+      this.userStandDataFetched = true; // Set boolean flag to true if data was fetched
+    } else {
+      this.userStandDataFetched = false; // Set boolean flag to false if data was empty or an error occurred
+    }
+  });
   }
 
   onHover(): void {

@@ -2,7 +2,7 @@ $primary-color: #00bf63;
 
 .main-container {
   max-width: 60vw;
-  height: 50vh;
+  height: 38vh;
   margin: auto;
   margin-bottom: 10px;
   background-color: rgba(140, 195, 63, 0.1);
@@ -45,8 +45,8 @@ $primary-color: #00bf63;
   justify-content: left;
   grid-column: 1;
   grid-row: 1;
-  border: 1px solid black;
-  height: 50vh;
+  border-right: 1px solid #bfbfbf;
+  height: 38vh;
   max-width: 15vw;
 
   img {
@@ -59,12 +59,13 @@ $primary-color: #00bf63;
   .upload-photo-button {
     width: 90%;
     margin-left: 10px;
+    background-color: #00bf63b1;
+    color: black;
   }
 
   .delete-account-button {
     width: 90%;
     margin-left: 10px;
-    margin-top: 80px;
   }
 }
 
@@ -107,7 +108,7 @@ $primary-color: #00bf63;
 .account-description-container {
   width: 40vw;
   height: 10vh;
-  margin: 100px auto;
+  margin: 50px auto;
   margin-left: 0;
 }
 
@@ -123,65 +124,67 @@ $primary-color: #00bf63;
   font-weight: 400;
 }
 
-// .grid-container {
-//   display: grid;
-//   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-//   gap: 20px;
-//   max-width: 1000px;
-//   margin: 0 auto;
+.grid-container {
+  max-height: 30vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding-left: 10px;
 
-//   .grid-item {
-//     width: 220px;
-//     height: 200px;
-//     margin-top: 20px;
-//     text-align: center;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     height: 300px;
+  .grid-item {
+    width: 220px;
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
 
-//     .item-data {
-//       background-color: rgba(140, 195, 63, 0.1);
-//       border: 1px solid black;
+    .item-data {
+      background-color: rgba(140, 195, 63, 0.1);
+      border: 1px solid black;
 
-//       .product-image {
-//         width: 100%;
-//         height: 150px;
-//         margin-bottom: 5px;
-//       }
+      .product-image {
+        width: 100%;
+        height: 150px;
+        margin-bottom: 5px;
+      }
 
-//       .product-name {
-//         text-transform: capitalize;
-//         font-size: 20px;
-//         font-weight: 550;
-//         margin-bottom: 4px;
-//       }
+      .product-name {
+        text-transform: capitalize;
+        font-size: 20px;
+        font-weight: 550;
+        margin-bottom: 4px;
+      }
 
-//       .product-price {
-//         font-weight: 500;
-//         margin: 0;
-//       }
+      .product-price {
+        font-weight: 500;
+        margin: 0;
+      }
 
-//       .product-qty {
-//         text-align: left;
-//         margin-left: 6px;
-//         margin-bottom: 0px;
-//         font-weight: 400;
-//       }
+      .product-qty {
+        text-align: left;
+        margin-left: 6px;
+        margin-bottom: 0px;
+        font-weight: 400;
+      }
 
-//       .product-seller-container {
-//         background-color: rgba(36, 45, 24, 0.212);
-//         height: 50px;
-//         padding-top: 10px;
+      .product-seller-container {
+        background-color: rgba(36, 45, 24, 0.212);
+        height: 60px;
+        padding-top: 10px;
 
-//         .product-seller,
-//         .product-harvestdate {
-//           font-weight: 550;
-//           font-size: 14px;
-//           margin: 0;
-//         }
-//       }
-//     }
-//   }
-// }
+        .product-seller,
+        .product-harvestdate {
+          font-weight: 550;
+          font-size: 14px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

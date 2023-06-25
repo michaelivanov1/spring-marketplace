@@ -16,7 +16,7 @@
       <button mat-raised-button color="primary" class="upload-photo-button" (click)="uploadPhoto()">
         Upload New Photo
       </button>
-      <p style="margin-top: 20px; font-size: small">
+      <p style="margin-top: 10px; font-size: small">
         Member since: {{dateCreatedFormatted}}
       </p>
       <button class="delete-account-button" (click)="deleteAccount()">
@@ -57,11 +57,12 @@
       </ul>
 
       <mat-card-actions align="end" style="margin: 0">
-        <button mat-raised-button color="warn" *ngIf="isEditable" (click)="cancelEdit()">
+        <button mat-raised-button style="background-color: #bf6c189f;" *ngIf="isEditable" (click)="cancelEdit()">
           Cancel
         </button>
-        <button mat-raised-button color="primary" (click)="isEditable ? saveChanges() : toggleEdit()">
-          {{ isEditable ? 'Save' : 'Edit' }}
+        <button mat-raised-button style="background-color: #00bf63b1;"
+          (click)="isEditable ? saveChanges() : toggleEdit()">
+          {{ isEditable ? 'Save' : 'Update Profile' }}
         </button>
       </mat-card-actions>
 
@@ -80,10 +81,10 @@
     </div>
   </mat-card-content>
 
-  <!-- <mat-card-content>
+  <mat-card-content>
     <div class="produce-container">
-      <h2>Produce</h2>
-      <div class="grid-container">
+      <h2 *ngIf="userStandDataFetched" style="margin: 0">Produce</h2>
+      <div class="grid-container" *ngIf="userStandDataFetched">
         <ng-container *ngFor="let produce of userStand.produceList">
           <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ cursor: getCursor() }"
             (click)="onProductClick(userStand, produce)" [ngClass]="{ selected: userStand === selectedProduct }">
@@ -104,7 +105,10 @@
           </div>
         </ng-container>
       </div>
+      <div *ngIf="!userStandDataFetched">
+        <h2>You have nothing for sale yet !</h2>
+      </div>
     </div>
-  </mat-card-content> -->
+  </mat-card-content>
 
 </mat-card>
