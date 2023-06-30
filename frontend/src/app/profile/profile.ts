@@ -9,7 +9,6 @@ export interface Profile {
   description: String;
   phoneNumber: String;
   profileImage: String;
-  bannerImage: String;
   creationDate: String;
   email: string;
 }

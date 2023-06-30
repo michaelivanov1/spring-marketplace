@@ -50,7 +50,6 @@ export class ProfileComponent implements OnInit {
       email: '',
       phoneNumber: '',
       profileImage: '',
-      bannerImage: '',
       creationDate: '',
     };
     this.userStand = {
@@ -75,7 +74,6 @@ export class ProfileComponent implements OnInit {
     //   description: this.userProfile.description,
     //   phoneNumber: this.userProfile.phoneNumber,
     //   profileImage: this.userProfile.profileImage,
-    //   bannerImage: this.userProfile.bannerImage,
     //   creationDate: this.userProfile.creationDate,
     //   email: this.userProfile.email,
     // };
