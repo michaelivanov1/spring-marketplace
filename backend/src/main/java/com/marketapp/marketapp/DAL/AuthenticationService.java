@@ -39,7 +39,6 @@ public class AuthenticationService {
                 .description("")
                 .phoneNumber("")
                 .profileImage("")
-                .bannerImage("")
                 .creationDate(now)
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
