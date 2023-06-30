@@ -37,7 +37,6 @@ public class UserService {
     //     existingUser.setDescription(updatedUser.getDescription());
     //     existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
     //     existingUser.setProfileImage(updatedUser.getProfileImage());
-    //     existingUser.setBannerImage(updatedUser.getBannerImage());
     //     existingUser.setCreationDate(existingUser.getCreationDate());
     //     existingUser.setRole(Role.USER);
 
@@ -52,7 +51,6 @@ public class UserService {
         existingUser.setDescription(updatedUser.getDescription());
         existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
         existingUser.setProfileImage(updatedUser.getProfileImage());
-        existingUser.setBannerImage(updatedUser.getBannerImage());
         existingUser.setCreationDate(existingUser.getCreationDate());
         existingUser.setRole(Role.USER);
 

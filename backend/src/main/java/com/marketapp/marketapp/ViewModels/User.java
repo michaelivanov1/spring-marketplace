@@ -33,7 +33,6 @@ public class User implements UserDetails {
     private String description;
     private String phoneNumber;
     private String profileImage;
-    private String bannerImage;
     private Date creationDate;
     private String email;
     private String password;
