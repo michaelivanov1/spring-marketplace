@@ -46,6 +46,22 @@ public class UserStandService {
         return existingUserStand;
     }
 
+    public UserStand updateProduceList(String email, ArrayList<Produce> produceList) {
+        //find existing stand
+        Optional<UserStand> existingUserStandOp = userStandRepository.findUserStandByEmail(email);
+        UserStand existingUserStand = null;
+        if (existingUserStandOp.isPresent()) {
+            existingUserStand = existingUserStandOp.get();
+        }
+        else {
+            return new UserStand();
+        }
+
+        existingUserStand.updateProduceList(produceList);
+        userStandRepository.save(existingUserStand);
+        return existingUserStand;
+    }
+
     public Optional<UserStand> singleUserStandById(ObjectId id) {
         return userStandRepository.findById(id);
     }

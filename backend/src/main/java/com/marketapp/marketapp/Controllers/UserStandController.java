@@ -52,10 +52,15 @@ public class UserStandController {
     }
 
     @PutMapping("/user_stand")
-    public ResponseEntity<UserStand> addToUserStand(@RequestBody ProduceRequest
-                                                    request) {
+    public ResponseEntity<UserStand> addToUserStand(@RequestBody ProduceRequest request) {
         return new ResponseEntity<>(userStandService.addToUserStand(request.getEmail(), request.getProduce()),
                 HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/user_stand/edit")
+    public ResponseEntity<UserStand> updateUserStand(@RequestBody UserStandRequest request) {
+        return new ResponseEntity<>(userStandService.updateProduceList(request.getEmail(),
+                request.getProduceList()), HttpStatus.NO_CONTENT);
     }
 
 }

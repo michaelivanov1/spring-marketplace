@@ -35,6 +35,10 @@ public class UserStand { // we don't need a stand name / farm name because it wi
         this.produceList.add(produce);
     }
 
+    public void updateProduceList(ArrayList<Produce> produceList) {
+        this.produceList = produceList;
+    }
+
     public UserStand(User user, ArrayList<Produce> produceList) {
 
         this.email = user.getEmail();
