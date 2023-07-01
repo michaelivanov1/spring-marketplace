@@ -13,20 +13,34 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 public class Produce {
 
     private String foodName;
     private int qty;
-    private String harvestDate; //TODO: Will change to be a proper date object so its uniform
+    private String harvestDate;
     private double price;
 
     public Produce(String foodName, int qty, String harvestDate, double price) {
         this.foodName = foodName;
         this.qty = qty;
-        this.harvestDate = harvestDate;
+        this.harvestDate = harvestDate; //TODO: convert incoming string to proper date
+        //this.harvestDate = convertStrToDate(harvestDate);
         this.price = price;
     }
 
+    private Date convertStrToDate(String date) {
+        try {
+            return new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        }
+        catch (ParseException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -29,6 +29,23 @@ public class UserStandService {
         return userStandRepository.insert(new UserStand(user, produceList));
     }
 
+    public UserStand addToUserStand(String email, Produce produce) {
+        //find existing stand
+        Optional<UserStand> existingUserStandOp = userStandRepository.findUserStandByEmail(email);
+        UserStand existingUserStand = null;
+        if (existingUserStandOp.isPresent()) {
+            existingUserStand = existingUserStandOp.get();
+        }
+        else {
+            return new UserStand();
+        }
+
+        existingUserStand.addToProduceList(produce);
+
+        userStandRepository.save(existingUserStand);
+        return existingUserStand;
+    }
+
     public Optional<UserStand> singleUserStandById(ObjectId id) {
         return userStandRepository.findById(id);
     }
