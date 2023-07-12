@@ -13,8 +13,11 @@ export class GenericHttpService<T> {
     @Inject(String) private entity: string
   ) { } // constructor
   public add(item: T): Observable<T> {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
+      .set('Content-Type', 'application/json');
     return this.httpClient
-      .post<T>(`${BASEURL}${this.entity}`, item)
+      .post<T>(`${BASEURL}${this.entity}`, item, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // add
 
@@ -27,6 +30,15 @@ export class GenericHttpService<T> {
       .pipe(retry(2), catchError(this.handleError));
   } // update
 
+  updateUserStand<T>(item: T): Observable<T> {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
+      .set('Content-Type', 'application/json');
+    return this.httpClient
+      .put<T>(`${BASEURL}${this.entity}`, item, { headers })
+      .pipe(retry(2), catchError(this.handleError));
+  } // update
+
   public get(): Observable<T[]> {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
@@ -35,7 +47,7 @@ export class GenericHttpService<T> {
       .get<T[]>(`${BASEURL}${this.entity}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // getAll
-  
+
   public getSome(id: any): Observable<T[]> {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
@@ -62,7 +74,7 @@ export class GenericHttpService<T> {
       .delete<T>(`${BASEURL}${this.entity}/${email}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // delete
-  
+
   // Error handling
   handleError(error: any) {
     let status: any;

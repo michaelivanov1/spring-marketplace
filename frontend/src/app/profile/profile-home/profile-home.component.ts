@@ -8,8 +8,10 @@ import { UserStandService } from '@app/user-stand/user-stand.service';
 import { UserStand } from '@app/user-stand/user-stand';
 import jwt_decode from 'jwt-decode';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ListItemDialogComponent } from '../../dialogs/listitem-dialog/listitem-dialog.component';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -30,13 +32,25 @@ export class ProfileComponent implements OnInit {
   isEditable: boolean;
   dateCreatedFormatted: string;
   userStandDataFetched: boolean;
+  // add product form
+  productForm: FormGroup;
 
   constructor(
     private profileService: ProfileService,
     private userStandService: UserStandService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {
+
+    // add product form
+    this.productForm = this.formBuilder.group({
+      foodName: '',
+      qty: 0,
+      harvestDate: '',
+      price: '',
+    })
+
     this.msg = '';
     this.isHovered = false;
     this.editableFields = [];
@@ -57,6 +71,7 @@ export class ProfileComponent implements OnInit {
         date: '',
         timestamp: '',
       },
+      email: '',
       displayName: '',
       produceList: [],
     };
@@ -68,16 +83,6 @@ export class ProfileComponent implements OnInit {
   }
 
   saveChanges() {
-    // const updatedProfile: Profile = {
-    //   id: this.userProfile.id,
-    //   displayName: this.userProfile.displayName,
-    //   description: this.userProfile.description,
-    //   phoneNumber: this.userProfile.phoneNumber,
-    //   profileImage: this.userProfile.profileImage,
-    //   creationDate: this.userProfile.creationDate,
-    //   email: this.userProfile.email,
-    // };
-
     this.profileService.update(this.userProfile.email, this.updatedProfile)
       .subscribe(
         () => {
@@ -132,6 +137,77 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  listItem(result?: any): void {
+    console.log('called listitem: ' + JSON.stringify(result))
+
+    // object when adding to existing UserStand
+    const produceItemsObj = {
+      foodName: result.foodName,
+      qty: parseInt(result.qty),
+      harvestDate: result.harvestDate,
+      price: parseFloat(result.price),
+    }
+    const itemUpdateUserStand = {
+      email: this.decodedToken.sub,
+      produce: produceItemsObj
+    };
+
+    // array object when creating new UserStand (0 existing items)
+    const produceItemsArr = [{
+      foodName: result.foodName,
+      qty: parseInt(result.qty),
+      harvestDate: result.harvestDate,
+      price: parseFloat(result.price),
+    }]
+    const itemCreateUserStand = {
+      email: this.decodedToken.sub,
+      produceList: produceItemsArr,
+    }
+
+    this.userStandService.getOne(this.decodedToken.sub)
+      .pipe(
+        catchError((err) => {
+          this.msg = err.message;
+          return of(null);
+        })
+      )
+      .subscribe((existingUserStand) => {
+        if (existingUserStand) {
+          // UserStand already exists, perform update
+          this.updateUserStand(itemUpdateUserStand);
+        } else {
+          // UserStand not created yet, perform add
+          this.createUserStand(itemCreateUserStand);
+        }
+      });
+  }
+
+  createUserStand(item: any): void {
+    this.userStandService.add(item)
+      .pipe(
+        catchError((err) => {
+          this.msg = err.message;
+          return of(null);
+        })
+      )
+      .subscribe(() => {
+        console.log('userstand created')
+      });
+  }
+
+  updateUserStand(item: any): void {
+    this.userStandService.updateUserStand(item)
+      .pipe(
+        catchError((err) => {
+          this.msg = err.message;
+          return of(null);
+        })
+      )
+      .subscribe(() => {
+        console.log('userstand updated')
+      });
+  }
+
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '250px',
@@ -141,6 +217,21 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
         this.deleteAccount();
+      }
+    });
+  }
+
+  openListItemDialog(): void {
+    const dialogRef = this.dialog.open(ListItemDialogComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.listItem(result);
+      } else {
+        // TODO: make proper 
+        console.log('bad data')
       }
     });
   }
@@ -159,6 +250,7 @@ export class ProfileComponent implements OnInit {
 
   deleteAccount(): void {
     console.log('Account deleted');
+    // TODO: delete userstand 
     this.profileService.delete(this.decodedToken.sub)
       .subscribe(
         () => {

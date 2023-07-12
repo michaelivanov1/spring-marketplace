@@ -23,11 +23,13 @@ export class MarketplaceComponent {
         date: '',
         timestamp: '',
       },
+      email: '',
       produceList: [{
         id: {
           date: '',
           timestamp: '',
         },
+
         foodName: '',
         qty: 0,
         harvestDate: '',
@@ -53,7 +55,7 @@ export class MarketplaceComponent {
       this.userStandProfiles = users;
 
       users.forEach((user: UserStand) => {
-       
+
         // user.produceList.forEach((produce) => {
         //   console.log(produce.foodName, produce.qty, produce.harvestDate);
         // });
