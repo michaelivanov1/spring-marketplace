@@ -14,7 +14,8 @@ import { ProfileComponent } from './profile/profile-home/profile-home.component'
 import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { RegistrationFinishComponent } from './registration/registration-finish/registration-finish.component';
 import { LoginComponent } from './login/login.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ListItemDialogComponent } from './dialogs/listitem-dialog/listitem-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     RegistrationFinishComponent,
     LoginComponent,
     ConfirmationDialogComponent,
+    ListItemDialogComponent,
   ],
   imports: [
     BrowserModule,

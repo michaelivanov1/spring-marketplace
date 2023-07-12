@@ -26,12 +26,14 @@ export class MarketplaceComponent {
         date: '',
         timestamp: '',
       },
+      email: '',
       produceList: [
         {
           id: {
             date: '',
             timestamp: '',
           },
+
           foodName: '',
           qty: 0,
           harvestDate: '',

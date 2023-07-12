@@ -62,6 +62,7 @@
         </li>
       </ul>
 
+
       <mat-card-actions align="end" style="margin: 0">
         <button
           mat-raised-button
@@ -91,10 +92,15 @@
             />
           </span>
           <span *ngIf="!isEditable">
-            <strong>Description: </strong>
+            <strong *ngIf="userProfile.description != ''">Description: </strong>
             {{ userProfile.description }}
           </span>
         </li>
+
+        <button (click)="openListItemDialog()">
+          Sell item
+        </button>
+
       </div>
     </div>
   </mat-card-content>

@@ -7,5 +7,6 @@ import { Produce } from '@app/common-interfaces/produce';
 export interface UserStand {
   id: ObjectId;
   displayName: String;
+  email: String;
   produceList: Produce[];
 }

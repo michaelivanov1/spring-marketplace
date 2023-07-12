@@ -54,7 +54,7 @@ public class UserStandController {
     @PutMapping("/user_stand")
     public ResponseEntity<UserStand> addToUserStand(@RequestBody ProduceRequest request) {
         return new ResponseEntity<>(userStandService.addToUserStand(request.getEmail(), request.getProduce()),
-                HttpStatus.NO_CONTENT);
+                HttpStatus.CREATED);
     }
 
     @PutMapping("/user_stand/edit")
