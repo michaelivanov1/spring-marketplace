@@ -78,18 +78,25 @@ $primary-color: #00bf63;
   grid-column: 2;
   grid-row: 1;
   width: 41vw;
-  
+
   padding-right: 20px;
   height: 50vh;
 
   ul {
     padding: 0;
+    margin-right: auto;
   }
 
   li {
     margin-bottom: 10px;
-    text-align: left;
     font-size: larger;
+
+    .item-title {
+      text-align: right;
+    }
+    .item-data {
+      text-align: left;
+    }
   }
 
   .display-name-input {

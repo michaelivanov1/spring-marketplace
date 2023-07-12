@@ -1,14 +1,21 @@
 <mat-card align="center">
   <mat-card-header></mat-card-header>
   <mat-card-content class="main-container">
-
     <div class="img-container">
-      <img src="../../../assets/nate-johnstonunsplash.jpg" alt="User's Profile Pic" />
-      <button mat-raised-button color="primary" class="upload-photo-button" (click)="uploadPhoto()">
+      <img
+        src="../../../assets/nate-johnstonunsplash.jpg"
+        alt="User's Profile Pic"
+      />
+      <button
+        mat-raised-button
+        color="primary"
+        class="upload-photo-button"
+        (click)="uploadPhoto()"
+      >
         Upload New Photo
       </button>
       <p style="margin-top: 10px; font-size: small">
-        Member since: {{dateCreatedFormatted}}
+        Member since: {{ dateCreatedFormatted }}
       </p>
       <button class="delete-account-button" (click)="openConfirmationDialog()">
         Delete account
@@ -23,15 +30,19 @@
       <ul style="list-style-type: none">
         <li>
           <span *ngIf="isEditable">
-            <strong>Display Name: </strong>
-            <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field" />
+            <strong class="item-title">Display Name: </strong>
+            <input
+              type="text"
+              [(ngModel)]="updatedProfile.displayName"
+              class="input-field"
+            />
           </span>
           <span *ngIf="!isEditable" class="display-name-input">
             {{ userProfile.displayName }}
           </span>
         </li>
         <li *ngIf="isEditable">
-          <strong>Email: </strong>
+          <strong class="item-title">Email: </strong>
           <span>
             {{ userProfile.email }}
           </span>
@@ -39,7 +50,11 @@
         <li *ngIf="isEditable">
           <strong>Phone: </strong>
           <span>
-            <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field" />
+            <input
+              type="text"
+              [(ngModel)]="updatedProfile.phoneNumber"
+              class="input-field"
+            />
           </span>
           <span *ngIf="!isEditable">
             {{ userProfile.phoneNumber }}
@@ -48,12 +63,20 @@
       </ul>
 
       <mat-card-actions align="end" style="margin: 0">
-        <button mat-raised-button style="background-color: #bf6c189f;" *ngIf="isEditable" (click)="cancelEdit()">
+        <button
+          mat-raised-button
+          style="background-color: #bf6c189f"
+          *ngIf="isEditable"
+          (click)="cancelEdit()"
+        >
           Cancel
         </button>
-        <button mat-raised-button style="background-color: #00bf63b1;"
-          (click)="isEditable ? saveChanges() : toggleEdit()">
-          {{ isEditable ? 'Save' : 'Update Profile' }}
+        <button
+          mat-raised-button
+          style="background-color: #00bf63b1"
+          (click)="isEditable ? saveChanges() : toggleEdit()"
+        >
+          {{ isEditable ? "Save" : "Update Profile" }}
         </button>
       </mat-card-actions>
 
@@ -61,7 +84,11 @@
         <li style="list-style-type: none">
           <span *ngIf="isEditable">
             <strong>Description: </strong>
-            <input type="text" [(ngModel)]="updatedProfile.description" class="input-field description" />
+            <input
+              type="text"
+              [(ngModel)]="updatedProfile.description"
+              class="input-field description"
+            />
           </span>
           <span *ngIf="!isEditable">
             <strong>Description: </strong>
@@ -77,8 +104,14 @@
       <h2 *ngIf="userStandDataFetched" style="margin: 0">Produce</h2>
       <div class="grid-container" *ngIf="userStandDataFetched">
         <ng-container *ngFor="let produce of userStand.produceList">
-          <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ cursor: getCursor() }"
-            (click)="onProductClick(userStand, produce)" [ngClass]="{ selected: userStand === selectedProduct }">
+          <div
+            class="grid-item"
+            (mouseenter)="onHover()"
+            (mouseleave)="onLeave()"
+            [ngStyle]="{ cursor: getCursor() }"
+            (click)="onProductClick(userStand, produce)"
+            [ngClass]="{ selected: userStand === selectedProduct }"
+          >
             <div class="item-data">
               <img class="product-image" src="assets/Pumpkin.jpg" />
               <p class="product-name">{{ produce.foodName }}</p>
@@ -101,5 +134,4 @@
       </div>
     </div>
   </mat-card-content>
-
 </mat-card>

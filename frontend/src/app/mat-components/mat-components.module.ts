@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -19,6 +20,7 @@ const MaterialComponents = [
   MatToolbarModule,
   MatInputModule,
   MatFormFieldModule,
+  MatDialogModule,
 ];
 
 @NgModule({

@@ -1,0 +1,32 @@
+.info-container {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .product-price {
+    text-align: right;
+    margin-right: 4vw;
+  }
+}
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .product-image {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 5px;
+  }
+}
+.qty-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.confirm-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

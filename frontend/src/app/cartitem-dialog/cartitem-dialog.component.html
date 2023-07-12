@@ -1,0 +1,33 @@
+<div>
+  <div class="image-container">
+    <img
+      class="product-image"
+      src="assets/Pumpkin.jpg"
+      alt="${produce.foodName}"
+    />
+  </div>
+
+  <div mat-dialog-content class="info-container">
+    <p class="product-name">{{ produce.foodName }}</p>
+    <br />
+    <p class="product-price">
+      {{ subTotal }}
+    </p>
+  </div>
+  <div mat-dialog-content class="qty-container">
+    <button class="" (click)="qtyChange('-')">-</button>
+    <input
+      type="text"
+      [value]="counter"
+      size="4"
+      maxlength="4"
+      ng-pattern="onlyNumbers"
+      (keypress)="numberOnly($event)"
+    />
+    <button class="" (click)="qtyChange('+')">+</button>
+  </div>
+  <div mat-dialog-actions align="end" class="confirm-container">
+    <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
+    <button mat-button color="primary" (click)="confirm()">Add</button>
+  </div>
+</div>

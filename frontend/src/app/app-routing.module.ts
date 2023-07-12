@@ -7,9 +7,9 @@ import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', component: RegistrationComponent, title: 'register' },
-  { path: 'register', component: RegistrationComponent, title: 'register' },
+  { path: '', component: LoginComponent, title: 'login' },
   { path: 'login', component: LoginComponent, title: 'login' },
+  { path: 'register', component: RegistrationComponent, title: 'register' },
   { path: 'profile', component: ProfileComponent, title: 'profile' },
   {
     path: 'registration-finish',
