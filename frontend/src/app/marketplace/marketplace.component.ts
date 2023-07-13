@@ -3,7 +3,7 @@ import { UserStandService } from '../user-stand/user-stand.service';
 import { UserStand } from '../user-stand/user-stand';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CartitemDialogComponent } from '../cartitem-dialog/cartitem-dialog.component';
+import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dialog.component';
 
 @Component({
   selector: 'app-marketplace',

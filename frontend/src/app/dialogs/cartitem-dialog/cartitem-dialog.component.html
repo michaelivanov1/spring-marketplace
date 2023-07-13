@@ -21,8 +21,9 @@
       [value]="counter"
       size="4"
       maxlength="4"
-      ng-pattern="onlyNumbers"
       (keypress)="numberOnly($event)"
+      (keyup.backspace)="removeNumber()"
+      (keyup)="validNumber($event)"
     />
     <button class="" (click)="qtyChange('+')">+</button>
   </div>

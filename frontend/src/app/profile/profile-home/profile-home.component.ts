@@ -42,14 +42,13 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder
   ) {
-
     // add product form
     this.productForm = this.formBuilder.group({
       foodName: '',
       qty: 0,
       harvestDate: '',
       price: '',
-    })
+    });
 
     this.msg = '';
     this.isHovered = false;
@@ -83,7 +82,8 @@ export class ProfileComponent implements OnInit {
   }
 
   saveChanges() {
-    this.profileService.update(this.userProfile.email, this.updatedProfile)
+    this.profileService
+      .update(this.userProfile.email, this.updatedProfile)
       .subscribe(
         () => {
           this.userProfile = { ...this.updatedProfile };
@@ -119,7 +119,8 @@ export class ProfileComponent implements OnInit {
     });
 
     // user's listings
-    this.userStandService.getOne(this.decodedToken.sub)
+    this.userStandService
+      .getOne(this.decodedToken.sub)
       .pipe(
         catchError((err) => {
           this.msg = err.message;
@@ -138,7 +139,7 @@ export class ProfileComponent implements OnInit {
   }
 
   listItem(result?: any): void {
-    console.log('called listitem: ' + JSON.stringify(result))
+    console.log('called listitem: ' + JSON.stringify(result));
 
     // object when adding to existing UserStand
     const produceItemsObj = {
@@ -146,25 +147,28 @@ export class ProfileComponent implements OnInit {
       qty: parseInt(result.qty),
       harvestDate: result.harvestDate,
       price: parseFloat(result.price),
-    }
+    };
     const itemUpdateUserStand = {
       email: this.decodedToken.sub,
-      produce: produceItemsObj
+      produce: produceItemsObj,
     };
 
     // array object when creating new UserStand (0 existing items)
-    const produceItemsArr = [{
-      foodName: result.foodName,
-      qty: parseInt(result.qty),
-      harvestDate: result.harvestDate,
-      price: parseFloat(result.price),
-    }]
+    const produceItemsArr = [
+      {
+        foodName: result.foodName,
+        qty: parseInt(result.qty),
+        harvestDate: result.harvestDate,
+        price: parseFloat(result.price),
+      },
+    ];
     const itemCreateUserStand = {
       email: this.decodedToken.sub,
       produceList: produceItemsArr,
-    }
+    };
 
-    this.userStandService.getOne(this.decodedToken.sub)
+    this.userStandService
+      .getOne(this.decodedToken.sub)
       .pipe(
         catchError((err) => {
           this.msg = err.message;
@@ -183,7 +187,8 @@ export class ProfileComponent implements OnInit {
   }
 
   createUserStand(item: any): void {
-    this.userStandService.add(item)
+    this.userStandService
+      .add(item)
       .pipe(
         catchError((err) => {
           this.msg = err.message;
@@ -191,12 +196,13 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe(() => {
-        console.log('userstand created')
+        console.log('userstand created');
       });
   }
 
   updateUserStand(item: any): void {
-    this.userStandService.updateUserStand(item)
+    this.userStandService
+      .updateUserStand(item)
       .pipe(
         catchError((err) => {
           this.msg = err.message;
@@ -204,17 +210,17 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe(() => {
-        console.log('userstand updated')
+        console.log('userstand updated');
       });
   }
 
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '250px',
-      data: 'Are you sure you want to permanently delete your account?'
+      data: 'Are you sure you want to permanently delete your account?',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result === 'confirm') {
         this.deleteAccount();
       }
@@ -226,12 +232,12 @@ export class ProfileComponent implements OnInit {
       width: '400px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.listItem(result);
       } else {
-        // TODO: make proper 
-        console.log('bad data')
+        // TODO: make proper
+        console.log('bad data');
       }
     });
   }
@@ -250,21 +256,20 @@ export class ProfileComponent implements OnInit {
 
   deleteAccount(): void {
     console.log('Account deleted');
-    // TODO: delete userstand 
-    this.profileService.delete(this.decodedToken.sub)
-      .subscribe(
-        () => {
-          this.navigateToRegister()
-        },
-        error => {
-          console.error('Error deleting account:', error);
-        }
-      )
+    // TODO: delete userstand
+    this.profileService.delete(this.decodedToken.sub).subscribe(
+      () => {
+        this.navigateToRegister();
+      },
+      (error) => {
+        console.error('Error deleting account:', error);
+      }
+    );
   }
 
   navigateToRegister() {
     localStorage.removeItem('jwtToken');
-    this.router.navigate(['/register'])
+    this.router.navigate(['/register']);
   }
 
   getCursor(): string {

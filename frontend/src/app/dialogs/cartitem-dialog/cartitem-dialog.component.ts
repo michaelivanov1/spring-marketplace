@@ -33,29 +33,43 @@ export class CartitemDialogComponent {
     this.dialogRef.close();
   }
   qtyChange(change: String): void {
-    this.price = this.produce.price;
-    if (change === '+') {
+    if (change === '+' && this.counter < this.produce.qty) {
       this.counter++;
-    } else if (this.counter > 0) {
+    } else if (change === '-' && this.counter > 0) {
       this.counter--;
     }
-    this.price = this.price * this.counter;
-    console.log(this.price);
-    this.subTotal = formatCurrency(this.price, this.locale, '$ ');
-    console.log(this.subTotal);
+    this.subTotal = formatCurrency(
+      this.price * this.counter,
+      this.locale,
+      '$ '
+    );
   }
 
   numberOnly(event: any): boolean {
-    this.price = this.produce.price;
     const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;
     }
-    console.log(event);
-    this.price = this.price * parseInt(event.key);
-    console.log(this.price);
-    this.subTotal = formatCurrency(this.price, this.locale, '$ ');
-    console.log(this.subTotal);
     return true;
+  }
+
+  removeNumber() {
+    if (this.counter.toString().length - 1 <= 0) {
+      this.counter = 0;
+    } else {
+      this.counter = parseInt(
+        this.counter.toString().substring(0, this.counter.toString().length - 1)
+      );
+    }
+  }
+
+  validNumber(event: any) {
+    this.counter = parseInt(this.counter.toString().concat(event.key));
+    console.log(this.counter);
+    this.subTotal = formatCurrency(
+      this.price * this.counter,
+      this.locale,
+      '$ '
+    );
   }
 }
