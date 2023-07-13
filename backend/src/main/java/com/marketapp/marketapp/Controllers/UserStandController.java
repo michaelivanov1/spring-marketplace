@@ -63,4 +63,15 @@ public class UserStandController {
                 request.getProduceList()), HttpStatus.NO_CONTENT);
     }
 
+    @DeleteMapping("/user_stand/{email}")
+    public ResponseEntity<Boolean> deleteUserStand(@PathVariable String email) {
+        boolean deleted = userStandService.deleteUserStandByEmail(email);
+        if (deleted) {
+            return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(Boolean.FALSE, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

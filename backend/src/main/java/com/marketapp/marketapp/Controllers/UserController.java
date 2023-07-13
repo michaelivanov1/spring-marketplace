@@ -41,7 +41,8 @@ public class UserController {
 
         if (deleted) {
             return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
-        } else {
+        }
+        else {
             return new ResponseEntity<>(Boolean.FALSE, HttpStatus.NOT_FOUND);
         }
     }

@@ -31,7 +31,7 @@ public class UserStandService {
 
     public UserStand addToUserStand(String email, Produce produce) {
         //find existing stand
-        Optional<UserStand> existingUserStandOp = userStandRepository.findUserStandByEmail(email);
+        Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
         UserStand existingUserStand = null;
         if (existingUserStandOp.isPresent()) {
             existingUserStand = existingUserStandOp.get();
@@ -48,7 +48,7 @@ public class UserStandService {
 
     public UserStand updateProduceList(String email, ArrayList<Produce> produceList) {
         //find existing stand
-        Optional<UserStand> existingUserStandOp = userStandRepository.findUserStandByEmail(email);
+        Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
         UserStand existingUserStand = null;
         if (existingUserStandOp.isPresent()) {
             existingUserStand = existingUserStandOp.get();
@@ -62,11 +62,21 @@ public class UserStandService {
         return existingUserStand;
     }
 
+    public boolean deleteUserStandByEmail(String email) {
+        Optional<UserStand> optionalUser = userStandRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            UserStand user = optionalUser.get();
+            userStandRepository.delete(user);
+            return true;
+        }
+        return false;
+    }
+
     public Optional<UserStand> singleUserStandById(ObjectId id) {
         return userStandRepository.findById(id);
     }
 
     public Optional<UserStand> singleUserStandByEmail(String email) {
-        return userStandRepository.findUserStandByEmail(email);
+        return userStandRepository.findByEmail(email);
     }
 }
