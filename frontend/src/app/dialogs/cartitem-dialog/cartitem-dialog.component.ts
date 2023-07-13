@@ -65,7 +65,6 @@ export class CartitemDialogComponent {
 
   validNumber(event: any) {
     this.counter = parseInt(this.counter.toString().concat(event.key));
-    console.log(this.counter);
     this.subTotal = formatCurrency(
       this.price * this.counter,
       this.locale,
