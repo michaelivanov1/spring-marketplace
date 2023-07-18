@@ -94,6 +94,7 @@ $primary-color: #00bf63;
     .item-title {
       text-align: right;
     }
+
     .item-data {
       text-align: left;
     }
@@ -141,7 +142,9 @@ $primary-color: #00bf63;
   margin: 0 auto;
   padding-left: 10px;
 
+
   .grid-item {
+    position: relative;
     width: 220px;
     margin-top: 20px;
     text-align: center;
@@ -152,8 +155,26 @@ $primary-color: #00bf63;
     height: 300px;
 
     .item-data {
+      position: relative;
       background-color: rgba(140, 195, 63, 0.1);
       border: 1px solid black;
+
+      .hover-icons {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+
+        .edit-item-button,
+        .delete-item-button {
+          color: white;
+        }
+
+        .edit-item-button:hover,
+        .delete-item-button:hover {
+          color: green;
+          // transition: all 0.3s ease;
+        }
+      }
 
       .product-image {
         width: 100%;

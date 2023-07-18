@@ -39,7 +39,7 @@ public class UserStandService {
         else {
             return new UserStand();
         }
-
+        
         existingUserStand.addToProduceList(produce);
 
         userStandRepository.save(existingUserStand);
@@ -78,5 +78,25 @@ public class UserStandService {
 
     public Optional<UserStand> singleUserStandByEmail(String email) {
         return userStandRepository.findByEmail(email);
+    }
+
+    public boolean deleteProduceItemByEmailAndFoodName(String email, String foodName) {
+        Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
+        if (existingUserStandOp.isPresent()) {
+            UserStand existingUserStand = existingUserStandOp.get();
+            
+            Optional<Produce> produceToDeleteOp = existingUserStand.getProduceList()
+                .stream()
+                .filter(produce -> produce.getFoodName().equals(foodName))
+                .findFirst();
+            
+            if (produceToDeleteOp.isPresent()) {
+                Produce produceToDelete = produceToDeleteOp.get();
+                existingUserStand.getProduceList().remove(produceToDelete);
+                userStandRepository.save(existingUserStand);
+                return true; 
+            }
+        }
+        return false; 
     }
 }

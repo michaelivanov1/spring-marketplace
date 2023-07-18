@@ -35,7 +35,7 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .put<T>(`${BASEURL}${this.entity}`, item, { headers })
+      .put<T>(`${BASEURL}${this.entity}/edit`, item, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // update
 
@@ -74,6 +74,15 @@ export class GenericHttpService<T> {
       .delete<T>(`${BASEURL}${this.entity}/${email}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // delete
+
+  deleteProduceItem<T>(email: string, foodName: string): Observable<boolean> {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
+      .set('Content-Type', 'application/json');
+    return this.httpClient
+      .delete<boolean>(`${BASEURL}${this.entity}/${email}/produce/${foodName}`, { headers })
+      .pipe(retry(2), catchError(this.handleError));
+  }
 
   // Error handling
   handleError(error: any) {

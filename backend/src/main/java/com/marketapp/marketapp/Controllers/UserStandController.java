@@ -68,8 +68,17 @@ public class UserStandController {
         boolean deleted = userStandService.deleteUserStandByEmail(email);
         if (deleted) {
             return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(Boolean.FALSE, HttpStatus.NOT_FOUND);
         }
-        else {
+    }
+
+    @DeleteMapping("/user_stand/{email}/produce/{foodName}")
+    public ResponseEntity<Boolean> deleteProduceItem(@PathVariable String email, @PathVariable String foodName) {
+        boolean deleted = userStandService.deleteProduceItemByEmailAndFoodName(email, foodName);
+        if (deleted) {
+            return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(Boolean.FALSE, HttpStatus.NOT_FOUND);
         }
     }
