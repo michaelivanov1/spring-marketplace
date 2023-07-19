@@ -38,6 +38,13 @@ export class LoginComponent {
       ));
   }
 
+  ngOnInit() {
+    // if they re-open the page as logged in, send them to profile instead of login component
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/profile']);
+    }
+  }
+
   onFormSubmit() {
     const { email, password } = this.loginForm.value;
 
@@ -45,7 +52,7 @@ export class LoginComponent {
 
     this.authService.login(email, password).subscribe(
       () => {
-        this.navigateToMarketplace();
+        this.navigateToProfile();
         this.loginFailed = false;
       },
       (error: any) => {
@@ -57,12 +64,12 @@ export class LoginComponent {
         console.error('Login failed:', error);
       },
       () => {
-        this.loading = false; 
+        this.loading = false;
       }
     );
   }
 
-  navigateToMarketplace() {
-    this.router.navigate(['/marketplace']);
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
   }
 }

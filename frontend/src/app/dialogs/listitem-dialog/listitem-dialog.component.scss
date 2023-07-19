@@ -1,0 +1,24 @@
+.dialog-container {
+}
+
+.dialog-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.dialog-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dialog-labels {
+    padding-top: 2px;
+    width: 120px;
+    margin-right: 10px;
+}
+
+.dialog-data {
+    flex: 1;
+}

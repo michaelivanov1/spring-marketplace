@@ -1,23 +1,23 @@
 <h2 mat-dialog-title>Modal Title</h2>
-<mat-dialog-content>
+<mat-dialog-content class="dialog-container">
   <form [formGroup]="productForm" (ngSubmit)="onClose()">
-    <div>
-      <label>
-        Food Name:
-        <input type="text" matInput formControlName="foodName" required>
-      </label>
-      <label>
-        Quantity:
-        <input type="number" matInput formControlName="qty" required>
-      </label>
-      <label>
-        Harvest Date:
-        <input type="date" matInput formControlName="harvestDate" required>
-      </label>
-      <label>
-        Price:
-        <input type="number" step="0.01" matInput formControlName="price" required>
-      </label>
+    <div class="dialog-fields">
+      <div class="dialog-field">
+        <label class="dialog-labels">Food Name:</label>
+        <input class="dialog-data" type="text" matInput formControlName="foodName" required>
+      </div>
+      <div class="dialog-field">
+        <label class="dialog-labels">Quantity:</label>
+        <input class="dialog-data" type="number" matInput formControlName="qty" required>
+      </div>
+      <div class="dialog-field">
+        <label class="dialog-labels">Harvest Date:</label>
+        <input class="dialog-data" type="date" matInput formControlName="harvestDate" required>
+      </div>
+      <div class="dialog-field">
+        <label class="dialog-labels">Price:</label>
+        <input class="dialog-data" type="number" step="0.01" matInput formControlName="price" required>
+      </div>
     </div>
     <button type="submit" mat-raised-button color="primary">Submit</button>
   </form>

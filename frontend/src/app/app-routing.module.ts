@@ -6,6 +6,7 @@ import { RegistrationFinishComponent } from './registration/registration-finish/
 import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { LoginComponent } from './login/login.component';
 
+
 const routes: Routes = [
   { path: '', component: LoginComponent, title: 'login' },
   { path: 'login', component: LoginComponent, title: 'login' },
@@ -26,4 +27,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+
+export class AppRoutingModule { }
