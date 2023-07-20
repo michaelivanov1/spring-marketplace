@@ -12,7 +12,7 @@ $primary-color: #00bf63;
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  display: grid;
+  display: flex;
   flex-wrap: nowrap;
 }
 
@@ -40,11 +40,8 @@ $primary-color: #00bf63;
 }
 
 .img-container {
-  display: flex;
-  flex-direction: column;
+  display: block;
   justify-content: left;
-  grid-column: 1;
-  grid-row: 1;
   border-right: 1px solid #bfbfbf;
   height: 38vh;
   max-width: 15vw;
@@ -61,6 +58,7 @@ $primary-color: #00bf63;
     margin-left: 10px;
     background-color: #00bf63b1;
     color: black;
+    font-size: 1rem;
   }
 
   .delete-account-button {
@@ -70,38 +68,45 @@ $primary-color: #00bf63;
 }
 
 .account-details-container {
-  // border: 1px solid red;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   margin-bottom: 20px;
-  grid-column: 2;
-  grid-row: 1;
   width: 41vw;
-
   padding-right: 20px;
-  height: 50vh;
+  height: 40vh;
 
-  ul {
-    padding: 0;
-    margin-right: auto;
+  .display-name-input {
+    font-size: 30px;
   }
+  .primary-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
-  li {
-    margin-bottom: 10px;
-    font-size: larger;
-
+    .info-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .item-label {
+      padding-top: 2px;
+      width: 120px;
+      margin-right: 10px;
+    }
+    .item-data {
+      flex: 1;
+    }
     .item-title {
       text-align: right;
+      font-size: larger;
     }
 
     .item-data {
       text-align: left;
     }
-  }
 
-  .display-name-input {
-    font-size: 30px;
+    .display-name-input {
+      font-size: 30px;
+    }
   }
 
   @media (min-width: 768px) {
@@ -141,7 +146,6 @@ $primary-color: #00bf63;
   max-width: 100vw;
   margin: 0 auto;
   padding-left: 10px;
-
 
   .grid-item {
     position: relative;

@@ -2,8 +2,16 @@
   <mat-card-header></mat-card-header>
   <mat-card-content class="main-container">
     <div class="img-container">
-      <img src="../../../assets/nate-johnstonunsplash.jpg" alt="User's Profile Pic" />
-      <button mat-raised-button color="primary" class="upload-photo-button" (click)="uploadPhoto()">
+      <img
+        src="../../../assets/nate-johnstonunsplash.jpg"
+        alt="User's Profile Pic"
+      />
+      <button
+        mat-raised-button
+        color="primary"
+        class="upload-photo-button"
+        (click)="uploadPhoto()"
+      >
         Upload New Photo
       </button>
       <p style="margin-top: 10px; font-size: small">
@@ -19,40 +27,46 @@
     </div>
 
     <div class="account-details-container">
-      <ul style="list-style-type: none">
-        <li>
-          <span *ngIf="isEditable">
-            <strong class="item-title">Display Name: </strong>
-            <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field" />
-          </span>
-          <span *ngIf="!isEditable" class="display-name-input">
-            {{ userProfile.displayName }}
-          </span>
-        </li>
-        <li *ngIf="isEditable">
-          <strong class="item-title">Email: </strong>
-          <span>
-            {{ userProfile.email }}
-          </span>
-        </li>
-        <li *ngIf="isEditable">
-          <strong>Phone: </strong>
-          <span>
-            <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field" />
-          </span>
-          <span *ngIf="!isEditable">
-            {{ userProfile.phoneNumber }}
-          </span>
-        </li>
-      </ul>
-
+      <span *ngIf="!isEditable" class="display-name-input">
+        {{ userProfile.displayName }}
+      </span>
+      <div class="primary-info">
+        <span *ngIf="isEditable" class="info-row">
+          <strong class="item-title item-label">Display Name: </strong>
+          <input
+            type="text"
+            [(ngModel)]="updatedProfile.displayName"
+            class="input-field item-data"
+          />
+        </span>
+        <span *ngIf="isEditable" class="info-row">
+          <strong class="item-title item-label">Email: </strong>
+          <label class="item-title item-data">{{ userProfile.email }}</label>
+        </span>
+        <span *ngIf="isEditable" class="info-row">
+          <strong class="item-title item-label">Phone: </strong>
+          <input
+            type="text"
+            [(ngModel)]="updatedProfile.phoneNumber"
+            class="input-field item-data"
+          />
+        </span>
+      </div>
 
       <mat-card-actions align="end" style="margin: 0">
-        <button mat-raised-button style="background-color: #bf6c189f" *ngIf="isEditable" (click)="cancelEdit()">
+        <button
+          mat-raised-button
+          style="background-color: #bf6c189f"
+          *ngIf="isEditable"
+          (click)="cancelEdit()"
+        >
           Cancel
         </button>
-        <button mat-raised-button style="background-color: #00bf63b1"
-          (click)="isEditable ? saveChanges() : toggleEdit()">
+        <button
+          mat-raised-button
+          style="background-color: #00bf63b1"
+          (click)="isEditable ? saveChanges() : toggleEdit()"
+        >
           {{ isEditable ? "Save" : "Update Profile" }}
         </button>
       </mat-card-actions>
@@ -61,18 +75,17 @@
         <li style="list-style-type: none">
           <span *ngIf="isEditable">
             <strong>Description: </strong>
-            <input type="text" [(ngModel)]="updatedProfile.description" class="input-field description" />
+            <input
+              type="text"
+              [(ngModel)]="updatedProfile.description"
+              class="input-field description"
+            />
           </span>
           <span *ngIf="!isEditable">
             <strong *ngIf="userProfile.description != ''">Description: </strong>
             {{ userProfile.description }}
           </span>
         </li>
-
-        <button (click)="openListItemDialog()">
-          Sell item
-        </button>
-
       </div>
     </div>
   </mat-card-content>
@@ -80,18 +93,34 @@
   <mat-card-content>
     <div class="produce-container">
       <h2 *ngIf="userStandDataExists" style="margin: 0">Produce</h2>
+      <button (click)="openListItemDialog()">Sell item</button>
       <div class="grid-container" *ngIf="userStandDataExists">
         <ng-container *ngFor="let produce of userStand.produceList">
-          <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
-            [ngStyle]="{ cursor: getCursor() }" [ngClass]="{ selected: userStand === selectedProduct }">
+          <div
+            class="grid-item"
+            (mouseenter)="onHover(produce)"
+            (mouseleave)="onLeave()"
+            [ngStyle]="{ cursor: getCursor() }"
+            [ngClass]="{ selected: userStand === selectedProduct }"
+          >
             <div class="item-data">
-
-              <div class="hover-icons" *ngIf="isHovered && hoveredProduce === produce">
-                <button mat-icon-button class="edit-item-button" (click)="onEditClick(userStand, produce)">
+              <div
+                class="hover-icons"
+                *ngIf="isHovered && hoveredProduce === produce"
+              >
+                <button
+                  mat-icon-button
+                  class="edit-item-button"
+                  (click)="onEditClick(userStand, produce)"
+                >
                   <mat-icon>edit</mat-icon>
                 </button>
 
-                <button mat-icon-button class="delete-item-button" (click)="onDeleteClick(produce)">
+                <button
+                  mat-icon-button
+                  class="delete-item-button"
+                  (click)="onDeleteClick(produce)"
+                >
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
