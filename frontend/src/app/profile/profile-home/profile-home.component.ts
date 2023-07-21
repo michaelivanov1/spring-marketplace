@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Observer, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
 import { UserStandService } from '@app/user-stand/user-stand.service';
@@ -84,12 +83,13 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  // grab all user's profile data & listings on page init
+  // grab all users profile data & listings on page init
   ngOnInit(): void {
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
 
     this.profile = this.profileService.getOne(this.decodedToken.sub);
 
+    // grab users profile & format account creation date
     this.profile.subscribe(
       (profile) => {
         this.userProfile = profile;
@@ -123,13 +123,13 @@ export class ProfileComponent implements OnInit {
           console.log(this.userStand);
           if (this.userStand.produceList.length > 0)
             this.userStandDataExists = true;
-        } else {
-          this.userStandDataExists = false;
-        }
+        } //else {
+        //   // this.userStandDataExists = false;
+        // }
       });
   }
 
-  // handling data from list item for sale dialog
+  // handle data from list item for sale dialog
   listItem(result?: any): void {
 
     // object when adding to existing UserStand
@@ -143,13 +143,9 @@ export class ProfileComponent implements OnInit {
       harvestDate: result.harvestDate,
       price: parseFloat(result.price),
     };
-    const itemUpdateUserStand = {
-      email: this.decodedToken.sub,
-      produce: produceItemsObj,
-    };
 
     this.userStandService
-      .getOne(this.decodedToken.sub)
+      .getOne(this.userProfile.email)
       .pipe(
         catchError((err) => {
           this.msg = err.message;
@@ -159,31 +155,35 @@ export class ProfileComponent implements OnInit {
       .subscribe((existingUserStand) => {
         if (existingUserStand) {
           // UserStand already exists, perform update
-          const itemExists = existingUserStand.produceList.some(item => item.foodName === result.foodName);
+          const itemExists = existingUserStand.produceList.some(
+            (item) => item.foodName === result.foodName
+          );
           if (!itemExists) {
             // add the new item to the produceList
             this.userStand.produceList.push(produceItemsObj);
 
-            // update the userStand on the server
-            this.updateUserStand(itemUpdateUserStand);
+            // update the userStand object with the new produceList
+            this.userStand.produceList = this.userStand.produceList;
 
-            // set userStandDataExists flag to true
-            this.userStandDataExists = true;
+            // update the userStand on the server
+            this.updateUserStand(this.userStand);
           } else {
             // TODO: display proper error message
             console.log('foodname already exists');
           }
         } else {
-          // UserStand not created yet, perform add
+          // userStand not created yet, perform add
           const produceItemsArr = [produceItemsObj];
-          const itemCreateUserStand = {
-            email: this.decodedToken.sub,
+          const itemCreateUserStand: UserStand = {
+            id: {
+              date: '',
+              timestamp: '',
+            },
+            email: this.userProfile.email,
+            displayName: '',
             produceList: produceItemsArr,
           };
-
           this.createUserStand(itemCreateUserStand);
-
-          this.userStandDataExists = true;
         }
       });
   }
@@ -199,16 +199,14 @@ export class ProfileComponent implements OnInit {
       // grab index of current produce in userStand.produceList
       const index = userStand.produceList.findIndex(item => item.foodName === produce.foodName);
       if (index !== -1) {
-
-        // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
+        // create a new instance of the userStand object with the updated produceList
+        // Update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
         userStand.produceList[index] = updatedProduce;
 
-        const produceItemsArr = {
-          email: this.userProfile.email,
-          produceList: userStand.produceList
-        };
+        // Update the userStand object with the updated produceList
+        this.userStand = { ...userStand, produceList: [...userStand.produceList] };
 
-        this.updateUserStand(produceItemsArr);
+        this.updateUserStand(this.userStand);
       } else {
         console.error('something went wrong while editing produce item');
       }
@@ -237,7 +235,7 @@ export class ProfileComponent implements OnInit {
             // remove item from produceList. this is so the page reflects the deletion without a page refresh
             this.userStand.produceList = this.userStand.produceList.filter(item => item.foodName !== produce.foodName);
             if (this.userStand.produceList.length == 0) {
-              // this.userStandService.delete(this.decodedToken.sub).subscribe(() => console.log('got to 0 items. deleted user stand'));
+              this.userStandService.delete(this.userProfile.email).subscribe(() => console.log('got to 0 items. deleted user stand'));
               this.userStandDataExists = false;
             }
           },
@@ -249,7 +247,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  // for brand new accounts, creates a fresh user stand for selling items
+  // for brand new accounts (or 0 items for sale), creates a fresh user stand for selling items
   createUserStand(item: any): void {
     this.userStandService
       .add(item)
@@ -260,14 +258,15 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe(() => {
+        this.userStandDataExists = true;
         console.log('userstand created');
       });
   }
 
-  // for existing accounts, updates user stand data 
-  updateUserStand(item: any): void {
+  // for existing accounts (or > 0 items for sale), updates user stand data 
+  updateUserStand(userStand: UserStand): void {
     this.userStandService
-      .updateUserStand(item)
+      .updateUserStand(userStand)
       .pipe(
         catchError((err) => {
           this.msg = err.message;
@@ -275,7 +274,8 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe(() => {
-        console.log('userstand updated with data: ' + JSON.stringify(item));
+        this.userStandDataExists = true;
+        console.log('userstand updated');
       });
   }
 
@@ -283,10 +283,10 @@ export class ProfileComponent implements OnInit {
   deleteAccount(): void {
     console.log('account deleted');
     // delete user's whole stand
-    this.userStandService.delete(this.decodedToken.sub).subscribe(
+    this.userStandService.delete(this.userProfile.email).subscribe(
       () => {
         // delete user's whole profile
-        this.profileService.delete(this.decodedToken.sub).subscribe(
+        this.profileService.delete(this.userProfile.email).subscribe(
           () => {
             this.navigateToRegister();
           })
@@ -335,7 +335,7 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.listItem(result);
-      } 
+      }
     });
   }
 
