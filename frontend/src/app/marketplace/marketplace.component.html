@@ -17,7 +17,7 @@
           <p class="product-price">
             {{ produce.price + "" | currency : "USD" : "symbol" : "1.2-2" }}
           </p>
-          <p class="product-qty">{{ produce.qty }}x</p>
+          <p class="product-qoh">{{ produce.qoh }}x</p>
           <div class="product-seller-container">
             <p class="product-seller">Seller: {{ user.displayName }}</p>
             <p class="product-harvestdate">
@@ -42,7 +42,7 @@
         <div class="product-name">{{ user.account.username }}</div>
         <div *ngFor="let produce of user?.produceList">
             <p>Food Name: {{ produce?.foodName }}</p>
-            <p>Quantity: {{ produce?.qty }}</p>
+            <p>Quantity: {{ produce?.qoh }}</p>
             <p>Harvest Date: {{ produce?.harvestDate }}</p>
         </div>
     </div>

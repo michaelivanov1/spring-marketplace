@@ -20,7 +20,7 @@ export class ListItemDialogComponent {
   ) {
     this.productForm = this.formBuilder.group({
       foodName: data?.foodName || '',
-      qty: data?.qty || '',
+      qoh: data?.qoh || '',
       harvestDate: data?.harvestDate || '',
       price: data?.price || ''
     });
@@ -31,7 +31,7 @@ export class ListItemDialogComponent {
     const updatedProduce: Produce = {
       ...this.data,
       foodName: productFormValue.foodName,
-      qty: productFormValue.qty,
+      qoh: productFormValue.qoh,
       harvestDate: productFormValue.harvestDate,
       price: productFormValue.price
     };

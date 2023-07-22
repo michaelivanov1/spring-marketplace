@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
     // form for adding products
     this.productForm = this.formBuilder.group({
       foodName: '',
-      qty: 0,
+      qoh: 0,
       harvestDate: '',
       price: '',
     });
@@ -139,7 +139,7 @@ export class ProfileComponent implements OnInit {
         timestamp: '',
       },
       foodName: result.foodName,
-      qty: parseInt(result.qty),
+      qoh: parseInt(result.qoh),
       harvestDate: result.harvestDate,
       price: parseFloat(result.price),
     };
