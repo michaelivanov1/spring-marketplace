@@ -15,6 +15,8 @@
         <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login" (click)="setTitle('login')">Login</a>
         <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register"
           (click)="setTitle('register')">Register</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart"
+          (click)="setTitle('shopping cart')">Cart</a>
         <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
       </div>
     </mat-toolbar>

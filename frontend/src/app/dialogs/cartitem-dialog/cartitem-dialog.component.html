@@ -14,8 +14,8 @@
       {{ subTotal }}
     </p>
   </div>
-  <div mat-dialog-content class="qty-container">
-    <button class="" (click)="qtyChange('-')">-</button>
+  <div mat-dialog-content class="qoh-container">
+    <button class="" (click)="qohChange('-')">-</button>
     <input
       type="text"
       [value]="counter"
@@ -25,10 +25,10 @@
       (keyup.backspace)="removeNumber()"
       (keyup)="validNumber($event)"
     />
-    <button class="" (click)="qtyChange('+')">+</button>
+    <button class="" (click)="qohChange('+')">+</button>
   </div>
   <div mat-dialog-actions align="end" class="confirm-container">
     <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
-    <button mat-button color="primary" (click)="confirm()">Add</button>
+    <button mat-button color="primary" (click)="confirm(produce)">Add</button>
   </div>
 </div>

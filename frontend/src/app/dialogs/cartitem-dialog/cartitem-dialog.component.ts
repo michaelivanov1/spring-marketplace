@@ -1,6 +1,8 @@
-import { Component, Inject, LOCALE_ID } from '@angular/core';
+import { Component, EventEmitter, Inject, LOCALE_ID, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { formatCurrency } from '@angular/common';
+import { Produce } from '@app/common-interfaces/produce';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -13,11 +15,25 @@ export class CartitemDialogComponent {
   counter: number;
   price: number;
   subTotal: string;
+  cartItemForm: FormGroup;
+
+  @Output() confirmEvent: EventEmitter<{ produce: Produce; counter: number }> = new EventEmitter<{ produce: Produce; counter: number }>();
+
   constructor(
     public dialogRef: MatDialogRef<CartitemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    @Inject(LOCALE_ID) public locale: string
+    @Inject(LOCALE_ID) public locale: string,
+    private formBuilder: FormBuilder
   ) {
+
+    this.cartItemForm = this.formBuilder.group({
+      user: data?.user,
+      produce: data?.produce,
+      counter: data?.counter,
+      price: data?.price,
+      subTotal: data?.subTotal
+    })
+
     this.user = data.user;
     this.produce = data.produce;
     this.counter = 1;
@@ -25,15 +41,36 @@ export class CartitemDialogComponent {
     this.subTotal = formatCurrency(this.price, this.locale, '$ ');
   }
 
-  confirm(): void {
+  confirm(produce: Produce): void {
+    const item: { produce: Produce; counter: number } = {
+      produce: produce,
+      counter: this.counter,
+    };
+
+    // retrieve cart items from localStorage & add to existing cart items from storage
+    let cartItemsFromStorage: { produce: Produce; counter: number }[] = [];
+    const cartItemsJson = localStorage.getItem('cartItems');
+    if (cartItemsJson) {
+      cartItemsFromStorage = JSON.parse(cartItemsJson);
+    }
+
+    console.log('item from cartitem dialog: ' + JSON.stringify(item))
+
+    // save the cart item to localStorage
+    cartItemsFromStorage.push(item);
+    localStorage.setItem('cartItems', JSON.stringify(cartItemsFromStorage));
+
     this.dialogRef.close();
   }
 
+
   cancel(): void {
+    console.log('canceled');
     this.dialogRef.close();
   }
-  qtyChange(change: String): void {
-    if (change === '+' && this.counter < this.produce.qty) {
+
+  qohChange(change: String): void {
+    if (change === '+' && this.counter < this.produce.qoh) {
       this.counter++;
     } else if (change === '-' && this.counter > 0) {
       this.counter--;

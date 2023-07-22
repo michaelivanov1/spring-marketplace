@@ -1,0 +1,18 @@
+<div *ngIf="!isCartEmpty" class="cart-items">
+    <div *ngFor="let item of cartItems" class="cart-item">
+        <div>
+            <span>{{ item.produce.foodName }} - ${{ item.produce.price }}</span>
+            <span>Quantity: {{ item.counter }}</span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isCartEmpty">Cart is empty</div>
+
+
+<div class="purchase-button">
+    <button (click)="purchaseCartItems()">Purchase items</button>
+</div>
+<div class="clear-button">
+    <button (click)="clearCartItems()">Clear items</button>
+</div>

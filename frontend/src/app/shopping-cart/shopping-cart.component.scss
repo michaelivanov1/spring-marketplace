@@ -1,0 +1,37 @@
+.cart-items {
+    display: flex;
+    flex-direction: column;
+
+    .cart-item {
+        background-color: #f0f0f0;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span {
+            margin-right: 10px;
+        }
+    }
+}
+
+.clear-button, .purchase-button {
+    margin-top: 20px;
+
+    button {
+        background-color: #f44336;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #d32f2f;
+        }
+    }
+}

@@ -199,11 +199,10 @@ export class ProfileComponent implements OnInit {
       // grab index of current produce in userStand.produceList
       const index = userStand.produceList.findIndex(item => item.foodName === produce.foodName);
       if (index !== -1) {
-        // create a new instance of the userStand object with the updated produceList
-        // Update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
+        // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
         userStand.produceList[index] = updatedProduce;
 
-        // Update the userStand object with the updated produceList
+        // update the userStand object with the updated produceList
         this.userStand = { ...userStand, produceList: [...userStand.produceList] };
 
         this.updateUserStand(this.userStand);
