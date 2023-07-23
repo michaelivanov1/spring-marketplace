@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -33,6 +34,11 @@ public class UserController {
     public ResponseEntity<Boolean> updateUser(@PathVariable String email, @RequestBody User updatedUser) {
         User user = userService.updateUser(email, updatedUser);
         return new ResponseEntity<>(Boolean.TRUE, HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/user/{email}")
+    public ResponseEntity<User> updateUserFields(@PathVariable String email, @RequestBody Map<String, Object> fields) {
+        return new ResponseEntity<>(userService.updateUserByFields(email, fields), HttpStatus.OK);
     }
 
     @DeleteMapping("/user/{email}")

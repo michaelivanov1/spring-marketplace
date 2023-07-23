@@ -35,7 +35,7 @@ export class MarketplaceComponent {
           },
 
           foodName: '',
-          qty: 0,
+          qoh: 0,
           harvestDate: '',
           price: 0.0,
         },
@@ -46,7 +46,7 @@ export class MarketplaceComponent {
       //     timestamp: '',
       //   },
       //   foodName: '',
-      //   qty: 0,
+      //   qoh: 0,
       //   harvestDate: ''
       // }],
     };
@@ -60,7 +60,7 @@ export class MarketplaceComponent {
 
       users.forEach((user: UserStand) => {
         // user.produceList.forEach((produce) => {
-        //   console.log(produce.foodName, produce.qty, produce.harvestDate);
+        //   console.log(produce.foodName, produce.qoh, produce.harvestDate);
         // });
       });
     });

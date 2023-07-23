@@ -1,0 +1,117 @@
+$primary-color: #00BF63;
+
+.main-container {
+    max-width: 70vw;
+    margin: 7vh auto;
+
+    .your-cart-text {
+        text-align: center;
+        font-size: large;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+
+    .label-container {
+        display: grid;
+        grid-template-columns: 10% 10% 7% 21% 18% 12% 10%;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        margin-bottom: 10px;
+
+        p {
+            margin: 0;
+            padding: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+    }
+
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 60vh;
+        overflow: auto;
+    }
+
+    .item-data {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        background-color: rgba(140, 195, 63, 0.1);
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        padding: 10px;
+
+        .product-image {
+            width: 10%;
+            height: 10vh;
+        }
+
+        .product-name {
+            width: 10%;
+        }
+
+        .product-qoh {
+            width: 10%;
+        }
+
+        .product-seller {
+            width: 20%;
+        }
+
+        .product-harvestdate {
+            width: 15%;
+        }
+
+        .product-price {
+            width: 10%;
+        }
+
+        .product-total-price {
+            width: 10%;
+        }
+
+        .action-icons {
+            display: flex;
+            margin-bottom: 1%;
+        }
+
+    }
+
+    .totals-container {
+        margin: 10px;
+        float: right;
+
+        .sub-total {
+            font-size: 16px;
+            float: right;
+            margin-bottom: 10px;
+        }
+
+        .grand-total {
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+
+    .purchase-button,
+    .clear-cart-button {
+        margin-top: 12px;
+
+        button {
+            background-color: $primary-color;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: darken($primary-color, 10%);
+            }
+        }
+    }
+}

@@ -2,16 +2,8 @@
   <mat-card-header></mat-card-header>
   <mat-card-content class="main-container">
     <div class="img-container">
-      <img
-        src="../../../assets/nate-johnstonunsplash.jpg"
-        alt="User's Profile Pic"
-      />
-      <button
-        mat-raised-button
-        color="primary"
-        class="upload-photo-button"
-        (click)="uploadPhoto()"
-      >
+      <img src="../../../assets/nate-johnstonunsplash.jpg" alt="User's Profile Pic" />
+      <button mat-raised-button color="primary" class="upload-photo-button" (click)="uploadPhoto()">
         Upload New Photo
       </button>
       <p style="margin-top: 10px; font-size: small">
@@ -33,11 +25,7 @@
       <div class="primary-info">
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-title item-label">Display Name: </strong>
-          <input
-            type="text"
-            [(ngModel)]="updatedProfile.displayName"
-            class="input-field item-data"
-          />
+          <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field item-data" />
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-title item-label">Email: </strong>
@@ -45,28 +33,16 @@
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-title item-label">Phone: </strong>
-          <input
-            type="text"
-            [(ngModel)]="updatedProfile.phoneNumber"
-            class="input-field item-data"
-          />
+          <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field item-data" />
         </span>
       </div>
 
       <mat-card-actions align="end" style="margin: 0">
-        <button
-          mat-raised-button
-          style="background-color: #bf6c189f"
-          *ngIf="isEditable"
-          (click)="cancelEdit()"
-        >
+        <button mat-raised-button style="background-color: #bf6c189f" *ngIf="isEditable" (click)="cancelEdit()">
           Cancel
         </button>
-        <button
-          mat-raised-button
-          style="background-color: #00bf63b1"
-          (click)="isEditable ? saveChanges() : toggleEdit()"
-        >
+        <button mat-raised-button style="background-color: #00bf63b1"
+          (click)="isEditable ? saveChanges() : toggleEdit()">
           {{ isEditable ? "Save" : "Update Profile" }}
         </button>
       </mat-card-actions>
@@ -75,11 +51,7 @@
         <li style="list-style-type: none">
           <span *ngIf="isEditable">
             <strong>Description: </strong>
-            <input
-              type="text"
-              [(ngModel)]="updatedProfile.description"
-              class="input-field description"
-            />
+            <input type="text" [(ngModel)]="updatedProfile.description" class="input-field description" />
           </span>
           <span *ngIf="!isEditable">
             <strong *ngIf="userProfile.description != ''">Description: </strong>
@@ -92,35 +64,19 @@
 
   <mat-card-content>
     <div class="produce-container">
-      <h2 *ngIf="userStandDataExists" style="margin: 0">Produce</h2>
+      <h2 style="margin: 0">{{userStandDataExists ? 'Produce' : 'You have nothing for sale yet!'}}</h2>
       <button (click)="openListItemDialog()">Sell item</button>
-      <div class="grid-container" *ngIf="userStandDataExists">
+      <div class="grid-container">
         <ng-container *ngFor="let produce of userStand.produceList">
-          <div
-            class="grid-item"
-            (mouseenter)="onHover(produce)"
-            (mouseleave)="onLeave()"
-            [ngStyle]="{ cursor: getCursor() }"
-            [ngClass]="{ selected: userStand === selectedProduct }"
-          >
+          <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
+            [ngStyle]="{ cursor: getCursor() }" [ngClass]="{ selected: userStand === selectedProduct }">
             <div class="item-data">
-              <div
-                class="hover-icons"
-                *ngIf="isHovered && hoveredProduce === produce"
-              >
-                <button
-                  mat-icon-button
-                  class="edit-item-button"
-                  (click)="onEditClick(userStand, produce)"
-                >
+              <div class="hover-icons" *ngIf="isHovered && hoveredProduce === produce">
+                <button mat-icon-button class="edit-item-button" (click)="onEditClick(userStand, produce)">
                   <mat-icon>edit</mat-icon>
                 </button>
 
-                <button
-                  mat-icon-button
-                  class="delete-item-button"
-                  (click)="onDeleteClick(produce)"
-                >
+                <button mat-icon-button class="delete-item-button" (click)="onDeleteClick(produce)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
@@ -128,7 +84,7 @@
               <img class="product-image" src="assets/Pumpkin.jpg" />
               <p class="product-name">{{ produce.foodName }}</p>
               <p class="product-price">${{ produce.price }}</p>
-              <p class="product-qty">{{ produce.qty }}x</p>
+              <p class="product-qoh">{{ produce.qoh }}x</p>
               <div class="product-seller-container">
                 <p class="product-seller">
                   Seller: {{ userProfile.displayName }}
@@ -141,9 +97,9 @@
           </div>
         </ng-container>
       </div>
-      <div *ngIf="!userStandDataExists">
+      <!-- <div *ngIf="!userStandDataExists">
         <h2>You have nothing for sale yet!</h2>
-      </div>
+      </div> -->
     </div>
   </mat-card-content>
 </mat-card>

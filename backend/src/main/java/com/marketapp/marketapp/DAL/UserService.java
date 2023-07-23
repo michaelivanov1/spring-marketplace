@@ -5,8 +5,11 @@ import com.marketapp.marketapp.ViewModels.User;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -39,6 +42,21 @@ public class UserService {
         existingUser.setRole(Role.USER);
 
         return userRepository.save(existingUser);
+    }
+
+    public User updateUserByFields(String email, Map<String, Object> fields) {
+        Optional<User> existingUser = userRepository.findByEmail(email);
+        if (existingUser.isPresent()) {
+            fields.forEach((key, value) -> {
+                Field field = ReflectionUtils.findField(User.class, key);
+                field.setAccessible(true);
+                ReflectionUtils.setField(field, existingUser.get(), value);
+            });
+            return userRepository.save(existingUser.get());
+        }
+        else {
+            return null;
+        }
     }
 
      public boolean deleteUserByEmail(String email) {
