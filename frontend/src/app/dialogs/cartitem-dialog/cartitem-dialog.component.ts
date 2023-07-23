@@ -101,6 +101,7 @@ export class CartitemDialogComponent {
       );
     }
   }
+  
 
   validNumber(event: any) {
     this.counter = parseInt(this.counter.toString().concat(event.key));
