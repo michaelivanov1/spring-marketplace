@@ -282,18 +282,31 @@ export class ProfileComponent implements OnInit {
   deleteAccount(): void {
     console.log('account deleted');
     // delete user's whole stand
-    this.userStandService.delete(this.userProfile.email).subscribe(
-      () => {
-        // delete user's whole profile
-        this.profileService.delete(this.userProfile.email).subscribe(
-          () => {
-            this.navigateToRegister();
-          })
-      },
-      (error) => {
-        console.error('error deleting account:', error);
-      }
-    );
+    if (this.userStandDataExists) {
+      console.log('userstand exists, so deleting userstand and profile');
+      this.userStandService.delete(this.userProfile.email).subscribe(
+        () => {
+          // delete user's whole profile
+          this.profileService.delete(this.userProfile.email).subscribe(
+            () => {
+              this.navigateToRegister();
+            })
+        },
+        (error) => {
+          console.error('error deleting account:', error);
+        }
+      );
+    } else {
+      console.log('userstand doesnt exist, so only deleting profile');
+      this.profileService.delete(this.userProfile.email).subscribe(
+        () => {
+          this.navigateToRegister();
+        }),
+        (error: any) => {
+          console.error('error deleting account:', error);
+        }
+    }
+
   }
 
   // handles saving any updates to your profile

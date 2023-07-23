@@ -2,6 +2,7 @@ import { Component, EventEmitter, Inject, LOCALE_ID, Output } from '@angular/cor
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { formatCurrency } from '@angular/common';
 import { Produce } from '@app/common-interfaces/produce';
+import { UserStand } from '@app/user-stand/user-stand';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -16,6 +17,7 @@ export class CartitemDialogComponent {
   price: number;
   subTotal: string;
   cartItemForm: FormGroup;
+  qoh: number;
 
   @Output() confirmEvent: EventEmitter<{ produce: Produce; counter: number }> = new EventEmitter<{ produce: Produce; counter: number }>();
 
@@ -39,11 +41,13 @@ export class CartitemDialogComponent {
     this.counter = 1;
     this.price = this.produce.price;
     this.subTotal = formatCurrency(this.price, this.locale, '$ ');
+    this.qoh = data.qoh;
   }
 
   confirm(produce: Produce): void {
-    const item: { produce: Produce; counter: number } = {
+    const item: { produce: Produce; user: UserStand, counter: number } = {
       produce: produce,
+      user: this.user,
       counter: this.counter,
     };
 
@@ -53,8 +57,6 @@ export class CartitemDialogComponent {
     if (cartItemsJson) {
       cartItemsFromStorage = JSON.parse(cartItemsJson);
     }
-
-    console.log('item from cartitem dialog: ' + JSON.stringify(item))
 
     // save the cart item to localStorage
     cartItemsFromStorage.push(item);

@@ -7,5 +7,5 @@ export interface Produce {
   qoh: Number;
   // qoo: Number;
   harvestDate: String;
-  price: Number;
+  price: number;
 }

@@ -1,10 +1,6 @@
 <div>
   <div class="image-container">
-    <img
-      class="product-image"
-      src="assets/Pumpkin.jpg"
-      alt="${produce.foodName}"
-    />
+    <img class="product-image" src="assets/Pumpkin.jpg" alt="${produce.foodName}" />
   </div>
 
   <div mat-dialog-content class="info-container">
@@ -14,17 +10,13 @@
       {{ subTotal }}
     </p>
   </div>
+  <div>
+    Total: {{produce.qoh}}x
+  </div>
   <div mat-dialog-content class="qoh-container">
     <button class="" (click)="qohChange('-')">-</button>
-    <input
-      type="text"
-      [value]="counter"
-      size="4"
-      maxlength="4"
-      (keypress)="numberOnly($event)"
-      (keyup.backspace)="removeNumber()"
-      (keyup)="validNumber($event)"
-    />
+    <input type="text" [value]="counter" size="4" maxlength="4" (keypress)="numberOnly($event)"
+      (keyup.backspace)="removeNumber()" (keyup)="validNumber($event)" />
     <button class="" (click)="qohChange('+')">+</button>
   </div>
   <div mat-dialog-actions align="end" class="confirm-container">

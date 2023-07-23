@@ -1,18 +1,56 @@
-<div *ngIf="!isCartEmpty" class="cart-items">
-    <div *ngFor="let item of cartItems" class="cart-item">
-        <div>
-            <span>{{ item.produce.foodName }} - ${{ item.produce.price }}</span>
-            <span>Quantity: {{ item.counter }}</span>
+<div class="main-container">
+
+    <div class="your-cart-text" *ngIf="!isCartEmpty">Your cart ({{cartItems.length}} items)</div>
+    <div *ngIf="isCartEmpty">Cart is empty</div>
+
+    <div *ngIf="!isCartEmpty" class="label-container">
+        <p class="label-image"></p>
+        <p class="label-name">Name</p>
+        <p class="label-qoh">Qty</p>
+        <p class="label-seller">Seller</p>
+        <p class="label-harvestdate">Harvest Date</p>
+        <p class="label-price">Price</p>
+        <p class="label-total-price">Total</p>
+    </div>
+
+    <div class="grid-container">
+        <ng-container *ngFor="let item of cartItems; let i = index">
+            <div class="item-data">
+                <img class="product-image" src="assets/Pumpkin.jpg" />
+                <p class="product-name">{{ item.produce.foodName }}</p>
+                <p class="product-qoh">{{ item.counter }}x</p>
+                <p class="product-seller">{{item.user.displayName}}</p>
+                <p class="product-harvestdate">
+                    {{ item.produce.harvestDate }}
+                </p>
+                <p class="product-price">
+                    {{ item.produce.price + "" | currency : "USD" : "symbol" : "1.2-2" }}
+                </p>
+                <p class="product-total-price">{{item.counter * item.produce.price + "" | currency : "USD" :
+                    "symbol" : "1.2-2"}}</p>
+
+                <div class="action-icons">
+                    <button mat-icon-button (click)="purchaseIndividualItem(i)">
+                        <mat-icon>shopping_cart</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="removeCartItem(i)">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="totals-container">
+        <div class="sub-total"> Sub total: {{ grandTotal | currency : "USD" : "symbol" : "1.2-2" }}</div>
+        <div class="grand-total"> Grand total: {{ grandTotal * taxRate | currency : "USD" : "symbol" : "1.2-2" }}</div>
+        <div class="purchase-button">
+            <button (click)="purchaseCartItems()">Purchase All Items</button>
         </div>
     </div>
-</div>
 
-<div *ngIf="isCartEmpty">Cart is empty</div>
-
-
-<div class="purchase-button">
-    <button (click)="purchaseCartItems()">Purchase items</button>
-</div>
-<div class="clear-button">
-    <button (click)="clearCartItems()">Clear items</button>
+    <div class="clear-cart-button">
+        <button (click)="clearCartItems()">Clear Cart</button>
+    </div>
 </div>
