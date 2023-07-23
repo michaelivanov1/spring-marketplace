@@ -2,7 +2,7 @@ $primary-color: #00BF63;
 
 .main-container {
     max-width: 70vw;
-    margin: 7vh auto;
+    margin: 5vh auto;
 
     .your-cart-text {
         text-align: center;
@@ -30,7 +30,7 @@ $primary-color: #00BF63;
         display: flex;
         flex-direction: column;
         gap: 10px;
-        max-height: 60vh;
+        max-height: 50vh;
         overflow: auto;
     }
 
@@ -82,10 +82,15 @@ $primary-color: #00BF63;
     .totals-container {
         margin: 10px;
         float: right;
+        text-align: right;
 
         .sub-total {
             font-size: 16px;
-            float: right;
+            margin-bottom: 10px;
+        }
+
+        .sales-tax {
+            font-size: 16px;
             margin-bottom: 10px;
         }
 

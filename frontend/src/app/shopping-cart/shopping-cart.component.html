@@ -1,6 +1,6 @@
 <div class="main-container">
 
-    <div class="your-cart-text" *ngIf="!isCartEmpty">Your cart ({{cartItems.length}} items)</div>
+    <div class="your-cart-text" *ngIf="!isCartEmpty">Your Cart ({{cartItems.length}} items)</div>
     <div *ngIf="isCartEmpty">Cart is empty</div>
 
     <div *ngIf="!isCartEmpty" class="label-container">
@@ -18,7 +18,12 @@
             <div class="item-data">
                 <img class="product-image" src="assets/Pumpkin.jpg" />
                 <p class="product-name">{{ item.produce.foodName }}</p>
-                <p class="product-qoh">{{ item.counter }}x</p>
+                <p class="product-qoh">
+                    <input type="text" [(ngModel)]="item.counter" size="4" maxlength="4"
+                        (input)="onCounterInput($event, i)" (input)="calculateGrandTotal()" />
+                    Max: {{ item.produce.qoh }}
+                </p>
+
                 <p class="product-seller">{{item.user.displayName}}</p>
                 <p class="product-harvestdate">
                     {{ item.produce.harvestDate }}
@@ -43,7 +48,8 @@
     </div>
 
     <div class="totals-container">
-        <div class="sub-total"> Sub total: {{ grandTotal | currency : "USD" : "symbol" : "1.2-2" }}</div>
+        <div class="sub-total"> Subtotal: {{ grandTotal | currency : "USD" : "symbol" : "1.2-2" }}</div>
+        <div class="sales-tax"> Sales Tax: {{ grandTotal * 0.13 | currency : "USD" : "symbol" : "1.2-2" }}</div>
         <div class="grand-total"> Grand total: {{ grandTotal * taxRate | currency : "USD" : "symbol" : "1.2-2" }}</div>
         <div class="purchase-button">
             <button (click)="purchaseCartItems()">Purchase All Items</button>
