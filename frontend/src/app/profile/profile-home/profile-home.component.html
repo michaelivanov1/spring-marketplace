@@ -1,5 +1,4 @@
 <mat-card align="center">
-  <mat-card-header></mat-card-header>
   <mat-card-content class="main-container">
     <div class="img-container">
       <img src="../../../assets/nate-johnstonunsplash.jpg" alt="User's Profile Pic" />
@@ -24,20 +23,24 @@
       </span>
       <div class="primary-info">
         <span *ngIf="isEditable" class="info-row">
-          <strong class="item-title item-label">Display Name: </strong>
+          <strong class="item-label">Display Name* </strong>
           <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field item-data" />
         </span>
         <span *ngIf="isEditable" class="info-row">
-          <strong class="item-title item-label">Email: </strong>
-          <label class="item-title item-data">{{ userProfile.email }}</label>
+          <strong class="item-label">Phone* </strong>
+          <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field item-data" />
         </span>
         <span *ngIf="isEditable" class="info-row">
-          <strong class="item-title item-label">Phone: </strong>
-          <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field item-data" />
+          <strong class="item-label">Description </strong>
+          <input type="text" [(ngModel)]="updatedProfile.description" class="input-field item-data" />
+        </span>
+        <span *ngIf="isEditable" class="info-row">
+          <strong class="item-label">Email </strong>
+          <label class="item-data">{{ userProfile.email }}</label>
         </span>
       </div>
 
-      <mat-card-actions align="end" style="margin: 0">
+      <mat-card-actions style="margin: 0">
         <button mat-raised-button style="background-color: #bf6c189f" *ngIf="isEditable" (click)="cancelEdit()">
           Cancel
         </button>
@@ -48,16 +51,10 @@
       </mat-card-actions>
 
       <div class="account-description-container">
-        <li style="list-style-type: none">
-          <span *ngIf="isEditable">
-            <strong>Description: </strong>
-            <input type="text" [(ngModel)]="updatedProfile.description" class="input-field description" />
-          </span>
-          <span *ngIf="!isEditable">
-            <strong *ngIf="userProfile.description != ''">Description: </strong>
-            {{ userProfile.description }}
-          </span>
-        </li>
+        <span *ngIf="!isEditable">
+          <strong *ngIf="userProfile.description != ''">Description: </strong>
+          {{ userProfile.description }}
+        </span>
       </div>
     </div>
   </mat-card-content>
@@ -65,7 +62,7 @@
   <mat-card-content>
     <div class="produce-container">
       <h2 style="margin: 0">{{userStandDataExists ? 'Produce' : 'You have nothing for sale yet!'}}</h2>
-      <button (click)="openListItemDialog()">Sell item</button>
+      <button mat-raised-button style="background-color: #00bf63b1" (click)="openListItemDialog()">Sell item</button>
       <div class="grid-container">
         <ng-container *ngFor="let produce of userStand.produceList">
           <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
