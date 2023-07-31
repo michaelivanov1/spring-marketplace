@@ -29,8 +29,6 @@
   box-shadow: 0 0 8px rgba(0, 191, 99, 0.2);
 }
 
-
-
 .img-container {
   display: block;
   justify-content: left;
@@ -56,6 +54,10 @@
   .delete-account-button {
     width: 90%;
     margin-left: 10px;
+  }
+  .delete-account-button:hover {
+    background: red;
+    color: white;
   }
 }
 
@@ -122,7 +124,6 @@
     font-size: 16px;
     box-sizing: border-box;
   }
-
 }
 
 .produce-container {

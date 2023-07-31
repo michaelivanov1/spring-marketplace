@@ -19,7 +19,6 @@ import { Produce } from '@app/common-interfaces/produce';
   styleUrls: ['./profile-home.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-
   profile?: Observable<Profile>;
   subscriberStand: any;
   msg: string;
@@ -82,7 +81,6 @@ export class ProfileComponent implements OnInit {
     this.userStandDataExists = false;
   }
 
-
   // grab all users profile data & listings on page init
   ngOnInit(): void {
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
@@ -120,7 +118,6 @@ export class ProfileComponent implements OnInit {
       .subscribe((data) => {
         if (data) {
           this.userStand = data;
-          console.log(this.userStand);
           if (this.userStand.produceList.length > 0)
             this.userStandDataExists = true;
         } //else {
@@ -131,7 +128,6 @@ export class ProfileComponent implements OnInit {
 
   // handle data from list item for sale dialog
   listItem(result?: any): void {
-
     // object when adding to existing UserStand
     const produceItemsObj = {
       id: {
@@ -192,24 +188,31 @@ export class ProfileComponent implements OnInit {
   onEditClick(userStand: UserStand, produce: Produce) {
     const dialogRef = this.dialog.open(ListItemDialogComponent, {
       width: '400px',
-      data: produce
+      data: produce,
     });
 
-    dialogRef.componentInstance.updateProduce.subscribe((updatedProduce: Produce) => {
-      // grab index of current produce in userStand.produceList
-      const index = userStand.produceList.findIndex(item => item.foodName === produce.foodName);
-      if (index !== -1) {
-        // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
-        userStand.produceList[index] = updatedProduce;
+    dialogRef.componentInstance.updateProduce.subscribe(
+      (updatedProduce: Produce) => {
+        // grab index of current produce in userStand.produceList
+        const index = userStand.produceList.findIndex(
+          (item) => item.foodName === produce.foodName
+        );
+        if (index !== -1) {
+          // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
+          userStand.produceList[index] = updatedProduce;
 
-        // update the userStand object with the updated produceList
-        this.userStand = { ...userStand, produceList: [...userStand.produceList] };
+          // update the userStand object with the updated produceList
+          this.userStand = {
+            ...userStand,
+            produceList: [...userStand.produceList],
+          };
 
-        this.updateUserStand(this.userStand);
-      } else {
-        console.error('something went wrong while editing produce item');
+          this.updateUserStand(this.userStand);
+        } else {
+          console.error('something went wrong while editing produce item');
+        }
       }
-    });
+    );
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) {
@@ -227,21 +230,29 @@ export class ProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'confirm') {
-        this.userStandService.deleteProduceItem(this.userProfile.email, produce.foodName).subscribe(
-          () => {
-            console.log('item deleted: ' + produce.foodName);
+        this.userStandService
+          .deleteProduceItem(this.userProfile.email, produce.foodName)
+          .subscribe(
+            () => {
+              console.log('item deleted: ' + produce.foodName);
 
-            // remove item from produceList. this is so the page reflects the deletion without a page refresh
-            this.userStand.produceList = this.userStand.produceList.filter(item => item.foodName !== produce.foodName);
-            if (this.userStand.produceList.length == 0) {
-              this.userStandService.delete(this.userProfile.email).subscribe(() => console.log('got to 0 items. deleted user stand'));
-              this.userStandDataExists = false;
+              // remove item from produceList. this is so the page reflects the deletion without a page refresh
+              this.userStand.produceList = this.userStand.produceList.filter(
+                (item) => item.foodName !== produce.foodName
+              );
+              if (this.userStand.produceList.length == 0) {
+                this.userStandService
+                  .delete(this.userProfile.email)
+                  .subscribe(() =>
+                    console.log('got to 0 items. deleted user stand')
+                  );
+                this.userStandDataExists = false;
+              }
+            },
+            (error) => {
+              console.error('error deleting item: ', error);
             }
-          },
-          (error) => {
-            console.error('error deleting item: ', error);
-          }
-        );
+          );
       }
     });
   }
@@ -262,7 +273,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  // for existing accounts (or > 0 items for sale), updates user stand data 
+  // for existing accounts (or > 0 items for sale), updates user stand data
   updateUserStand(userStand: UserStand): void {
     this.userStandService
       .updateUserStand(userStand)
@@ -287,10 +298,9 @@ export class ProfileComponent implements OnInit {
       this.userStandService.delete(this.userProfile.email).subscribe(
         () => {
           // delete user's whole profile
-          this.profileService.delete(this.userProfile.email).subscribe(
-            () => {
-              this.navigateToRegister();
-            })
+          this.profileService.delete(this.userProfile.email).subscribe(() => {
+            this.navigateToRegister();
+          });
         },
         (error) => {
           console.error('error deleting account:', error);
@@ -298,15 +308,13 @@ export class ProfileComponent implements OnInit {
       );
     } else {
       console.log('userstand doesnt exist, so only deleting profile');
-      this.profileService.delete(this.userProfile.email).subscribe(
-        () => {
-          this.navigateToRegister();
-        }),
+      this.profileService.delete(this.userProfile.email).subscribe(() => {
+        this.navigateToRegister();
+      }),
         (error: any) => {
           console.error('error deleting account:', error);
-        }
+        };
     }
-
   }
 
   // handles saving any updates to your profile
@@ -351,13 +359,13 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  // cursor / pointer 
+  // cursor / pointer
   onHover(produce: Produce): void {
     this.isHovered = true;
     this.hoveredProduce = produce;
   }
 
-  // cursor / pointer 
+  // cursor / pointer
   onLeave(): void {
     this.isHovered = false;
     this.hoveredProduce = null;
