@@ -11,7 +11,8 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class OrderRequest {
 
-    private String email;
+    private String buyerEmail;
+    private String sellerEmail;
     private double grandTotal;
     private ArrayList<OrderProduce> orderProduceList;
 }

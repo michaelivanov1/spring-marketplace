@@ -24,7 +24,8 @@ public class Order {
     @Id
     private ObjectId id;
 
-    private String email;
+    private String buyerEmail;
+    private String sellerEmail;
     private double grandTotal;
     private String invoiceDate;
     private String orderId;
@@ -32,8 +33,9 @@ public class Order {
     private String qrcode;
     private String qrcodetxt;
 
-    public void createNewOrder(String email, double grandTotal, ArrayList<OrderProduce> orderProduceList) {
-        this.email = email;
+    public void createNewOrder(String buyerEmail, String sellerEmail, double grandTotal, ArrayList<OrderProduce> orderProduceList) {
+        this.buyerEmail = buyerEmail;
+        this.sellerEmail = sellerEmail;
         this.grandTotal = grandTotal;
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

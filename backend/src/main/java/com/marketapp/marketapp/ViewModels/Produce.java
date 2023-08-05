@@ -25,8 +25,8 @@ public class Produce {
     //private int qty;
     private int qoh;
     private int qoo;
-    private String qrcode;
-    private String qrcodetxt;
+    //private String qrcode;
+    //private String qrcodetxt;
     private String harvestDate;
     private double price;
 
@@ -35,8 +35,19 @@ public class Produce {
         //this.qty = qty;
         this.qoh = qoh;
         this.qoo = 0;
-        this.qrcode = "";
-        this.qrcodetxt = "";
+        //this.qrcode = "";
+        //this.qrcodetxt = "";
+        this.harvestDate = harvestDate; //TODO: convert incoming string to proper date
+        //this.harvestDate = convertStrToDate(harvestDate);
+        this.price = price;
+    }
+    public Produce(String foodName, int qoh, String harvestDate, double price, int qoo) {
+        this.foodName = foodName;
+        //this.qty = qty;
+        this.qoh = qoh;
+        this.qoo = qoo;
+        //this.qrcode = "";
+        //this.qrcodetxt = "";
         this.harvestDate = harvestDate; //TODO: convert incoming string to proper date
         //this.harvestDate = convertStrToDate(harvestDate);
         this.price = price;

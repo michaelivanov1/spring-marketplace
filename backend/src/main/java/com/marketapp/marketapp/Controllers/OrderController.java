@@ -27,13 +27,13 @@ public class OrderController {
     }
 
     @GetMapping("/order/{email}")
-    public ResponseEntity<Optional<List<Order>>> getOrdersByEmail(@PathVariable String email) {
-        return new ResponseEntity<>(orderService.allOrdersByEmail(email), HttpStatus.OK);
+    public ResponseEntity<Optional<List<Order>>> getOrdersByBuyerEmail(@PathVariable String email) {
+        return new ResponseEntity<>(orderService.allOrdersByBuyerEmail(email), HttpStatus.OK);
     }
 
     @PostMapping("/order")
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequest request) {
-        return new ResponseEntity<>(orderService.createNewOrder(request.getEmail(),
+        return new ResponseEntity<>(orderService.createNewOrder(request.getBuyerEmail(), request.getSellerEmail(),
                 request.getGrandTotal(), request.getOrderProduceList()),
                 HttpStatus.CREATED);
     }

@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends MongoRepository<Order, ObjectId> {
 
-    Optional<List<Order>> findOrdersByEmail(String email);
+    Optional<List<Order>> findOrdersByBuyerEmail(String buyerEmail);
     Optional<Order> findOrderByOrderId(String orderId);
-    boolean existsByEmail(String email);
+    boolean existsByBuyerEmail(String buyerEmail);
 }
