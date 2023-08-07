@@ -17,7 +17,7 @@ mat-card {
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  // height: 100vh; this is wrong
   overflow: hidden;
 }
 
@@ -28,7 +28,7 @@ mat-card {
 .header {
   background-color: #222222;
   color: black;
-  height: 6vw;
+  height: 6rem;
   margin: auto;
 }
 
@@ -38,16 +38,16 @@ mat-card {
   color: #ffde59;
 
   .logo {
-    width: 20vw;
-    height: 20vw;
-    padding-bottom: 5.5vw;
+    width: 20rem;
+    height: 20rem;
+    padding-bottom: 5.5rem;
   }
 }
 
 .menu-items-center {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 1.5rem;
   flex: 1;
 }
 
@@ -73,13 +73,14 @@ a:hover {
   background-color: #222222;
   color: white;
   font-family: Roboto, sans-serif;
-  font-size: 1.25vw;
-  font-weight: 400;
-  height: 4vw;
-  margin: 0vh;
+  font-size: 1.25rem;
+  font-weight: 400em;
+  height: 4rem;
+  margin: 0rem;
+  bottom: 0;
 
   .footer-text {
-    margin-top: 2.5vh;
+    margin-top: 1em;
     color: #ffde59;
   }
 }

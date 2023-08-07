@@ -1,80 +1,80 @@
-$primary-color: #00BF63;
+$primary-color: #00bf63;
 
 .main-container {
-    max-width: 500px;
-    height: 400px;
-    margin: auto;
-    background-color: rgba(140, 195, 63, 0.1);
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    font-family: Roboto, sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
+  max-width: 35rem;
+  height: 30rem;
+  margin: auto;
+  background-color: rgba(140, 195, 63, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .form-container {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 mat-card-title {
-    font-family: Roboto, sans-serif;
-    font-size: 2.5rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
-    color: $primary-color;
-    padding-top: 30px;
+  font-family: Roboto, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: $primary-color;
+  padding-top: 30px;
 }
 
 h2 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: $primary-color;
-    margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: $primary-color;
+  margin-bottom: 1rem;
 }
 
 button {
-    background-color: $primary-color;
-    color: #fff;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 1rem;
-    transition: all 0.3s ease;
+  background-color: $primary-color;
+  color: #fff;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
 
-    &:hover {
-        background-color: darken($primary-color, 10%);
-    }
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
 }
 
 mat-form-field {
-    width: 100%;
-    margin-bottom: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 input[type="text"],
 input[type="password"] {
-    font-size: 1rem;
-    font-weight: 400;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 mat-error {
-    font-size: 0.875rem;
-    font-weight: 400;
-    color: #d50000;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #d50000;
 }
 
 mat-icon-button {
-    background-color: transparent;
-    border: none;
-    margin-right: -1.5rem;
-    margin-top: -0.5rem;
+  background-color: transparent;
+  border: none;
+  margin-right: -1.5rem;
+  margin-top: -0.5rem;
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
