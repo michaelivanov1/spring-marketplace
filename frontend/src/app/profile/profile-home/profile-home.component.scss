@@ -1,6 +1,6 @@
 .main-container {
   max-width: 60vw;
-  height: 38vh;
+  height: 45vh;
   margin: auto;
   margin-bottom: 10px;
   background-color: rgba(140, 195, 63, 0.1);
@@ -139,7 +139,7 @@
 }
 
 .grid-container {
-  max-height: 30vh;
+  max-height: 20rem;
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
