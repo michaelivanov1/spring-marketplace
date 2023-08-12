@@ -25,32 +25,29 @@ public class Produce {
     //private int qty;
     private int qoh;
     private int qoo;
-    //private String qrcode;
-    //private String qrcodetxt;
     private String harvestDate;
     private double price;
+    private String produceImage;
 
     public Produce(String foodName, int qoh, String harvestDate, double price) {
         this.foodName = foodName;
         //this.qty = qty;
         this.qoh = qoh;
         this.qoo = 0;
-        //this.qrcode = "";
-        //this.qrcodetxt = "";
         this.harvestDate = harvestDate; //TODO: convert incoming string to proper date
         //this.harvestDate = convertStrToDate(harvestDate);
         this.price = price;
+        this.produceImage = "";
     }
-    public Produce(String foodName, int qoh, String harvestDate, double price, int qoo) {
+    public Produce(String foodName, int qoh, String harvestDate, double price, int qoo, String produceImage) {
         this.foodName = foodName;
         //this.qty = qty;
         this.qoh = qoh;
         this.qoo = qoo;
-        //this.qrcode = "";
-        //this.qrcodetxt = "";
         this.harvestDate = harvestDate; //TODO: convert incoming string to proper date
         //this.harvestDate = convertStrToDate(harvestDate);
         this.price = price;
+        this.produceImage = produceImage;
     }
 
     private Date convertStrToDate(String date) {

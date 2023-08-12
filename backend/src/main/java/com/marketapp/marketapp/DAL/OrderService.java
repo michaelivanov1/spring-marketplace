@@ -49,7 +49,7 @@ public class OrderService {
             updatedProduceList.set(count, new Produce(standProduceComesFrom.getProduceList().get(count).getFoodName(),
                     newQoh, standProduceComesFrom.getProduceList().get(count).getHarvestDate(),
                     standProduceComesFrom.getProduceList().get(count).getPrice(),
-                    newQoo));
+                    newQoo, standProduceComesFrom.getProduceList().get(count).getProduceImage()));
 
             count++;
         }
