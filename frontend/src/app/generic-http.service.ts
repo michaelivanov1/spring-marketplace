@@ -11,7 +11,7 @@ export class GenericHttpService<T> {
   constructor(
     private httpClient: HttpClient,
     @Inject(String) private entity: string
-  ) { } // constructor
+  ) {} // constructor
   public add(item: T): Observable<T> {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
@@ -80,7 +80,10 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .delete<boolean>(`${BASEURL}${this.entity}/${email}/produce/${foodName}`, { headers })
+      .delete<boolean>(
+        `${BASEURL}${this.entity}/${email}/produce/${foodName}`,
+        { headers }
+      )
       .pipe(retry(2), catchError(this.handleError));
   }
 
@@ -89,9 +92,9 @@ export class GenericHttpService<T> {
     let status: any;
     error.error instanceof ErrorEvent
       ? // Get client-side error
-      (status = error.error.message)
+        (status = error.error.message)
       : // Get server-side error
-      (status = `Error Code: ${error.status}\nMessage: ${error.message}`);
+        (status = `Error Code: ${error.status}\nMessage: ${error.message}`);
     window.alert(status);
     return throwError(() => status);
   }

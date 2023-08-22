@@ -15,47 +15,45 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/file")
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:8080")
 @RequiredArgsConstructor
 
 public class FileController {
 
     private final FileService fileService;
 
-    @PostMapping("/")
-    public ResponseEntity<String> addFile(@RequestParam MultipartFile file) {
+    @PostMapping("/file")
+    public ResponseEntity<String> addFile(@RequestParam("photo") MultipartFile file) {
         if (file.isEmpty()) {
-            return ResponseEntity.status
-                    (HttpStatus.BAD_REQUEST).body("No file uploaded; select a file.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No file uploaded; select a file.");
         }
 
         try {
             return new ResponseEntity<>(fileService.storeFile(file),
                     HttpStatus.CREATED);
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
-            return ResponseEntity.status
-                    (HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("File upload failed: " + ex.getMessage());
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/file/{id}")
     public ResponseEntity<GridFSFile> findFile(@PathVariable String id) {
         return new ResponseEntity<>(fileService.findFile(id), HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping("/file")
     public ResponseEntity<List<GridFSFile>> findAll() {
         return new ResponseEntity<>(fileService.findAll(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/file/{id}")
     public ResponseEntity<Boolean> deleteOne(@PathVariable String id) {
         if (fileService.deleteOne(id)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        else {
+        } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

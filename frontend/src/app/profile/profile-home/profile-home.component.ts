@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
 import { UserStandService } from '@app/user-stand/user-stand.service';
+import { PictureService } from '@app/picture/picture.service';
 import { UserStand } from '@app/user-stand/user-stand';
 import jwt_decode from 'jwt-decode';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +13,7 @@ import { ListItemDialogComponent } from '../../dialogs/listitem-dialog/listitem-
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Produce } from '@app/common-interfaces/produce';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -34,10 +36,13 @@ export class ProfileComponent implements OnInit {
   userStandDataExists: boolean;
   productForm: FormGroup; // form for adding products
   hoveredProduce: any = null;
+  imageSrc: string;
 
   constructor(
+    private http: HttpClient,
     private profileService: ProfileService,
     private userStandService: UserStandService,
+    private pictureService: PictureService,
     public dialog: MatDialog,
     private router: Router,
     private formBuilder: FormBuilder
@@ -79,6 +84,7 @@ export class ProfileComponent implements OnInit {
     this.updatedProfile = { ...this.userProfile };
     this.dateCreatedFormatted = '';
     this.userStandDataExists = false;
+    this.imageSrc = '';
   }
 
   // grab all users profile data & listings on page init
@@ -377,8 +383,33 @@ export class ProfileComponent implements OnInit {
   }
 
   // upload profile photo
-  uploadPhoto(): void {
-    // TODO: photo uploads
+  onUploadPhoto(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      let formData = new FormData();
+      formData.append('photo', file);
+      reader.onload = (e) => (this.imageSrc = reader.result as string);
+
+      reader.readAsDataURL(file);
+      // console.log(formData.get('photo'));
+      const headers = new HttpHeaders()
+        .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
+        .set('Content-Type', 'multipart/form-data');
+      this.http
+        .post('http://localhost:8080/api/file', formData, {
+          headers,
+        })
+        .subscribe(
+          (response: any) => {
+            console.log(response);
+          },
+          (error: any) => {
+            console.error('not added to db: ', error);
+          }
+        );
+      //this.pictureService.add(file);
+    }
   }
 
   // when deleting account, remove jwtToken & navigate user to register component
@@ -387,7 +418,7 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  // handles togglable/editable user profile info
+  // handles toggle-able/editable user profile info
   toggleEdit(): void {
     this.isEditable = !this.isEditable;
     this.updatedProfile.displayName = this.userProfile.displayName;
