@@ -21,6 +21,15 @@ export class GenericHttpService<T> {
       .pipe(retry(2), catchError(this.handleError));
   } // add
 
+  public upload(item: T): Observable<T> {
+    console.log("inside");
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`);
+    return this.httpClient
+      .post<T>(`${BASEURL}${this.entity}`, item, { headers })
+      //.pipe(retry(2), catchError(this.handleError));
+  } // upload
+
   update<T>(email: string, item: T): Observable<T> {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)

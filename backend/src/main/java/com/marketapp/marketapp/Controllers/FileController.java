@@ -24,18 +24,25 @@ public class FileController {
     private final FileService fileService;
 
     @PostMapping("/file")
-    public ResponseEntity<String> addFile(@RequestParam("photo") MultipartFile file) {
+    public ResponseEntity<String> addFile(@RequestParam MultipartFile file) {
         if (file.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No file uploaded; select a file.");
+            return ResponseEntity.status
+                    (HttpStatus.BAD_REQUEST).body("No file uploaded; select a file.");
+        }
+
+        if (file.getSize() >= 1000000) {
+            return ResponseEntity.status
+                    (HttpStatus.PAYLOAD_TOO_LARGE).body("File exceeds upload limit (16MB).");
         }
 
         try {
             return new ResponseEntity<>(fileService.storeFile(file),
                     HttpStatus.CREATED);
-        } catch (IOException ex) {
+        }
+        catch (IOException ex) {
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("File upload failed: " + ex.getMessage());
+            return ResponseEntity.status
+                    (HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed: " + ex.getMessage());
         }
     }
 
@@ -53,7 +60,8 @@ public class FileController {
     public ResponseEntity<Boolean> deleteOne(@PathVariable String id) {
         if (fileService.deleteOne(id)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
+        }
+        else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

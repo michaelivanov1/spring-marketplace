@@ -388,14 +388,13 @@ export class ProfileComponent implements OnInit {
       const file = event.target.files[0];
       const reader = new FileReader();
       let formData = new FormData();
-      formData.append('photo', file);
+      formData.append('file', file);
       reader.onload = (e) => (this.imageSrc = reader.result as string);
 
       reader.readAsDataURL(file);
       // console.log(formData.get('photo'));
       const headers = new HttpHeaders()
         .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
-        .set('Content-Type', 'multipart/form-data');
       this.http
         .post('http://localhost:8080/api/file', formData, {
           headers,
@@ -405,10 +404,11 @@ export class ProfileComponent implements OnInit {
             console.log(response);
           },
           (error: any) => {
-            console.error('not added to db: ', error);
+            //console.error('not added to db: ', error);
           }
         );
-      //this.pictureService.add(file);
+      //this.pictureService.upload(file);
+      //console.log("passed");
     }
   }
 
