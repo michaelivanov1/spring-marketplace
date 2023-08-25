@@ -30,7 +30,7 @@ public class FileController {
                     (HttpStatus.BAD_REQUEST).body("No file uploaded; select a file.");
         }
 
-        if (file.getSize() >= 1000000) {
+        if (file.getSize() >= 1.6e+7) {
             return ResponseEntity.status
                     (HttpStatus.PAYLOAD_TOO_LARGE).body("File exceeds upload limit (16MB).");
         }
