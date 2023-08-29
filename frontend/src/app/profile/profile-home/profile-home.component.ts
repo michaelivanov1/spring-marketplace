@@ -388,7 +388,10 @@ export class ProfileComponent implements OnInit {
       const file = event.target.files[0];
       const reader = new FileReader();
       let formData = new FormData();
+      let email = this.userProfile.email;
       formData.append('file', file);
+      formData.append('email', email);
+
       reader.onload = (e) => (this.imageSrc = reader.result as string);
 
       reader.readAsDataURL(file);

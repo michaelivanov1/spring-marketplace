@@ -7,6 +7,7 @@ import com.mongodb.client.gridfs.model.GridFSFile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,11 +24,17 @@ public class FileController {
 
     private final FileService fileService;
 
-    @PostMapping("/file")
-    public ResponseEntity<String> addFile(@RequestParam MultipartFile file) {
+    @PostMapping(value = "/file", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,
+            MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> addFile(@RequestPart("email") String email,
+                                          @RequestPart("file") MultipartFile file) {
         if (file.isEmpty()) {
             return ResponseEntity.status
                     (HttpStatus.BAD_REQUEST).body("No file uploaded; select a file.");
+        }
+        if (email == null) {
+            return ResponseEntity.status
+                    (HttpStatus.BAD_REQUEST).body("No email given; select an email to associate the image with.");
         }
 
         if (file.getSize() >= 1.6e+7) {
@@ -36,7 +43,7 @@ public class FileController {
         }
 
         try {
-            return new ResponseEntity<>(fileService.storeFile(file),
+            return new ResponseEntity<>(fileService.storeFile(email, file),
                     HttpStatus.CREATED);
         }
         catch (IOException ex) {
@@ -47,8 +54,13 @@ public class FileController {
     }
 
     @GetMapping("/file/{id}")
-    public ResponseEntity<GridFSFile> findFile(@PathVariable String id) {
-        return new ResponseEntity<>(fileService.findFile(id), HttpStatus.OK);
+    public ResponseEntity<GridFSFile> findFileByObjectId(@PathVariable String id) {
+        return new ResponseEntity<>(fileService.findFileByObjectId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/file/metadata/{uuid}")
+    public ResponseEntity<GridFSFile> findFileByUUID(@PathVariable String uuid) {
+        return new ResponseEntity<>(fileService.findFileByUUid(uuid), HttpStatus.OK);
     }
 
     @GetMapping("/file")

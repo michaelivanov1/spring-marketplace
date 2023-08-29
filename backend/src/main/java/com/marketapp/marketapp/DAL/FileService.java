@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class FileService {
@@ -22,19 +20,34 @@ public class FileService {
     @Autowired
     private GridFsTemplate gridFsTemplate;
 
-    public String storeFile(MultipartFile file) throws IOException {
+    @Autowired
+    private UserService userService;
+
+    public String storeFile(String email, MultipartFile file) throws IOException {
         FileMetadata metadata = new FileMetadata();
         metadata.setFilename(file.getOriginalFilename());
-        metadata.setId(UUID.randomUUID().toString());
+        String uuid = UUID.randomUUID().toString();
+        metadata.setId(uuid);
         metadata.setSize(file.getSize());
 
         ObjectId fileId = gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename(), metadata);
+
+        //store the unique id that was created in profileImage in accounts
+        Map<String, Object> keyMap = new HashMap<>();
+        keyMap.put("profileImage", uuid);
+        userService.updateUserByFields(email, keyMap);
+
         return fileId.toString();
     }
 
-    public GridFSFile findFile(String id) {
+    public GridFSFile findFileByObjectId(String id) {
         return gridFsTemplate.findOne(new Query(Criteria.where("_id").is(id)));
     }
+
+    public GridFSFile findFileByUUid(String uuid) {
+        return gridFsTemplate.findOne(new Query(Criteria.where("metadata._id").is(uuid)));
+    }
+
 
     public List<GridFSFile> findAll() {
         List<GridFSFile> gridFSFiles = new ArrayList<GridFSFile>();
