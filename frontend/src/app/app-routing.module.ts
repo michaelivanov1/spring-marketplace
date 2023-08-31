@@ -5,7 +5,7 @@ import { ProfileComponent } from './profile/profile-home/profile-home.component'
 import { RegistrationFinishComponent } from './registration/registration-finish/registration-finish.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { LoginComponent } from './login/login.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.component';
 
 
 const routes: Routes = [

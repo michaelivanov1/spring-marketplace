@@ -16,7 +16,7 @@ import { RegistrationFinishComponent } from './registration/registration-finish/
 import { LoginComponent } from './login/login.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ListItemDialogComponent } from './dialogs/listitem-dialog/listitem-dialog.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.component';
 
 @NgModule({
   declarations: [

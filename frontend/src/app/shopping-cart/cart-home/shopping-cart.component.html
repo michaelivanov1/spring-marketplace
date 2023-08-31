@@ -49,9 +49,9 @@
             </p>
 
             <div class="action-icons">
-              <button mat-icon-button (click)="purchaseIndividualItem(i)">
+              <!-- <button mat-icon-button (click)="purchaseIndividualItem(i)">
                 <mat-icon>shopping_cart</mat-icon>
-              </button>
+              </button> -->
               <button mat-icon-button (click)="removeCartItem(i)">
                 <mat-icon>cancel</mat-icon>
               </button>
@@ -76,7 +76,7 @@
       </div>
       <div class="cart-actions">
         <div class="purchase-button">
-          <button (click)="purchaseCartItems()">Checkout</button>
+          <button (click)="openConfirmationDialog()">Checkout</button>
         </div>
         <div class="clear-cart-button">
           <button (click)="clearCartItems()">Clear Cart</button>
