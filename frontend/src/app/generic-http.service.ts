@@ -22,12 +22,15 @@ export class GenericHttpService<T> {
   } // add
 
   public upload(item: T): Observable<T> {
-    console.log("inside");
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`);
-    return this.httpClient
-      .post<T>(`${BASEURL}${this.entity}`, item, { headers })
-      //.pipe(retry(2), catchError(this.handleError));
+    console.log('inside');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
+    return this.httpClient.post<T>(`${BASEURL}${this.entity}`, item, {
+      headers,
+    });
+    //.pipe(retry(2), catchError(this.handleError));
   } // upload
 
   update<T>(email: string, item: T): Observable<T> {
@@ -93,6 +96,21 @@ export class GenericHttpService<T> {
         `${BASEURL}${this.entity}/${email}/produce/${foodName}`,
         { headers }
       )
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  public patchSingleField<T>(
+    field: any,
+    value: any,
+    email: any
+  ): Observable<T> {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
+      .set('Content-Type', 'application/json');
+    return this.httpClient
+      .patch<T>(`${BASEURL}${this.entity}/${email}`, `"${field}": "${value}"`, {
+        headers,
+      })
       .pipe(retry(2), catchError(this.handleError));
   }
 
