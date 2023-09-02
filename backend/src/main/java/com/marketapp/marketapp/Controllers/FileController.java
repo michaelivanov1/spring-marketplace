@@ -60,9 +60,9 @@ public class FileController {
         return new ResponseEntity<>(fileService.findAll(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/file/{id}")
-    public ResponseEntity<Boolean> deleteOne(@PathVariable String id) {
-        if (fileService.deleteOne(id)) {
+    @DeleteMapping("/file/{uuid}")
+    public ResponseEntity<Boolean> deleteOne(@PathVariable String uuid) {
+        if (fileService.deleteOne(uuid)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
