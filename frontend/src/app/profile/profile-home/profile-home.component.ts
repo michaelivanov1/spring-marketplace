@@ -89,10 +89,6 @@ export class ProfileComponent implements OnInit {
 
   // grab all users profile data & listings on page init
   ngOnInit(): void {
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      `Bearer ${localStorage.getItem('jwtToken')}`
-    );
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
 
     this.profile = this.profileService.getOne(this.decodedToken.sub);
@@ -134,24 +130,6 @@ export class ProfileComponent implements OnInit {
         //   // this.userStandDataExists = false;
         // }
       });
-
-    this.http
-      .get(
-        `http://localhost:8080/api/file/metadata/${this.userProfile.profileImage}`,
-        {
-          headers,
-        }
-      )
-      .subscribe(
-        (data: any) => {
-          const file = data;
-          const reader = new FileReader();
-
-          reader.onload = (e) => (this.imageSrc = reader.result as string);
-          reader.readAsDataURL(file);
-        },
-        (error: any) => {}
-      );
   }
 
   // handle data from list item for sale dialog
@@ -406,13 +384,6 @@ export class ProfileComponent implements OnInit {
 
   // upload profile photo
   onUploadPhoto(event: any): void {
-    // if (this.userProfile.profileImage !== '') {
-    //   this.profileService.patchSingleField(
-    //     'displayName',
-    //     '',
-    //     this.userProfile.email
-    //   );
-    // } // if user has a picture delete it
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -425,10 +396,8 @@ export class ProfileComponent implements OnInit {
 
       reader.readAsDataURL(file);
       // console.log(formData.get('photo'));
-      const headers = new HttpHeaders().set(
-        'Authorization',
-        `Bearer ${localStorage.getItem('jwtToken')}`
-      );
+      const headers = new HttpHeaders()
+        .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       this.http
         .post('http://localhost:8080/api/file', formData, {
           headers,
@@ -442,6 +411,7 @@ export class ProfileComponent implements OnInit {
           }
         );
       //this.pictureService.upload(file);
+      //console.log("passed");
     }
   }
 

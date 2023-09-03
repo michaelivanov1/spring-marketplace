@@ -2,7 +2,9 @@
   <div class="your-cart-text" *ngIf="!isCartEmpty">
     Your Cart ({{ cartItems.length }} items)
   </div>
-  <div *ngIf="isCartEmpty">Cart is empty</div>
+  <div *ngIf="isCartEmpty">Cart is empty
+    <button (click)="marketplaceRedirect()">Browse produce here</button>
+  </div>
   <div class="cart-summary">
     <div class="user-cart">
       <div *ngIf="!isCartEmpty" class="label-container">
@@ -15,7 +17,7 @@
         <p></p>
       </div>
 
-      <div class="grid-container">
+      <div class="grid-container" *ngIf="!isCartEmpty">
         <ng-container *ngFor="let item of cartItems; let i = index">
           <div class="item-data">
             <div>
@@ -24,7 +26,12 @@
             </div>
 
             <p class="product-name">{{ item.produce.foodName }}</p>
+
             <p class="product-qoh">
+              {{item.counter}}
+            </p>
+
+            <!-- <p class="product-qoh">
               <input
                 type="text"
                 [(ngModel)]="item.counter"
@@ -33,18 +40,18 @@
                 (input)="onCounterInput($event, i)"
                 (input)="calculateGrandTotal()"
               />
-            </p>
+            </p> -->
 
             <p class="product-seller">{{ item.user.displayName }}</p>
             <p class="product-price">
               {{
-                item.produce.price + "" | currency : "USD" : "symbol" : "1.2-2"
+              item.produce.price + "" | currency : "USD" : "symbol" : "1.2-2"
               }}
             </p>
             <p class="product-total-price">
               {{
-                item.counter * item.produce.price + ""
-                  | currency : "USD" : "symbol" : "1.2-2"
+              item.counter * item.produce.price + ""
+              | currency : "USD" : "symbol" : "1.2-2"
               }}
             </p>
 
@@ -61,7 +68,7 @@
       </div>
     </div>
 
-    <div class="totals-container">
+    <div class="totals-container" *ngIf="!isCartEmpty">
       <div class="sub-total">
         Subtotal: {{ grandTotal | currency : "USD" : "symbol" : "1.2-2" }}
       </div>

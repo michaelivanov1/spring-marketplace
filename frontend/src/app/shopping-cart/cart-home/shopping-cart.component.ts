@@ -5,6 +5,9 @@ import { UserStand } from '@app/user-stand/user-stand';
 import { CartService } from '../cart.service';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { Cart, CartItem } from '../cart';
+import { ProfileService } from '../../profile/profile.service';
+import { Router } from '@angular/router';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -17,21 +20,29 @@ export class ShoppingCartComponent implements OnInit {
   isCartEmpty: boolean = false;
   grandTotal: number = 0;
   taxRate: number = 1.13;
+  decodedToken: any;
+  buyersEmail: any;
 
   constructor(
     public dialog: MatDialog,
-    private cartService: CartService
+    private cartService: CartService,
+    private profileService: ProfileService,
+    private router: Router,
   ) { }
 
 
   ngOnInit(): void {
+    // grab logged in users email
+    this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
+    this.profileService.getOne(this.decodedToken.sub);
+    this.buyersEmail = this.decodedToken.sub;
+
     // retrieve cart items from localStorage
     const cartItemsJson = localStorage.getItem('cartItems');
     if (cartItemsJson) {
       this.isCartEmpty = false;
       const cartItemsFromStorage = JSON.parse(cartItemsJson);
       this.cartItems = cartItemsFromStorage;
-      // console.log('cart items: ' + this.cartItems.map((q) => q.produce.qoh));
     } else {
       this.isCartEmpty = true;
       console.log('cart is empty');
@@ -40,31 +51,31 @@ export class ShoppingCartComponent implements OnInit {
     this.calculateGrandTotal();
   }
 
-  onCounterInput(event: any, index: number) {
-    const input = event.target as HTMLInputElement;
-    // only 0-9 allowed
-    let sanitizedValue = input.value.replace(/[^0-9]/g, '');
+  // onCounterInput(event: any, index: number) {
 
-    // store max amount of products
-    const maxQoh = this.cartItems[index].produce.qoh;
+  //   const input = event.target as HTMLInputElement;
+  //   // only 0-9 allowed
+  //   let sanitizedValue = input.value.replace(/[^0-9]/g, '');
 
-    const enteredValue = parseInt(sanitizedValue, 10);
+  //   // store max amount of products
+  //   const maxQoh = this.cartItems[index].produce.qoh;
 
-    // if entered num > max num: set max num of products
-    if (enteredValue > maxQoh) {
-      sanitizedValue = maxQoh.toString();
-      this.cartItems[index].counter = maxQoh;
-      // if entered num == '': set entered num to 0
-    } else if (sanitizedValue.trim() === '') {
-      sanitizedValue = '0';
-      this.cartItems[index].counter = 0;
-    } else {
-      this.cartItems[index].counter = enteredValue;
-    }
+  //   const enteredValue = parseInt(sanitizedValue, 10);
 
-    // update input field with entered value
-    input.value = sanitizedValue;
-  }
+  //   // if entered num > max num: set max num of products
+  //   if (enteredValue > maxQoh) {
+  //     sanitizedValue = maxQoh.toString();
+  //     this.cartItems[index].counter = maxQoh;
+  //     // if entered num == '': set entered num to 0
+  //   } else if (sanitizedValue.trim() === '') {
+  //     sanitizedValue = '0';
+  //     this.cartItems[index].counter = 0;
+  //   } else {
+  //     this.cartItems[index].counter = enteredValue;
+  //   }
+  //   // update input field with entered value
+  //   input.value = sanitizedValue;
+  // }
 
   calculateGrandTotal(): number {
     this.grandTotal = 0;
@@ -116,7 +127,8 @@ export class ShoppingCartComponent implements OnInit {
   purchaseCartItems(): void {
     const sellerEmails: String[] = [];
     const sellerItems: CartItem[][] = [];
-    let buyerEmail = this.cartItems.map((p) => p.user.email)[0];
+
+    console.log('cart items: ' + JSON.stringify(this.cartItems));
 
     for (const item of this.cartItems) {
       const sellerIndex = sellerEmails.indexOf(item.user.email);
@@ -149,17 +161,17 @@ export class ShoppingCartComponent implements OnInit {
       const grandTotal = items.reduce((total, item) => total + item.total, 0);
 
       const cartItemsObj: Cart = {
-        buyerEmail: buyerEmail,
+        buyerEmail: this.buyersEmail,
         sellerEmail: sellerEmail,
         grandTotal: grandTotal,
         orderProduceList: items,
       };
-
       console.log(cartItemsObj);
 
       this.cartService.add(cartItemsObj).subscribe(
         () => {
-          // TODO: update frontend cart with new qoh values
+          localStorage.removeItem('cartItems');
+          this.isCartEmpty = true;
           console.log(`added order to db for seller: ${sellerEmail}`);
         },
         (error) => {
@@ -172,7 +184,8 @@ export class ShoppingCartComponent implements OnInit {
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '250px',
-      data: 'Are you sure you want to purchase these items?',
+      // TODO: probly create a new component and add in all the data needed for an orders sheet
+      data: 'Are you sure you want to purchase these items? ' + this.buyersEmail,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -180,5 +193,10 @@ export class ShoppingCartComponent implements OnInit {
         this.purchaseCartItems();
       }
     });
+  }
+
+  marketplaceRedirect() {
+    this.router.navigate(['/marketplace']);
+
   }
 }
