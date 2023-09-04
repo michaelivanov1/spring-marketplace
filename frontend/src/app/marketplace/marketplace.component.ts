@@ -4,6 +4,8 @@ import { UserStand } from '../user-stand/user-stand';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dialog.component';
+import jwt_decode from 'jwt-decode';
+import { ProfileService } from '@app/profile/profile.service';
 
 @Component({
   selector: 'app-marketplace',
@@ -13,56 +15,62 @@ import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dia
 export class MarketplaceComponent {
   selectedProduct: any;
   userStand?: Observable<UserStand[]>;
-  userStandProfile: UserStand;
+  // userStandProfile: UserStand;
   userStandProfiles: UserStand[] = [];
+  decodedToken: any;
+  loggedInUser: any;
 
   constructor(
     private userStandService: UserStandService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private profileService: ProfileService,
   ) {
-    this.userStandProfile = {
-      displayName: '',
-      id: {
-        date: '',
-        timestamp: '',
-      },
-      email: '',
-      produceList: [
-        {
-          id: {
-            date: '',
-            timestamp: '',
-          },
+    // this.userStandProfile = {
+    //   displayName: '',
+    //   id: {
+    //     date: '',
+    //     timestamp: '',
+    //   },
+    //   email: '',
+    //   produceList: [
+    //     {
+    //       id: {
+    //         date: '',
+    //         timestamp: '',
+    //       },
 
-          foodName: '',
-          qoh: 0,
-          harvestDate: '',
-          price: 0.0,
-        },
-      ],
-      // profileName: [{
-      //   id: {
-      //     date: '',
-      //     timestamp: '',
-      //   },
-      //   foodName: '',
-      //   qoh: 0,
-      //   harvestDate: ''
-      // }],
-    };
+    //       foodName: '',
+    //       qoh: 0,
+    //       harvestDate: '',
+    //       price: 0.0,
+    //     },
+    //   ],
+    //   // profileName: [{
+    //   //   id: {
+    //   //     date: '',
+    //   //     timestamp: '',
+    //   //   },
+    //   //   foodName: '',
+    //   //   qoh: 0,
+    //   //   harvestDate: ''
+    //   // }],
+    // };
   }
 
   ngOnInit(): void {
+    this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
+    this.profileService.getOne(this.decodedToken.sub);
+    this.loggedInUser = this.decodedToken.sub;
+
+    
+    
+
     this.userStand = this.userStandService.get();
     this.userStand?.subscribe((users: UserStand[]) => {
-      // populate user stand profiles array
-      this.userStandProfiles = users;
 
-      users.forEach((user: UserStand) => {
-        // user.produceList.forEach((produce) => {
-        //   console.log(produce.foodName, produce.qoh, produce.harvestDate);
-        // });
-      });
+      this.userStandProfiles = users;
+      console.log('emails : ' + users.map((e) => e.email));
+      console.log('logged in user ; ' + this.loggedInUser);
     });
   }
 

@@ -18,6 +18,13 @@
     align-items: center;
     height: 300px;
 
+    .grid-item .not-clickable {
+      opacity: 0.5;
+      cursor: not-allowed;
+      color: red;
+      background-color: green;
+    }
+
     .item-data {
       background-color: rgba(140, 195, 63, 0.1);
       border: 1px solid black;

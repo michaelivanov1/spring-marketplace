@@ -184,8 +184,7 @@ export class ShoppingCartComponent implements OnInit {
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '250px',
-      // TODO: probly create a new component and add in all the data needed for an orders sheet
-      data: 'Are you sure you want to purchase these items? ' + this.buyersEmail,
+      data: 'Confirm purchase?'
     });
 
     dialogRef.afterClosed().subscribe((result) => {

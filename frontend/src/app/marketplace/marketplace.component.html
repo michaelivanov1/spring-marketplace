@@ -9,7 +9,9 @@
         (mouseleave)="onLeave()"
         [ngStyle]="{ cursor: getCursor() }"
         (click)="onProductClick(user, produce)"
-        [ngClass]="{ selected: user === selectedProduct }"
+        [style.cursor]="getCursor()"
+        [style.opacity]="!user.email.includes(loggedInUser) ? 1 : 0.7"
+        [style.pointer-events]="!user.email.includes(loggedInUser) ? 'auto' : 'none'"
       >
         <div class="item-data">
           <img class="product-image" src="assets/Pumpkin.jpg" />
@@ -19,7 +21,8 @@
           </p>
           <p class="product-qoh">{{ produce.qoh }}x</p>
           <div class="product-seller-container">
-            <p class="product-seller">Seller: {{ user.displayName }}</p>
+            <p *ngIf="user.email.includes(loggedInUser)" class="product-seller">This is your item</p>
+            <p *ngIf="!user.email.includes(loggedInUser)"class="product-seller">Seller: {{ user.displayName }}</p>
             <p class="product-harvestdate">
               Harvested: {{ produce.harvestDate }}
             </p>
