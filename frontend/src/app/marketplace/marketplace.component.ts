@@ -62,15 +62,9 @@ export class MarketplaceComponent {
     this.profileService.getOne(this.decodedToken.sub);
     this.loggedInUser = this.decodedToken.sub;
 
-    
-    
-
     this.userStand = this.userStandService.get();
     this.userStand?.subscribe((users: UserStand[]) => {
-
       this.userStandProfiles = users;
-      console.log('emails : ' + users.map((e) => e.email));
-      console.log('logged in user ; ' + this.loggedInUser);
     });
   }
 
