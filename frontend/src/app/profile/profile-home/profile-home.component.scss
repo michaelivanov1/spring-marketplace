@@ -1,18 +1,37 @@
 .main-container {
   max-width: 60vw;
-  height: 45vh;
   margin: auto;
   margin-bottom: 10px;
   background-color: rgba(140, 195, 63, 0.1);
   border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  // border: 1px solid green;
 }
+
+.banner-container {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.banner-image {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid black;
+  width: 60vw;
+  height: 40vh;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
 
 .input-field {
   border: none;
@@ -30,22 +49,33 @@
 }
 
 .img-container {
-  display: block;
-  justify-content: left;
+  height: 40vh;
+  padding: 10px;
   border-right: 1px solid #bfbfbf;
-  height: 38vh;
-  max-width: 15vw;
+  /* Set the width to 20vw */
+  flex: 1;
+  /* Allow it to take up remaining space */
+  max-width: 20vw;
+  /* Limit the max-width */
+  padding-right: 20px;
+  /* Add some spacing between containers */
+
 
   img {
-    width: 90%;
+    width: 200px;
     height: 200px;
-    padding: 10px;
     margin: 0;
+    border-radius: 50%;
+    border: 1px solid black;
+    position: relative;
+    // for image overlap
+    top: -60px;
   }
 
   input[type="file"] {
     display: none;
   }
+
   .custom-file-upload {
     border: 1px solid #ccc;
     display: inline-block;
@@ -56,7 +86,6 @@
 
   .upload-photo-button {
     width: 90%;
-    margin-left: 10px;
     background-color: #00bf63b1;
     color: black;
     font-size: 1rem;
@@ -64,8 +93,8 @@
 
   .delete-account-button {
     width: 90%;
-    margin-left: 10px;
   }
+
   .delete-account-button:hover {
     background: red;
     color: white;
@@ -75,9 +104,9 @@
 .account-details-container {
   display: flex;
   margin-bottom: 20px;
-  width: 41vw;
-  padding-right: 20px;
+  padding: 10px;
   height: 40vh;
+
 
   .display-name-input {
     font-size: 30px;
@@ -123,9 +152,13 @@
 .account-description-container {
   width: 40vw;
   height: 10vh;
-  margin: 232px auto;
-  margin-left: 0;
-  text-align: left;
+  margin-top: 20%;
+
+  p {
+    font-size: 26px;
+    text-align: left;
+    line-height: 1;
+  }
 
   .input-field.description {
     border-bottom: 1px solid #9b9b9b;
@@ -139,18 +172,20 @@
 
 .produce-container {
   max-width: 60vw;
+  height: 80vh;
+  overflow-y: auto;
   margin: auto;
   background-color: rgba(140, 195, 63, 0.1);
   border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   font-weight: 400;
 }
 
 .grid-container {
-  max-height: 20rem;
+  max-height: 70vh;
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

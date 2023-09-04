@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ProfileService } from '../profile.service';
@@ -89,6 +89,9 @@ export class ProfileComponent implements OnInit {
 
   // grab all users profile data & listings on page init
   ngOnInit(): void {
+
+    this.loadImage('31774a89-3ccc-4429-b2da-c8fcd3307e72');
+
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
 
     this.profile = this.profileService.getOne(this.decodedToken.sub);
@@ -342,7 +345,7 @@ export class ProfileComponent implements OnInit {
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '250px',
-      data: 'Are you sure you want to permanently delete your account?',
+      data: 'Are you sure you want to permanently delete your account and all its data? This action cannot be undone.',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -404,7 +407,7 @@ export class ProfileComponent implements OnInit {
         })
         .subscribe(
           (response: any) => {
-            console.log(response);
+            console.log('res: ' + response);
           },
           (error: any) => {
             //console.error('not added to db: ', error);
@@ -413,6 +416,19 @@ export class ProfileComponent implements OnInit {
       //this.pictureService.upload(file);
       //console.log("passed");
     }
+  }
+
+  loadImage(fileId: string) {
+
+    // TODO: work on loading img on refresh
+    console.log('img loaded with fileId: ' + fileId);
+    this.http
+      .get(`http://localhost:8080/api/file/${fileId}`, { responseType: 'blob' })
+      .subscribe((response: Blob) => {
+        const reader = new FileReader();
+        reader.onload = (e) => (this.imageSrc = reader.result as string);
+        reader.readAsDataURL(response);
+      });
   }
 
   // when deleting account, remove jwtToken & navigate user to register component

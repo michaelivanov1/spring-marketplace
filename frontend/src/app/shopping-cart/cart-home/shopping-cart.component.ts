@@ -32,6 +32,8 @@ export class ShoppingCartComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.isCartEmpty);
+
     // grab logged in users email
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
     this.profileService.getOne(this.decodedToken.sub);
