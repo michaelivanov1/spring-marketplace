@@ -17,8 +17,9 @@ mat-card {
 .container {
   display: flex;
   flex-direction: column;
-  // height: 100vh; // this is wrong
-  overflow: hidden;
+  height: 100vh; // this is wrong
+  // overflow: hidden;
+  overflow-x: hidden;
 }
 
 .content {

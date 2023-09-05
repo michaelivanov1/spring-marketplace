@@ -14,6 +14,7 @@
   justify-content: center;
   align-items: flex-start;
   // border: 1px solid green;
+
 }
 
 .banner-container {
@@ -23,8 +24,7 @@
 }
 
 .banner-image {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  border: 1px solid black;
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   width: 60vw;
   height: 40vh;
   max-width: 100%;
@@ -51,7 +51,6 @@
 .img-container {
   height: 40vh;
   padding: 10px;
-  border-right: 1px solid #bfbfbf;
   /* Set the width to 20vw */
   flex: 1;
   /* Allow it to take up remaining space */
@@ -59,7 +58,8 @@
   /* Limit the max-width */
   padding-right: 20px;
   /* Add some spacing between containers */
-
+  position: relative;
+  top: -60px;
 
   img {
     width: 200px;
@@ -67,9 +67,6 @@
     margin: 0;
     border-radius: 50%;
     border: 1px solid black;
-    position: relative;
-    // for image overlap
-    top: -60px;
   }
 
   input[type="file"] {
@@ -77,6 +74,7 @@
   }
 
   .custom-file-upload {
+    margin-top: 20px;
     border: 1px solid #ccc;
     display: inline-block;
     padding: 6px 12px;
@@ -104,8 +102,9 @@
 .account-details-container {
   display: flex;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 10px 10px 10px 30px;
   height: 40vh;
+  border-left: 1px solid #bfbfbf;
 
 
   .display-name-input {
