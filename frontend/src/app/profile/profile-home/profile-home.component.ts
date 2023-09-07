@@ -45,7 +45,8 @@ export class ProfileComponent implements OnInit {
     private pictureService: PictureService,
     public dialog: MatDialog,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private el: ElementRef
   ) {
     // form for adding products
     this.productForm = this.formBuilder.group({
@@ -449,5 +450,12 @@ export class ProfileComponent implements OnInit {
   // handles togglable/editable user profile info
   cancelEdit(): void {
     this.isEditable = false;
+  }
+
+  scrollToSection(sectionId: string) {
+    const element = this.el.nativeElement.querySelector(`#${sectionId}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

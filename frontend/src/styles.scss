@@ -1,12 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 html,
 body {
   background-image: url("assets/background.png");
   // height: 100%;
   margin: 0;
   padding: 0;
+  // font-family: 'Roboto', sans-serif;
 }
+
+// currently selected menu item
+.selected-menu-item {
+  border-bottom: 1px solid #ffde59;
+}
+
 
 /* override all mat-card instances to use this instead of default white color */
 mat-card {
@@ -31,12 +39,14 @@ mat-card {
   color: black;
   height: 6rem;
   margin: auto;
+  margin-bottom: 10px;
 }
 
 .menu-items-left {
   display: flex;
   align-items: center;
   color: #ffde59;
+  width: 20vw;
 
   .logo {
     width: 20rem;
@@ -48,13 +58,14 @@ mat-card {
 .menu-items-center {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 3rem;
   flex: 1;
 }
 
 .menu-items-right {
+  width: 20vw;
   display: flex;
-  align-items: center;
+  justify-content: right;
   color: #ffde59;
 }
 

@@ -7,8 +7,9 @@
   
       <div class="img-container">
         <img [src]="imageSrc || '../../../assets/nate-johnstonunsplash.jpg'" alt="User's Profile Pic" />
-        <label for="file-upload" class="custom-file-upload">Custom Upload
+        <label for="file-upload" class="upload-profile-photo">Upload Photo
         </label>
+        
         <input id="file-upload" type="file" accept="image/" (change)="onUploadPhoto($event)" />
   
         <p style="margin-top: 10px; font-size: small">
@@ -56,12 +57,17 @@
           <span *ngIf="!isEditable">
             <p *ngIf="userProfile.description != ''">{{ userProfile.description }}</p>
           </span>
+          <mat-icon (click)="scrollToSection('produceSection')" class="down-arrow">keyboard_arrow_down</mat-icon>
         </div>
+
+        <!-- <button (click)="scrollToSection('produceSection')">Scroll to Section</button> -->
+       
+
       </div>
     </mat-card-content>
   
     <mat-card-content>
-      <div class="produce-container">
+      <div class="produce-container" id="produceSection">
         <h2 style="margin-bottom: 10px">
           {{ userStandDataExists ? "Your listings" : "You have nothing for sale yet!" }}
           <button mat-raised-button style="background-color: #00bf63b1" (click)="openListItemDialog()">
