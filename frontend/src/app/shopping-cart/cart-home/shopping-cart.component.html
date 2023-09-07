@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="your-cart-text" *ngIf="!isCartEmpty">
-    Your Cart ({{ cartItems.length }} items)
+    Your Cart ({{ cartItems?.length }} items)
   </div>
   <div *ngIf="isCartEmpty">Cart is empty
     <button (click)="marketplaceRedirect()">Browse produce here</button>

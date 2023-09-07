@@ -16,7 +16,7 @@ import jwt_decode from 'jwt-decode';
 })
 
 export class ShoppingCartComponent implements OnInit {
-  cartItems: { produce: Produce; user: UserStand; counter: number }[] = [];
+  cartItems: { produce: Produce; user: UserStand; counter: number; }[] | null = null;
   isCartEmpty: boolean = false;
   grandTotal: number = 0;
   taxRate: number = 1.13;
@@ -32,7 +32,6 @@ export class ShoppingCartComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.isCartEmpty);
 
     // grab logged in users email
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
@@ -82,22 +81,31 @@ export class ShoppingCartComponent implements OnInit {
   calculateGrandTotal(): number {
     this.grandTotal = 0;
 
-    for (const item of this.cartItems) {
-      // only update the grand total values if current item count entered is <= product on hand qty
-      if (item.counter <= item.produce.qoh) {
-        this.grandTotal += item.counter * item.produce.price;
+    if (this.cartItems != null) {
+      for (const item of this.cartItems) {
+        // only update the grand total values if current item count entered is <= product on hand qty
+        if (item.counter <= item.produce.qoh) {
+          this.grandTotal += item.counter * item.produce.price;
+        }
       }
     }
+
     return this.grandTotal;
   }
 
   removeCartItem(index: number): void {
-    this.cartItems.splice(index, 1);
-    if (this.cartItems.length === 0) {
-      this.isCartEmpty = true;
+    if (this.cartItems !== null) {
+      this.cartItems.splice(index, 1);
+
+      if (this.cartItems.length === 0) {
+        this.isCartEmpty = true;
+      }
+
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+      this.calculateGrandTotal();
+    } else {
+      console.log('cart is empty.');
     }
-    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-    this.calculateGrandTotal();
   }
 
   // purchaseIndividualItem(index: number): void {
@@ -119,7 +127,7 @@ export class ShoppingCartComponent implements OnInit {
   // }
 
   clearCartItems(): void {
-    this.cartItems = [];
+    this.cartItems = null;
     this.isCartEmpty = true;
     console.log('clear cart items');
     localStorage.removeItem('cartItems');
@@ -132,29 +140,32 @@ export class ShoppingCartComponent implements OnInit {
 
     console.log('cart items: ' + JSON.stringify(this.cartItems));
 
-    for (const item of this.cartItems) {
-      const sellerIndex = sellerEmails.indexOf(item.user.email);
+    if (this.cartItems != null) {
+      for (const item of this.cartItems) {
+        const sellerIndex = sellerEmails.indexOf(item.user.email);
 
-      // check if the seller's email is already in the array
-      if (sellerIndex === -1) {
-        // if not, add the sellers email and the current item to the arrays
-        sellerEmails.push(item.user.email);
-        sellerItems.push([{
-          foodName: item.produce.foodName,
-          qty: item.counter,
-          harvestDate: item.produce.harvestDate,
-          total: item.produce.price * item.counter,
-        }]);
-      } else {
-        // if yes, add the current item to the existing sellers items
-        sellerItems[sellerIndex].push({
-          foodName: item.produce.foodName,
-          qty: item.counter,
-          harvestDate: item.produce.harvestDate,
-          total: item.produce.price * item.counter,
-        });
+        // check if the seller's email is already in the array
+        if (sellerIndex === -1) {
+          // if not, add the sellers email and the current item to the arrays
+          sellerEmails.push(item.user.email);
+          sellerItems.push([{
+            foodName: item.produce.foodName,
+            qty: item.counter,
+            harvestDate: item.produce.harvestDate,
+            total: item.produce.price * item.counter,
+          }]);
+        } else {
+          // if yes, add the current item to the existing sellers items
+          sellerItems[sellerIndex].push({
+            foodName: item.produce.foodName,
+            qty: item.counter,
+            harvestDate: item.produce.harvestDate,
+            total: item.produce.price * item.counter,
+          });
+        }
       }
     }
+
 
     for (let i = 0; i < sellerEmails.length; i++) {
       const sellerEmail = sellerEmails[i];
