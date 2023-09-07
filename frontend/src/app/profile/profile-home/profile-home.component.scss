@@ -2,17 +2,21 @@
   max-width: 60vw;
   margin: auto;
   margin-bottom: 10px;
-  background-color: rgba(140, 195, 63, 0.1);
+  background-image: linear-gradient(to bottom, #ffde5950, rgba(140, 195, 63, 0.172));
+  // background-color: rgba(140, 195, 63, 0.1);
+
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  border: 1px solid #00000021;
   font-size: 1rem;
   font-weight: 400;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  // border: 1px solid green;
+  // border: 1px solid black;
+
 }
 
 .banner-container {
@@ -22,7 +26,7 @@
 }
 
 .banner-image {
-  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 60vw;
   height: 40vh;
   max-width: 100%;
@@ -71,13 +75,17 @@
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
+    font-weight: 450;
     background-color: #00bf63b1;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .delete-account-button {
+    position: absolute;
     width: 50%;
-    margin-top: 20px;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .delete-account-button:hover {
@@ -139,11 +147,11 @@
 .account-description-container {
   width: 40vw;
   height: 10vh;
-  margin-top: 20%;
+  margin-top: 18%;
 
   p {
     font-size: 26px;
-    text-align: center;
+    text-align: left;
     line-height: 1.2;
   }
 
@@ -164,6 +172,7 @@
 }
 
 .produce-container {
+  border: 1px solid black;
   max-width: 60vw;
   height: 80vh;
   overflow-y: auto;
@@ -172,6 +181,7 @@
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  border: 1px solid #00000021;
   font-size: 1rem;
   font-weight: 400;
 }
