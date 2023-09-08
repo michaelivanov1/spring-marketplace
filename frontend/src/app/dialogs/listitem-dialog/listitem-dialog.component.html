@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Modal Title</h2>
+<h2 mat-dialog-title>List an Item</h2>
 <mat-dialog-content class="dialog-container">
   <form [formGroup]="productForm" (ngSubmit)="onClose()">
     <div class="dialog-fields">
@@ -11,14 +11,14 @@
         <input class="dialog-data" type="number" matInput formControlName="qoh" required>
       </div>
       <div class="dialog-field">
-        <label class="dialog-labels">Harvest Date:</label>
-        <input class="dialog-data" type="date" matInput formControlName="harvestDate" required>
-      </div>
-      <div class="dialog-field">
         <label class="dialog-labels">Price:</label>
         <input class="dialog-data" type="number" step="0.01" matInput formControlName="price" required>
       </div>
+      <div class="dialog-field">
+        <label class="dialog-labels">Harvest Date:</label>
+        <input class="dialog-data" type="date" [max]="disableFutureDates()" matInput formControlName="harvestDate" required>
+      </div>
     </div>
-    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button type="submit" mat-raised-button style="background-color: #00bf63b1;">Confirm</button>
   </form>
 </mat-dialog-content>

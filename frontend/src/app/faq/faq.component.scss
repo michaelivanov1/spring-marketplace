@@ -1,0 +1,22 @@
+.main-container {
+    text-align: left;
+    margin: 0 auto;
+    padding: 10px;
+    width: 50%;
+
+    .headers {
+        margin-top: 30px;
+        color: #0FC263;
+        font-weight: 500;
+    }
+
+    p {
+        line-height: 1;
+        font-size: 16px;
+    }
+
+    a {
+        color: purple;
+        font-size: 16px;
+    }
+}

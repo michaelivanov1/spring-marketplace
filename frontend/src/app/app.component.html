@@ -3,74 +3,60 @@
     <mat-toolbar class="header">
       <div class="menu-items-left">
         <img src="../assets/logo.png" class="logo" />
-        <a
-          mat-tab-link
-          *ngIf="isLoggedIn()"
-          [routerLink]="['profile']"
-          (click)="setTitle('profile')"
-          >Profile</a
-        >
       </div>
       <div class="menu-items-center">
-        <a
-          mat-tab-link
-          *ngIf="isLoggedIn()"
-          [routerLink]="['marketplace']"
-          (click)="setTitle('marketplace')"
-          >Marketplace</a
-        >
-        <a
-          mat-tab-link
-          *ngIf="isLoggedIn()"
-          [routerLink]="['na']"
-          (click)="setTitle('newsletter')"
-          >Newsletter</a
-        >
-        <a
-          mat-tab-link
-          *ngIf="isLoggedIn()"
-          [routerLink]="['na2']"
-          (click)="setTitle('blog')"
-          >Blog</a
-        >
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['profile']" (click)="setTitle('profile')"
+          routerLinkActive="selected-menu-item">Profile</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']" (click)="setTitle('marketplace')"
+          routerLinkActive="selected-menu-item">Marketplace</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na']" (click)="setTitle('newsletter')"
+          routerLinkActive="selected-menu-item">Newsletter</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na2']" (click)="setTitle('blog')"
+          routerLinkActive="selected-menu-item">Blog</a>
+        <a mat-tab-link [routerLink]="['faq']" (click)="setTitle('faq')" routerLinkActive="selected-menu-item">FAQ/About
+          Us</a>
       </div>
       <div class="menu-items-right">
-        <a
-          mat-tab-link
-          *ngIf="!isLoggedIn()"
-          mat-button
-          routerLink="/login"
-          (click)="setTitle('login')"
-          >Login</a
-        >
-        <a
-          mat-tab-link
-          *ngIf="!isLoggedIn()"
-          mat-button
-          routerLink="/register"
-          (click)="setTitle('register')"
-          >Register</a
-        >
-        <a
-          mat-tab-link
-          *ngIf="isLoggedIn()"
-          mat-button
-          routerLink="/shopping-cart"
-          (click)="setTitle('shopping cart')"
-        >
+        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login" (click)="setTitle('login')"
+          routerLinkActive="selected-menu-item">Login</a>
+        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register" (click)="setTitle('register')"
+          routerLinkActive="selected-menu-item">Register</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart" (click)="setTitle('shopping cart')"
+          routerLinkActive="selected-menu-item">
           <mat-icon>shopping_cart</mat-icon>
         </a>
-        <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()"
-          >Logout</a
-        >
+        <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </div>
 
-  <mat-card-footer class="footer">
+  <div class="about">
+    <div class="about-grid">
+      <img src="../assets/about-section-icons//buy-local.png" width="140" height="120" alt="to add">
+      <h4>Support Local</h4>
+      <p>Picture a virtual farmers' market that you can explore from the cozy confines of your home whenever it suits
+        your schedule.</p>
+    </div>
+
+    <div class="about-grid">
+      <img src="../assets/about-section-icons/sell-goods.png" width="120" height="120" alt="to add">
+      <h4>Sell Your Own Goods</h4>
+      <p>Do you have fresh produce or goods to offer? Now, you can sell them comfortably from your home or office, with
+        ease and convenience.</p>
+    </div>
+
+    <div class="about-grid">
+      <img src="../assets/about-section-icons/fresh-guarantee.png" width="140" height="120" alt="to add">
+      <h4>Fresh Guarantee</h4>
+      <p>We pledge that all our products are delivered to your doorstep at the peak of freshness, ensuring you enjoy the
+        finest quality every time.</p>
+    </div>
+  </div>
+
+  <div class="footer">
     <p class="footer-text">&copy;Spring Marketplace - 2023</p>
-  </mat-card-footer>
+  </div>
 </div>
 
 <!-- <div class="container">

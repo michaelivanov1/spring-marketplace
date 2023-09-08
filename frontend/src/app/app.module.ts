@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ListItemDialogComponent } from './dialogs/listitem-dialog/listitem-dialog.component';
 import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.component';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.c
     ConfirmationDialogComponent,
     ListItemDialogComponent,
     ShoppingCartComponent,
+    FaqComponent,
   ],
   imports: [
     BrowserModule,

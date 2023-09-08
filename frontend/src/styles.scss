@@ -1,12 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 html,
 body {
   background-image: url("assets/background.png");
   // height: 100%;
   margin: 0;
   padding: 0;
+  // font-family: 'Roboto', sans-serif;
 }
+
+// currently selected menu item
+.selected-menu-item {
+  border-bottom: 1px solid #ffde59;
+}
+
 
 /* override all mat-card instances to use this instead of default white color */
 mat-card {
@@ -17,8 +25,6 @@ mat-card {
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh; // this is wrong
-  // overflow: hidden;
   overflow-x: hidden;
 }
 
@@ -37,6 +43,7 @@ mat-card {
   display: flex;
   align-items: center;
   color: #ffde59;
+  width: 20vw;
 
   .logo {
     width: 20rem;
@@ -48,13 +55,14 @@ mat-card {
 .menu-items-center {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 3rem;
   flex: 1;
 }
 
 .menu-items-right {
+  width: 20vw;
   display: flex;
-  align-items: center;
+  justify-content: right;
   color: #ffde59;
 }
 
@@ -69,20 +77,75 @@ a:hover {
   transform: scale(1.1);
 }
 
+.about {
+  background-color: #F1EFDD;
+  padding: 50px 300px;
+  margin: 20px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.about-grid {
+  text-align: center;
+  padding: 10px;
+  flex: 0 1 calc(33.33% - 100px);
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+  h4 {
+    margin: 14px 0;
+    color: #068742;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .about-grid {
+    flex: 0 1 calc(50% - 20px);
+    /* Adjust for two columns on smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-grid {
+    flex: 0 1 100%;
+    /* Single column on even smaller screens */
+    margin-right: 0;
+    /* No gap between columns */
+  }
+}
+
+
+
+
+
 .footer {
   text-align: center;
   background-color: #222222;
   color: white;
   font-family: Roboto, sans-serif;
   font-size: 1.25rem;
-  font-weight: 400em;
-  height: 4rem;
+  font-weight: 400;
+  height: 100px;
   margin: 0rem;
   width: 100vw;
   bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .footer-text {
-    margin-top: 1em;
+    text-align: center;
     color: #ffde59;
   }
 }

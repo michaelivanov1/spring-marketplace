@@ -2,18 +2,21 @@
   max-width: 60vw;
   margin: auto;
   margin-bottom: 10px;
-  background-color: rgba(140, 195, 63, 0.1);
+  margin-top: 10px !important;
+  background-image: linear-gradient(to bottom, #ffde5950, rgba(140, 195, 63, 0.1));
+  // background-color: rgba(140, 195, 63, 0.1);
+
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-  font-family: Roboto, sans-serif;
+  border: 1px solid #00000021;
   font-size: 1rem;
   font-weight: 400;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  // border: 1px solid green;
+  // border: 1px solid black;
 
 }
 
@@ -24,14 +27,12 @@
 }
 
 .banner-image {
-  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 60vw;
   height: 40vh;
   max-width: 100%;
   max-height: 100%;
 }
-
-
 
 .input-field {
   border: none;
@@ -51,13 +52,9 @@
 .img-container {
   height: 40vh;
   padding: 10px;
-  /* Set the width to 20vw */
   flex: 1;
-  /* Allow it to take up remaining space */
   max-width: 20vw;
-  /* Limit the max-width */
   padding-right: 20px;
-  /* Add some spacing between containers */
   position: relative;
   top: -60px;
 
@@ -73,29 +70,29 @@
     display: none;
   }
 
-  .custom-file-upload {
-    margin-top: 20px;
-    border: 1px solid #ccc;
+  .upload-profile-photo {
+    margin-top: 10px;
+    border-radius: 4px;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
+    font-weight: 450;
     background-color: #00bf63b1;
-  }
-
-  .upload-photo-button {
-    width: 90%;
-    background-color: #00bf63b1;
-    color: black;
-    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .delete-account-button {
-    width: 90%;
+    position: absolute;
+    width: 50%;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .delete-account-button:hover {
     background: red;
     color: white;
+    cursor: pointer;
   }
 }
 
@@ -129,7 +126,7 @@
     }
 
     .item-data {
-      width: 160px;
+      width: 500px;
       flex: 1;
       text-align: left;
     }
@@ -151,12 +148,12 @@
 .account-description-container {
   width: 40vw;
   height: 10vh;
-  margin-top: 20%;
+  margin-top: 4%;
 
   p {
-    font-size: 26px;
+    font-size: 20px;
     text-align: left;
-    line-height: 1;
+    line-height: 1.2;
   }
 
   .input-field.description {
@@ -169,7 +166,14 @@
   }
 }
 
+.down-arrow {
+  margin-top: 30px;
+  font-size: 32px;
+  cursor: pointer;
+}
+
 .produce-container {
+  border: 1px solid black;
   max-width: 60vw;
   height: 80vh;
   overflow-y: auto;
@@ -178,7 +182,7 @@
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-  font-family: Roboto, sans-serif;
+  border: 1px solid #00000021;
   font-size: 1rem;
   font-weight: 400;
 }

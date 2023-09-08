@@ -48,7 +48,8 @@ export class ProfileComponent implements OnInit {
     private pictureService: PictureService,
     public dialog: MatDialog,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private el: ElementRef
   ) {
     // form for adding products
     this.productForm = this.formBuilder.group({
@@ -343,12 +344,18 @@ export class ProfileComponent implements OnInit {
 
   // handles saving any updates to your profile
   saveChanges() {
+
+    // handle display name updates
+    this.userStand.displayName = this.updatedProfile.displayName;
+    this.updateUserStand(this.userStand);
+
     this.profileService
       .update(this.userProfile.email, this.updatedProfile)
       .subscribe(
         () => {
+          this.isEditable = false;
           this.userProfile = { ...this.updatedProfile };
-          console.log('profile updated successfully.');
+          console.log('profile updated successfully');
         },
         (error) => {
           console.error('error updating profile:', error);
@@ -476,5 +483,12 @@ export class ProfileComponent implements OnInit {
   // handles togglable/editable user profile info
   cancelEdit(): void {
     this.isEditable = false;
+  }
+
+  scrollToSection(sectionId: string) {
+    const element = this.el.nativeElement.querySelector(`#${sectionId}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

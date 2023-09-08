@@ -8,11 +8,31 @@ $primary-color: #00bf63;
   .cart-summary {
     display: flex;
   }
+
   .your-cart-text {
     text-align: center;
     font-size: large;
     font-weight: 600;
     margin-bottom: 30px;
+  }
+
+  .button-market-redirect {
+    background-color: transparent;
+    border: 2px solid green;
+    color: green;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .button-market-redirect:hover {
+    background-color: green;
+    /* Green background on hover */
+    color: white;
+    /* White text on hover */
   }
 
   .label-container {
@@ -85,6 +105,7 @@ $primary-color: #00bf63;
     padding: 0.75vh 1.25vw;
 
     border-radius: 5px;
+
     .sub-total {
       font-size: 16px;
       margin-bottom: 10px;
@@ -103,12 +124,14 @@ $primary-color: #00bf63;
 
   .cart-actions {
     margin-top: auto;
+
     .purchase-button,
     .clear-cart-button {
       margin-top: 12px;
       text-align: center;
       justify-content: center;
       align-items: center;
+
       button {
         background-color: $primary-color;
         color: #fff;
@@ -127,10 +150,12 @@ $primary-color: #00bf63;
     }
   }
 }
+
 @media only screen and (max-width: 768px) {
   .cart-summary {
     display: block !important;
   }
+
   .totals-container {
     margin: 1vh 0 0 0 !important;
   }

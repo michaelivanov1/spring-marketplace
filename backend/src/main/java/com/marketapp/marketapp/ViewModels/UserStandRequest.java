@@ -11,6 +11,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class UserStandRequest {
     //private String id;
+    private String displayName;
     private String email;
     private ArrayList<Produce> produceList;
 

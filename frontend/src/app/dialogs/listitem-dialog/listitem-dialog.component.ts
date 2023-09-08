@@ -38,4 +38,9 @@ export class ListItemDialogComponent {
     this.updateProduce.emit(updatedProduce);
     this.dialogRef.close(productFormValue);
   }
+
+  disableFutureDates(): string {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  }
 }
