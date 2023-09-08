@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { ProfileService } from '../profile.service';
@@ -344,7 +344,6 @@ export class ProfileComponent implements OnInit {
 
   // handles saving any updates to your profile
   saveChanges() {
-
     // handle display name updates
     this.userStand.displayName = this.updatedProfile.displayName;
     this.updateUserStand(this.userStand);
