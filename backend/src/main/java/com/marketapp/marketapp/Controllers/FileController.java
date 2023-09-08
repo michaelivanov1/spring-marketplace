@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 
 @RestController
 @RequestMapping("/api")
@@ -51,8 +54,16 @@ public class FileController {
     }
 
     @GetMapping("/file/{uuid}")
-    public ResponseEntity<GridFSFile> findFileByUUID(@PathVariable String uuid) {
-        return new ResponseEntity<>(fileService.findFileByUUid(uuid), HttpStatus.OK);
+    public ResponseEntity<byte[]> findFileByUUID(@PathVariable String uuid) throws IOException {
+        GridFSFile file = fileService.findFileByUUid(uuid);
+        if (file != null) {
+            GridFsResource resource = fileService.getResource(file);
+            InputStream inputStream = resource.getInputStream();
+            byte[] bytes = IOUtils.toByteArray(inputStream);
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytes);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/file")

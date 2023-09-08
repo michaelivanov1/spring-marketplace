@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap, switchMap } from 'rxjs/operators';
 import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
 import { UserStandService } from '@app/user-stand/user-stand.service';
@@ -37,6 +37,9 @@ export class ProfileComponent implements OnInit {
   productForm: FormGroup; // form for adding products
   hoveredProduce: any = null;
   imageSrc: string;
+
+  emailApiResponse: any;
+  pictureApiResponse: any;
 
   constructor(
     private http: HttpClient,
@@ -89,31 +92,45 @@ export class ProfileComponent implements OnInit {
 
   // grab all users profile data & listings on page init
   ngOnInit(): void {
-
-    this.loadImage('31774a89-3ccc-4429-b2da-c8fcd3307e72');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
 
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
 
-    this.profile = this.profileService.getOne(this.decodedToken.sub);
+    this.profileService
+      .getOne(this.decodedToken.sub)
+      .pipe(
+        switchMap((profile) => {
+          this.userProfile = profile; // Save the profile from the first call
 
-    // grab users profile & format account creation date
-    this.profile.subscribe(
-      (profile) => {
-        this.userProfile = profile;
-        const year = this.userProfile.creationDate.substr(0, 4);
-        const month = this.userProfile.creationDate.substr(5, 2);
-        const day = this.userProfile.creationDate.substr(8, 2);
-        const formattedDate = `${year}-${month}-${day}`;
-        this.dateCreatedFormatted = formattedDate;
-      },
-      (error) => {
-        console.error('Error fetching profile:', error);
-      }
-    );
-    catchError((err) => (this.msg = err.message));
-    this.profile.forEach((x) => {
-      this.userProfile = x;
-    });
+          // Make the second API call
+          return this.http.get(
+            `http://localhost:8080/api/file/${profile.profileImage}`,
+            {
+              headers,
+              responseType: 'blob', // Set the responseType to 'blob' for binary data
+            }
+          );
+        }),
+        catchError((error) => {
+          console.error('Error:', error);
+          return of(null);
+        })
+      )
+      .subscribe(
+        (data: any) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            this.imageSrc = reader.result as string;
+          };
+          reader.readAsDataURL(data);
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
 
     // user's listings
     this.userStandService
@@ -129,9 +146,7 @@ export class ProfileComponent implements OnInit {
           this.userStand = data;
           if (this.userStand.produceList.length > 0)
             this.userStandDataExists = true;
-        } //else {
-        //   // this.userStandDataExists = false;
-        // }
+        }
       });
   }
 
@@ -258,7 +273,7 @@ export class ProfileComponent implements OnInit {
                 this.userStandDataExists = false;
               }
             },
-            (error) => {
+            (error: any) => {
               console.error('error deleting item: ', error);
             }
           );
@@ -345,7 +360,7 @@ export class ProfileComponent implements OnInit {
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '250px',
-      data: 'Are you sure you want to permanently delete your account and all its data? This action cannot be undone.',
+      data: 'Are you sure you want to permanently delete your account?',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -387,6 +402,35 @@ export class ProfileComponent implements OnInit {
 
   // upload profile photo
   onUploadPhoto(event: any): void {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
+    if (this.userProfile.profileImage !== '') {
+      // Delete the user's profile image
+      this.http
+        .delete(
+          `http://localhost:8080/api/file/${this.userProfile.profileImage}`,
+          {
+            headers,
+          }
+        )
+        .pipe(
+          tap(() => {
+            console.log('Profile image deleted');
+          }),
+          catchError((error: any) => {
+            console.error('Error deleting profile image:', error);
+            return of(null);
+          })
+        )
+        .subscribe((response) => {
+          if (response !== null) {
+            // Handle the response if needed
+          }
+        });
+      //this.pictureService.upload(file);
+    } // if user has a picture delete it
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -396,39 +440,22 @@ export class ProfileComponent implements OnInit {
       formData.append('email', email);
 
       reader.onload = (e) => (this.imageSrc = reader.result as string);
-
       reader.readAsDataURL(file);
-      // console.log(formData.get('photo'));
-      const headers = new HttpHeaders()
-        .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
+
       this.http
         .post('http://localhost:8080/api/file', formData, {
           headers,
         })
         .subscribe(
           (response: any) => {
-            console.log('res: ' + response);
+            console.log(response);
           },
           (error: any) => {
             //console.error('not added to db: ', error);
           }
         );
       //this.pictureService.upload(file);
-      //console.log("passed");
     }
-  }
-
-  loadImage(fileId: string) {
-
-    // TODO: work on loading img on refresh
-    console.log('img loaded with fileId: ' + fileId);
-    this.http
-      .get(`http://localhost:8080/api/file/${fileId}`, { responseType: 'blob' })
-      .subscribe((response: Blob) => {
-        const reader = new FileReader();
-        reader.onload = (e) => (this.imageSrc = reader.result as string);
-        reader.readAsDataURL(response);
-      });
   }
 
   // when deleting account, remove jwtToken & navigate user to register component

@@ -63,4 +63,8 @@ public class FileService {
         }
         return true;
     }
+
+    public GridFsResource getResource(GridFSFile uuid) {
+        return gridFsTemplate.getResource(uuid);
+    }
 }
