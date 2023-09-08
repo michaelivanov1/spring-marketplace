@@ -2,7 +2,8 @@
   max-width: 60vw;
   margin: auto;
   margin-bottom: 10px;
-  background-image: linear-gradient(to bottom, #ffde5950, rgba(140, 195, 63, 0.172));
+  margin-top: 10px !important;
+  background-image: linear-gradient(to bottom, #ffde5950, rgba(140, 195, 63, 0.1));
   // background-color: rgba(140, 195, 63, 0.1);
 
   border-radius: 8px;
@@ -125,7 +126,7 @@
     }
 
     .item-data {
-      width: 160px;
+      width: 500px;
       flex: 1;
       text-align: left;
     }
@@ -147,10 +148,10 @@
 .account-description-container {
   width: 40vw;
   height: 10vh;
-  margin-top: 18%;
+  margin-top: 4%;
 
   p {
-    font-size: 26px;
+    font-size: 20px;
     text-align: left;
     line-height: 1.2;
   }

@@ -2,9 +2,9 @@
   <div class="your-cart-text" *ngIf="!isCartEmpty">
     Your Cart ({{ cartItems?.length }} items)
   </div>
-  <div *ngIf="isCartEmpty">Cart is empty
-    <button (click)="marketplaceRedirect()">Browse produce here</button>
-  </div>
+  <p *ngIf="isCartEmpty" style="font-size: 22px">Your cart is currently empty
+  </p>
+  <button class="button-market-redirect" (click)="marketplaceRedirect()">Go shopping</button>
   <div class="cart-summary">
     <div class="user-cart">
       <div *ngIf="!isCartEmpty" class="label-container">

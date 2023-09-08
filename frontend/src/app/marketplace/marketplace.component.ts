@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserStandService } from '../user-stand/user-stand.service';
 import { UserStand } from '../user-stand/user-stand';
+import { Profile } from '@app/profile/profile';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dialog.component';
@@ -25,36 +26,6 @@ export class MarketplaceComponent {
     private dialog: MatDialog,
     private profileService: ProfileService,
   ) {
-    // this.userStandProfile = {
-    //   displayName: '',
-    //   id: {
-    //     date: '',
-    //     timestamp: '',
-    //   },
-    //   email: '',
-    //   produceList: [
-    //     {
-    //       id: {
-    //         date: '',
-    //         timestamp: '',
-    //       },
-
-    //       foodName: '',
-    //       qoh: 0,
-    //       harvestDate: '',
-    //       price: 0.0,
-    //     },
-    //   ],
-    //   // profileName: [{
-    //   //   id: {
-    //   //     date: '',
-    //   //     timestamp: '',
-    //   //   },
-    //   //   foodName: '',
-    //   //   qoh: 0,
-    //   //   harvestDate: ''
-    //   // }],
-    // };
   }
 
   ngOnInit(): void {

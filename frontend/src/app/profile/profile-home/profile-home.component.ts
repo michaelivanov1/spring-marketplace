@@ -329,12 +329,18 @@ export class ProfileComponent implements OnInit {
 
   // handles saving any updates to your profile
   saveChanges() {
+
+    // handle display name updates
+    this.userStand.displayName = this.updatedProfile.displayName;
+    this.updateUserStand(this.userStand);
+
     this.profileService
       .update(this.userProfile.email, this.updatedProfile)
       .subscribe(
         () => {
+          this.isEditable = false;
           this.userProfile = { ...this.updatedProfile };
-          console.log('profile updated successfully.');
+          console.log('profile updated successfully');
         },
         (error) => {
           console.error('error updating profile:', error);

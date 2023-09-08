@@ -6,6 +6,7 @@ import { RegistrationFinishComponent } from './registration/registration-finish/
 import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.component';
+import { FaqComponent } from './faq/faq.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,11 @@ const routes: Routes = [
     path: 'marketplace',
     component: MarketplaceComponent,
     title: 'marketplace',
+  },
+  {
+    path: 'faq',
+    component: FaqComponent,
+    title: 'Faq',
   },
   {
     path: 'shopping-cart',
