@@ -38,12 +38,19 @@ export class ShoppingCartComponent implements OnInit {
     this.profileService.getOne(this.decodedToken.sub);
     this.buyersEmail = this.decodedToken.sub;
 
-    // retrieve cart items from localStorage
     const cartItemsJson = localStorage.getItem('cartItems');
+
     if (cartItemsJson) {
-      this.isCartEmpty = false;
       const cartItemsFromStorage = JSON.parse(cartItemsJson);
-      this.cartItems = cartItemsFromStorage;
+
+      // check if cartItemsFromStorage is an array and not empty
+      if (Array.isArray(cartItemsFromStorage) && cartItemsFromStorage.length > 0) {
+        this.isCartEmpty = false;
+        this.cartItems = cartItemsFromStorage;
+      } else {
+        this.isCartEmpty = true;
+        console.log('cart is empty');
+      }
     } else {
       this.isCartEmpty = true;
       console.log('cart is empty');
@@ -51,6 +58,7 @@ export class ShoppingCartComponent implements OnInit {
 
     this.calculateGrandTotal();
   }
+
 
   // onCounterInput(event: any, index: number) {
 
@@ -127,7 +135,6 @@ export class ShoppingCartComponent implements OnInit {
   // }
 
   clearCartItems(): void {
-    this.cartItems = null;
     this.isCartEmpty = true;
     console.log('clear cart items');
     localStorage.removeItem('cartItems');
