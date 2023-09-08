@@ -1,12 +1,11 @@
-<!--each item is seperate in this html. not grouped by user-->
-
 <div class="grid-container">
   <ng-container *ngFor="let user of userStandProfiles">
     <ng-container *ngFor="let produce of user.produceList">
-      <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ cursor: getCursor() }"
-        (click)="onProductClick(user, produce)" [style.cursor]="getCursor()"
+      <div *ngIf="produce.qoh != 0" class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()"
+        [ngStyle]="{ cursor: getCursor() }" (click)="onProductClick(user, produce)" [style.cursor]="getCursor()"
         [style.opacity]="!user.email.includes(loggedInUser) ? 1 : 0.8"
         [style.pointer-events]="!user.email.includes(loggedInUser) ? 'auto' : 'none'">
+
         <div class="item-data">
           <img class="product-image" src="assets/Pumpkin.jpg" />
           <p class="product-name">{{ produce.foodName }}</p>
@@ -22,26 +21,9 @@
               Harvested: {{ produce.harvestDate }}
             </p>
           </div>
+
         </div>
       </div>
     </ng-container>
   </ng-container>
 </div>
-
-<!--this is html for filtering by users. this is grouped by users-->
-
-<!-- <div class="grid-container" >
-    <div class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()" [ngStyle]="{ 'cursor': getCursor() }"
-
-        (click)="onProductClick(user)" *ngFor="let user of userStandProfiles"
-        [ngClass]="{ 'selected': user === selectedProduct }">
-       
-
-        <div class="product-name">{{ user.account.username }}</div>
-        <div *ngFor="let produce of user?.produceList">
-            <p>Food Name: {{ produce?.foodName }}</p>
-            <p>Quantity: {{ produce?.qoh }}</p>
-            <p>Harvest Date: {{ produce?.harvestDate }}</p>
-        </div>
-    </div>
-</div> -->
