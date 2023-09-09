@@ -100,6 +100,27 @@ export class ProfileComponent implements OnInit {
 
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
 
+    this.profile = this.profileService.getOne(this.decodedToken.sub);
+
+    // grab users profile & format account creation date
+    this.profile.subscribe(
+      (profile) => {
+        this.userProfile = profile;
+        const year = this.userProfile.creationDate.substr(0, 4);
+        const month = this.userProfile.creationDate.substr(5, 2);
+        const day = this.userProfile.creationDate.substr(8, 2);
+        const formattedDate = `${year}-${month}-${day}`;
+        this.dateCreatedFormatted = formattedDate;
+      },
+      (error) => {
+        console.error('Error fetching profile:', error);
+      }
+    );
+    catchError((err) => (this.msg = err.message));
+    this.profile.forEach((x) => {
+      this.userProfile = x;
+    });
+
     this.profileService
       .getOne(this.decodedToken.sub)
       .pipe(
