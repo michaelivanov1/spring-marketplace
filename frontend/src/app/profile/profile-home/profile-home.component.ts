@@ -34,12 +34,12 @@ export class ProfileComponent implements OnInit {
   isEditable: boolean;
   dateCreatedFormatted: string;
   userStandDataExists: boolean;
-  productForm: FormGroup; // form for adding products
+  productForm: FormGroup;
   hoveredProduce: any = null;
   imageSrc: string;
-
   emailApiResponse: any;
   pictureApiResponse: any;
+  profileImageLoaded: Boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -51,7 +51,6 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private el: ElementRef
   ) {
-    // form for adding products
     this.productForm = this.formBuilder.group({
       foodName: '',
       qoh: 0,
@@ -98,6 +97,9 @@ export class ProfileComponent implements OnInit {
       `Bearer ${localStorage.getItem('jwtToken')}`
     );
 
+    this.profileImageLoaded = false;
+
+    this.imageSrc = '../../../assets/profile-image-loading.gif';
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
 
     this.profile = this.profileService.getOne(this.decodedToken.sub);
@@ -125,6 +127,7 @@ export class ProfileComponent implements OnInit {
       .getOne(this.decodedToken.sub)
       .pipe(
         switchMap((profile) => {
+
           this.userProfile = profile; // Save the profile from the first call
 
           // Make the second API call
@@ -145,6 +148,7 @@ export class ProfileComponent implements OnInit {
         (data: any) => {
           const reader = new FileReader();
           reader.onload = () => {
+            this.profileImageLoaded = true;
             this.imageSrc = reader.result as string;
           };
           reader.readAsDataURL(data);
@@ -427,14 +431,14 @@ export class ProfileComponent implements OnInit {
     return this.isHovered ? 'pointer' : 'default';
   }
 
-  // upload profile photo
   onUploadPhoto(event: any): void {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('jwtToken')}`
     );
+
     if (this.userProfile.profileImage !== '') {
-      // Delete the user's profile image
+      // delete the user's profile image
       this.http
         .delete(
           `http://localhost:8080/api/file/${this.userProfile.profileImage}`,
@@ -453,35 +457,46 @@ export class ProfileComponent implements OnInit {
         )
         .subscribe((response) => {
           if (response !== null) {
-            // Handle the response if needed
+            // handle the response if needed
           }
         });
-      //this.pictureService.upload(file);
-    } // if user has a picture delete it
+    }
+
+    // check if a file was selected
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const reader = new FileReader();
-      let formData = new FormData();
-      let email = this.userProfile.email;
-      formData.append('file', file);
-      formData.append('email', email);
 
-      reader.onload = (e) => (this.imageSrc = reader.result as string);
-      reader.readAsDataURL(file);
+      const fileExtension = file.name.split('.').pop().toLowerCase();
+      const allowedExtensions = ['jpg', 'jpeg', 'png'];
 
-      this.http
-        .post('http://localhost:8080/api/file', formData, {
-          headers,
-        })
-        .subscribe(
-          (response: any) => {
-            console.log(response);
-          },
-          (error: any) => {
-            //console.error('not added to db: ', error);
-          }
-        );
-      //this.pictureService.upload(file);
+      // only allow file upload if file extension is allowed
+      if (allowedExtensions.includes(fileExtension)) {
+        let formData = new FormData();
+        let email = this.userProfile.email;
+        formData.append('file', file);
+        formData.append('email', email);
+
+        reader.onload = (e) => (this.imageSrc = reader.result as string);
+        reader.readAsDataURL(file);
+
+        this.http
+          .post('http://localhost:8080/api/file', formData, {
+            headers,
+          })
+          .subscribe(
+            (response: any) => {
+              // TODO: erroring here, but works fine
+              console.log(response);
+            },
+            (error: any) => {
+              console.error('error uploading image:', error);
+            }
+          );
+      } else {
+        // TODO: snackbar: let user know cant upload this file type
+        console.error('invalid file type. please select an image (jpg, jpeg, png).');
+      }
     }
   }
 

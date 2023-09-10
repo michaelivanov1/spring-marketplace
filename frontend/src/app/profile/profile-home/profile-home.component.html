@@ -6,8 +6,12 @@
     </div>
 
     <div class="img-container">
-      <img [src]="imageSrc || '../../../assets/nate-johnstonunsplash.jpg'" alt="User's Profile Pic" />
-      <label for="file-upload" class="upload-profile-photo">Upload Photo
+      <img class="profile-image" *ngIf="profileImageLoaded" [src]="imageSrc || '../../../assets/nate-johnstonunsplash.jpg'"
+        alt="User's Profile Pic" />
+      <img class="profile-image-loading" *ngIf="!profileImageLoaded" src='../../../assets/profile-image-loading.gif' alt="Loading Image..." />
+
+
+      <label *ngIf="profileImageLoaded" for="file-upload" class="upload-profile-photo">Upload Photo
       </label>
 
       <input id="file-upload" type="file" accept="image/" (change)="onUploadPhoto($event)" />

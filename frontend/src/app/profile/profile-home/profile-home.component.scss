@@ -58,12 +58,19 @@
   position: relative;
   top: -60px;
 
-  img {
+  .profile-image {
     width: 200px;
     height: 200px;
     margin: 0;
     border-radius: 50%;
     border: 1px solid black;
+  }
+
+  .profile-image-loading {
+    width: 100px;
+    height: 100px;
+    margin: 60px auto;
+    border-radius: 50%;
   }
 
   input[type="file"] {
@@ -99,10 +106,13 @@
 .account-details-container {
   display: flex;
   margin-bottom: 20px;
+  margin-left: 20px;
   padding: 10px 10px 10px 30px;
   height: 40vh;
   border-left: 1px solid #bfbfbf;
-
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 
   .display-name-input {
     font-size: 30px;
@@ -136,12 +146,8 @@
     }
   }
 
-  @media (min-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin-bottom: 0;
-    margin-left: 20px;
+  @media (min-width: 300px) {
+   
   }
 }
 
