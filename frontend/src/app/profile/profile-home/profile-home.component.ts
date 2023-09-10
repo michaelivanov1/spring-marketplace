@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Produce } from '@app/common-interfaces/produce';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SnackbarComponent } from '@app/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-profile',
@@ -49,7 +50,8 @@ export class ProfileComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private formBuilder: FormBuilder,
-    private el: ElementRef
+    private el: ElementRef,
+    private snackbarService: SnackbarComponent,
   ) {
     this.productForm = this.formBuilder.group({
       foodName: '',
@@ -128,14 +130,14 @@ export class ProfileComponent implements OnInit {
       .pipe(
         switchMap((profile) => {
 
-          this.userProfile = profile; // Save the profile from the first call
+          this.userProfile = profile; // save the profile from the first call
 
-          // Make the second API call
+          // make the second API call
           return this.http.get(
             `http://localhost:8080/api/file/${profile.profileImage}`,
             {
               headers,
-              responseType: 'blob', // Set the responseType to 'blob' for binary data
+              responseType: 'blob', // set the responseType to 'blob' for binary data
             }
           );
         }),
@@ -232,6 +234,7 @@ export class ProfileComponent implements OnInit {
           };
           this.createUserStand(itemCreateUserStand);
         }
+        this.snackbarService.open("Item Successfully Listed");
       });
   }
 
@@ -285,6 +288,7 @@ export class ProfileComponent implements OnInit {
           .deleteProduceItem(this.userProfile.email, produce.foodName)
           .subscribe(
             () => {
+              this.snackbarService.open('Listing Successfully Deleted');
               console.log('item deleted: ' + produce.foodName);
 
               // remove item from produceList. this is so the page reflects the deletion without a page refresh
@@ -382,6 +386,7 @@ export class ProfileComponent implements OnInit {
           this.isEditable = false;
           this.userProfile = { ...this.updatedProfile };
           console.log('profile updated successfully');
+          this.snackbarService.open("Saved Profile");
         },
         (error) => {
           console.error('error updating profile:', error);
@@ -433,36 +438,12 @@ export class ProfileComponent implements OnInit {
     return this.isHovered ? 'pointer' : 'default';
   }
 
+  // handle uploading profile picture
   onUploadPhoto(event: any): void {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('jwtToken')}`
     );
-
-    if (this.userProfile.profileImage !== '') {
-      // delete the users previous profile image
-      this.http
-        .delete(
-          `http://localhost:8080/api/file/${this.userProfile.profileImage}`,
-          {
-            headers,
-          }
-        )
-        .pipe(
-          tap(() => {
-            console.log('Profile image deleted');
-          }),
-          catchError((error: any) => {
-            console.error('Error deleting profile image:', error);
-            return of(null);
-          })
-        )
-        .subscribe((response) => {
-          if (response !== null) {
-            // handle the response if needed
-          }
-        });
-    }
 
     // check if a file was selected
     if (event.target.files && event.target.files[0]) {
@@ -472,8 +453,33 @@ export class ProfileComponent implements OnInit {
       const fileExtension = file.name.split('.').pop().toLowerCase();
       const allowedExtensions = ['jpg', 'jpeg', 'png'];
 
-      // only allow file upload if file extension is allowed
+      // only allow file upload if the file extension is allowed
       if (allowedExtensions.includes(fileExtension)) {
+        if (this.userProfile.profileImage !== '') {
+          // delete the user's previous profile image
+          this.http
+            .delete(
+              `http://localhost:8080/api/file/${this.userProfile.profileImage}`,
+              {
+                headers,
+              }
+            )
+            .pipe(
+              tap(() => {
+                console.log('Profile image deleted');
+              }),
+              catchError((error: any) => {
+                console.error('Error deleting profile image:', error);
+                return of(null);
+              })
+            )
+            .subscribe((response) => {
+              if (response !== null) {
+                // handle the response if needed
+              }
+            });
+        }
+
         let formData = new FormData();
         let email = this.userProfile.email;
         formData.append('file', file);
@@ -485,19 +491,21 @@ export class ProfileComponent implements OnInit {
         this.http
           .post('http://localhost:8080/api/file', formData, {
             headers,
+            responseType: 'text', // set responseType to 'text' to avoid parsing as JSON
           })
           .subscribe(
             (response: any) => {
-              // TODO: erroring here, but works fine
-              console.log(response);
+              this.snackbarService.open("Image Uploaded Successfully");
+              console.log('Image uploaded successfully', response);
             },
             (error: any) => {
-              console.error('error uploading image:', error);
+              console.error('Error uploading image:', error);
+              this.snackbarService.open("Error Uploading Image");
             }
           );
       } else {
-        // TODO: snackbar: let user know cant upload this file type
-        console.error('invalid file type. please select an image (jpg, jpeg, png).');
+        this.snackbarService.open("Allowed File Types: jpg, jpeg, png");
+        console.error('Invalid file type. Please select an image (jpg, jpeg, png).');
       }
     }
   }
@@ -522,10 +530,10 @@ export class ProfileComponent implements OnInit {
     this.isEditable = false;
   }
 
-  scrollToSection(sectionId: string) {
-    const element = this.el.nativeElement.querySelector(`#${sectionId}`);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
+  // scrollToSection(sectionId: string) {
+  //   const element = this.el.nativeElement.querySelector(`#${sectionId}`);
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }
 }

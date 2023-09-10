@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Produce } from '@app/common-interfaces/produce';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {SnackbarComponent} from "@app/snackbar/snackbar.component";
+import { SnackbarComponent } from "@app/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-list-item-dialog',
@@ -45,13 +45,14 @@ export class ListItemDialogComponent {
     }
   }
 
+  // handle uploading listing pictures
   onUploadPhoto(event: any): void {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('jwtToken')}`
     );
 
-    // Check if a file was selected
+    // check if a file was selected
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -59,11 +60,11 @@ export class ListItemDialogComponent {
       const fileExtension = file.name.split('.').pop().toLowerCase();
       const allowedExtensions = ['jpg', 'jpeg', 'png'];
 
-      // Only allow file upload if file extension is allowed
+      // only allow file upload if file extension is allowed
       if (allowedExtensions.includes(fileExtension)) {
         reader.onload = (e) => {
           this.imageSrc = reader.result as string;
-          // Set the base64 string in the produceImage field
+          // set the base64 string in the produceImage field
           this.productForm.get('produceImage')!.setValue(reader.result);
 
           const formData = new FormData();
@@ -73,23 +74,22 @@ export class ListItemDialogComponent {
             .post('http://localhost:8080/api/file', formData, {
               headers,
             })
+            // TODO: throwing an error for some reason even though it uploads img just fine
             .subscribe(
               (response: any) => {
-                // TODO: Handle the response if needed
                 console.log(response);
                 this.snackbarService.open('Successfully Uploaded Image');
               },
               (error: any) => {
-                console.error('Error uploading image:', error);
-                this.snackbarService.open('Something Went Wrong: Error Uploading Image');
+                // console.error('Error uploading image:', error);
+                // this.snackbarService.open('Something Went Wrong: Error Uploading Image');
               }
             );
         };
-
         reader.readAsDataURL(file);
       } else {
-        // TODO: Snackbar: Let the user know they can't upload this file type
-        console.error('Invalid file type. Please select an image (jpg, jpeg, png).');
+        // clear file input so user has to re-add the picture
+        event.target.value = '';
         this.snackbarService.open('Invalid File Type: Please select an image (jpg, jpeg, png)');
       }
     }

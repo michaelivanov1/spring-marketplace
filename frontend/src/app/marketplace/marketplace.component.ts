@@ -34,12 +34,13 @@ export class MarketplaceComponent {
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
     this.profileService.getOne(this.decodedToken.sub);
     this.loggedInUser = this.decodedToken.sub;
-
+    this.snackbarService.open('Loading All Available Produce..');
     this.userStand = this.userStandService.get();
     this.userStand?.subscribe((users: UserStand[]) => {
       this.userStandProfiles = users;
+      this.snackbarService.open('Loaded All Available Produce');
     });
-    this.snackbarService.open('Loading All Available Produce..');
+    
   }
 
   onProductClick(user: UserStand, produce: any) {
