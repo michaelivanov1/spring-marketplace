@@ -7,7 +7,7 @@
         [style.pointer-events]="!user.email.includes(loggedInUser) ? 'auto' : 'none'">
 
         <div class="item-data">
-          <img class="product-image" src="assets/Pumpkin.jpg" />
+          <img class="product-image" [src]="produce.produceImage || '../../../assets/Pumpkin.jpg'"/>
           <p class="product-name">{{ produce.foodName }}</p>
           <p class="product-price">
             {{ produce.price + "" | currency : "USD" : "symbol" : "1.2-2" }}
