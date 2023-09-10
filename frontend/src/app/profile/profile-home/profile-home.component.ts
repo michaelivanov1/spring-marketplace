@@ -184,6 +184,7 @@ export class ProfileComponent implements OnInit {
         date: '',
         timestamp: '',
       },
+      produceImage: result.produceImage,
       foodName: result.foodName,
       qoh: parseInt(result.qoh),
       harvestDate: result.harvestDate,
@@ -334,6 +335,7 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe(() => {
+        console.log('userstand data: ' + JSON.stringify(userStand));
         this.userStandDataExists = true;
         console.log('userstand updated');
       });
@@ -438,7 +440,7 @@ export class ProfileComponent implements OnInit {
     );
 
     if (this.userProfile.profileImage !== '') {
-      // delete the user's profile image
+      // delete the users previous profile image
       this.http
         .delete(
           `http://localhost:8080/api/file/${this.userProfile.profileImage}`,

@@ -1,7 +1,11 @@
-<h2 mat-dialog-title>List an Item</h2>
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
 <mat-dialog-content class="dialog-container">
   <form [formGroup]="productForm" (ngSubmit)="onClose()">
     <div class="dialog-fields">
+
+      <input style="margin-bottom: 10px" id="file-upload" type="file" accept="image/"
+        (change)="onUploadPhoto($event)" />
+
       <div class="dialog-field">
         <label class="dialog-labels">Food Name:</label>
         <input class="dialog-data" type="text" matInput formControlName="foodName" required>
@@ -16,7 +20,8 @@
       </div>
       <div class="dialog-field">
         <label class="dialog-labels">Harvest Date:</label>
-        <input class="dialog-data" type="date" [max]="disableFutureDates()" matInput formControlName="harvestDate" required>
+        <input class="dialog-data" type="date" [max]="disableFutureDates()" matInput formControlName="harvestDate"
+          required>
       </div>
     </div>
     <button type="submit" mat-raised-button style="background-color: #00bf63b1;">Confirm</button>

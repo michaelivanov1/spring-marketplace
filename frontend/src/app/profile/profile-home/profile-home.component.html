@@ -93,7 +93,8 @@
                 </button>
               </div>
 
-              <img class="product-image" src="assets/Pumpkin.jpg" />
+              <img class="product-image" [src]="produce.produceImage || '../../../assets/Pumpkin.jpg'" />
+
               <p class="product-name">{{ produce.foodName }}</p>
               <p class="product-price">${{ produce.price }}</p>
               <p class="product-qoh">{{ produce.qoh == 0 ? 'Out of stock!' : produce.qoh + 'x' }}</p>
