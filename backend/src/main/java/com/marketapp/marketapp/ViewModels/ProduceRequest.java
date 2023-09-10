@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProduceRequest {
 
+    private String produceImage;
     private String email;
     private Produce produce;
 

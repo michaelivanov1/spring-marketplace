@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderProduce {
 
+    private String produceImage;
     private String foodName;
     private int qty;
     private String harvestDate;
