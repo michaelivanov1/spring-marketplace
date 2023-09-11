@@ -18,6 +18,7 @@ import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confi
 import { ListItemDialogComponent } from './dialogs/listitem-dialog/listitem-dialog.component';
 import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.component';
 import { FaqComponent } from './faq/faq.component';
+import { SnackbarComponent } from './snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { FaqComponent } from './faq/faq.component';
     ListItemDialogComponent,
     ShoppingCartComponent,
     FaqComponent,
+    //SnackbarComponent,
   ],
   imports: [
     BrowserModule,

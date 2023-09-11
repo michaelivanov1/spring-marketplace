@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Produce } from '@app/common-interfaces/produce';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {SnackbarComponent} from "@app/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-list-item-dialog',
@@ -20,6 +21,7 @@ export class ListItemDialogComponent {
     public dialogRef: MatDialogRef<ListItemDialogComponent>,
     private formBuilder: FormBuilder,
     private http: HttpClient,
+    private snackbarService: SnackbarComponent,
     @Inject(MAT_DIALOG_DATA) public data: Produce
   ) {
 
@@ -75,9 +77,11 @@ export class ListItemDialogComponent {
               (response: any) => {
                 // TODO: Handle the response if needed
                 console.log(response);
+                this.snackbarService.open('Successfully Uploaded Image');
               },
               (error: any) => {
                 console.error('Error uploading image:', error);
+                this.snackbarService.open('Something Went Wrong: Error Uploading Image');
               }
             );
         };
@@ -86,6 +90,7 @@ export class ListItemDialogComponent {
       } else {
         // TODO: Snackbar: Let the user know they can't upload this file type
         console.error('Invalid file type. Please select an image (jpg, jpeg, png).');
+        this.snackbarService.open('Invalid File Type: Please select an image (jpg, jpeg, png)');
       }
     }
   }

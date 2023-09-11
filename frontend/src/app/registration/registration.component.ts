@@ -11,6 +11,7 @@ import { ValidateDisplayName } from '../validators/displayname.validator';
 import { ValidatePassword } from '../validators/password.validator';
 import { Router } from '@angular/router';
 import { AuthService } from '../authService';
+import {SnackbarComponent} from "@app/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-registration',
@@ -29,7 +30,8 @@ export class RegistrationComponent {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackbarService: SnackbarComponent,
   ) {
     (this.displayName = new FormControl(
       '',
@@ -61,10 +63,12 @@ export class RegistrationComponent {
       (response: any) => {
         sessionStorage.setItem('jwtToken', response.token);
         this.navigateToComponent();
+        this.snackbarService.open('Successfully Registered New Account');
       },
       (error: any) => {
         this.loading = false;
         console.error('not added to db: ', error);
+        this.snackbarService.open('Something Went Wrong: Failed To Register New Account');
       },
       () => {
         this.loading = false;

@@ -8,6 +8,7 @@ import { ValidatePassword } from '../validators/password.validator';
 import { Router } from '@angular/router';
 import { ValidateEmail } from "@app/validators/email.validator";
 import { AuthService } from '../authService';
+import { SnackbarComponent } from "@app/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
+    private snackbarService: SnackbarComponent,
   ) {
     (this.email = new FormControl('', Validators.compose([Validators.required, ValidateEmail]))),
 
@@ -54,6 +56,7 @@ export class LoginComponent {
       () => {
         this.navigateToProfile();
         this.loginFailed = false;
+        this.snackbarService.open('Successfully Logged In!');
       },
       (error: any) => {
         setTimeout(() => {
@@ -61,7 +64,9 @@ export class LoginComponent {
         }, 2500);
         this.loginFailed = true;
         this.loading = false;
+
         console.error('Login failed:', error);
+        this.snackbarService.open('Login Failed. Please try again');
       },
       () => {
         this.loading = false;

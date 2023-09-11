@@ -7,6 +7,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dialog.component';
 import jwt_decode from 'jwt-decode';
 import { ProfileService } from '@app/profile/profile.service';
+import {SnackbarComponent} from "@app/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-marketplace',
@@ -25,6 +26,7 @@ export class MarketplaceComponent {
     private userStandService: UserStandService,
     private dialog: MatDialog,
     private profileService: ProfileService,
+    private snackbarService: SnackbarComponent,
   ) {
   }
 
@@ -37,6 +39,7 @@ export class MarketplaceComponent {
     this.userStand?.subscribe((users: UserStand[]) => {
       this.userStandProfiles = users;
     });
+    this.snackbarService.open('Loading All Available Produce..');
   }
 
   onProductClick(user: UserStand, produce: any) {

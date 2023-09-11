@@ -10,6 +10,7 @@ import { formatCurrency } from '@angular/common';
 import { Produce } from '@app/common-interfaces/produce';
 import { UserStand } from '@app/user-stand/user-stand';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import {SnackbarComponent} from "@app/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -36,7 +37,8 @@ export class CartitemDialogComponent {
     public dialogRef: MatDialogRef<CartitemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     @Inject(LOCALE_ID) public locale: string,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackbarService: SnackbarComponent,
   ) {
     this.cartItemForm = this.formBuilder.group({
       user: data?.user,
@@ -77,6 +79,7 @@ export class CartitemDialogComponent {
     localStorage.setItem('cartItems', JSON.stringify(cartItemsFromStorage));
 
     this.dialogRef.close();
+    this.snackbarService.open('Added Item To Cart');
   }
 
   cancel(): void {

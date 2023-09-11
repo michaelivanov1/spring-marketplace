@@ -8,6 +8,7 @@ import { Cart, CartItem } from '../cart';
 import { ProfileService } from '../../profile/profile.service';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
+import {SnackbarComponent} from "@app/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -28,6 +29,7 @@ export class ShoppingCartComponent implements OnInit {
     private cartService: CartService,
     private profileService: ProfileService,
     private router: Router,
+    private snackbarService: SnackbarComponent,
   ) { }
 
 
@@ -111,6 +113,7 @@ export class ShoppingCartComponent implements OnInit {
 
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
       this.calculateGrandTotal();
+      this.snackbarService.open('Removed Item From Cart');
     } else {
       console.log('cart is empty.');
     }
@@ -126,7 +129,7 @@ export class ShoppingCartComponent implements OnInit {
 
   //   dialogRef.afterClosed().subscribe((result) => {
   //     if (result === 'confirm') {
-  //       // TOTO: add single item purchasing 
+  //       // TOTO: add single item purchasing
   //       console.log('purchased');
   //     } else {
   //       console.log('canceled purchasing individual item');
@@ -139,6 +142,7 @@ export class ShoppingCartComponent implements OnInit {
     console.log('clear cart items');
     localStorage.removeItem('cartItems');
     this.calculateGrandTotal();
+    this.snackbarService.open('Your Cart Has Been Emptied');
   }
 
   purchaseCartItems(): void {
@@ -193,9 +197,11 @@ export class ShoppingCartComponent implements OnInit {
           localStorage.removeItem('cartItems');
           this.isCartEmpty = true;
           console.log(`added order to db for seller: ${sellerEmail}`);
+          this.snackbarService.open('Successfully Placed Order');
         },
         (error) => {
           console.error(`error adding order to db for seller: ${sellerEmail} `, error);
+          this.snackbarService.open('Something Went Wrong: Order Failed To Be Placed')
         }
       );
     }
