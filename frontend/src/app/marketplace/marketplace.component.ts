@@ -47,7 +47,7 @@ export class MarketplaceComponent {
     console.log(`clicked on: ${produce.foodName} sold by ${user.displayName}`);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
-    dialogConfig.width = '40vw';
+    dialogConfig.width = '20vw';
     dialogConfig.height = '50vh';
     dialogConfig.autoFocus = false;
     dialogConfig.data = {

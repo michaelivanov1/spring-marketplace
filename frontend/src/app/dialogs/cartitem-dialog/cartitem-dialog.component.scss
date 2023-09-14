@@ -1,17 +1,16 @@
-div {
-  background-image: url("../../../assets/background.png");
+.main-container {
+  // background-image: url("../../../assets/background.png");
+  width: 15vw;
+  margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .info-container {
   align-items: center;
   justify-content: center;
   text-align: center;
-
-  .product-price {
-    text-align: right;
-    margin-right: 4vw;
-  }
 }
+
 .image-container {
   display: flex;
   align-items: center;
@@ -22,12 +21,14 @@ div {
     margin-bottom: 5px;
   }
 }
+
 .qoh-container {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 5px;
 }
+
 .confirm-container {
   display: flex;
   align-items: center;

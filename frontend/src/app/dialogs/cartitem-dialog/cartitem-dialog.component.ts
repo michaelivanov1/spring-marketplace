@@ -10,7 +10,7 @@ import { formatCurrency } from '@angular/common';
 import { Produce } from '@app/common-interfaces/produce';
 import { UserStand } from '@app/user-stand/user-stand';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {SnackbarComponent} from "@app/snackbar/snackbar.component";
+import { SnackbarComponent } from "@app/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-confirmation-dialog',
