@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Inject,
   LOCALE_ID,
+  OnInit,
   Output,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -10,14 +11,14 @@ import { formatCurrency } from '@angular/common';
 import { Produce } from '@app/common-interfaces/produce';
 import { UserStand } from '@app/user-stand/user-stand';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SnackbarComponent } from "@app/snackbar/snackbar.component";
+import { SnackbarComponent } from '@app/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-confirmation-dialog',
   templateUrl: './cartitem-dialog.component.html',
   styleUrls: ['./cartitem-dialog.component.scss'],
 })
-export class CartitemDialogComponent {
+export class CartitemDialogComponent implements OnInit {
   user: any;
   produce: any;
   counter: number;
@@ -38,7 +39,7 @@ export class CartitemDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     @Inject(LOCALE_ID) public locale: string,
     private formBuilder: FormBuilder,
-    private snackbarService: SnackbarComponent,
+    private snackbarService: SnackbarComponent
   ) {
     this.cartItemForm = this.formBuilder.group({
       user: data?.user,
@@ -58,6 +59,9 @@ export class CartitemDialogComponent {
     this.isRemoved = false;
     this.isEntered = false;
     this.isGreater = false;
+  }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
   confirm(produce: Produce): void {

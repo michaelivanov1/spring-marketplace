@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private el: ElementRef,
-    private snackbarService: SnackbarComponent,
+    private snackbarService: SnackbarComponent
   ) {
     this.productForm = this.formBuilder.group({
       foodName: '',
@@ -129,8 +129,14 @@ export class ProfileComponent implements OnInit {
       .getOne(this.decodedToken.sub)
       .pipe(
         switchMap((profile) => {
-
           this.userProfile = profile; // save the profile from the first call
+
+          if (profile.profileImage === '') {
+            this.imageSrc =
+              '../../../assets/default-avatar-profile-icon-of-social-media-user-vector.png';
+            this.profileImageLoaded = true;
+            return of(null); // Return an observable to stop the chain
+          }
 
           // make the second API call
           return this.http.get(
@@ -144,38 +150,21 @@ export class ProfileComponent implements OnInit {
         catchError((error) => {
           console.error('Error:', error);
           return of(null);
+        }),
+        tap((data: any) => {
+          if (data) {
+            const reader = new FileReader();
+            reader.onload = () => {
+              this.imageSrc = reader.result as string;
+            };
+            reader.readAsDataURL(data);
+          } else {
+            // Handle the case where profileImage is an empty string
+            // For example, you might want to set some default image or do nothing
+          }
         })
       )
-      .subscribe(
-        (data: any) => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            this.profileImageLoaded = true;
-            this.imageSrc = reader.result as string;
-          };
-          reader.readAsDataURL(data);
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
-
-    // user's listings
-    this.userStandService
-      .getOne(this.decodedToken.sub)
-      .pipe(
-        catchError((err) => {
-          this.msg = err.message;
-          return of(null);
-        })
-      )
-      .subscribe((data) => {
-        if (data) {
-          this.userStand = data;
-          if (this.userStand.produceList.length > 0)
-            this.userStandDataExists = true;
-        }
-      });
+      .subscribe();
   }
 
   // handle data from list item for sale dialog
@@ -234,7 +223,7 @@ export class ProfileComponent implements OnInit {
           };
           this.createUserStand(itemCreateUserStand);
         }
-        this.snackbarService.open("Item Successfully Listed");
+        this.snackbarService.open('Item Successfully Listed');
       });
   }
 
@@ -386,7 +375,7 @@ export class ProfileComponent implements OnInit {
           this.isEditable = false;
           this.userProfile = { ...this.updatedProfile };
           console.log('profile updated successfully');
-          this.snackbarService.open("Saved Profile");
+          this.snackbarService.open('Saved Profile');
         },
         (error) => {
           console.error('error updating profile:', error);
@@ -495,17 +484,19 @@ export class ProfileComponent implements OnInit {
           })
           .subscribe(
             (response: any) => {
-              this.snackbarService.open("Image Uploaded Successfully");
+              this.snackbarService.open('Image Uploaded Successfully');
               console.log('Image uploaded successfully', response);
             },
             (error: any) => {
               console.error('Error uploading image:', error);
-              this.snackbarService.open("Error Uploading Image");
+              this.snackbarService.open('Error Uploading Image');
             }
           );
       } else {
-        this.snackbarService.open("Allowed File Types: jpg, jpeg, png");
-        console.error('Invalid file type. Please select an image (jpg, jpeg, png).');
+        this.snackbarService.open('Allowed File Types: jpg, jpeg, png');
+        console.error(
+          'Invalid file type. Please select an image (jpg, jpeg, png).'
+        );
       }
     }
   }

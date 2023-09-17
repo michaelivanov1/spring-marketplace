@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Produce } from '@app/common-interfaces/produce';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SnackbarComponent } from "@app/snackbar/snackbar.component";
+import { SnackbarComponent } from '@app/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-list-item-dialog',
@@ -24,7 +24,6 @@ export class ListItemDialogComponent {
     private snackbarService: SnackbarComponent,
     @Inject(MAT_DIALOG_DATA) public data: Produce
   ) {
-
     this.imageSrc = '';
 
     this.productForm = this.formBuilder.group({
@@ -32,7 +31,7 @@ export class ListItemDialogComponent {
       foodName: data?.foodName || '',
       qoh: data?.qoh || '',
       harvestDate: data?.harvestDate || '',
-      price: data?.price || ''
+      price: data?.price || '',
     });
 
     if (data) {
@@ -90,7 +89,9 @@ export class ListItemDialogComponent {
       } else {
         // clear file input so user has to re-add the picture
         event.target.value = '';
-        this.snackbarService.open('Invalid File Type: Please select an image (jpg, jpeg, png)');
+        this.snackbarService.open(
+          'Invalid File Type: Please select an image (jpg, jpeg, png)'
+        );
       }
     }
   }
@@ -99,11 +100,10 @@ export class ListItemDialogComponent {
     const productFormValue = this.productForm.value;
     const updatedProduce: Produce = {
       ...this.data,
-      produceImage: productFormValue.produceImage,
       foodName: productFormValue.foodName,
       qoh: productFormValue.qoh,
       harvestDate: productFormValue.harvestDate,
-      price: productFormValue.price
+      price: productFormValue.price,
     };
 
     console.log('onclose formdata: ' + JSON.stringify(updatedProduce));
