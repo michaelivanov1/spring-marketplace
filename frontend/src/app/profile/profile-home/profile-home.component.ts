@@ -153,6 +153,7 @@ export class ProfileComponent implements OnInit {
         }),
         tap((data: any) => {
           if (data) {
+            this.profileImageLoaded = true;
             const reader = new FileReader();
             reader.onload = () => {
               this.imageSrc = reader.result as string;
