@@ -15,9 +15,9 @@
           routerLinkActive="selected-menu-item">Blog</a>
         <a mat-tab-link [routerLink]="['faq']" (click)="setTitle('faq')" routerLinkActive="selected-menu-item">FAQ/About
           Us</a>
-        <div *ngIf="isSmallScreen"> <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login"
+        <div *ngIf="isSmallScreen"> <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login"
             (click)="setTitle('login')" routerLinkActive="selected-menu-item">Login</a>
-          <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register" (click)="setTitle('register')"
+          <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register" (click)="setTitle('register')"
             routerLinkActive="selected-menu-item">Register</a>
           <a style="color: yellow" mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart"
             (click)="setTitle('shopping cart')" routerLinkActive="selected-menu-item">

@@ -113,6 +113,35 @@ a:hover {
   .menu-items-left {
     display: none;
   }
+
+  .about {
+    padding: 50px 10px;
+  }
+
+  .about-grid {
+    flex: 0 1 calc(100% - 20px);
+  }
+}
+
+.footer {
+  text-align: center;
+  background-color: #222222;
+  color: white;
+  font-family: Roboto, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  height: 100px;
+  margin: 0rem;
+  width: 100vw;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .footer-text {
+    text-align: center;
+    color: #ffde59;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -152,126 +181,6 @@ a:hover {
 @media screen and (max-width: 480px) {
   .about-grid {
     flex: 0 1 100%;
-    /* Single column on even smaller screens */
     margin-right: 0;
-    /* No gap between columns */
   }
 }
-
-
-
-
-
-.footer {
-  text-align: center;
-  background-color: #222222;
-  color: white;
-  font-family: Roboto, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 400;
-  height: 100px;
-  margin: 0rem;
-  width: 100vw;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .footer-text {
-    text-align: center;
-    color: #ffde59;
-  }
-}
-
-// html,
-// body {
-//   background-image: url("assets/background.png");
-//   height: 100%;
-//   margin: 0;
-//   padding: 0;
-// }
-
-// /* override all mat-card instances to use this instead of default white color */
-// mat-card {
-//   background-image: url("assets/background.png") !important;
-//   box-shadow: none !important;
-// }
-
-// .container {
-//   display: flex;
-//   flex-direction: column;
-//   min-height: 100vh;
-
-//   .content {
-//     flex: 1;
-
-//     .header {
-//       background-color: #222222;
-//       color: black;
-//       height: 6vw;
-//       margin: auto;
-
-//       .logo {
-//         width: 20vw;
-//         height: 20vw;
-//         padding-bottom: 5.5vw;
-//       }
-
-//       .app-menu {
-//         color: #ffde59;
-//       }
-//     }
-//   }
-
-//   .navigation-bar-main {
-//     a {
-//       font-weight: 400;
-//       padding: 8px 16px;
-//       color: #0FC263;
-//       text-decoration: none;
-//       transition: background-color 0.3s ease;
-//     }
-
-//     a:hover {
-//       background-color: #ddd;
-//     }
-
-//     a.active {
-//       background-color: #ccc;
-//     }
-//   }
-
-//   .header {
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//   }
-
-//   .menu-items-center {
-//     flex: 1;
-//     display: flex;
-//     justify-content: center;
-//   }
-
-//   .menu-items-right {
-//     display: flex;
-//     gap: 10px;
-//     color: #ffde59;
-//   }
-
-//   .footer {
-//     text-align: center;
-//     background-color: #222222;
-//     color: white;
-//     font-family: Roboto, sans-serif;
-//     font-size: 1.25vw;
-//     font-weight: 400;
-//     height: 4vw;
-//     margin: 0vh;
-
-//     .footer-text {
-//       margin-top: 2.5vh;
-//       color: #ffde59;
-//     }
-//   }
-// }

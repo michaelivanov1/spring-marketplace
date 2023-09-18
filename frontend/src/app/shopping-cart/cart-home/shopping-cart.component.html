@@ -9,6 +9,7 @@
     <div class="user-cart">
       <div *ngIf="!isCartEmpty" class="label-container">
         <p></p>
+        <p></p>
         <p class="label-name">Name</p>
         <p class="label-qoh">Qty</p>
         <p class="label-seller">Seller</p>
@@ -67,27 +68,27 @@
         </ng-container>
       </div>
     </div>
+  </div>
 
-    <div class="totals-container" *ngIf="!isCartEmpty">
-      <div class="sub-total">
-        Subtotal: {{ grandTotal | currency : "USD" : "symbol" : "1.2-2" }}
+  <div class="totals-container" *ngIf="!isCartEmpty">
+    <div class="sub-total">
+      Subtotal: {{ grandTotal | currency : "USD" : "symbol" : "1.2-2" }}
+    </div>
+    <div class="sales-tax">
+      Sales Tax:
+      {{ grandTotal * 0.13 | currency : "USD" : "symbol" : "1.2-2" }}
+    </div>
+    <hr width="50%">
+    <div class="grand-total">
+      Grand total:
+      {{ grandTotal * taxRate | currency : "USD" : "symbol" : "1.2-2" }}
+    </div>
+    <div class="cart-actions">
+      <div class="purchase-button">
+        <button (click)="openConfirmationDialog()">Checkout</button>
       </div>
-      <div class="sales-tax">
-        Sales Tax:
-        {{ grandTotal * 0.13 | currency : "USD" : "symbol" : "1.2-2" }}
-      </div>
-      <hr />
-      <div class="grand-total">
-        Grand total:
-        {{ grandTotal * taxRate | currency : "USD" : "symbol" : "1.2-2" }}
-      </div>
-      <div class="cart-actions">
-        <div class="purchase-button">
-          <button (click)="openConfirmationDialog()">Checkout</button>
-        </div>
-        <div class="clear-cart-button">
-          <button (click)="clearCartItems()">Clear Cart</button>
-        </div>
+      <div class="clear-cart-button">
+        <button (click)="clearCartItems()">Clear Cart</button>
       </div>
     </div>
   </div>

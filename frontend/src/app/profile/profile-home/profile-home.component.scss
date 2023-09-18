@@ -57,6 +57,10 @@
   padding-right: 20px;
   position: relative;
   top: -60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 
   .profile-image {
     width: 200px;
@@ -92,12 +96,10 @@
     position: absolute;
     width: 50%;
     bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   .delete-account-button:hover {
-    background: red;
+    background: lightcoral;
     color: white;
     cursor: pointer;
   }
@@ -145,21 +147,19 @@
       font-size: 30px;
     }
   }
-
-  @media (min-width: 300px) {
-   
-  }
 }
 
 .account-description-container {
   width: 40vw;
   height: 10vh;
   margin-top: 4%;
+  word-wrap: break-word;
 
   p {
     font-size: 20px;
     text-align: left;
     line-height: 1.2;
+
   }
 
   .input-field.description {
@@ -274,5 +274,66 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 1460px) {
+  .account-details-container {
+    border-left: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .account-description-container {
+    p {
+      text-align: center;
+    }
+  }
+
+  .img-container {
+    top: 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .account-details-container {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .item-label {
+    display: none;
+  }
+
+  .info-row {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .account-description-container p {
+    font-size: 14px;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    justify-items: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .banner-image {
+    display: none;
+  }
+
+  .upload-profile-photo {
+    margin-bottom: 20px;
   }
 }

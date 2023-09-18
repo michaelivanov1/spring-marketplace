@@ -66,3 +66,18 @@
     }
   }
 }
+
+
+@media screen and (max-width: 1024px) {
+  .grid-container {
+    max-width: 80vw;
+  }  
+}
+
+@media screen and (max-width: 574px) {
+  .grid-container {
+    justify-items: center;
+    align-items: center;
+    margin: 0 auto;
+  }  
+}
