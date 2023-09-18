@@ -23,7 +23,7 @@ public class FileService {
     @Autowired
     private UserService userService;
 
-    public String storeFile(String email, MultipartFile file) throws IOException {
+    public String storeFile(String email, MultipartFile file, string type) throws IOException {
         FileMetadata metadata = new FileMetadata();
         metadata.setFilename(file.getOriginalFilename());
         String uuid = UUID.randomUUID().toString();
@@ -33,9 +33,15 @@ public class FileService {
         ObjectId fileId = gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename(), metadata);
 
         // store the unique id that was created in profileImage in accounts
-        Map<String, Object> keyMap = new HashMap<>();
-        keyMap.put("profileImage", uuid);
-        userService.updateUserByFields(email, keyMap);
+        if (type == "profile") {
+            Map<String, Object> keyMap = new HashMap<>();
+            keyMap.put("profileImage", uuid);
+            userService.updateUserByFields(email, keyMap);
+        } else {
+            Map<String, Object> keyMap = new HashMap<>();
+            keyMap.put("produceImage", uuid);
+            userService.updatUserStandByFields(email, keyMap, type);
+        }
 
         return fileId.toString();
     }

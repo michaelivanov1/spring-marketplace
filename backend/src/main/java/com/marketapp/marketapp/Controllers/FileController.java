@@ -28,29 +28,29 @@ public class FileController {
     private final FileService fileService;
 
     @PostMapping(value = "/file", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE,
-            MediaType.MULTIPART_FORM_DATA_VALUE })
+            MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<String> addFile(@RequestPart("email") String email,
-            @RequestPart("file") MultipartFile file) {
+            @RequestPart("file") MultipartFile file, @RequestPart("type") String type) {
         if (file.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No file uploaded; select a file.");
-        }
-        if (email == null) {
+        } else if (email == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("No email given; select an email to associate the image with.");
         }
 
-        if (file.getSize() >= 1.6e+7) {
+        else if (file.getSize() >= 1.6e+7) {
             return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body("File exceeds upload limit (16MB).");
         }
 
         try {
-            return new ResponseEntity<>(fileService.storeFile(email, file),
+            return new ResponseEntity<>(fileService.storeFile(email, file, type),
                     HttpStatus.CREATED);
         } catch (IOException ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("File upload failed: " + ex.getMessage());
         }
+
     }
 
     @GetMapping("/file/{uuid}")

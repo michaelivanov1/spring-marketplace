@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -30,16 +31,15 @@ public class UserStandService {
     }
 
     public UserStand addToUserStand(String email, Produce produce) {
-        //find existing stand
+        // find existing stand
         Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
         UserStand existingUserStand = null;
         if (existingUserStandOp.isPresent()) {
             existingUserStand = existingUserStandOp.get();
-        }
-        else {
+        } else {
             return new UserStand();
         }
-        
+
         existingUserStand.addToProduceList(produce);
 
         userStandRepository.save(existingUserStand);
@@ -47,13 +47,12 @@ public class UserStandService {
     }
 
     public UserStand updateProduceList(String displayName, String email, ArrayList<Produce> produceList) {
-        //find existing stand
+        // find existing stand
         Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
         UserStand existingUserStand = null;
         if (existingUserStandOp.isPresent()) {
             existingUserStand = existingUserStandOp.get();
-        }
-        else {
+        } else {
             return new UserStand();
         }
 
@@ -61,6 +60,15 @@ public class UserStandService {
         existingUserStand.setDisplayName(displayName);
         userStandRepository.save(existingUserStand);
         return existingUserStand;
+    }
+
+    public UserStand updatUserStandByFields(String email, Map<String, Object> fields, String type) {
+        Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
+        if (existingUserStandOp.isPresent()) {
+
+        } else {
+            return null;
+        }
     }
 
     public boolean deleteUserStandByEmail(String email) {
@@ -85,19 +93,19 @@ public class UserStandService {
         Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
         if (existingUserStandOp.isPresent()) {
             UserStand existingUserStand = existingUserStandOp.get();
-            
+
             Optional<Produce> produceToDeleteOp = existingUserStand.getProduceList()
-                .stream()
-                .filter(produce -> produce.getFoodName().equals(foodName))
-                .findFirst();
-            
+                    .stream()
+                    .filter(produce -> produce.getFoodName().equals(foodName))
+                    .findFirst();
+
             if (produceToDeleteOp.isPresent()) {
                 Produce produceToDelete = produceToDeleteOp.get();
                 existingUserStand.getProduceList().remove(produceToDelete);
                 userStandRepository.save(existingUserStand);
-                return true; 
+                return true;
             }
         }
-        return false; 
+        return false;
     }
 }
