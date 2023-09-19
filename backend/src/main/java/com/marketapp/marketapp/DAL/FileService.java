@@ -1,6 +1,8 @@
 package com.marketapp.marketapp.DAL;
 
 import com.marketapp.marketapp.ViewModels.FileMetadata;
+import com.marketapp.marketapp.ViewModels.Produce;
+import com.marketapp.marketapp.ViewModels.UserStand;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,10 @@ public class FileService {
     @Autowired
     private UserService userService;
 
-    public String storeFile(String email, MultipartFile file) throws IOException {
+    @Autowired
+    private UserStandService userStandService;
+
+    public String storeFile(String email, MultipartFile file, String type) throws IOException {
         FileMetadata metadata = new FileMetadata();
         metadata.setFilename(file.getOriginalFilename());
         String uuid = UUID.randomUUID().toString();
@@ -33,9 +38,26 @@ public class FileService {
         ObjectId fileId = gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename(), metadata);
 
         // store the unique id that was created in profileImage in accounts
-        Map<String, Object> keyMap = new HashMap<>();
-        keyMap.put("profileImage", uuid);
-        userService.updateUserByFields(email, keyMap);
+        if (type.equals("profile")) {
+            Map<String, Object> keyMap = new HashMap<>();
+            keyMap.put("profileImage", uuid);
+            userService.updateUserByFields(email, keyMap);
+        } else {
+            Map<String, Object> keyMap = new HashMap<>();
+            keyMap.put("produceImage", uuid);
+
+            Optional<UserStand> userStand = userStandService.singleUserStandByEmail(email);
+            ArrayList<Produce> produceList = userStand.get().getProduceList();
+            for (Produce p : produceList) {
+                if (p.getFoodName().equals(type)) {
+                    p.setProduceImage(uuid);
+                    String displayName = userStand.get().getDisplayName();
+                    userStandService.updateProduceList(displayName, email, produceList);
+                    break;
+                }
+            }
+            //userStandService.updateUserStandByFields(email, keyMap, type);
+        }
 
         return fileId.toString();
     }
