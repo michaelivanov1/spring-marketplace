@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap, switchMap } from 'rxjs/operators';
+import { catchError, tap, switchMap, concatMap } from 'rxjs/operators';
 import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
 import { UserStandService } from '@app/user-stand/user-stand.service';
@@ -474,6 +474,7 @@ export class ProfileComponent implements OnInit {
         let email = this.userProfile.email;
         formData.append('file', file);
         formData.append('email', email);
+        formData.append('type', 'profile');
 
         reader.onload = (e) => (this.imageSrc = reader.result as string);
         reader.readAsDataURL(file);
@@ -483,10 +484,14 @@ export class ProfileComponent implements OnInit {
             headers,
             responseType: 'text', // set responseType to 'text' to avoid parsing as JSON
           })
+          .pipe(
+            concatMap(() => this.profileService.getOne(this.decodedToken.sub))
+          )
           .subscribe(
             (response: any) => {
               this.snackbarService.open('Image Uploaded Successfully');
-              console.log('Image uploaded successfully', response);
+              console.log('Image uploaded successfully');
+              this.userProfile.profileImage = response.profileImage;
             },
             (error: any) => {
               console.error('Error uploading image:', error);
