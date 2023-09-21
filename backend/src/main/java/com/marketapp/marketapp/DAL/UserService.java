@@ -37,7 +37,7 @@ public class UserService {
         existingUser.setDisplayName(updatedUser.getDisplayName());
         existingUser.setDescription(updatedUser.getDescription());
         existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
-        existingUser.setProfileImage(updatedUser.getProfileImage());
+        // existingUser.setProfileImage(updatedUser.getProfileImage());
         existingUser.setCreationDate(existingUser.getCreationDate());
         existingUser.setRole(Role.USER);
 
@@ -53,14 +53,13 @@ public class UserService {
                 ReflectionUtils.setField(field, existingUser.get(), value);
             });
             return userRepository.save(existingUser.get());
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-     public boolean deleteUserByEmail(String email) {
-        
+    public boolean deleteUserByEmail(String email) {
+
         Optional<User> optionalUser = userRepository.findByEmail(email);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
