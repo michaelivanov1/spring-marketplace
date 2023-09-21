@@ -129,14 +129,15 @@ export class ProfileComponent implements OnInit {
       .getOne(this.decodedToken.sub)
       .pipe(
         switchMap((profile) => {
-          this.userProfile = profile; // save the profile from the first call
 
+          this.userProfile = profile; // save the profile from the first call
           if (profile.profileImage === '') {
             this.imageSrc =
               '../../../assets/default-avatar-profile-icon-of-social-media-user-vector.png';
             this.profileImageLoaded = true;
-            return of(null); // Return an observable to stop the chain
+            return of(null); // return an observable to stop the chain
           }
+
 
           // make the second API call
           return this.http.get(
@@ -159,13 +160,27 @@ export class ProfileComponent implements OnInit {
               this.imageSrc = reader.result as string;
             };
             reader.readAsDataURL(data);
-          } else {
-            // Handle the case where profileImage is an empty string
-            // For example, you might want to set some default image or do nothing
           }
         })
       )
       .subscribe();
+
+    // user's listings
+    this.userStandService
+      .getOne(this.decodedToken.sub)
+      .pipe(
+        catchError((err) => {
+          this.msg = err.message;
+          return of(null);
+        })
+      )
+      .subscribe((data) => {
+        if (data) {
+          this.userStand = data;
+          if (this.userStand.produceList.length > 0)
+            this.userStandDataExists = true;
+        }
+      });
   }
 
   // handle data from list item for sale dialog
@@ -227,6 +242,7 @@ export class ProfileComponent implements OnInit {
         this.snackbarService.open('Item Successfully Listed');
       });
   }
+
 
   // handle edit of an existing market listing
   onEditClick(userStand: UserStand, produce: Produce) {
