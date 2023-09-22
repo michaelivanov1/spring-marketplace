@@ -330,7 +330,8 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe(() => {
         this.userStandDataExists = true;
-        console.log('userstand created');
+        // TODO: temp fix; reload page when first item is loaded so it displays on profile
+        location.reload();
       });
   }
 
