@@ -11,6 +11,23 @@
   padding-left: 20px;
   padding-bottom: 20px;
 
+  .button-profile-redirect {
+    background-color: transparent;
+    border: 2px solid green;
+    color: green;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .button-profile-redirect:hover {
+    background-color: green;
+    color: white;
+  }
+
   .grid-item {
     width: 220px;
     height: 200px;
@@ -71,7 +88,7 @@
 @media screen and (max-width: 1024px) {
   .grid-container {
     max-width: 80vw;
-  }  
+  }
 }
 
 @media screen and (max-width: 574px) {
@@ -79,5 +96,5 @@
     justify-items: center;
     align-items: center;
     margin: 0 auto;
-  }  
+  }
 }

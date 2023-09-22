@@ -7,7 +7,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dialog.component';
 import jwt_decode from 'jwt-decode';
 import { ProfileService } from '@app/profile/profile.service';
-import {SnackbarComponent} from "@app/snackbar/snackbar.component";
+import { SnackbarComponent } from "@app/snackbar/snackbar.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-marketplace',
@@ -21,12 +22,14 @@ export class MarketplaceComponent {
   userStandProfiles: UserStand[] = [];
   decodedToken: any;
   loggedInUser: any;
+  totalCount: Number | undefined;
 
   constructor(
     private userStandService: UserStandService,
     private dialog: MatDialog,
     private profileService: ProfileService,
     private snackbarService: SnackbarComponent,
+    private router: Router,
   ) {
   }
 
@@ -38,9 +41,14 @@ export class MarketplaceComponent {
     this.userStand = this.userStandService.get();
     this.userStand?.subscribe((users: UserStand[]) => {
       this.userStandProfiles = users;
+
+      // get count of items on marketplace
+      this.totalCount = this.userStandProfiles.reduce((count, user) => {
+        return count + user.produceList.length;
+      }, 0);
+
       this.snackbarService.open('Loaded All Available Produce');
     });
-    
   }
 
   onProductClick(user: UserStand, produce: any) {
@@ -68,5 +76,9 @@ export class MarketplaceComponent {
 
   getCursor(): string {
     return this.selectedProduct ? 'pointer' : 'default';
+  }
+
+  profileRedirect() {
+    this.router.navigate(['/profile']);
   }
 }
