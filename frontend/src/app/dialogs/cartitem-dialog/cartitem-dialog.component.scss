@@ -1,6 +1,5 @@
 .main-container {
   // background-image: url("../../../assets/background.png");
-  width: 15vw;
   margin: 0 auto;
   overflow-x: hidden;
 }
@@ -26,7 +25,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5px;
+  gap: 10px;
+}
+
+.qoh-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.qoh-container input {
+  width: 50px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .confirm-container {
@@ -48,6 +66,15 @@
 
     &:hover {
       background-color: #0ad171b1;
+    }
+
+    &:disabled {
+      background-color: #00bf63b1;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: #00bf63b1;
+      }
     }
   }
 
