@@ -279,10 +279,10 @@ export class ListItemDialogComponent {
     if (data) {
       console.log(data);
       // if editing an existing listing
-      this.dialogTitle = 'Editing listing';
+      this.dialogTitle = 'Edit Listing';
     } else {
       // if adding a new listing
-      this.dialogTitle = 'List an item';
+      this.dialogTitle = 'List an Item';
     }
   }
 
@@ -342,6 +342,7 @@ export class ListItemDialogComponent {
     const productFormValue = this.productForm.value;
     const updatedProduce: Produce = {
       ...this.data,
+      produceImage: productFormValue.produceImage,
       foodName: productFormValue.foodName,
       qoh: productFormValue.qoh,
       harvestDate: productFormValue.harvestDate,
