@@ -1,4 +1,4 @@
-# Use an official Node.js runtime as the base image
+# Use an official Node.js runtime as the base image for building
 FROM node:16 as builder
 
 # Set the working directory in the container
@@ -15,16 +15,16 @@ RUN npm install
 
 # Build your Angular application for production
 COPY . .
-RUN ng build
+RUN ng build prod
 
-# Stage 2: Use Nginx to serve the production build files
-FROM nginx:alpine
+# Stage 2: Use Caddy to serve the production build files
+FROM caddy:alpine
 
-# Copy the production build files from the builder stage to Nginx's HTML directory
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy the production build files from the builder stage to Caddy's HTML directory
+COPY --from=builder /app/dist /usr/share/caddy
 
-# Expose the port that Nginx will use (default is 80)
+# Expose the port that Caddy will use (default is 80)
 EXPOSE 80
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start Caddy
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
