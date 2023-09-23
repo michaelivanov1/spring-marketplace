@@ -14,7 +14,7 @@ RUN npm install -g @angular/cli
 RUN npm install
 
 # Copy the production build files from your local machine into the container
-COPY /dist/untitled-marketplace /dist/untitled-marketplace
+COPY ./dist ./dist
 
 # Expose the port that ng serve will use (default is 4200)
 EXPOSE 4200
