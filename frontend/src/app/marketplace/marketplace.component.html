@@ -1,6 +1,8 @@
 <div class="grid-container">
-  <h2 *ngIf="totalCount == 0">No items on marketplace
-    <button class="button-profile-redirect" (click)="profileRedirect()">Be the first to list an item!</button>
+  <h2 style="margin-top: 10px; text-align: center" *ngIf="totalCount == 0">No items on marketplace
+    <button style="margin-left: 15px" class="button-profile-redirect" (click)="profileRedirect()">Be the first to list
+      an
+      item!</button>
   </h2>
 
   <ng-container *ngFor="let user of userStandProfiles">
@@ -11,7 +13,7 @@
         [style.pointer-events]="!user.email.includes(loggedInUser) ? 'auto' : 'none'">
 
         <div class="item-data">
-          <img class="product-image" [src]="produce.produceImage || '../../../assets/Pumpkin.jpg'" />
+          <img class="product-image" [src]="produce.produceImage" />
           <p class="product-name">{{ produce.foodName }}</p>
           <p class="product-price">
             {{ produce.price + "" | currency : "USD" : "symbol" : "1.2-2" }}
