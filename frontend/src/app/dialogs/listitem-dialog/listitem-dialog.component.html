@@ -1,5 +1,6 @@
-<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+
 <mat-dialog-content class="dialog-container">
+  <h2 mat-dialog-title>{{ dialogTitle }}</h2>
   <form [formGroup]="productForm" (ngSubmit)="onClose()">
     <div class="dialog-fields">
 
@@ -24,6 +25,10 @@
           required>
       </div>
     </div>
-    <button type="submit" mat-raised-button style="background-color: #00bf63b1;">Confirm</button>
+
+    <button type="submit" mat-raised-button style="background-color: #00bf63b1;"
+      [disabled]="productForm.invalid">Confirm
+    </button>
+    <p style="color: red; margin-top: 10px" *ngIf="productForm.invalid">Fill Out Required Fields</p>
   </form>
 </mat-dialog-content>

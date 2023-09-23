@@ -242,7 +242,7 @@
 
 import { Component, Inject, EventEmitter, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Produce } from '@app/common-interfaces/produce';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SnackbarComponent } from '@app/snackbar/snackbar.component';
@@ -269,11 +269,11 @@ export class ListItemDialogComponent {
     this.imageSrc = '';
 
     this.productForm = this.formBuilder.group({
-      produceImage: data?.produceImage,
-      foodName: data?.foodName || '',
-      qoh: data?.qoh || '',
-      harvestDate: data?.harvestDate || '',
-      price: data?.price || '',
+      produceImage: [data?.produceImage, Validators.required],
+      foodName: [data?.foodName || '', Validators.required],
+      qoh: [data?.qoh || '', Validators.required],
+      harvestDate: [data?.harvestDate || '', Validators.required],
+      price: [data?.price || '', Validators.required]
     });
 
     if (data) {
