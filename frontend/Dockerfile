@@ -15,7 +15,7 @@ RUN npm install
 
 # Build your Angular application for production
 COPY . .
-RUN ng build prod
+RUN ng build
 
 # Stage 2: Use Caddy to serve the production build files
 FROM caddy:alpine
