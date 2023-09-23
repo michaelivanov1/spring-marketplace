@@ -6,7 +6,6 @@
 
   <div mat-dialog-content class="info-container">
     <p class="product-name">{{ produce.foodName }}</p>
-    <br />
     <p>
       {{ subTotal }}
     </p>
@@ -20,7 +19,9 @@
     <button class="" (click)="qohChangeButton('+')">+</button>
   </div>
   <div mat-dialog-actions align="end" class="confirm-container">
-    <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
-    <button mat-button color="primary" (click)="confirm(produce)">Add</button>
+    <button class="cancel-button mat-raised-button" type="submit" (click)="cancel()">Cancel</button>
+
+    <button class="add-button mat-raised-button" type="submit" [disabled]="counter == 0"
+      (click)="confirm(produce)">Add</button>
   </div>
 </div>
