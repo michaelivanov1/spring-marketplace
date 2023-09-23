@@ -20,4 +20,4 @@ COPY ./dist ./dist
 EXPOSE 4200
 
 # Start a web server to serve your Angular application
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+CMD ["ng", "serve"]
