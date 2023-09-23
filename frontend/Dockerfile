@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:16
+FROM node:16 as builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -13,11 +13,18 @@ RUN npm install -g @angular/cli
 # Install project dependencies
 RUN npm install
 
-# Copy the production build files from your local machine into the container
-COPY ./dist ./dist
+# Build your Angular application for production
+COPY . .
+RUN ng build
 
-# Expose the port that ng serve will use (default is 4200)
-EXPOSE 4200
+# Stage 2: Use Nginx to serve the production build files
+FROM nginx:alpine
 
-# Start a web server to serve your Angular application
-CMD ["ng", "serve"]
+# Copy the production build files from the builder stage to Nginx's HTML directory
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Expose the port that Nginx will use (default is 80)
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
