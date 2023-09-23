@@ -13,5 +13,11 @@ RUN npm install -g @angular/cli
 # Install project dependencies
 RUN npm install
 
+# Copy the production build files from your local machine into the container
+COPY ./dist ./dist
+
 # Expose the port that ng serve will use (default is 4200)
 EXPOSE 4200
+
+# Start a web server to serve your Angular application
+CMD ["ng", "serve", "--host", "0.0.0.0"]
