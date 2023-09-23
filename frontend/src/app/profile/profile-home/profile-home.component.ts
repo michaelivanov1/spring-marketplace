@@ -141,7 +141,7 @@ export class ProfileComponent implements OnInit {
 
           // make the second API call
           return this.http.get(
-            `http://localhost:8080/api/file/${profile.profileImage}`,
+            `https://spring-marketplace.onrender.com/api/file/${profile.profileImage}`,
             {
               headers,
               responseType: 'blob', // set the responseType to 'blob' for binary data
@@ -466,7 +466,7 @@ export class ProfileComponent implements OnInit {
           // delete the user's previous profile image
           this.http
             .delete(
-              `http://localhost:8080/api/file/${this.userProfile.profileImage}`,
+              `https://spring-marketplace.onrender.com/api/file/${this.userProfile.profileImage}`,
               {
                 headers,
               }
@@ -497,7 +497,7 @@ export class ProfileComponent implements OnInit {
         reader.readAsDataURL(file);
 
         this.http
-          .post('http://localhost:8080/api/file', formData, {
+          .post('https://spring-marketplace.onrender.com/api/file', formData, {
             headers,
             responseType: 'text', // set responseType to 'text' to avoid parsing as JSON
           })

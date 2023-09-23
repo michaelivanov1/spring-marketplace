@@ -1,0 +1,17 @@
+# Use an official Node.js runtime as the base image
+FROM node:16
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Install project dependencies
+RUN npm install
+
+# Expose the port that ng serve will use (default is 4200)
+EXPOSE 4200
