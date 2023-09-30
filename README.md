@@ -1,6 +1,26 @@
 A fullstack (Angular/Java Springboot) marketplace for farmers. 
 
-Features registration/login, fully customizable profile page, marketplace page, cart.
+Features secure user authentication using JWT tokens, full profile customization, a marketplace, shopping cart, faq page, and more features coming. Passwords are hashed and stored securely, along with user order history.
+
+The frontend uses Angular with Material UI.
+MongoDB is used as our database. 
+The backend is coded in Java Springboot and uses the MVC design pattern. 
+
+`
+Main libraries/tools used:
+
+  Frontend:
+    - jwt-decode
+    - rxjs
+    - tslib
+    - zone.js
+
+  Backend:
+    - spring framework
+    - jsonwebtoken 
+    - jakarta
+    - lombok
+`
 
 Hosted on render.com
   - backend: Docker runtime
