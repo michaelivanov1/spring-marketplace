@@ -47,7 +47,7 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        return this.http.post<any>('https://spring-marketplace.onrender.com/api/authenticate', { email, password }).pipe(
+        return this.http.post<any>('https://spring-marketplace.onrender.com/api/auth/authenticate', { email, password }).pipe(
             tap((response: any) => {
                 console.log('non decoded token: ' + response.token);
                 localStorage.setItem('jwtToken', response.token);
