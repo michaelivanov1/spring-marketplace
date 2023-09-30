@@ -6,9 +6,9 @@ The frontend uses Angular with Material UI.
 MongoDB is used as our database. 
 The backend is coded in Java Springboot and uses the MVC design pattern. 
 
-`
-Main libraries/tools used:
 
+**Main libraries/tools used:**
+```
   Frontend:
     - jwt-decode
     - rxjs
@@ -20,7 +20,7 @@ Main libraries/tools used:
     - jsonwebtoken 
     - jakarta
     - lombok
-`
+```
 
 Hosted on render.com
   - backend: Docker runtime
