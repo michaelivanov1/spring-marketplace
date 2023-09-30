@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
 import { ObjectId } from '../common-interfaces/id-object';
+
 /**
  * profile - interface for account details
  */
+
 export interface Profile {
   id: ObjectId;
   displayName: String;
