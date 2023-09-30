@@ -142,7 +142,7 @@ export class ProfileComponent implements OnInit {
 
           // make the second API call
           return this.http.get(
-            `${PRODURL}/file/${profile.profileImage}`,
+            `${PRODURL}file/${profile.profileImage}`,
             {
               headers,
               responseType: 'blob', // set the responseType to 'blob' for binary data
