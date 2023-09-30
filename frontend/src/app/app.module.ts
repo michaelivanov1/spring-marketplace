@@ -7,6 +7,7 @@ import { MatComponentsModule } from './mat-components/mat-components.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 // components
 import { RegistrationComponent } from './registration/registration.component';
@@ -42,8 +43,8 @@ import { FaqComponent } from './faq/faq.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 
-export class AppModule {}
+export class AppModule { }
