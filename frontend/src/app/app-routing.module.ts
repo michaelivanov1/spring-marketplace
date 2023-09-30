@@ -10,19 +10,19 @@ import { FaqComponent } from './faq/faq.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, title: 'login' },
-  { path: 'login', component: LoginComponent, title: 'login' },
-  { path: 'register', component: RegistrationComponent, title: 'register' },
-  { path: 'profile', component: ProfileComponent, title: 'profile' },
+  { path: '', component: LoginComponent, title: 'Login' },
+  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: 'register', component: RegistrationComponent, title: 'Register' },
+  { path: 'profile', component: ProfileComponent, title: 'Profile' },
   {
     path: 'registration-finish',
     component: RegistrationFinishComponent,
-    title: 'finish account setup',
+    title: 'Finish Account Setup',
   },
   {
     path: 'marketplace',
     component: MarketplaceComponent,
-    title: 'marketplace',
+    title: 'Marketplace',
   },
   {
     path: 'faq',
@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
-    title: 'shopping cart',
+    title: 'Shopping Cart',
   },
 ];
 @NgModule({
