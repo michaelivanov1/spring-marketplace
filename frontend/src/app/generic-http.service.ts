@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { DEVURL, PRODURL } from '@app/constants';
+import { BASEURL } from '@app/constants';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +17,7 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .post<T>(`${PRODURL}${this.entity}`, item, { headers })
+      .post<T>(`${BASEURL}${this.entity}`, item, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // add
 
@@ -27,7 +27,7 @@ export class GenericHttpService<T> {
       'Authorization',
       `Bearer ${localStorage.getItem('jwtToken')}`
     );
-    return this.httpClient.post<T>(`${PRODURL}${this.entity}`, item, {
+    return this.httpClient.post<T>(`${BASEURL}${this.entity}`, item, {
       headers,
     });
     //.pipe(retry(2), catchError(this.handleError));
@@ -38,7 +38,7 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .put<T>(`${PRODURL}${this.entity}/${email}`, item, { headers })
+      .put<T>(`${BASEURL}${this.entity}/${email}`, item, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // update
 
@@ -47,7 +47,7 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .put<T>(`${PRODURL}${this.entity}/edit`, item, { headers })
+      .put<T>(`${BASEURL}${this.entity}/edit`, item, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // update
 
@@ -56,7 +56,7 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .get<T[]>(`${PRODURL}${this.entity}`, { headers })
+      .get<T[]>(`${BASEURL}${this.entity}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // getAll
 
@@ -65,7 +65,7 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .get<T[]>(`${PRODURL}${this.entity}/${id}`, { headers })
+      .get<T[]>(`${BASEURL}${this.entity}/${id}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // getSome
 
@@ -74,7 +74,7 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .get<T>(`${PRODURL}${this.entity}/${id}`, { headers })
+      .get<T>(`${BASEURL}${this.entity}/${id}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // getOne
 
@@ -83,7 +83,7 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .delete<T>(`${PRODURL}${this.entity}/${email}`, { headers })
+      .delete<T>(`${BASEURL}${this.entity}/${email}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // delete
 
@@ -93,7 +93,7 @@ export class GenericHttpService<T> {
       .set('Content-Type', 'application/json');
     return this.httpClient
       .delete<boolean>(
-        `${PRODURL}${this.entity}/${email}/produce/${foodName}`,
+        `${BASEURL}${this.entity}/${email}/produce/${foodName}`,
         { headers }
       )
       .pipe(retry(2), catchError(this.handleError));
@@ -108,7 +108,7 @@ export class GenericHttpService<T> {
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
       .set('Content-Type', 'application/json');
     return this.httpClient
-      .patch<T>(`${PRODURL}${this.entity}/${email}`, `"${field}": "${value}"`, {
+      .patch<T>(`${BASEURL}${this.entity}/${email}`, `"${field}": "${value}"`, {
         headers,
       })
       .pipe(retry(2), catchError(this.handleError));

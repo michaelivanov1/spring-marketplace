@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { UserStandService } from '../user-stand/user-stand.service';
 import { UserStand } from '../user-stand/user-stand';
-import { Profile } from '@app/profile/profile';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dialog.component';
@@ -15,6 +14,7 @@ import { Router } from '@angular/router';
   templateUrl: './marketplace.component.html',
   styleUrls: ['./marketplace.component.scss'],
 })
+
 export class MarketplaceComponent {
   selectedProduct: any;
   userStand?: Observable<UserStand[]>;
@@ -51,7 +51,6 @@ export class MarketplaceComponent {
   }
 
   onProductClick(user: UserStand, produce: any) {
-    console.log(`clicked on: ${produce.foodName} sold by ${user.displayName}`);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.width = '20vw';

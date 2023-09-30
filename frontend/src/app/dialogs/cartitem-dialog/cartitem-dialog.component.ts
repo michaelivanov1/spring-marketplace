@@ -3,7 +3,6 @@ import {
   EventEmitter,
   Inject,
   LOCALE_ID,
-  OnInit,
   Output,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -18,7 +17,8 @@ import { SnackbarComponent } from '@app/snackbar/snackbar.component';
   templateUrl: './cartitem-dialog.component.html',
   styleUrls: ['./cartitem-dialog.component.scss'],
 })
-export class CartitemDialogComponent implements OnInit {
+
+export class CartitemDialogComponent {
   user: any;
   produce: any;
   counter: number;
@@ -60,9 +60,7 @@ export class CartitemDialogComponent implements OnInit {
     this.isEntered = false;
     this.isGreater = false;
   }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+
 
   confirm(produce: Produce): void {
     const item: { produce: Produce; user: UserStand; counter: number } = {

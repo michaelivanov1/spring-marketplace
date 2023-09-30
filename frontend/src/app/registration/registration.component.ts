@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -18,6 +16,7 @@ import { SnackbarComponent } from "@app/snackbar/snackbar.component";
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
+
 export class RegistrationComponent {
   registrationForm: FormGroup;
   displayName: FormControl;

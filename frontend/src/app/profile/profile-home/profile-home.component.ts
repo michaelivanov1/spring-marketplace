@@ -15,7 +15,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Produce } from '@app/common-interfaces/produce';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SnackbarComponent } from '@app/snackbar/snackbar.component';
-import { DEVURL, PRODURL } from '@app/constants';
+import { BASEURL } from '@app/constants';
 
 @Component({
   selector: 'app-profile',
@@ -142,7 +142,7 @@ export class ProfileComponent implements OnInit {
 
           // make the second API call
           return this.http.get(
-            `${PRODURL}file/${profile.profileImage}`,
+            `${BASEURL}file/${profile.profileImage}`,
             {
               headers,
               responseType: 'blob', // set the responseType to 'blob' for binary data
@@ -467,7 +467,7 @@ export class ProfileComponent implements OnInit {
           // delete the user's previous profile image
           this.http
             .delete(
-              `${PRODURL}file/${this.userProfile.profileImage}`,
+              `${BASEURL}file/${this.userProfile.profileImage}`,
               {
                 headers,
               }
@@ -498,7 +498,7 @@ export class ProfileComponent implements OnInit {
         reader.readAsDataURL(file);
 
         this.http
-          .post(`${PRODURL}file`, formData, {
+          .post(`${BASEURL}file`, formData, {
             headers,
             responseType: 'text', // set responseType to 'text' to avoid parsing as JSON
           })
