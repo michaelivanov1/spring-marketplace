@@ -5,33 +5,33 @@
         <img src="../assets/logo.png" class="logo" />
       </div>
       <div class="menu-items-center">
-        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['profile']" (click)="setTitle('profile')"
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['profile']" (click)="setTitle('Profile')"
           routerLinkActive="selected-menu-item">Profile</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']" (click)="setTitle('marketplace')"
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']" (click)="setTitle('Marketplace')"
           routerLinkActive="selected-menu-item">Marketplace</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na']" (click)="setTitle('newsletter')"
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na']" (click)="setTitle('Newsletter')"
           routerLinkActive="selected-menu-item">Newsletter</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na2']" (click)="setTitle('blog')"
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na2']" (click)="setTitle('Blog')"
           routerLinkActive="selected-menu-item">Blog</a>
-        <a mat-tab-link [routerLink]="['faq']" (click)="setTitle('faq')" routerLinkActive="selected-menu-item">FAQ/About
+        <a mat-tab-link [routerLink]="['faq']" (click)="setTitle('Faq')" routerLinkActive="selected-menu-item">FAQ/About
           Us</a>
-        <div *ngIf="isSmallScreen"> <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login"
-            (click)="setTitle('login')" routerLinkActive="selected-menu-item">Login</a>
-          <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register" (click)="setTitle('register')"
-            routerLinkActive="selected-menu-item">Register</a>
+        <div *ngIf="isSmallScreen"> <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button
+            routerLink="/login" (click)="setTitle('Login')" routerLinkActive="selected-menu-item">Login</a>
+          <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register"
+            (click)="setTitle('Register')" routerLinkActive="selected-menu-item">Register</a>
           <a style="color: yellow" mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart"
-            (click)="setTitle('shopping cart')" routerLinkActive="selected-menu-item">
+            (click)="setTitle('Shopping Cart')" routerLinkActive="selected-menu-item">
             <mat-icon>shopping_cart</mat-icon>
           </a>
           <a style="color: yellow" mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
         </div>
       </div>
       <div *ngIf="!isSmallScreen" class="menu-items-right">
-        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login" (click)="setTitle('login')"
+        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login" (click)="setTitle('Login')"
           routerLinkActive="selected-menu-item">Login</a>
-        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register" (click)="setTitle('register')"
+        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register" (click)="setTitle('Register')"
           routerLinkActive="selected-menu-item">Register</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart" (click)="setTitle('shopping cart')"
+        <a mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart" (click)="setTitle('Shopping Cart')"
           routerLinkActive="selected-menu-item">
           <mat-icon>shopping_cart</mat-icon>
         </a>
@@ -68,30 +68,3 @@
     <p class="footer-text">&copy;Spring Marketplace - 2023</p>
   </div>
 </div>
-
-<!-- <div class="container">
-  <div class="content">
-    <mat-toolbar class="header">
-      <img src="../assets/logo.png" class="logo" />
-      <div class="menu-items-center">
-        <nav mat-tab-nav-bar class="navigation-bar-main">
-          <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['profile']" (click)="setTitle('profile')">Profile</a>
-          <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']"
-            (click)="setTitle('marketplace')">Marketplace</a>
-        </nav>
-      </div>
-      <div class="menu-items-right">
-        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login" (click)="setTitle('login')">Login</a>
-        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register"
-          (click)="setTitle('register')">Register</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
-      </div>
-    </mat-toolbar>
-
-    <router-outlet></router-outlet>
-  </div>
-
-  <mat-card-footer class="footer">
-    <p class="footer-text">&copy;Spring Marketplace - 2023</p>
-  </mat-card-footer>
-</div> -->
