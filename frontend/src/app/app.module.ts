@@ -7,8 +7,9 @@ import { MatComponentsModule } from './mat-components/mat-components.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-// custom imports
+// components
 import { RegistrationComponent } from './registration/registration.component';
 import { ProfileComponent } from './profile/profile-home/profile-home.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
@@ -18,7 +19,6 @@ import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confi
 import { ListItemDialogComponent } from './dialogs/listitem-dialog/listitem-dialog.component';
 import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.component';
 import { FaqComponent } from './faq/faq.component';
-import { SnackbarComponent } from './snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,6 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
     ListItemDialogComponent,
     ShoppingCartComponent,
     FaqComponent,
-    //SnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +43,8 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+
+export class AppModule { }
