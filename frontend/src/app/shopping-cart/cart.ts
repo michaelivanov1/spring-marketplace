@@ -1,6 +1,3 @@
-import { NgModule } from '@angular/core';
-import { ObjectId } from '../common-interfaces/id-object';
-
 /**
  * cart - interface for shopping cart
  */

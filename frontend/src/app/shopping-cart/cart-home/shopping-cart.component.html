@@ -32,17 +32,6 @@
               {{item.counter}}
             </p>
 
-            <!-- <p class="product-qoh">
-              <input
-                type="text"
-                [(ngModel)]="item.counter"
-                size="4"
-                maxlength="4"
-                (input)="onCounterInput($event, i)"
-                (input)="calculateGrandTotal()"
-              />
-            </p> -->
-
             <p class="product-seller">{{ item.user.displayName }}</p>
             <p class="product-price">
               {{
@@ -57,9 +46,6 @@
             </p>
 
             <div class="action-icons">
-              <!-- <button mat-icon-button (click)="purchaseIndividualItem(i)">
-                <mat-icon>shopping_cart</mat-icon>
-              </button> -->
               <button mat-icon-button (click)="removeCartItem(i)">
                 <mat-icon>cancel</mat-icon>
               </button>

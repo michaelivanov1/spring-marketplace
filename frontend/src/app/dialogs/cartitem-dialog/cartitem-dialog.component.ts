@@ -126,6 +126,7 @@ export class CartitemDialogComponent implements OnInit {
       );
     }
   }
+
   validNumber(event: any) {
     this.isEntered = true;
     this.tempCounter = parseInt(this.tempCounter.toString().concat(event.key));
@@ -136,6 +137,7 @@ export class CartitemDialogComponent implements OnInit {
       this.isGreater = false;
     }
   }
+
   updateCounterInput() {
     if (this.isRemoved === true) {
       this.counter = this.tempCounter;

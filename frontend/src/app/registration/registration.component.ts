@@ -11,7 +11,7 @@ import { ValidateDisplayName } from '../validators/displayname.validator';
 import { ValidatePassword } from '../validators/password.validator';
 import { Router } from '@angular/router';
 import { AuthService } from '../authService';
-import {SnackbarComponent} from "@app/snackbar/snackbar.component";
+import { SnackbarComponent } from "@app/snackbar/snackbar.component";
 
 @Component({
   selector: 'app-registration',
@@ -27,8 +27,6 @@ export class RegistrationComponent {
   loading: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
     private router: Router,
     private authService: AuthService,
     private snackbarService: SnackbarComponent,

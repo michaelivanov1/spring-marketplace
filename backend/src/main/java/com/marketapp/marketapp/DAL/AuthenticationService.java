@@ -5,7 +5,6 @@ import com.marketapp.marketapp.Enums.Role;
 import com.marketapp.marketapp.Security.JwtService;
 import com.marketapp.marketapp.ViewModels.*;
 import lombok.RequiredArgsConstructor;
-//import lombok.var;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

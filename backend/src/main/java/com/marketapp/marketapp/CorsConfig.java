@@ -1,5 +1,5 @@
 /* 
- * allow CORS to use localhost:4200
+ * allow CORS to use localhost:4200 and onrender
 */
 
 package com.marketapp.marketapp;

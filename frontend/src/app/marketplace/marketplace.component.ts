@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
 export class MarketplaceComponent {
   selectedProduct: any;
   userStand?: Observable<UserStand[]>;
-  // userStandProfile: UserStand;
   userStandProfiles: UserStand[] = [];
   decodedToken: any;
   loggedInUser: any;

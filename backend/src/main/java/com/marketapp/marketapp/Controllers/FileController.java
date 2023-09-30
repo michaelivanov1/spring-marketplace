@@ -1,8 +1,6 @@
 package com.marketapp.marketapp.Controllers;
 
 import com.marketapp.marketapp.DAL.FileService;
-import com.marketapp.marketapp.ViewModels.AuthenticationResponse;
-import com.marketapp.marketapp.ViewModels.FileMetadata;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.gridfs.GridFsResource;

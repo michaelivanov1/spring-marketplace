@@ -7,6 +7,7 @@ import { ValidatePassword } from "@app/validators/password.validator";
 import jwt_decode from "jwt-decode";
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { DEVURL, PRODURL } from './constants';
 
 @Injectable({
     providedIn: 'root'
@@ -33,7 +34,7 @@ export class AuthService {
     }
 
     register(displayName: string, email: string, password: string): Observable<any> {
-        return this.http.post<any>('https://spring-marketplace.onrender.com/api/auth/register', { displayName, email, password }, {
+        return this.http.post<any>(`${PRODURL}auth/register`, { displayName, email, password }, {
             responseType: 'json',
         }).pipe(
             tap((response: any) => {
@@ -47,7 +48,7 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        return this.http.post<any>('https://spring-marketplace.onrender.com/api/auth/authenticate', { email, password }).pipe(
+        return this.http.post<any>(`${PRODURL}auth/authenticate`, { email, password }).pipe(
             tap((response: any) => {
                 console.log('non decoded token: ' + response.token);
                 localStorage.setItem('jwtToken', response.token);

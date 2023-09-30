@@ -1,4 +1,3 @@
-import { NgModule } from '@angular/core';
 import { ObjectId } from '@app/common-interfaces/id-object';
 
 export interface Produce {
@@ -6,7 +5,6 @@ export interface Produce {
   foodName: string;
   produceImage: string;
   qoh: number;
-  // qoo: Number;
   harvestDate: String;
   price: number;
 }

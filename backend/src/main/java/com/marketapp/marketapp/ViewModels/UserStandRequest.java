@@ -10,10 +10,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserStandRequest {
-    //private String id;
     private String displayName;
     private String email;
     private ArrayList<Produce> produceList;
-
-    // Getters and setters
 }
