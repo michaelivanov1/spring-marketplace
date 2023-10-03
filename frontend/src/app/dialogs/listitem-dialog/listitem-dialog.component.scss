@@ -1,4 +1,5 @@
-.dialog-container {}
+.dialog-container {
+}
 
 #file-upload {
   color: #00bf63b1;
@@ -24,4 +25,11 @@
 
 .dialog-data {
   flex: 1;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+  border: 1px solid #ccc; /* 1 pixel solid border in a shade of gray */
+  border-color: black;
 }

@@ -1,34 +1,69 @@
-
 <mat-dialog-content class="dialog-container">
   <h2 mat-dialog-title>{{ dialogTitle }}</h2>
   <form [formGroup]="productForm" (ngSubmit)="onClose()">
     <div class="dialog-fields">
-
-      <input style="margin-bottom: 10px" id="file-upload" type="file" accept="image/"
-        (change)="onUploadPhoto($event)" />
+      <input
+        style="margin-bottom: 10px"
+        id="file-upload"
+        type="file"
+        accept="image/"
+        (change)="onUploadPhoto($event)"
+      />
 
       <div class="dialog-field">
         <label class="dialog-labels">Food Name:</label>
-        <input class="dialog-data" type="text" matInput formControlName="foodName" required>
+        <input
+          class="dialog-data"
+          type="text"
+          matInput
+          formControlName="foodName"
+          required
+        />
       </div>
       <div class="dialog-field">
         <label class="dialog-labels">Quantity:</label>
-        <input class="dialog-data" type="number" matInput formControlName="qoh" required>
+        <input
+          class="dialog-data"
+          type="number"
+          matInput
+          formControlName="qoh"
+          required
+        />
       </div>
       <div class="dialog-field">
         <label class="dialog-labels">Price:</label>
-        <input class="dialog-data" type="number" step="0.01" matInput formControlName="price" required>
+        <input
+          class="dialog-data"
+          type="number"
+          step="0.01"
+          matInput
+          formControlName="price"
+          required
+        />
       </div>
       <div class="dialog-field">
         <label class="dialog-labels">Harvest Date:</label>
-        <input class="dialog-data" type="date" [max]="disableFutureDates()" matInput formControlName="harvestDate"
-          required>
+        <input
+          class="dialog-data"
+          type="date"
+          [max]="disableFutureDates()"
+          matInput
+          formControlName="harvestDate"
+          required
+        />
       </div>
     </div>
 
-    <button type="submit" mat-raised-button style="background-color: #00bf63b1;"
-      [disabled]="productForm.invalid">Confirm
+    <button
+      type="submit"
+      mat-raised-button
+      style="background-color: #00bf63b1"
+      [disabled]="productForm.invalid"
+    >
+      Confirm
     </button>
-    <p style="color: red; margin-top: 10px" *ngIf="productForm.invalid">Fill Out Required Fields</p>
+    <p style="color: red; margin-top: 10px" *ngIf="productForm.invalid">
+      Fill Out Required Fields
+    </p>
   </form>
 </mat-dialog-content>
