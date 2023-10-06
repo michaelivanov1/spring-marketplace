@@ -111,9 +111,10 @@ export class ProfileComponent implements OnInit {
     this.profile.subscribe(
       (profile) => {
         this.userProfile = profile;
-        const year = this.userProfile.creationDate.substr(0, 4);
-        const month = this.userProfile.creationDate.substr(5, 2);
-        const day = this.userProfile.creationDate.substr(8, 2);
+        const ESTDate = this.convertToEST(this.userProfile.creationDate);
+        const year = ESTDate.substr(0, 4);
+        const month = ESTDate.substr(5, 2);
+        const day = ESTDate.substr(8, 2);
         const formattedDate = `${year}-${month}-${day}`;
         this.dateCreatedFormatted = formattedDate;
       },
@@ -130,7 +131,6 @@ export class ProfileComponent implements OnInit {
       .getOne(this.decodedToken.sub)
       .pipe(
         switchMap((profile) => {
-
           this.userProfile = profile; // save the profile from the first call
           if (profile.profileImage === '') {
             this.imageSrc =
@@ -139,15 +139,11 @@ export class ProfileComponent implements OnInit {
             return of(null); // return an observable to stop the chain
           }
 
-
           // make the second API call
-          return this.http.get(
-            `${BASEURL}file/${profile.profileImage}`,
-            {
-              headers,
-              responseType: 'blob', // set the responseType to 'blob' for binary data
-            }
-          );
+          return this.http.get(`${BASEURL}file/${profile.profileImage}`, {
+            headers,
+            responseType: 'blob', // set the responseType to 'blob' for binary data
+          });
         }),
         catchError((error) => {
           console.error('Error:', error);
@@ -243,7 +239,6 @@ export class ProfileComponent implements OnInit {
         this.snackbarService.open('Item Successfully Listed');
       });
   }
-
 
   // handle edit of an existing market listing
   onEditClick(userStand: UserStand, produce: Produce) {
@@ -466,12 +461,9 @@ export class ProfileComponent implements OnInit {
         if (this.userProfile.profileImage !== '') {
           // delete the user's previous profile image
           this.http
-            .delete(
-              `${BASEURL}file/${this.userProfile.profileImage}`,
-              {
-                headers,
-              }
-            )
+            .delete(`${BASEURL}file/${this.userProfile.profileImage}`, {
+              headers,
+            })
             .pipe(
               tap(() => {
                 console.log('Profile image deleted');
@@ -551,4 +543,16 @@ export class ProfileComponent implements OnInit {
   //     element.scrollIntoView({ behavior: 'smooth' });
   //   }
   // }
+
+  //helper math functions
+  convertToEST(dateString: any): string {
+    const utcDate = new Date(dateString);
+    const estOffset = -4 * 60; // EST is UTC-4
+
+    utcDate.setMinutes(utcDate.getMinutes() + estOffset); // Adjust minutes for EST
+
+    const isoString = utcDate.toISOString(); // Convert back to ISO string
+
+    return isoString;
+  }
 }
