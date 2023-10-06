@@ -103,6 +103,17 @@ $primary-color: #00bf63;
     }
   }
 
+  button.mat-icon-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  button.mat-icon-button:hover {
+    transform: scale(1.2);
+  }
+
   .totals-container {
     margin: 15px auto;
     background-color: rgba(64, 88, 31, 0.1);
