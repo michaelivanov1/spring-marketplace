@@ -53,7 +53,6 @@ export class MarketplaceComponent {
   onProductClick(user: UserStand, produce: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
-    dialogConfig.width = '20vw';
     dialogConfig.height = '50vh';
     dialogConfig.autoFocus = false;
     dialogConfig.data = {
