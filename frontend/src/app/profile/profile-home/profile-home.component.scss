@@ -4,8 +4,6 @@
   margin-bottom: 10px;
   margin-top: 10px !important;
   background-image: linear-gradient(to bottom, #ffde5950, rgba(140, 195, 63, 0.1));
-  // background-color: rgba(140, 195, 63, 0.1);
-
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
@@ -16,8 +14,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  // border: 1px solid black;
-
 }
 
 .banner-container {
@@ -90,17 +86,22 @@
     font-weight: 450;
     background-color: #00bf63b1;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background-color: #17c370;
+    }
   }
 
   .delete-account-button {
     position: absolute;
-    width: 50%;
+    width: 40%;
+    height: 35px;
     bottom: 10px;
+    background-color: rgb(199, 217, 199);
   }
 
   .delete-account-button:hover {
-    background: lightcoral;
-    color: white;
+    background: rgb(205, 183, 183);
     cursor: pointer;
   }
 }
@@ -172,6 +173,22 @@
   }
 }
 
+.cancel-edit-button {
+  background-color: #bf6c189f;
+
+  &:hover {
+    background-color: #995b1d9f;
+  }
+}
+
+.save-update-profile-button {
+  background-color: #00bf63b1;
+
+  &:hover {
+    background-color: #17c370;
+  }
+}
+
 .down-arrow {
   margin-top: 30px;
   font-size: 32px;
@@ -191,6 +208,15 @@
   border: 1px solid #00000021;
   font-size: 1rem;
   font-weight: 400;
+}
+
+.list-item-button {
+  background-color: #00bf63b1;
+  font-weight: 550;
+
+  &:hover {
+    background-color: #17c370;
+  }
 }
 
 .grid-container {

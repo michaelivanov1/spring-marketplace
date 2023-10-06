@@ -18,7 +18,7 @@
       <input id="file-upload" type="file" accept="image/" (change)="onUploadPhoto($event)" />
 
 
-      <button class="delete-account-button" (click)="openConfirmationDialog()">
+      <button mat-raised-button class="delete-account-button" (click)="openConfirmationDialog()">
         Delete account
       </button>
     </div>
@@ -51,10 +51,10 @@
       </div>
 
       <mat-card-actions style="margin: 0">
-        <button mat-raised-button style="background-color: #bf6c189f" *ngIf="isEditable" (click)="cancelEdit()">
+        <button class="cancel-edit-button" mat-raised-button *ngIf="isEditable" (click)="cancelEdit()">
           Cancel
         </button>
-        <button mat-raised-button style="background-color: #00bf63b1"
+        <button class="save-update-profile-button" mat-raised-button
           (click)="isEditable ? saveChanges() : toggleEdit()">
           {{ isEditable ? "Save" : "Update Profile" }}
         </button>
@@ -74,7 +74,7 @@
     <div class="produce-container" id="produceSection">
       <h2 style="margin-bottom: 10px; padding: 0px 10px; text-align: left;">
         {{ userStandDataExists ? "" : "You have nothing for sale yet!" }}
-        <button mat-raised-button style="background-color: #00bf63b1; font-weight: 550" (click)="openListItemDialog()">
+        <button mat-raised-button class="list-item-button" (click)="openListItemDialog()">
           <mat-icon class="icon" style="margin-right: 5px;">add</mat-icon>List Item
         </button>
       </h2>
