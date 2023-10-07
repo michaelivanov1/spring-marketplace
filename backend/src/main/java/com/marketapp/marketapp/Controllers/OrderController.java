@@ -29,6 +29,12 @@ public class OrderController {
         return new ResponseEntity<>(orderService.allOrdersByBuyerEmail(email), HttpStatus.OK);
     }
 
+    //FIXME: ambiguous with the email; temp fix is including "/id" in the uri
+    @GetMapping("/order/id/{orderId}")
+    public ResponseEntity<Optional<Order>> getSingleOrderById(@PathVariable String orderId) {
+        return new ResponseEntity<>(orderService.singleOrderByOrderId(orderId), HttpStatus.OK);
+    }
+
     @PostMapping("/order")
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequest request) {
         return new ResponseEntity<>(orderService.createNewOrder(request.getBuyerEmail(), request.getSellerEmail(),
