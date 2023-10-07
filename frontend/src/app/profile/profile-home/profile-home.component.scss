@@ -94,7 +94,6 @@
 
   .delete-account-button {
     position: absolute;
-    width: 40%;
     height: 35px;
     bottom: 10px;
     background-color: rgb(199, 217, 199);
@@ -239,11 +238,13 @@
     justify-content: center;
     align-items: center;
     height: 300px;
+    transition: all .2s ease-in-out;
 
     .item-data {
       position: relative;
       background-color: rgba(140, 195, 63, 0.1);
-      border: 1px solid black;
+      // border: 1px solid black;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 
       .hover-icons {
         position: absolute;
@@ -252,13 +253,13 @@
 
         .edit-item-button,
         .delete-item-button {
-          color: white;
+          color: black;
         }
 
         .edit-item-button:hover,
         .delete-item-button:hover {
-          color: green;
-          // transition: all 0.3s ease;
+          transition: all .2s ease-in-out;
+          transform: scale(1.1);
         }
       }
 
@@ -300,6 +301,10 @@
         }
       }
     }
+  }
+
+  .grid-item:hover {
+    transform: scale(1.05);
   }
 }
 
