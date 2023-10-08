@@ -39,6 +39,10 @@
   background-color: rgba(140, 195, 63, 0.1);
 }
 
+.input-field::placeholder {
+  color: transparent; 
+}
+
 .input-field:focus {
   outline: none;
   border-color: #00bf63;
@@ -345,10 +349,13 @@
   .info-row {
     width: 50%;
   }
+
+  .input-field::placeholder {
+    color: #999;
+  }
 }
 
 @media screen and (max-width: 768px) {
-
   .account-description-container p {
     font-size: 14px;
   }

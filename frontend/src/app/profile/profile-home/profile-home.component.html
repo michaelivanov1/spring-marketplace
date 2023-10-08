@@ -34,15 +34,18 @@
       <div class="primary-info">
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Display Name </strong>
-          <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field item-data" />
+          <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field item-data"
+            placeholder="Display Name" />
         </span>
         <span *ngIf="isEditable" class="info-row">
-          <strong class="item-label">Phone </strong>
-          <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field item-data" />
+          <strong class="item-label">Phone Num</strong>
+          <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field item-data"
+            placeholder="Phone Num" />
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Description </strong>
-          <input type="text" [(ngModel)]="updatedProfile.description" class="input-field item-data" />
+          <input type="text" [(ngModel)]="updatedProfile.description" class="input-field item-data"
+            placeholder="Description" />
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Email </strong>

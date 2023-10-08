@@ -1,7 +1,8 @@
-$primary-color: rgba(140,195,63,0.1);
+$primary-color: rgba(140, 195, 63, 0.1);
 
 .mat-card {
-    width: 400px;
+    width: 50%;
+    border: 1px solid black;
     margin: 0 auto;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -27,8 +28,8 @@ $primary-color: rgba(140,195,63,0.1);
         }
 
         button {
-            width: 400px;
-            margin: 10px;
+            width: 80%;
+            margin-bottom: 20px;
             font-size: 16px;
             padding: 10px 20px;
             border-radius: 4px;
@@ -38,8 +39,10 @@ $primary-color: rgba(140,195,63,0.1);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 
             &:hover {
-                background-color: darken($primary-color, 10%);
+                background-color: darken($primary-color, 20%);
                 cursor: pointer;
+                transform: scale(1.05);
+                transition: transform .2s ease-in-out, background-color .2s ease-in-out;
             }
         }
     }
@@ -48,5 +51,15 @@ $primary-color: rgba(140,195,63,0.1);
         margin-top: 20px;
         font-size: 14px;
         color: #999;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .mat-card-title {
+        line-height: 30px;
+    }
+
+    .mat-card {
+        margin-top: 20px;
     }
 }

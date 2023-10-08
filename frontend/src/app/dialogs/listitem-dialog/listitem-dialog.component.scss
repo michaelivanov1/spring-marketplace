@@ -1,5 +1,4 @@
-.dialog-container {
-}
+.dialog-container {}
 
 #file-upload {
   color: #00bf63b1;
@@ -30,6 +29,28 @@
 input[type="text"],
 input[type="date"],
 input[type="number"] {
-  border: 1px solid #ccc; /* 1 pixel solid border in a shade of gray */
+  border: 1px solid #ccc;
   border-color: black;
+}
+
+@media screen and (max-width: 440px) {
+  .dialog-container {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .dialog-fields {
+    width: 100%;
+  }
+
+  .dialog-labels {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .dialog-field {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
 }
