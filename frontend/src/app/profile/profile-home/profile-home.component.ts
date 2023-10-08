@@ -219,8 +219,7 @@ export class ProfileComponent implements OnInit {
             // update the userStand on the server
             this.updateUserStand(this.userStand);
           } else {
-            // TODO: display proper error message
-            console.log('foodname already exists');
+            this.snackbarService.open('Food Name Already Exists');
           }
         } else {
           // userStand not created yet, perform add
@@ -291,7 +290,6 @@ export class ProfileComponent implements OnInit {
           .subscribe(
             () => {
               this.snackbarService.open('Listing Successfully Deleted');
-              console.log('item deleted: ' + produce.foodName);
 
               // remove item from produceList. this is so the page reflects the deletion without a page refresh
               this.userStand.produceList = this.userStand.produceList.filter(
@@ -342,18 +340,15 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe(() => {
-        console.log('userstand data: ' + JSON.stringify(userStand));
         this.userStandDataExists = true;
-        console.log('userstand updated');
       });
   }
 
   // wipe all user's data
   deleteAccount(): void {
-    console.log('account deleted');
+    this.snackbarService.open('Account Deleted - Data Wiped');
     // delete user's whole stand
     if (this.userStandDataExists) {
-      console.log('userstand exists, so deleting userstand and profile');
       this.userStandService.delete(this.userProfile.email).subscribe(
         () => {
           // delete user's whole profile
@@ -366,7 +361,6 @@ export class ProfileComponent implements OnInit {
         }
       );
     } else {
-      console.log('userstand doesnt exist, so only deleting profile');
       this.profileService.delete(this.userProfile.email).subscribe(() => {
         this.navigateToRegister();
       }),
@@ -388,8 +382,7 @@ export class ProfileComponent implements OnInit {
         () => {
           this.isEditable = false;
           this.userProfile = { ...this.updatedProfile };
-          console.log('profile updated successfully');
-          this.snackbarService.open('Saved Profile');
+          this.snackbarService.open('Profile Updated Successfully');
         },
         (error) => {
           console.error('error updating profile:', error);
@@ -466,7 +459,6 @@ export class ProfileComponent implements OnInit {
             })
             .pipe(
               tap(() => {
-                console.log('Profile image deleted');
               }),
               catchError((error: any) => {
                 console.error('Error deleting profile image:', error);
@@ -500,7 +492,6 @@ export class ProfileComponent implements OnInit {
           .subscribe(
             (response: any) => {
               this.snackbarService.open('Image Uploaded Successfully');
-              console.log('Image uploaded successfully');
               this.userProfile.profileImage = response.profileImage;
             },
             (error: any) => {

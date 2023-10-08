@@ -35,7 +35,6 @@ export class ListItemDialogComponent {
     });
 
     if (data) {
-      console.log(data);
       // if editing an existing listing
       this.dialogTitle = 'Edit Listing';
     } else {
@@ -90,8 +89,6 @@ export class ListItemDialogComponent {
       harvestDate: productFormValue.harvestDate,
       price: productFormValue.price,
     };
-
-    console.log('onclose formdata: ' + JSON.stringify(updatedProduce));
 
     this.updateProduce.emit(updatedProduce);
     this.dialogRef.close(productFormValue);
