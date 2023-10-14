@@ -1,11 +1,14 @@
 <div class="main-container">
-    <div *ngIf="(profile$ | async) as profiles">
+    <div *ngIf="(profile | async) as profiles">
         <div class="grid-layout" *ngFor="let profile of profiles">
             <div class="item-container">
+                <!-- <img class="profile-image" [src]="profile.profileImage" /> -->
                 <div class="profile-name">
                     {{profile.displayName}}
                 </div>
-                
+                <div class="profile-date-created">
+                    Member since: {{ parseDate(profile.creationDate.toString()) | date:'yyyy-MM-dd' }}
+                </div>
             </div>
 
         </div>

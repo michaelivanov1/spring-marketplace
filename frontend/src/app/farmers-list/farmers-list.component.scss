@@ -1,7 +1,8 @@
 .main-container {
 
     .grid-layout {
-        display: grid;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
 
 
@@ -9,6 +10,13 @@
             width: 40vw;
             padding: 30px;
             border: 1px solid lightblue;
+            margin-right: 20px;
+
+            .profile-image {
+                width: 220px;
+                height: 160px;
+                margin-bottom: 5px;
+            }
 
             .profile-name {
                 border: 1px solid red;
@@ -18,4 +26,3 @@
     }
 
 }
-
