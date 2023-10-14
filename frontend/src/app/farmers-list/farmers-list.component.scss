@@ -1,0 +1,21 @@
+.main-container {
+
+    .grid-layout {
+        display: grid;
+        justify-content: center;
+
+
+        .item-container {
+            width: 40vw;
+            padding: 30px;
+            border: 1px solid lightblue;
+
+            .profile-name {
+                border: 1px solid red;
+                width: 20%;
+            }
+        }
+    }
+
+}
+

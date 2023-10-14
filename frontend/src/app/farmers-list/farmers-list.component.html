@@ -1,0 +1,13 @@
+<div class="main-container">
+    <div *ngIf="(profile$ | async) as profiles">
+        <div class="grid-layout" *ngFor="let profile of profiles">
+            <div class="item-container">
+                <div class="profile-name">
+                    {{profile.displayName}}
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
