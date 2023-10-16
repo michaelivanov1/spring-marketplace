@@ -13,6 +13,7 @@ import { SnackbarComponent } from '@app/snackbar/snackbar.component';
 export class ListItemDialogComponent {
   productForm: FormGroup;
   imageSrc: string;
+  imageName: string;
 
   @Output() updateProduce: EventEmitter<Produce> = new EventEmitter<Produce>();
   dialogTitle: string | undefined;
@@ -25,13 +26,14 @@ export class ListItemDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: Produce
   ) {
     this.imageSrc = '';
-
+    this.imageName = '';
     this.productForm = this.formBuilder.group({
       produceImage: [data?.produceImage, Validators.required],
+      imageName: [data?.imageName, Validators.required],
       foodName: [data?.foodName || '', Validators.required],
       qoh: [data?.qoh || '', Validators.required],
       harvestDate: [data?.harvestDate || '', Validators.required],
-      price: [data?.price || '', Validators.required]
+      price: [data?.price || '', Validators.required],
     });
 
     if (data) {
@@ -64,9 +66,9 @@ export class ListItemDialogComponent {
           this.imageSrc = reader.result as string;
           // set the base64 string in the produceImage field
           this.productForm.get('produceImage')!.setValue(reader.result);
-
+          this.productForm.get('imageName')!.setValue(file.name);
           const formData = new FormData();
-          formData.append('file', file);        
+          formData.append('file', file);
         };
         reader.readAsDataURL(file);
       } else {
@@ -84,12 +86,12 @@ export class ListItemDialogComponent {
     const updatedProduce: Produce = {
       ...this.data,
       produceImage: productFormValue.produceImage,
+      imageName: this.imageName,
       foodName: productFormValue.foodName,
       qoh: productFormValue.qoh,
       harvestDate: productFormValue.harvestDate,
       price: productFormValue.price,
     };
-
     this.updateProduce.emit(updatedProduce);
     this.dialogRef.close(productFormValue);
   }

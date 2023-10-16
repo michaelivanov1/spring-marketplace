@@ -189,54 +189,67 @@ export class ProfileComponent implements OnInit {
         timestamp: '',
       },
       produceImage: result.produceImage,
+      imageName: result.imageName,
       foodName: result.foodName,
       qoh: parseInt(result.qoh),
       harvestDate: result.harvestDate,
       price: parseFloat(result.price),
     };
 
-    this.userStandService
-      .getOne(this.userProfile.email)
-      .pipe(
-        catchError((err) => {
-          this.msg = err.message;
-          return of(null);
-        })
-      )
-      .subscribe((existingUserStand) => {
-        if (existingUserStand) {
-          // UserStand already exists, perform update
-          const itemExists = existingUserStand.produceList.some(
-            (item) => item.foodName === result.foodName
-          );
-          if (!itemExists) {
-            // add the new item to the produceList
-            this.userStand.produceList.push(produceItemsObj);
+    let binaryData = atob(produceItemsObj.produceImage.split(',')[1]);
+    let blob = new Blob(
+      [
+        new Uint8Array(binaryData.length).map((_, i) =>
+          binaryData.charCodeAt(i)
+        ),
+      ],
+      {}
+    );
+    let file = new File([blob], produceItemsObj.imageName, {});
+    console.log(file);
 
-            // update the userStand object with the new produceList
-            this.userStand.produceList = this.userStand.produceList;
+    // this.userStandService
+    //   .getOne(this.userProfile.email)
+    //   .pipe(
+    //     catchError((err) => {
+    //       this.msg = err.message;
+    //       return of(null);
+    //     })
+    //   )
+    //   .subscribe((existingUserStand) => {
+    //     if (existingUserStand) {
+    //       // UserStand already exists, perform update
+    //       const itemExists = existingUserStand.produceList.some(
+    //         (item) => item.foodName === result.foodName
+    //       );
+    //       if (!itemExists) {
+    //         // add the new item to the produceList
+    //         this.userStand.produceList.push(produceItemsObj);
 
-            // update the userStand on the server
-            this.updateUserStand(this.userStand);
-          } else {
-            this.snackbarService.open('Food Name Already Exists');
-          }
-        } else {
-          // userStand not created yet, perform add
-          const produceItemsArr = [produceItemsObj];
-          const itemCreateUserStand: UserStand = {
-            id: {
-              date: '',
-              timestamp: '',
-            },
-            email: this.userProfile.email,
-            displayName: '',
-            produceList: produceItemsArr,
-          };
-          this.createUserStand(itemCreateUserStand);
-        }
-        this.snackbarService.open('Item Successfully Listed');
-      });
+    //         // update the userStand object with the new produceList
+    //         this.userStand.produceList = this.userStand.produceList;
+
+    //         // update the userStand on the server
+    //         this.updateUserStand(this.userStand);
+    //       } else {
+    //         this.snackbarService.open('Food Name Already Exists');
+    //       }
+    //     } else {
+    //       // userStand not created yet, perform add
+    //       const produceItemsArr = [produceItemsObj];
+    //       const itemCreateUserStand: UserStand = {
+    //         id: {
+    //           date: '',
+    //           timestamp: '',
+    //         },
+    //         email: this.userProfile.email,
+    //         displayName: '',
+    //         produceList: produceItemsArr,
+    //       };
+    //       this.createUserStand(itemCreateUserStand);
+    //     }
+    //     this.snackbarService.open('Item Successfully Listed');
+    //   });
   }
 
   // handle edit of an existing market listing
@@ -458,8 +471,7 @@ export class ProfileComponent implements OnInit {
               headers,
             })
             .pipe(
-              tap(() => {
-              }),
+              tap(() => {}),
               catchError((error: any) => {
                 console.error('Error deleting profile image:', error);
                 return of(null);
@@ -477,9 +489,9 @@ export class ProfileComponent implements OnInit {
         formData.append('file', file);
         formData.append('email', email);
         formData.append('type', 'profile');
-
         reader.onload = (e) => (this.imageSrc = reader.result as string);
         reader.readAsDataURL(file);
+        reader.onload = (e) => console.log(reader.result as string);
 
         this.http
           .post(`${BASEURL}file`, formData, {
