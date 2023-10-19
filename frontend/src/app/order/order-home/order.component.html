@@ -1,0 +1,22 @@
+<!-- orders.component.html -->
+
+<div>
+  <h2>Your Orders</h2>
+  <ul>
+    <li class="order-card" *ngFor="let order of orders">Order ID: {{ order.orderId }} <br> Seller Email: {{ order.sellerEmail }} <br> Purchaser Email:
+      {{ order.buyerEmail }} <br> Order Total: {{ order.grandTotal }} <br> Invoice Date: {{ order.invoiceDate }}
+      <br> Produce:
+      <ul>
+        <li *ngFor="let produce of order.orderProduceList">
+          Name: {{ produce.foodName }} <br> Quantity: {{ produce.qty }} <br> Harvest Date: {{ produce.harvestDate }}
+          <br> Total: {{ produce.total }}
+        </li>
+      </ul>
+      <!-- TODO: add qr image to order eventually -->
+    </li>
+  </ul>
+</div>
+
+<ng-template #loadingTemplate>
+  <p>Loading orders...</p>
+</ng-template>
