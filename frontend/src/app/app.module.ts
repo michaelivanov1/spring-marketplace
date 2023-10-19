@@ -21,6 +21,8 @@ import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.c
 import { FaqComponent } from './faq/faq.component';
 import { CartitemDialogComponent } from './dialogs/cartitem-dialog/cartitem-dialog.component';
 import { FarmersListComponent } from './farmers-list/farmers-list.component';
+import { OrderComponent } from './order/order-home/order.component'
+import {NgxQRCodeModule} from "@techiediaries/ngx-qrcode";
 
 @NgModule({
   declarations: [
@@ -34,19 +36,19 @@ import { FarmersListComponent } from './farmers-list/farmers-list.component';
     ListItemDialogComponent,
     ShoppingCartComponent,
     FaqComponent,
-    CartitemDialogComponent,
-    FarmersListComponent
+    CartitemDialogComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatComponentsModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatComponentsModule,
+        MatDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        NgxQRCodeModule,
+    ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })

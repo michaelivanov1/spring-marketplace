@@ -9,6 +9,12 @@
           routerLinkActive="selected-menu-item">Profile</a>
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']" (click)="setTitle('Marketplace')"
           routerLinkActive="selected-menu-item">Marketplace</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['orders']" (click)="setTitle('Orders')"
+           routerLinkActive="selected-menu-item">Orders</a> -->
+        <!-- <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na']" (click)="setTitle('Newsletter')"
+          routerLinkActive="selected-menu-item">Newsletter</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na2']" (click)="setTitle('Blog')"
+          routerLinkActive="selected-menu-item">Blog</a> -->
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['farmers']" (click)="setTitle('Farmers')"
           routerLinkActive="selected-menu-item">Farmers</a>
         <a mat-tab-link [routerLink]="['faq']" (click)="setTitle('Faq')" routerLinkActive="selected-menu-item">FAQ/About
