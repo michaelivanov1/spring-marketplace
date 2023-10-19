@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile/profile.service';
 import { Profile } from '../profile/profile';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BASEURL } from '@app/constants';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-farmers-list',
@@ -23,33 +23,29 @@ export class FarmersListComponent implements OnInit {
   ) { }
 
 
-
   ngOnInit(): void {
-
     this.profile = this.profileService.get();
 
+    //   this.profile.subscribe((data: Profile[]) => {
+    //     this.profiles = data;
 
-    // this.profile.subscribe((data: Profile[]) => {
-    //   this.profiles = data;
-
-    //   this.profileImages = [];
-
-    //   data.forEach((p) => {
-    //     if (p.profileImage) {
-    //       this.profileImages.push(p.profileImage);
-    //     }
+    //     data.forEach((p) => {
+    //       if (p.profileImage) {
+    //         // Fetch profile images and store them in the profileImages object
+    //         this.fetchProfileImage(p.profileImage).subscribe((imageData: Blob) => {
+    //           this.profileImages[p.id] = imageData;
+    //         });
+    //       }
+    //     });
     //   });
+    // }
 
-
-    // const headers = new HttpHeaders().set(
-    //   'Authorization',
-    //   `Bearer ${localStorage.getItem('jwtToken')}`
-    // );
-
-    // this.http.get(`http://localhost:8080/api/file/120ddac6-afa8-44c0-a69e-6879fa2f51e0}`, { headers, responseType: 'blob' })
-    //   .subscribe((data) => {
-    //     this.profileImages = data;
-    //   });
+    // private fetchProfileImage(imageUrl: string): Observable<Blob> {
+    //   const headers = new HttpHeaders().set(
+    //     'Authorization',
+    //     `Bearer ${localStorage.getItem('jwtToken')}`
+    //   );
+    //   return this.http.get(imageUrl, { headers, responseType: 'blob' });
   }
 
   parseDate(dateString: string): Date {
