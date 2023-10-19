@@ -188,7 +188,7 @@ export class ProfileComponent implements OnInit {
         date: '',
         timestamp: '',
       },
-      produceImage: result.produceImage,
+      produceImage: '',
       imageName: result.imageName,
       foodName: result.foodName,
       qoh: parseInt(result.qoh),
@@ -196,60 +196,65 @@ export class ProfileComponent implements OnInit {
       price: parseFloat(result.price),
     };
 
-    let binaryData = atob(produceItemsObj.produceImage.split(',')[1]);
+    // turn base64 to blob file and get ready for file post
+    let binaryData = result.produceImage.split(',')[1];
     let blob = new Blob(
       [
         new Uint8Array(binaryData.length).map((_, i) =>
           binaryData.charCodeAt(i)
         ),
       ],
-      {}
+      { type: 'image/jpeg' }
     );
-    let file = new File([blob], produceItemsObj.imageName, {});
-    console.log(file);
+    let file = new File([blob], produceItemsObj.imageName, {
+      type: 'image/jpeg',
+    });
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append('email', this.userProfile.email);
+    formData.append('type', produceItemsObj.foodName);
+    this.userStandService
+      .getOne(this.userProfile.email)
+      .pipe(
+        catchError((err) => {
+          this.msg = err.message;
+          return of(null);
+        })
+      )
+      .subscribe((existingUserStand) => {
+        if (existingUserStand) {
+          // UserStand already exists, perform update
+          const itemExists = existingUserStand.produceList.some(
+            (item) => item.foodName === result.foodName
+          );
+          if (!itemExists) {
+            // add the new item to the produceList
+            this.userStand.produceList.push(produceItemsObj);
 
-    // this.userStandService
-    //   .getOne(this.userProfile.email)
-    //   .pipe(
-    //     catchError((err) => {
-    //       this.msg = err.message;
-    //       return of(null);
-    //     })
-    //   )
-    //   .subscribe((existingUserStand) => {
-    //     if (existingUserStand) {
-    //       // UserStand already exists, perform update
-    //       const itemExists = existingUserStand.produceList.some(
-    //         (item) => item.foodName === result.foodName
-    //       );
-    //       if (!itemExists) {
-    //         // add the new item to the produceList
-    //         this.userStand.produceList.push(produceItemsObj);
+            // update the userStand object with the new produceList
+            this.userStand.produceList = this.userStand.produceList;
 
-    //         // update the userStand object with the new produceList
-    //         this.userStand.produceList = this.userStand.produceList;
-
-    //         // update the userStand on the server
-    //         this.updateUserStand(this.userStand);
-    //       } else {
-    //         this.snackbarService.open('Food Name Already Exists');
-    //       }
-    //     } else {
-    //       // userStand not created yet, perform add
-    //       const produceItemsArr = [produceItemsObj];
-    //       const itemCreateUserStand: UserStand = {
-    //         id: {
-    //           date: '',
-    //           timestamp: '',
-    //         },
-    //         email: this.userProfile.email,
-    //         displayName: '',
-    //         produceList: produceItemsArr,
-    //       };
-    //       this.createUserStand(itemCreateUserStand);
-    //     }
-    //     this.snackbarService.open('Item Successfully Listed');
-    //   });
+            // update the userStand on the server
+            this.updateUserStand(this.userStand, formData);
+          } else {
+            this.snackbarService.open('Food Name Already Exists');
+          }
+        } else {
+          // userStand not created yet, perform add
+          const produceItemsArr = [produceItemsObj];
+          const itemCreateUserStand: UserStand = {
+            id: {
+              date: '',
+              timestamp: '',
+            },
+            email: this.userProfile.email,
+            displayName: '',
+            produceList: produceItemsArr,
+          };
+          this.createUserStand(itemCreateUserStand, formData);
+        }
+        this.snackbarService.open('Item Successfully Listed');
+      });
   }
 
   // handle edit of an existing market listing
@@ -274,8 +279,30 @@ export class ProfileComponent implements OnInit {
             ...userStand,
             produceList: [...userStand.produceList],
           };
+          // FormData
+          let formData;
+          if (updatedProduce.produceImage.includes('data')) {
+            let binaryData = updatedProduce.produceImage.split(',')[1];
+            let blob = new Blob(
+              [
+                new Uint8Array(binaryData.length).map((_, i) =>
+                  binaryData.charCodeAt(i)
+                ),
+              ],
+              { type: 'image/jpeg' }
+            );
+            let file = new File([blob], updatedProduce.foodName, {
+              type: 'image/jpeg',
+            });
+            formData = new FormData();
+            formData.append('file', file);
+            formData.append('email', this.userProfile.email);
+            formData.append('type', updatedProduce.foodName);
+          } else {
+            formData = null;
+          }
 
-          this.updateUserStand(this.userStand);
+          this.updateUserStand(this.userStand, formData);
         } else {
           console.error('something went wrong while editing produce item');
         }
@@ -308,6 +335,7 @@ export class ProfileComponent implements OnInit {
               this.userStand.produceList = this.userStand.produceList.filter(
                 (item) => item.foodName !== produce.foodName
               );
+
               if (this.userStand.produceList.length == 0) {
                 this.userStandService
                   .delete(this.userProfile.email)
@@ -325,8 +353,12 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  // for brand new accounts (or 0 items for sale), creates a fresh user stand for selling items
-  createUserStand(item: any): void {
+  // for brand new accounts (or 0 items for sale), creates a fresh user stand for selling items.
+  createUserStand(item: any, imageHandler: any): void {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
     this.userStandService
       .add(item)
       .pipe(
@@ -339,11 +371,34 @@ export class ProfileComponent implements OnInit {
         this.userStandDataExists = true;
         // TODO: temp fix; reload page when first item is loaded so it displays on profile
         location.reload();
+
+        // check if it needs to call the file post
+        if (imageHandler !== null) {
+          this.http
+            .post(`${BASEURL}file`, imageHandler, {
+              headers,
+              responseType: 'text', // set responseType to 'text' to avoid parsing as JSON
+            })
+            .pipe()
+            .subscribe(
+              () => {
+                this.snackbarService.open('Image Uploaded Successfully');
+              },
+              (error: any) => {
+                console.error('Error uploading image:', error);
+                this.snackbarService.open('Error Uploading Image');
+              }
+            );
+        }
       });
   }
 
   // for existing accounts (or > 0 items for sale), updates user stand data
-  updateUserStand(userStand: UserStand): void {
+  updateUserStand(userStand: UserStand, imageHandler: any): void {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
     this.userStandService
       .updateUserStand(userStand)
       .pipe(
@@ -354,6 +409,25 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe(() => {
         this.userStandDataExists = true;
+
+        // check if it needs to call the file post
+        if (imageHandler !== null) {
+          this.http
+            .post(`${BASEURL}file`, imageHandler, {
+              headers,
+              responseType: 'text', // set responseType to 'text' to avoid parsing as JSON
+            })
+            .pipe()
+            .subscribe(
+              () => {
+                this.snackbarService.open('Image Uploaded Successfully');
+              },
+              (error: any) => {
+                console.error('Error uploading image:', error);
+                this.snackbarService.open('Error Uploading Image');
+              }
+            );
+        }
       });
   }
 
@@ -387,7 +461,7 @@ export class ProfileComponent implements OnInit {
   saveChanges() {
     // handle display name updates
     this.userStand.displayName = this.updatedProfile.displayName;
-    this.updateUserStand(this.userStand);
+    this.updateUserStand(this.userStand, null);
 
     this.profileService
       .update(this.userProfile.email, this.updatedProfile)
@@ -485,26 +559,20 @@ export class ProfileComponent implements OnInit {
         }
 
         let formData = new FormData();
-        let email = this.userProfile.email;
         formData.append('file', file);
-        formData.append('email', email);
+        formData.append('email', this.userProfile.email);
         formData.append('type', 'profile');
         reader.onload = (e) => (this.imageSrc = reader.result as string);
         reader.readAsDataURL(file);
-        reader.onload = (e) => console.log(reader.result as string);
 
         this.http
           .post(`${BASEURL}file`, formData, {
             headers,
             responseType: 'text', // set responseType to 'text' to avoid parsing as JSON
           })
-          .pipe(
-            concatMap(() => this.profileService.getOne(this.decodedToken.sub))
-          )
           .subscribe(
-            (response: any) => {
+            () => {
               this.snackbarService.open('Image Uploaded Successfully');
-              this.userProfile.profileImage = response.profileImage;
             },
             (error: any) => {
               console.error('Error uploading image:', error);

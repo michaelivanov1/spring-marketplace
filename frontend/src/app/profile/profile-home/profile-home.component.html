@@ -1,24 +1,42 @@
 <mat-card align="center" style="padding: 0">
   <mat-card-content class="main-container">
-
     <div class="banner-container">
-      <img class="banner-image" src="../../../assets/profile-banner.png">
+      <img class="banner-image" src="../../../assets/profile-banner.png" />
     </div>
 
     <div class="img-container">
-      <img class="profile-image" *ngIf="profileImageLoaded"
-        [src]="imageSrc || '../../../assets/nate-johnstonunsplash.jpg'" alt="User's Profile Pic" />
-      <img class="profile-image-loading" *ngIf="!profileImageLoaded" src='../../../assets/profile-image-loading.gif'
-        alt="Loading Image..." />
+      <img
+        class="profile-image"
+        *ngIf="profileImageLoaded"
+        [src]="imageSrc || '../../../assets/nate-johnstonunsplash.jpg'"
+        alt="User's Profile Pic"
+      />
+      <img
+        class="profile-image-loading"
+        *ngIf="!profileImageLoaded"
+        src="../../../assets/profile-image-loading.gif"
+        alt="Loading Image..."
+      />
 
-
-      <label *ngIf="profileImageLoaded" for="file-upload" class="upload-profile-photo">Upload Photo
+      <label
+        *ngIf="profileImageLoaded"
+        for="file-upload"
+        class="upload-profile-photo"
+        >Upload Photo
       </label>
 
-      <input id="file-upload" type="file" accept="image/" (change)="onUploadPhoto($event)" />
+      <input
+        id="file-upload"
+        type="file"
+        accept="image/"
+        (change)="onUploadPhoto($event)"
+      />
 
-
-      <button mat-raised-button class="delete-account-button" (click)="openConfirmationDialog()">
+      <button
+        mat-raised-button
+        class="delete-account-button"
+        (click)="openConfirmationDialog()"
+      >
         Delete account
       </button>
     </div>
@@ -34,18 +52,30 @@
       <div class="primary-info">
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Display Name </strong>
-          <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field item-data"
-            placeholder="Display Name" />
+          <input
+            type="text"
+            [(ngModel)]="updatedProfile.displayName"
+            class="input-field item-data"
+            placeholder="Display Name"
+          />
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Phone Num</strong>
-          <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field item-data"
-            placeholder="Phone Num" />
+          <input
+            type="text"
+            [(ngModel)]="updatedProfile.phoneNumber"
+            class="input-field item-data"
+            placeholder="Phone Num"
+          />
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Description </strong>
-          <input type="text" [(ngModel)]="updatedProfile.description" class="input-field item-data"
-            placeholder="Description" />
+          <input
+            type="text"
+            [(ngModel)]="updatedProfile.description"
+            class="input-field item-data"
+            placeholder="Description"
+          />
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Email </strong>
@@ -54,18 +84,28 @@
       </div>
 
       <mat-card-actions style="margin: 0">
-        <button class="cancel-edit-button" mat-raised-button *ngIf="isEditable" (click)="cancelEdit()">
+        <button
+          class="cancel-edit-button"
+          mat-raised-button
+          *ngIf="isEditable"
+          (click)="cancelEdit()"
+        >
           Cancel
         </button>
-        <button class="save-update-profile-button" mat-raised-button
-          (click)="isEditable ? saveChanges() : toggleEdit()">
+        <button
+          class="save-update-profile-button"
+          mat-raised-button
+          (click)="isEditable ? saveChanges() : toggleEdit()"
+        >
           {{ isEditable ? "Save" : "Update Profile" }}
         </button>
       </mat-card-actions>
 
       <div class="account-description-container">
         <span *ngIf="!isEditable">
-          <p *ngIf="userProfile.description != ''">{{ userProfile.description }}</p>
+          <p *ngIf="userProfile.description != ''">
+            {{ userProfile.description }}
+          </p>
         </span>
         <!-- <mat-icon *ngIf="!isEditable" (click)="scrollToSection('produceSection')"
           class="down-arrow">keyboard_arrow_down</mat-icon> -->
@@ -75,33 +115,59 @@
 
   <mat-card-content>
     <div class="produce-container" id="produceSection">
-      <h2 style="margin-bottom: 10px; padding: 0px 10px; text-align: left;">
+      <h2 style="margin-bottom: 10px; padding: 0px 10px; text-align: left">
         {{ userStandDataExists ? "" : "You have nothing for sale yet!" }}
-        <button mat-raised-button class="list-item-button" (click)="openListItemDialog()">
-          <mat-icon class="icon" style="margin-right: 5px;">add</mat-icon>List Item
+        <button
+          mat-raised-button
+          class="list-item-button"
+          (click)="openListItemDialog()"
+        >
+          <mat-icon class="icon" style="margin-right: 5px">add</mat-icon>List
+          Item
         </button>
       </h2>
 
       <div class="grid-container">
         <ng-container *ngFor="let produce of userStand.produceList">
-          <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
-            [ngStyle]="{ cursor: getCursor() }" [ngClass]="{ selected: userStand === selectedProduct }">
+          <div
+            class="grid-item"
+            (mouseenter)="onHover(produce)"
+            (mouseleave)="onLeave()"
+            [ngStyle]="{ cursor: getCursor() }"
+            [ngClass]="{ selected: userStand === selectedProduct }"
+          >
             <div class="item-data">
-              <div class="hover-icons" *ngIf="isHovered && hoveredProduce === produce">
-                <button mat-icon-button class="edit-item-button" (click)="onEditClick(userStand, produce)">
+              <div
+                class="hover-icons"
+                *ngIf="isHovered && hoveredProduce === produce"
+              >
+                <button
+                  mat-icon-button
+                  class="edit-item-button"
+                  (click)="onEditClick(userStand, produce)"
+                >
                   <mat-icon>edit</mat-icon>
                 </button>
 
-                <button mat-icon-button class="delete-item-button" (click)="onDeleteClick(produce)">
+                <button
+                  mat-icon-button
+                  class="delete-item-button"
+                  (click)="onDeleteClick(produce)"
+                >
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
 
-              <img class="product-image" [src]="produce.produceImage || '../../../assets/Pumpkin.jpg'" />
+              <img
+                class="product-image"
+                [src]="produce.produceImage || '../../../assets/Pumpkin.jpg'"
+              />
 
               <p class="product-name">{{ produce.foodName }}</p>
               <p class="product-price">${{ produce.price }}</p>
-              <p class="product-qoh">{{ produce.qoh == 0 ? 'Out of stock!' : produce.qoh + 'x' }}</p>
+              <p class="product-qoh">
+                {{ produce.qoh == 0 ? "Out of stock!" : produce.qoh + "x" }}
+              </p>
               <div class="product-seller-container">
                 <p class="product-seller">
                   Seller: {{ userProfile.displayName }}
@@ -116,5 +182,4 @@
       </div>
     </div>
   </mat-card-content>
-
 </mat-card>

@@ -62,15 +62,6 @@ public class UserStandService {
         return existingUserStand;
     }
 
-    public UserStand updateUserStandByFields(String email, Map<String, Object> fields, String type) {
-        Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
-        if (existingUserStandOp.isPresent()) {
-            return null;
-        } else {
-            return null;
-        }
-    }
-
     public boolean deleteUserStandByEmail(String email) {
         Optional<UserStand> optionalUser = userStandRepository.findByEmail(email);
         if (optionalUser.isPresent()) {

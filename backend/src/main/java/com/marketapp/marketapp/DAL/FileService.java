@@ -56,7 +56,6 @@ public class FileService {
                     break;
                 }
             }
-            //userStandService.updateUserStandByFields(email, keyMap, type);
         }
 
         return fileId.toString();
