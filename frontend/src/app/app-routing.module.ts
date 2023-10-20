@@ -9,6 +9,7 @@ import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.c
 import { FaqComponent } from './faq/faq.component';
 import {OrderComponent} from "@app/order/order-home/order.component";
 import { FarmersListComponent } from './farmers-list/farmers-list.component';
+import {OrderDetailsComponent} from "@app/order-details/order-details.component";
 
 
 const routes: Routes = [
@@ -45,6 +46,11 @@ const routes: Routes = [
     path: 'orders',
     component: OrderComponent,
     title: 'Orders'
+  },
+  {
+    path: 'order/:id',
+    component: OrderDetailsComponent,
+    title: 'Order'
   },
 ];
 @NgModule({

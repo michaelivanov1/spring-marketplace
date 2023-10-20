@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SnackbarComponent } from '@app/snackbar/snackbar.component';
 import { BASEURL } from '@app/constants';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-order',
@@ -30,7 +31,8 @@ export class OrderComponent implements OnInit {
     private http: HttpClient,
     private orderService: OrderService,
     public dialog: MatDialog,
-    private snackbarService: SnackbarComponent
+    private snackbarService: SnackbarComponent,
+    private sanitizer: DomSanitizer
   ) {
     this.msg = '';
     this.userOrder = {
@@ -73,6 +75,15 @@ export class OrderComponent implements OnInit {
         console.error('Error loading orders:', error);
       }
     );
+  }
+
+  setImageSource(str: any): void {
+    this.qrcodebase64str = str;
+  }
+
+  getSanitizedImageSource(): SafeResourceUrl {
+    const data = `data:image/png;base64,${this.qrcodebase64str}`;
+    return this.sanitizer.bypassSecurityTrustUrl(data);
   }
 
 }

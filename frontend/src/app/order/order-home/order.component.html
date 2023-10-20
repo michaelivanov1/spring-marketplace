@@ -3,17 +3,20 @@
 <div>
   <h2>Your Orders</h2>
   <ul>
-    <li class="order-card" *ngFor="let order of orders">Order ID: {{ order.orderId }} <br> Seller Email: {{ order.sellerEmail }} <br> Purchaser Email:
-      {{ order.buyerEmail }} <br> Order Total: {{ order.grandTotal }} <br> Invoice Date: {{ order.invoiceDate }}
-      <br> Produce:
-      <ul>
-        <li *ngFor="let produce of order.orderProduceList">
-          Name: {{ produce.foodName }} <br> Quantity: {{ produce.qty }} <br> Harvest Date: {{ produce.harvestDate }}
-          <br> Total: {{ produce.total }}
-        </li>
-      </ul>
-      <!-- TODO: add qr image to order eventually -->
-    </li>
+    <!-- <a [routerLink]="'/order/orderid'" class="order-card"]> -->
+      <li class="order-card" *ngFor="let order of orders">Order ID: {{ order.orderId }} <br> Seller Email: {{ order.sellerEmail }} <br> Purchaser Email:
+        {{ order.buyerEmail }} <br> Order Total: {{ order.grandTotal }} <br> Invoice Date: {{ order.invoiceDate }}
+        <br> Produce:
+        <ul>
+          <li *ngFor="let produce of order.orderProduceList">
+            Name: {{ produce.foodName }} <br> Quantity: {{ produce.qty }} <br> Harvest Date: {{ produce.harvestDate }}
+            <br> Total: {{ produce.total }}
+          </li>
+        </ul>
+        {{ this.setImageSource(order.qrcodetxt) }}
+        <img [src]="getSanitizedImageSource()" alt="Base64 Image"/>
+      </li>
+    <!-- </a> -->
   </ul>
 </div>
 

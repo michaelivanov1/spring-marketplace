@@ -21,7 +21,8 @@ import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.c
 import { FaqComponent } from './faq/faq.component';
 import { CartitemDialogComponent } from './dialogs/cartitem-dialog/cartitem-dialog.component';
 import { FarmersListComponent } from './farmers-list/farmers-list.component';
-import { OrderComponent } from './order/order-home/order.component'
+import { OrderComponent } from './order/order-home/order.component';
+import { OrderDetailsComponent } from './order-details/order-details.component'
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { OrderComponent } from './order/order-home/order.component'
     FaqComponent,
     CartitemDialogComponent,
     OrderComponent,
-    FarmersListComponent
+    FarmersListComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,
