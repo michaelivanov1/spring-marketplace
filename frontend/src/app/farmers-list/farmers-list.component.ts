@@ -4,6 +4,8 @@ import { Profile } from '../profile/profile';
 import { Observable } from 'rxjs';
 import { BASEURL } from '@app/constants';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { SharedService } from '@app/shared.service';
 
 @Component({
   selector: 'app-farmers-list',
@@ -19,36 +21,24 @@ export class FarmersListComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
+    private sharedService: SharedService
   ) { }
 
 
   ngOnInit(): void {
     this.profile = this.profileService.get();
+  }
 
-    //   this.profile.subscribe((data: Profile[]) => {
-    //     this.profiles = data;
+  navigateToFarmersProfile(profile: Profile) {
+    this.sharedService.setUserEmail(profile.email);
 
-    //     data.forEach((p) => {
-    //       if (p.profileImage) {
-    //         // Fetch profile images and store them in the profileImages object
-    //         this.fetchProfileImage(p.profileImage).subscribe((imageData: Blob) => {
-    //           this.profileImages[p.id] = imageData;
-    //         });
-    //       }
-    //     });
-    //   });
-    // }
-
-    // private fetchProfileImage(imageUrl: string): Observable<Blob> {
-    //   const headers = new HttpHeaders().set(
-    //     'Authorization',
-    //     `Bearer ${localStorage.getItem('jwtToken')}`
-    //   );
-    //   return this.http.get(imageUrl, { headers, responseType: 'blob' });
+    this.router.navigate(['farmers-profile']);
   }
 
   parseDate(dateString: string): Date {
     return new Date(dateString);
   }
+
 }

@@ -1,28 +1,99 @@
-.main-container {
+// .main-container {
 
+//     .grid-layout {
+//         display: flex;
+//         margin-left: auto;
+//         margin-right: auto;
+//         margin-top: 30px;
+//         width: 40vw;
+
+//         .item-container {
+//             background-color: rgba(140, 195, 63, 0.1);
+//             display: flex;
+//             flex-direction: row;
+//             justify-content: center;
+//             gap: 20px;
+//             width: 40vw;
+//             padding: 30px;
+//             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+//             transition: all 0.3s ease;
+//         }
+
+//         .item-container:hover {
+//             cursor: pointer;
+//             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.62);
+//             background-color: rgba(140, 195, 63, 0.248);
+//         }
+
+//         .profile-image {
+//             height: 160px;
+//             width: 90%;
+//         }
+
+//         .profile-name {
+//             line-height: 30px;
+//             font-size: 30px;
+
+//         }
+
+//         .profile-description {
+//             margin-top: 10px;
+//         }
+
+//         .name-description-container {
+//             width: 50%;
+//         }
+//     }
+// }
+
+.main-container {
     .grid-layout {
         display: flex;
         flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 80vw;
         justify-content: center;
 
 
         .item-container {
-            width: 40vw;
-            padding: 30px;
-            border: 1px solid lightblue;
-            margin-right: 20px;
+            background-color: rgba(140, 195, 63, 0.1);
+            flex: 0 0 calc(40% - 20px);
+            margin: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.60);
+                background-color: rgba(140, 195, 63, 0.250);
+            }
+
+            .left-items-container {
+                width: 30%;
+                height: 140px;
+                float: left;
+            }
 
             .profile-image {
-                width: 220px;
-                height: 160px;
-                margin-bottom: 5px;
+                height: 100%;
+                width: 100%;
             }
 
             .profile-name {
-                border: 1px solid red;
-                width: 20%;
+                line-height: 30px;
+                font-size: 30px;
+            }
+
+            .profile-description {
+                margin-top: 10px;
+            }
+
+            .right-items-container {
+                width: 65%;
+                float: right;
             }
         }
     }
-
 }
