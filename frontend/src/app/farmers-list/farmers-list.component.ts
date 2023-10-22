@@ -3,9 +3,10 @@ import { ProfileService } from '../profile/profile.service';
 import { Profile } from '../profile/profile';
 import { Observable } from 'rxjs';
 import { BASEURL } from '@app/constants';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SharedService } from '@app/shared.service';
+import { UserStand } from '@app/user-stand/user-stand';
 
 @Component({
   selector: 'app-farmers-list',
@@ -16,19 +17,50 @@ export class FarmersListComponent implements OnInit {
 
   profile: Observable<Profile[]> | undefined;
   profiles: Profile[] = [];
-
+  creationDateFormatted!: Date;
   profileImages: any = [];
+  imageSrc: string;
 
   constructor(
     private profileService: ProfileService,
     private http: HttpClient,
     private router: Router,
-    private sharedService: SharedService
-  ) { }
+    private sharedService: SharedService,
+  ) {
+    this.imageSrc = '';
+  }
 
 
   ngOnInit(): void {
-    this.profile = this.profileService.get();
+    this.profileService.get().subscribe(
+      (profiles) => {
+        this.profiles = profiles;
+        this.fetchProfileImages();
+      }
+    );
+  }
+
+  fetchProfileImages() {
+    this.profiles.forEach((profile) => {
+      if (profile.profileImage) {
+        const headers = new HttpHeaders().set(
+          'Authorization',
+          `Bearer ${localStorage.getItem('jwtToken')}`
+        );
+
+        this.http.get(`${BASEURL}file/${profile.profileImage}`, {
+          headers,
+          responseType: 'blob',
+        })
+          .subscribe((data: any) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              profile.profileImage = reader.result as string;
+            };
+            reader.readAsDataURL(data);
+          });
+      }
+    });
   }
 
   navigateToFarmersProfile(profile: Profile) {

@@ -1,49 +1,21 @@
-<!-- <div class="main-container">
-    <p style="text-align: center; margin-top: 10px; font-size: 16px"><b>In Progress: view all farmers/click to view their profile</b></p>
-    <div *ngIf="(profile | async) as profiles">
-        <div class="grid-layout" *ngFor="let profile of profiles">
-            <div class="item-container">
-                <div>
-                    <img class="profile-image" src="../../assets/Pumpkin.jpg" />
-                    <div class="profile-date-created">
-                        Member since: {{ parseDate(profile.creationDate.toString()) | date:'yyyy-MM-dd' }}
-                    </div>
-                </div>
-
-                <div class="name-description-container">
-                    <div class="profile-name">
-                        {{profile.displayName}}
-                    </div>
-                    <div class="profile-description">
-                        {{profile.description}}
-                    </div>
-                </div>
-              
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="main-container">
-    <p style="text-align: center; margin-top: 10px; font-size: 16px"><b>In Progress: user will soon be able to go
-            to farmers profile</b></p>
-    <div *ngIf="(profile | async) as profiles">
+    <div *ngIf="profiles">
         <div class="grid-layout">
             <div class="item-container" *ngFor="let profile of profiles" (click)="navigateToFarmersProfile(profile)">
 
                 <div class="left-items-container">
-                    <img class="profile-image" src="../../assets/Pumpkin.jpg" />
+                    <img class="profile-image" *ngIf="profile.profileImage" [src]="profile.profileImage" />
                     <div class="profile-date-created">
-                        Member since: {{ parseDate(profile.creationDate.toString()) | date:'yyyy-MM-dd' }}
+                        Member since: {{ parseDate(profile.creationDate) | date:'yyyy-MM-dd' }}
                     </div>
                 </div>
 
                 <div class="right-items-container">
                     <div class="profile-name">
-                        {{profile.displayName}}
+                        {{ profile.displayName }}
                     </div>
                     <div class="profile-description">
-                        {{profile.description}}
+                        {{ profile.description }}
                     </div>
                 </div>
             </div>

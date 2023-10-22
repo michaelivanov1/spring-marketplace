@@ -1,3 +1,58 @@
-<div *ngIf="profile">
-    <p>Name: {{ profile.displayName }}</p>
-</div>
+<mat-card align="center" style="padding: 0">
+    <mat-card-content class="main-container">
+
+        <div class="banner-container">
+            <img class="banner-image" src="../../../assets/profile-banner.png">
+        </div>
+
+        <div class="img-container">
+            <img class="profile-image" *ngIf="profileImageLoaded"
+                [src]="imageSrc || '../../../assets/default-avatar'" alt="User's Profile Pic" />
+            <img class="profile-image-loading" *ngIf="!profileImageLoaded"
+                src='../../../assets/profile-image-loading.gif' alt="Loading Image..." />
+
+        </div>
+
+        <div *ngIf="profile" class="account-details-container">
+            <span class="display-name-input">
+                {{ profile.displayName }}
+            </span>
+            <p style="font-size: small">
+                Member since: {{ dateCreatedFormatted }}
+            </p>
+
+            <div class="account-description-container">
+                <span>
+                    <p *ngIf="profile.description != ''">{{ profile.description }}</p>
+                </span>
+            </div>
+        </div>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="userStandDataExists">
+        <div class="produce-container" id="produceSection">
+            <div class="grid-container">
+                <ng-container *ngFor="let produce of userStand.produceList">
+                    <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
+                        [ngStyle]="{ cursor: getCursor() }">
+
+                        <div class="item-data">
+                            <img class="product-image" [src]="produce.produceImage" />
+                            <p class="product-name">{{ produce.foodName }}</p>
+                            <p class="product-price">${{ produce.price }}</p>
+                            <p class="product-qoh">{{ produce.qoh == 0 ? 'Out of stock!' : produce.qoh + 'x' }}</p>
+                            <div class="product-seller-container">
+                                <p class="product-seller">
+                                    Seller: {{ profile!.displayName }}
+                                </p>
+                                <p class="product-harvestdate">
+                                    Harvested: {{ produce.harvestDate }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

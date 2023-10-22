@@ -7,7 +7,7 @@
 
     <div class="img-container">
       <img class="profile-image" *ngIf="profileImageLoaded"
-        [src]="imageSrc || '../../../assets/nate-johnstonunsplash.jpg'" alt="User's Profile Pic" />
+        [src]="imageSrc || '../../../assets/default-avatar'" alt="User's Profile Pic" />
       <img class="profile-image-loading" *ngIf="!profileImageLoaded" src='../../../assets/profile-image-loading.gif'
         alt="Loading Image..." />
 
@@ -85,7 +85,7 @@
       <div class="grid-container">
         <ng-container *ngFor="let produce of userStand.produceList">
           <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
-            [ngStyle]="{ cursor: getCursor() }" [ngClass]="{ selected: userStand === selectedProduct }">
+            [ngStyle]="{ cursor: getCursor() }">
             <div class="item-data">
               <div class="hover-icons" *ngIf="isHovered && hoveredProduce === produce">
                 <button mat-icon-button class="edit-item-button" (click)="onEditClick(userStand, produce)">
@@ -97,7 +97,7 @@
                 </button>
               </div>
 
-              <img class="product-image" [src]="produce.produceImage || '../../../assets/Pumpkin.jpg'" />
+              <img class="product-image" [src]="produce.produceImage" />
 
               <p class="product-name">{{ produce.foodName }}</p>
               <p class="product-price">${{ produce.price }}</p>

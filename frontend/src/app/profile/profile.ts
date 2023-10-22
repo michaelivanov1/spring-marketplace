@@ -10,6 +10,6 @@ export interface Profile {
   description: String;
   phoneNumber: String;
   profileImage: String;
-  creationDate: String;
+  creationDate: string;
   email: string;
 }
