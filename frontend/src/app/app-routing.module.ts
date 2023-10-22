@@ -7,9 +7,10 @@ import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.component';
 import { FaqComponent } from './faq/faq.component';
-import {OrderComponent} from "@app/order/order-home/order.component";
+import { OrderComponent } from "@app/order/order-home/order.component";
 import { FarmersListComponent } from './farmers-list/farmers-list.component';
-import {OrderDetailsComponent} from "@app/order-details/order-details.component";
+import { OrderDetailsComponent } from "@app/order-details/order-details.component";
+import { FarmersProfileComponent } from './farmers-profile/farmers-profile.component';
 
 
 const routes: Routes = [
@@ -33,11 +34,6 @@ const routes: Routes = [
     title: 'Faq',
   },
   {
-    path: 'farmers',
-    component: FarmersListComponent,
-    title: 'Farmers',
-  },
-  {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
     title: 'Shopping Cart',
@@ -52,6 +48,17 @@ const routes: Routes = [
     component: OrderDetailsComponent,
     title: 'Order'
   },
+  {
+    path: 'farmers',
+    component: FarmersListComponent,
+    title: 'Farmers',
+  },
+  {
+    path: 'farmers-profile',
+    component: FarmersProfileComponent,
+    title: 'Farmers Profile'
+  }
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
