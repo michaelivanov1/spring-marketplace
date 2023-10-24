@@ -58,7 +58,7 @@ public class FileService {
             }
         }
 
-        return uuid;
+        return uuid.toString();
     }
 
     public GridFSFile findFileByObjectId(String id) {
