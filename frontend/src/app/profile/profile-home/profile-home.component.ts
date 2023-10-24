@@ -231,6 +231,8 @@ export class ProfileComponent implements OnInit {
             displayName: '',
             produceList: produceItemsArr,
           };
+          // update the userStand object with the new produceList
+          this.userStand = itemCreateUserStand;
           this.createUserStand(itemCreateUserStand);
         }
         this.snackbarService.open('Item Successfully Listed');
@@ -322,8 +324,6 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe(() => {
         this.userStandDataExists = true;
-        // TODO: temp fix; reload page when first item is loaded so it displays on profile
-        location.reload();
       });
   }
 
@@ -456,8 +456,7 @@ export class ProfileComponent implements OnInit {
               headers,
             })
             .pipe(
-              tap(() => {
-              }),
+              tap(() => {}),
               catchError((error: any) => {
                 console.error('Error deleting profile image:', error);
                 return of(null);
