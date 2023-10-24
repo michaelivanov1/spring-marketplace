@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
   emailApiResponse: any;
   pictureApiResponse: any;
   profileImageLoaded: Boolean = false;
+  rawProduceImg: string[];
 
   constructor(
     private http: HttpClient,
@@ -91,6 +92,7 @@ export class ProfileComponent implements OnInit {
     this.dateCreatedFormatted = '';
     this.userStandDataExists = false;
     this.imageSrc = '';
+    this.rawProduceImg = [];
   }
 
   // grab all users profile data & listings on page init
@@ -176,6 +178,9 @@ export class ProfileComponent implements OnInit {
           this.userStand = data;
           if (this.userStand.produceList.length > 0)
             this.userStandDataExists = true;
+          // loop through and api call the images
+          // put them in an array
+          // change the html to have the the array for pictures
         }
       });
   }
@@ -251,6 +256,9 @@ export class ProfileComponent implements OnInit {
             displayName: '',
             produceList: produceItemsArr,
           };
+          // update the userStand object with the new produceList
+          this.userStand = itemCreateUserStand;
+
           this.createUserStand(itemCreateUserStand, formData);
         }
         this.snackbarService.open('Item Successfully Listed');
@@ -263,6 +271,10 @@ export class ProfileComponent implements OnInit {
       width: '400px',
       data: produce,
     });
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
 
     dialogRef.componentInstance.updateProduce.subscribe(
       (updatedProduce: Produce) => {
@@ -271,14 +283,6 @@ export class ProfileComponent implements OnInit {
           (item) => item.foodName === produce.foodName
         );
         if (index !== -1) {
-          // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
-          userStand.produceList[index] = updatedProduce;
-
-          // update the userStand object with the updated produceList
-          this.userStand = {
-            ...userStand,
-            produceList: [...userStand.produceList],
-          };
           // FormData
           let formData;
           if (updatedProduce.produceImage.includes('data')) {
@@ -301,8 +305,34 @@ export class ProfileComponent implements OnInit {
           } else {
             formData = null;
           }
+          // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
+          updatedProduce.produceImage = '';
+          userStand.produceList[index] = updatedProduce;
 
+          // update the userStand object with the updated produceList
+          this.userStand = {
+            ...userStand,
+            produceList: [...userStand.produceList],
+          };
           this.updateUserStand(this.userStand, formData);
+          if (this.useRegex(updatedProduce.produceImage)) {
+            this.http
+              .delete(`${BASEURL}file/${updatedProduce.produceImage}`, {
+                headers,
+              })
+              .pipe(
+                tap(() => {}),
+                catchError((error: any) => {
+                  console.error('Error deleting profile image:', error);
+                  return of(null);
+                })
+              )
+              .subscribe((response) => {
+                if (response !== null) {
+                  // handle the response if needed
+                }
+              });
+          }
         } else {
           console.error('something went wrong while editing produce item');
         }
@@ -318,6 +348,10 @@ export class ProfileComponent implements OnInit {
 
   // handles deleting of an existing market listing
   onDeleteClick(produce: Produce) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '250px',
       data: `Are you sure you want to remove your listing for ${produce.foodName}?`,
@@ -349,6 +383,29 @@ export class ProfileComponent implements OnInit {
               console.error('error deleting item: ', error);
             }
           );
+        // grab index of current produce in userStand.produceList
+        const index = this.userStand.produceList.findIndex(
+          (item) => item.foodName === produce.foodName
+        );
+        this.http
+          .delete(
+            `${BASEURL}file/${this.userStand.produceList[index].produceImage}`,
+            {
+              headers,
+            }
+          )
+          .pipe(
+            tap(() => {}),
+            catchError((error: any) => {
+              console.error('Error deleting profile image:', error);
+              return of(null);
+            })
+          )
+          .subscribe((response) => {
+            if (response !== null) {
+              // handle the response if needed
+            }
+          });
       }
     });
   }
@@ -369,9 +426,6 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe(() => {
         this.userStandDataExists = true;
-        // TODO: temp fix; reload page when first item is loaded so it displays on profile
-        location.reload();
-
         // check if it needs to call the file post
         if (imageHandler !== null) {
           this.http
@@ -391,6 +445,8 @@ export class ProfileComponent implements OnInit {
             );
         }
       });
+    // // TODO: temp fix; reload page when first item is loaded so it displays on profile
+    // location.reload();
   }
 
   // for existing accounts (or > 0 items for sale), updates user stand data
@@ -409,7 +465,6 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe(() => {
         this.userStandDataExists = true;
-
         // check if it needs to call the file post
         if (imageHandler !== null) {
           this.http
@@ -615,7 +670,7 @@ export class ProfileComponent implements OnInit {
   //   }
   // }
 
-  //helper math functions
+  //helper functions
   convertToEST(dateString: any): string {
     const utcDate = new Date(dateString);
     const estOffset = -4 * 60; // EST is UTC-4
@@ -625,5 +680,10 @@ export class ProfileComponent implements OnInit {
     const isoString = utcDate.toISOString(); // Convert back to ISO string
 
     return isoString;
+  }
+  useRegex(input: any): boolean {
+    let regex =
+      /[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/i;
+    return regex.test(input);
   }
 }
