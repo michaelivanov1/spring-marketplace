@@ -626,8 +626,9 @@ export class ProfileComponent implements OnInit {
             responseType: 'text', // set responseType to 'text' to avoid parsing as JSON
           })
           .subscribe(
-            () => {
+            (response: any) => {
               this.snackbarService.open('Image Uploaded Successfully');
+              this.userProfile.profileImage = response;
             },
             (error: any) => {
               console.error('Error uploading image:', error);
