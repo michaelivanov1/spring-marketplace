@@ -1,51 +1,3 @@
-// .main-container {
-
-//     .grid-layout {
-//         display: flex;
-//         margin-left: auto;
-//         margin-right: auto;
-//         margin-top: 30px;
-//         width: 40vw;
-
-//         .item-container {
-//             background-color: rgba(140, 195, 63, 0.1);
-//             display: flex;
-//             flex-direction: row;
-//             justify-content: center;
-//             gap: 20px;
-//             width: 40vw;
-//             padding: 30px;
-//             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-//             transition: all 0.3s ease;
-//         }
-
-//         .item-container:hover {
-//             cursor: pointer;
-//             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.62);
-//             background-color: rgba(140, 195, 63, 0.248);
-//         }
-
-//         .profile-image {
-//             height: 160px;
-//             width: 90%;
-//         }
-
-//         .profile-name {
-//             line-height: 30px;
-//             font-size: 30px;
-
-//         }
-
-//         .profile-description {
-//             margin-top: 10px;
-//         }
-
-//         .name-description-container {
-//             width: 50%;
-//         }
-//     }
-// }
-
 .main-container {
     .grid-layout {
         display: flex;
@@ -55,12 +7,11 @@
         max-width: 80vw;
         justify-content: center;
 
-
         .item-container {
             background-color: rgba(140, 195, 63, 0.1);
             flex: 0 0 calc(40% - 20px);
             margin: 20px;
-            padding: 40px;
+            padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
 
@@ -74,25 +25,66 @@
                 width: 30%;
                 height: 140px;
                 float: left;
-            }
 
-            .profile-image {
-                height: 100%;
-                width: 100%;
-            }
-
-            .profile-name {
-                line-height: 30px;
-                font-size: 30px;
-            }
-
-            .profile-description {
-                margin-top: 10px;
+                .profile-image {
+                    height: 100%;
+                    width: 100%;
+                }
             }
 
             .right-items-container {
+                height: 140px;
                 width: 65%;
                 float: right;
+                position: relative;
+
+                .profile-name {
+                    line-height: 30px;
+                    font-size: 30px;
+                }
+
+                .profile-description {
+                    margin-top: 10px;
+                }
+
+                .profile-date-created {
+                    position: absolute;
+                    height: 10%;
+                    width: 100%;
+                    bottom: 0;
+                }
+
+                @media screen and (max-width: 750px) {
+                    .profile-name {
+                        font-size: 18px;
+                        line-height: 1;
+                    }
+
+                    .profile-description {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+        }
+
+        @media screen and (max-width: 1250px) {
+            .item-container {
+                flex: 0 0 calc(80% - 20px);
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            .left-items-container {
+                width: 0% !important;
+            }
+
+            .right-items-container {
+                width: 100% !important;
+            }
+
+            .profile-description {
+                font-size: 16px !important;
             }
         }
     }

@@ -5,9 +5,6 @@
 
                 <div class="left-items-container">
                     <img class="profile-image" *ngIf="profile.profileImage" [src]="profile.profileImage" />
-                    <div class="profile-date-created">
-                        Member since: {{ parseDate(profile.creationDate) | date:'yyyy-MM-dd' }}
-                    </div>
                 </div>
 
                 <div class="right-items-container">
@@ -15,7 +12,10 @@
                         {{ profile.displayName }}
                     </div>
                     <div class="profile-description">
-                        {{ profile.description }}
+                        {{ profile.description != '' ? profile.description : 'This farmer has not setup a profile description' }}
+                    </div>
+                    <div class="profile-date-created">
+                        Member since: {{ parseDate(profile.creationDate) | date:'yyyy-MM-dd' }}
                     </div>
                 </div>
             </div>
