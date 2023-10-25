@@ -6,8 +6,8 @@
         </div>
 
         <div class="img-container">
-            <img class="profile-image" *ngIf="profileImageLoaded"
-                [src]="imageSrc || '../../../assets/default-avatar'" alt="User's Profile Pic" />
+            <img class="profile-image" *ngIf="profileImageLoaded" [src]="imageSrc || '../../../assets/default-avatar'"
+                alt="User's Profile Pic" />
             <img class="profile-image-loading" *ngIf="!profileImageLoaded"
                 src='../../../assets/profile-image-loading.gif' alt="Loading Image..." />
 
@@ -25,6 +25,10 @@
                 <span>
                     <p *ngIf="profile.description != ''">{{ profile.description }}</p>
                 </span>
+            </div>
+
+            <div class="nothing-for-sale-container" *ngIf="userStand.produceList.length == 0">
+                <p class="nothing-for-sale">This user currently has nothing for sale</p>
             </div>
         </div>
     </mat-card-content>
