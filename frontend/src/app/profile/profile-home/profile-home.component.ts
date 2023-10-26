@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { catchError, tap, switchMap, concatMap } from 'rxjs/operators';
 import { ProfileService } from '../profile.service';
 import { Profile } from '../profile';
@@ -178,9 +178,32 @@ export class ProfileComponent implements OnInit {
           this.userStand = data;
           if (this.userStand.produceList.length > 0)
             this.userStandDataExists = true;
+
           // loop through and api call the images
-          // put them in an array
-          // change the html to have the the array for pictures
+          // Initialize an array to keep track of the order
+          const requests = data.produceList.map((e) =>
+            this.http.get(`${BASEURL}file/${e.produceImage}`, {
+              headers,
+              responseType: 'blob',
+            })
+          );
+          forkJoin(requests)
+            .pipe(
+              catchError((err) => {
+                this.msg = err.message;
+                return of([]);
+              })
+            )
+            .subscribe((responses: any[]) => {
+              responses.forEach((imageData: any, index) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                  const currentImage = reader.result as string;
+                  this.rawProduceImg[index] = currentImage;
+                };
+                reader.readAsDataURL(imageData);
+              });
+            });
         }
       });
   }
@@ -201,21 +224,10 @@ export class ProfileComponent implements OnInit {
       price: parseFloat(result.price),
     };
 
-    // turn base64 to blob file and get ready for file post
-    let binaryData = result.produceImage.split(',')[1];
-    let blob = new Blob(
-      [
-        new Uint8Array(binaryData.length).map((_, i) =>
-          binaryData.charCodeAt(i)
-        ),
-      ],
-      { type: 'image/jpeg' }
-    );
-    let file = new File([blob], produceItemsObj.imageName, {
-      type: 'image/jpeg',
-    });
+    const reader = new FileReader();
+
     let formData = new FormData();
-    formData.append('file', file);
+    formData.append('file', result.produceImage);
     formData.append('email', this.userProfile.email);
     formData.append('type', produceItemsObj.foodName);
     this.userStandService
@@ -236,8 +248,12 @@ export class ProfileComponent implements OnInit {
             // add the new item to the produceList
             this.userStand.produceList.push(produceItemsObj);
 
-            // update the userStand object with the new produceList
+            // update the userStand object with the new produceList and raw array
             this.userStand.produceList = this.userStand.produceList;
+            reader.onload = () => {
+              this.rawProduceImg.push(reader.result as string);
+            };
+            reader.readAsDataURL(result.produceImage);
 
             // update the userStand on the server
             this.updateUserStand(this.userStand, formData);
@@ -256,8 +272,12 @@ export class ProfileComponent implements OnInit {
             displayName: '',
             produceList: produceItemsArr,
           };
-          // update the userStand object with the new produceList
+          // update the userStand object with the new produceList and raw array
           this.userStand = itemCreateUserStand;
+          reader.onload = () => {
+            this.rawProduceImg.push(reader.result as string);
+          };
+          reader.readAsDataURL(result.produceImage);
 
           this.createUserStand(itemCreateUserStand, formData);
         }
@@ -285,25 +305,43 @@ export class ProfileComponent implements OnInit {
         if (index !== -1) {
           // FormData
           let formData;
-          if (updatedProduce.produceImage.includes('data')) {
-            let binaryData = updatedProduce.produceImage.split(',')[1];
-            let blob = new Blob(
-              [
-                new Uint8Array(binaryData.length).map((_, i) =>
-                  binaryData.charCodeAt(i)
-                ),
-              ],
-              { type: 'image/jpeg' }
-            );
-            let file = new File([blob], updatedProduce.foodName, {
-              type: 'image/jpeg',
-            });
-            formData = new FormData();
-            formData.append('file', file);
-            formData.append('email', this.userProfile.email);
-            formData.append('type', updatedProduce.foodName);
-          } else {
-            formData = null;
+
+          formData = new FormData();
+          formData.append('file', updatedProduce.produceImage);
+          formData.append('email', this.userProfile.email);
+          formData.append('type', updatedProduce.foodName);
+
+          if (this.useRegex(this.userStand.produceList[index].produceImage)) {
+            this.http
+              .delete(
+                `${BASEURL}file/${this.userStand.produceList[index].produceImage}`,
+                {
+                  headers,
+                }
+              )
+              .pipe(
+                tap(() => {}),
+                catchError((error: any) => {
+                  console.error('Error deleting profile image:', error);
+                  return of(null);
+                })
+              )
+              .subscribe(() => {
+                const blobData = new Blob(
+                  [
+                    Uint8Array.from(atob(updatedProduce.produceImage), (c) =>
+                      c.charCodeAt(0)
+                    ),
+                  ],
+                  { type: 'image/jpeg' }
+                );
+
+                const reader = new FileReader();
+                reader.onload = () => {
+                  this.rawProduceImg.splice(index, 1, reader.result as string);
+                };
+                reader.readAsDataURL(blobData);
+              });
           }
           // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
           updatedProduce.produceImage = '';
@@ -315,24 +353,6 @@ export class ProfileComponent implements OnInit {
             produceList: [...userStand.produceList],
           };
           this.updateUserStand(this.userStand, formData);
-          if (this.useRegex(updatedProduce.produceImage)) {
-            this.http
-              .delete(`${BASEURL}file/${updatedProduce.produceImage}`, {
-                headers,
-              })
-              .pipe(
-                tap(() => {}),
-                catchError((error: any) => {
-                  console.error('Error deleting profile image:', error);
-                  return of(null);
-                })
-              )
-              .subscribe((response) => {
-                if (response !== null) {
-                  // handle the response if needed
-                }
-              });
-          }
         } else {
           console.error('something went wrong while editing produce item');
         }
@@ -416,6 +436,7 @@ export class ProfileComponent implements OnInit {
       'Authorization',
       `Bearer ${localStorage.getItem('jwtToken')}`
     );
+
     this.userStandService
       .add(item)
       .pipe(
@@ -437,6 +458,19 @@ export class ProfileComponent implements OnInit {
             .subscribe(
               () => {
                 this.snackbarService.open('Image Uploaded Successfully');
+
+                //update the frontend(un-optimize)
+                this.userStandService
+                  .getOne(this.decodedToken.sub)
+                  .pipe(
+                    catchError((err) => {
+                      this.msg = err.message;
+                      return of(null);
+                    })
+                  )
+                  .subscribe((data: any) => {
+                    this.userStand = data;
+                  });
               },
               (error: any) => {
                 console.error('Error uploading image:', error);
@@ -445,8 +479,6 @@ export class ProfileComponent implements OnInit {
             );
         }
       });
-    // // TODO: temp fix; reload page when first item is loaded so it displays on profile
-    // location.reload();
   }
 
   // for existing accounts (or > 0 items for sale), updates user stand data
@@ -476,6 +508,19 @@ export class ProfileComponent implements OnInit {
             .subscribe(
               () => {
                 this.snackbarService.open('Image Uploaded Successfully');
+
+                //update the frontend(un-optimize)
+                this.userStandService
+                  .getOne(this.decodedToken.sub)
+                  .pipe(
+                    catchError((err) => {
+                      this.msg = err.message;
+                      return of(null);
+                    })
+                  )
+                  .subscribe((data: any) => {
+                    this.userStand = data;
+                  });
               },
               (error: any) => {
                 console.error('Error uploading image:', error);

@@ -55,22 +55,16 @@ export class ListItemDialogComponent {
     // check if a file was selected
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      const reader = new FileReader();
 
       const fileExtension = file.name.split('.').pop().toLowerCase();
       const allowedExtensions = ['jpg', 'jpeg', 'png'];
 
       // only allow file upload if file extension is allowed
       if (allowedExtensions.includes(fileExtension)) {
-        reader.onload = (e) => {
-          this.imageSrc = reader.result as string;
-          // set the base64 string in the produceImage field
-          this.productForm.get('produceImage')!.setValue(reader.result);
-          this.productForm.get('imageName')!.setValue(file.name);
-          const formData = new FormData();
-          formData.append('file', file);
-        };
-        reader.readAsDataURL(file);
+        this.productForm.get('produceImage')!.setValue(file);
+        this.productForm.get('imageName')!.setValue(file.name);
+        const formData = new FormData();
+        formData.append('file', file);
       } else {
         // clear file input so user has to re-add the picture
         event.target.value = '';

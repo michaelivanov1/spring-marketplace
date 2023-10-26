@@ -128,7 +128,9 @@
       </h2>
 
       <div class="grid-container">
-        <ng-container *ngFor="let produce of userStand.produceList">
+        <ng-container
+          *ngFor="let produce of userStand.produceList; let i = index"
+        >
           <div
             class="grid-item"
             (mouseenter)="onHover(produce)"
@@ -160,7 +162,7 @@
 
               <img
                 class="product-image"
-                [src]="produce.produceImage || '../../../assets/Pumpkin.jpg'"
+                [src]="this.rawProduceImg[i] || '../../../assets/Pumpkin.jpg'"
               />
 
               <p class="product-name">{{ produce.foodName }}</p>
