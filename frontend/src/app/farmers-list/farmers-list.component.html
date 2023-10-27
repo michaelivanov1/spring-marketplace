@@ -12,7 +12,7 @@
                         {{ profile.displayName }}
                     </div>
                     <div class="profile-description">
-                        {{ profile.description != '' ? profile.description : 'This farmer has not setup a profile description' }}
+                        {{ profile.description != '' ? profile.description : 'This farmer has not set up a profile description' }}
                     </div>
                     <div class="profile-date-created">
                         Member since: {{ parseDate(profile.creationDate) | date:'yyyy-MM-dd' }}
