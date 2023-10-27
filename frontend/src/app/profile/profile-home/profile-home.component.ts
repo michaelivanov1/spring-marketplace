@@ -304,7 +304,7 @@ export class ProfileComponent implements OnInit {
         );
         if (index !== -1) {
           // FormData
-          let formData;
+          let formData: FormData;
 
           formData = new FormData();
           formData.append('file', updatedProduce.produceImage);
@@ -340,7 +340,7 @@ export class ProfileComponent implements OnInit {
                 reader.onload = () => {
                   this.rawProduceImg.splice(index, 1, reader.result as string);
                 };
-                reader.readAsDataURL(blobData);
+                reader.readAsDataURL(formData.get('file') as Blob);
               });
           }
           // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
@@ -422,9 +422,7 @@ export class ProfileComponent implements OnInit {
             })
           )
           .subscribe((response) => {
-            if (response !== null) {
-              // handle the response if needed
-            }
+            this.rawProduceImg.splice(index, 1);
           });
       }
     });
