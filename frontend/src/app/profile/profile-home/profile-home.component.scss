@@ -40,7 +40,7 @@
 }
 
 .input-field::placeholder {
-  color: transparent; 
+  color: transparent;
 }
 
 .input-field:focus {
@@ -147,9 +147,9 @@
       text-align: left;
     }
 
-    .display-name-input {
-      font-size: 30px;
-    }
+    // .display-name-input {
+    //   font-size: 30px;
+    // }
   }
 }
 
@@ -356,6 +356,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .display-name-input {
+    line-height: 1;
+  }
+
   .account-description-container p {
     font-size: 14px;
   }

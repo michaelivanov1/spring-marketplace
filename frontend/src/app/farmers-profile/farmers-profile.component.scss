@@ -222,6 +222,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .display-name-input {
+    line-height: 1;
+  }
+
   .account-description-container p {
     font-size: 14px;
   }
