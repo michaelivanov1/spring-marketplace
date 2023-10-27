@@ -80,7 +80,7 @@
     position: absolute;
     font-size: 18px;
     bottom: 0;
-    color: #0FC263;
+    color: #b52945eb;
   }
 }
 
@@ -222,12 +222,25 @@
 }
 
 @media screen and (max-width: 768px) {
+  .img-container {
+    padding: 0;
+    height: 20vh;
+  }
+
   .display-name-input {
     line-height: 1;
   }
 
+  .account-description-container {
+    margin-bottom: 30px;
+  }
+
   .account-description-container p {
     font-size: 14px;
+  }
+
+  .nothing-for-sale {
+    font-size: 14px !important;
   }
 
   .grid-container {
