@@ -1,5 +1,4 @@
 <div class="main-container">
-
   <div>
     <button (click)="cancel()" mat-icon-button>
       <mat-icon>cancel</mat-icon>
@@ -8,7 +7,7 @@
   </div>
 
   <div class="image-container">
-    <img class="product-image" [src]="produce.produceImage" alt="${produce.foodName}" />
+    <img class="product-image" [src]="rawPicture" alt="${produce.foodName}" />
   </div>
 
   <div class="info-container">
@@ -16,18 +15,30 @@
     <p style="font-weight: 550">
       {{ subTotal }}
     </p>
-   
   </div>
 
   <div class="qoh-container">
     <button (click)="qohChangeButton('-')">-</button>
-    <input type="text" [value]="counter" size="4" (keypress)="numberOnly($event)" (keydown.backspace)="removeNumber()"
-      (keydown)="validNumber($event)" (keyup)="updateCounterInput()" />
+    <input
+      type="text"
+      [value]="counter"
+      size="4"
+      (keypress)="numberOnly($event)"
+      (keydown.backspace)="removeNumber()"
+      (keydown)="validNumber($event)"
+      (keyup)="updateCounterInput()"
+    />
     <button (click)="qohChangeButton('+')">+</button>
   </div>
 
   <div mat-dialog-actions align="end" class="confirm-container">
-    <button class="add-button mat-raised-button" type="submit" [disabled]="counter == 0" (click)="confirm(produce)">Add
-      to Cart</button>
+    <button
+      class="add-button mat-raised-button"
+      type="submit"
+      [disabled]="counter == 0"
+      (click)="confirm(produce)"
+    >
+      Add to Cart
+    </button>
   </div>
 </div>

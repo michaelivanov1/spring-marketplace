@@ -17,10 +17,10 @@ import { SnackbarComponent } from '@app/snackbar/snackbar.component';
   templateUrl: './cartitem-dialog.component.html',
   styleUrls: ['./cartitem-dialog.component.scss'],
 })
-
 export class CartitemDialogComponent {
   user: any;
   produce: any;
+  rawPicture: any;
   counter: number;
   tempCounter: number;
   price: number;
@@ -48,7 +48,7 @@ export class CartitemDialogComponent {
       price: data?.price,
       subTotal: data?.subTotal,
     });
-
+    this.rawPicture = data.rawPicture;
     this.user = data.user;
     this.produce = data.produce;
     this.counter = 0;
@@ -60,7 +60,6 @@ export class CartitemDialogComponent {
     this.isEntered = false;
     this.isGreater = false;
   }
-
 
   confirm(produce: Produce): void {
     const item: { produce: Produce; user: UserStand; counter: number } = {
