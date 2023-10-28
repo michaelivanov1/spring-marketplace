@@ -20,6 +20,10 @@ import { ListItemDialogComponent } from './dialogs/listitem-dialog/listitem-dial
 import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.component';
 import { FaqComponent } from './faq/faq.component';
 import { CartitemDialogComponent } from './dialogs/cartitem-dialog/cartitem-dialog.component';
+import { FarmersListComponent } from './farmers-list/farmers-list.component';
+import { OrderComponent } from './order/order-home/order.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { FarmersProfileComponent } from './farmers-profile/farmers-profile.component'
 
 @NgModule({
   declarations: [
@@ -33,7 +37,11 @@ import { CartitemDialogComponent } from './dialogs/cartitem-dialog/cartitem-dial
     ListItemDialogComponent,
     ShoppingCartComponent,
     FaqComponent,
-    CartitemDialogComponent
+    CartitemDialogComponent,
+    OrderComponent,
+    FarmersListComponent,
+    OrderDetailsComponent,
+    FarmersProfileComponent
   ],
   imports: [
     BrowserModule,

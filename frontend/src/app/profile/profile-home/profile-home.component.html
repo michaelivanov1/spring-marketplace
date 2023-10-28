@@ -8,7 +8,7 @@
       <img
         class="profile-image"
         *ngIf="profileImageLoaded"
-        [src]="imageSrc || '../../../assets/nate-johnstonunsplash.jpg'"
+        [src]="imageSrc || '../../../assets/default-avatar'"
         alt="User's Profile Pic"
       />
       <img
@@ -136,7 +136,6 @@
             (mouseenter)="onHover(produce)"
             (mouseleave)="onLeave()"
             [ngStyle]="{ cursor: getCursor() }"
-            [ngClass]="{ selected: userStand === selectedProduct }"
           >
             <div class="item-data">
               <div

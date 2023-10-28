@@ -1,0 +1,24 @@
+<div class="main-container">
+    <div *ngIf="profiles">
+        <div class="grid-layout">
+            <div class="item-container" *ngFor="let profile of profiles" (click)="navigateToFarmersProfile(profile)">
+
+                <div class="left-items-container">
+                    <img class="profile-image" *ngIf="profile.profileImage" [src]="profile.profileImage" />
+                </div>
+
+                <div class="right-items-container">
+                    <div class="profile-name">
+                        {{ profile.displayName }}
+                    </div>
+                    <div class="profile-description">
+                        {{ profile.description != '' ? profile.description : 'This farmer has not set up a profile description' }}
+                    </div>
+                    <div class="profile-date-created">
+                        Member since: {{ parseDate(profile.creationDate) | date:'yyyy-MM-dd' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

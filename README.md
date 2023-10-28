@@ -13,13 +13,13 @@ The backend is coded in Java Springboot and uses the MVC design pattern.
 
 **Main libraries/tools used:**
 ```
-  Frontend:
+  Frontend (Angular):
     - jwt-decode
     - rxjs
     - tslib
     - zone.js
 
-  Backend:
+  Backend (Java Springboot):
     - spring framework
     - jsonwebtoken 
     - jakarta

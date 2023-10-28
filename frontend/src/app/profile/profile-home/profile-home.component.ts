@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
   userProfile: Profile;
   userStand: UserStand;
   isHovered: boolean;
-  selectedProduct: any;
   decodedToken: any;
   editableFields: string[];
   updatedProfile: Profile;
@@ -87,7 +86,6 @@ export class ProfileComponent implements OnInit {
       produceList: [],
     };
     this.isEditable = false;
-    this.selectedProduct = '';
     this.updatedProfile = { ...this.userProfile };
     this.dateCreatedFormatted = '';
     this.userStandDataExists = false;
