@@ -14,7 +14,7 @@ import { FarmersProfileComponent } from './farmers-profile/farmers-profile.compo
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', component: LoginComponent, title: 'Login' },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegistrationComponent, title: 'Register' },
   { path: 'profile', component: ProfileComponent, title: 'Profile' },
