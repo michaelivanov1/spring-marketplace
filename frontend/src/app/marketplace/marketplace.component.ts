@@ -32,7 +32,7 @@ export class MarketplaceComponent {
     private snackbarService: SnackbarComponent,
     private router: Router,
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const headers = new HttpHeaders().set(
@@ -46,7 +46,7 @@ export class MarketplaceComponent {
     this.snackbarService.open('Loading All Available Produce..');
     this.userStand = this.userStandService.get();
     this.userStand?.subscribe((users: UserStand[]) => {
-      //filter
+
       this.userStandProfiles = users.filter(
         (user) => user.produceList && user.produceList.length > 0
       );
