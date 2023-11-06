@@ -132,12 +132,12 @@ export class ProfileComponent implements OnInit {
       .pipe(
         switchMap((profile) => {
           this.userProfile = profile; // save the profile from the first call
-          if (profile.profileImage === '') {
-            this.imageSrc =
-              '../../../assets/default-avatar-profile-icon-of-social-media-user-vector.png';
-            this.profileImageLoaded = true;
-            return of(null); // return an observable to stop the chain
-          }
+          // if (profile.profileImage === '') {
+          //   this.imageSrc =
+          //     '../../../assets/default-avatar.png';
+          //   this.profileImageLoaded = true;
+          //   return of(null); // return an observable to stop the chain
+          // }
 
           // make the second API call
           return this.http.get(`${BASEURL}file/${profile.profileImage}`, {
