@@ -19,16 +19,13 @@ export class FarmersListComponent implements OnInit {
   profiles: Profile[] = [];
   creationDateFormatted!: Date;
   profileImages: any = [];
-  imageSrc: string;
 
   constructor(
     private profileService: ProfileService,
     private http: HttpClient,
     private router: Router,
     private sharedService: SharedService,
-  ) {
-    this.imageSrc = '';
-  }
+  ) {}
 
 
   ngOnInit(): void {

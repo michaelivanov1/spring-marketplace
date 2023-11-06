@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@app/shared.service';
 import { ProfileService } from '../profile/profile.service';
 import { Profile } from '../profile/profile';
-import { catchError, of, switchMap, tap } from 'rxjs';
+import { catchError, forkJoin, of, switchMap, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BASEURL } from '@app/constants';
 import { UserStand } from '@app/user-stand/user-stand';
@@ -28,12 +28,14 @@ export class FarmersProfileComponent implements OnInit {
   userStandDataExists: boolean;
   isHovered: boolean;
   hoveredProduce: any = null;
+  rawProduceImg: string[];
 
   constructor(private sharedService: SharedService, private profileService: ProfileService, private http: HttpClient, private userStandService: UserStandService) {
     this.dateCreatedFormatted = '';
     this.imageSrc = '';
     this.userStandDataExists = false;
     this.isHovered = false;
+    this.rawProduceImg = [];
 
     this.userStand = {
       id: {
@@ -86,7 +88,7 @@ export class FarmersProfileComponent implements OnInit {
         switchMap((profile) => {
           if (profile.profileImage === '') {
             this.imageSrc =
-              '../../../assets/default-avatar-profile-icon-of-social-media-user-vector.png';
+              '../../../assets/default-avatar.png';
             this.profileImageLoaded = true;
             return of(null); // return an observable to stop the chain
           }
@@ -128,9 +130,34 @@ export class FarmersProfileComponent implements OnInit {
       .subscribe((data) => {
         if (data) {
           this.userStand = data;
-          console.log(this.userStand)
           if (this.userStand.produceList.length > 0)
             this.userStandDataExists = true;
+
+          // loop through and api call the images
+          // Initialize an array to keep track of the order
+          const requests = data.produceList.map((e) =>
+            this.http.get(`${BASEURL}file/${e.produceImage}`, {
+              headers,
+              responseType: 'blob',
+            })
+          );
+          forkJoin(requests)
+            .pipe(
+              catchError((err) => {
+                // this.msg = err.message;
+                return of([]);
+              })
+            )
+            .subscribe((responses: any[]) => {
+              responses.forEach((imageData: any, index) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                  const currentImage = reader.result as string;
+                  this.rawProduceImg[index] = currentImage;
+                };
+                reader.readAsDataURL(imageData);
+              });
+            });
         }
       });
   }

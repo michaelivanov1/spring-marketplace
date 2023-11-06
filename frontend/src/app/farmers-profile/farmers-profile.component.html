@@ -6,8 +6,8 @@
         </div>
 
         <div class="img-container">
-            <img class="profile-image" *ngIf="profileImageLoaded" [src]="imageSrc || '../../../assets/default-avatar'"
-                alt="User's Profile Pic" />
+            <img class="profile-image" *ngIf="profileImageLoaded"
+                [src]="imageSrc || '../../assets/default-avatar.png'" />
             <img class="profile-image-loading" *ngIf="!profileImageLoaded"
                 src='../../../assets/profile-image-loading.gif' alt="Loading Image..." />
         </div>
@@ -22,7 +22,7 @@
 
             <div class="account-description-container">
                 <span>
-                    <p *ngIf="profile.description != ''">{{ profile.description }}</p>
+                    <p>{{ profile.description != '' ? profile.description : 'This user has not set up a profile description' }}</p>
                 </span>
             </div>
 
@@ -34,13 +34,14 @@
 
     <mat-card-content *ngIf="userStandDataExists">
         <div class="produce-container" id="produceSection">
+            <p><b>Buying from other profiles is currently in development!</b></p>
             <div class="grid-container">
-                <ng-container *ngFor="let produce of userStand.produceList">
+                <ng-container *ngFor="let produce of userStand.produceList; let i = index">
                     <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
                         [ngStyle]="{ cursor: getCursor() }">
 
                         <div class="item-data">
-                            <img class="product-image" [src]="produce.produceImage" />
+                            <img class="product-image" [src]="rawProduceImg[i]" />
                             <p class="product-name">{{ produce.foodName }}</p>
                             <p class="product-price">${{ produce.price }}</p>
                             <p class="product-qoh">{{ produce.qoh == 0 ? 'Out of stock!' : produce.qoh + 'x' }}</p>
