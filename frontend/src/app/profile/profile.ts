@@ -12,4 +12,5 @@ export interface Profile {
   profileImage: String;
   creationDate: string;
   email: string;
+  produceListSize?: number;
 }

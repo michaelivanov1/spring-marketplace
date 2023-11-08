@@ -4,8 +4,10 @@
             <div class="item-container" *ngFor="let profile of profiles" (click)="navigateToFarmersProfile(profile)">
 
                 <div class="left-items-container">
-                    <img class="profile-image"
-                        [src]="profile.profileImage || '../../assets/default-avatar.png'" />
+                    <img class="profile-image" [src]="profile.profileImage || '../../assets/default-avatar.png'" />
+                    <p>
+                        {{profile.produceListSize}} listings
+                    </p>
                 </div>
 
                 <div class="right-items-container">

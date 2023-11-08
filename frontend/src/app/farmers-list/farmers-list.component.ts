@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SharedService } from '@app/shared.service';
 import { UserStand } from '@app/user-stand/user-stand';
+import { UserStandService } from '@app/user-stand/user-stand.service';
 
 @Component({
   selector: 'app-farmers-list',
@@ -25,7 +26,8 @@ export class FarmersListComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private sharedService: SharedService,
-  ) {}
+    private userStandService: UserStandService
+  ) { }
 
 
   ngOnInit(): void {
@@ -33,6 +35,18 @@ export class FarmersListComponent implements OnInit {
       (profiles) => {
         this.profiles = profiles;
         this.fetchProfileImages();
+
+        // grab each profile's produceList size. used to display # of listings
+        for (let i = 0; i < this.profiles.length; i++) {
+          this.profiles[i].produceListSize = 0;
+
+          this.userStandService.getOne(this.profiles[i].email).subscribe(
+            (userStands) => {
+              this.profiles[i].produceListSize! += userStands.produceList.length;
+            }
+          )
+        }
+        console.log(this.profiles.map((p) => p.produceListSize))
       }
     );
   }
