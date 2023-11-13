@@ -20,7 +20,7 @@ export class MarketplaceComponent {
   selectedProduct: any;
   userStand?: Observable<UserStand[]>;
   userStandProfiles: UserStand[] = [];
-  rawPicturesPerProfiles: string[][] = [[], []];
+  rawPicturesPerProfiles: string[][];
   decodedToken: any;
   loggedInUser: any;
   totalCount: Number | undefined;
@@ -32,31 +32,31 @@ export class MarketplaceComponent {
     private snackbarService: SnackbarComponent,
     private router: Router,
     private http: HttpClient
-  ) { }
+  ) {
+    this.rawPicturesPerProfiles = [['']];
+  }
 
   ngOnInit(): void {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('jwtToken')}`
     );
-
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
     this.profileService.getOne(this.decodedToken.sub);
     this.loggedInUser = this.decodedToken.sub;
     this.snackbarService.open('Loading All Available Produce..');
     this.userStand = this.userStandService.get();
     this.userStand?.subscribe((users: UserStand[]) => {
-
       this.userStandProfiles = users.filter(
         (user) => user.produceList && user.produceList.length > 0
       );
-
       // get count of items on marketplace
       this.totalCount = this.userStandProfiles.reduce((count, user) => {
         return count + user.produceList.length;
       }, 0);
 
       this.userStandProfiles.forEach((profile, i) => {
+        this.rawPicturesPerProfiles[i] = [];
         const requests = profile.produceList.map((e) =>
           this.http.get(`${BASEURL}file/${e.produceImage}`, {
             headers,
@@ -71,8 +71,8 @@ export class MarketplaceComponent {
           )
           .subscribe((responses: any[]) => {
             responses.forEach((imageData: Blob, j) => {
+              this.rawPicturesPerProfiles[i][j] = '';
               const reader = new FileReader();
-              this.rawPicturesPerProfiles[i] = [];
               reader.onload = () => {
                 const currentImage = reader.result as string;
                 this.rawPicturesPerProfiles[i][j] = currentImage;
@@ -81,7 +81,6 @@ export class MarketplaceComponent {
             });
           });
       });
-
       this.snackbarService.open('Loaded All Available Produce');
     });
   }
