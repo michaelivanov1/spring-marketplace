@@ -5,6 +5,8 @@
         <img src="../assets/logo.png" class="logo" />
       </div>
       <div class="menu-items-center">
+        <a mat-tab-link [routerLink]="['home']" (click)="setTitle('Home')"
+        routerLinkActive="selected-menu-item">Home</a>
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['profile']" (click)="setTitle('Profile')"
           routerLinkActive="selected-menu-item">Profile</a>
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']" (click)="setTitle('Marketplace')"
@@ -17,8 +19,8 @@
           routerLinkActive="selected-menu-item">Blog</a> -->
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['farmers']" (click)="setTitle('Farmers')"
           routerLinkActive="selected-menu-item">Farmers</a>
-        <a mat-tab-link [routerLink]="['faq']" (click)="setTitle('Faq')" routerLinkActive="selected-menu-item">FAQ/About
-          Us</a>
+        <!-- <a mat-tab-link [routerLink]="['faq']" (click)="setTitle('Faq')" routerLinkActive="selected-menu-item">FAQ/About
+          Us</a> -->
         <div *ngIf="isSmallScreen"> <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button
             routerLink="/login" (click)="setTitle('Login')" routerLinkActive="selected-menu-item">Login</a>
           <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register"

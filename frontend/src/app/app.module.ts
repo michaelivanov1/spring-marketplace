@@ -23,7 +23,8 @@ import { CartitemDialogComponent } from './dialogs/cartitem-dialog/cartitem-dial
 import { FarmersListComponent } from './farmers-list/farmers-list.component';
 import { OrderComponent } from './order/order-home/order.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
-import { FarmersProfileComponent } from './farmers-profile/farmers-profile.component'
+import { FarmersProfileComponent } from './farmers-profile/farmers-profile.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FarmersProfileComponent } from './farmers-profile/farmers-profile.compo
     OrderComponent,
     FarmersListComponent,
     OrderDetailsComponent,
-    FarmersProfileComponent
+    FarmersProfileComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

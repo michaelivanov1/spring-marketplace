@@ -11,12 +11,14 @@ import { OrderComponent } from "@app/order/order-home/order.component";
 import { FarmersListComponent } from './farmers-list/farmers-list.component';
 import { OrderDetailsComponent } from "@app/order-details/order-details.component";
 import { FarmersProfileComponent } from './farmers-profile/farmers-profile.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent, title: 'Login' },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegistrationComponent, title: 'Register' },
+  { path: 'home', component: HomePageComponent, title: 'Home' },
   { path: 'profile', component: ProfileComponent, title: 'Profile' },
   {
     path: 'registration-finish',
