@@ -3,7 +3,6 @@
     width: 100%;
     height: 550px;
     text-align: center;
-    // border: 2px solid red;
 }
 
 .banner-image {
@@ -14,8 +13,8 @@
 .data-container {
     position: absolute;
     top: 0;
-    left: 250px;
-    width: 30%;
+    left: 150px;
+    width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -61,19 +60,11 @@
     transform: scale(1.1);
 }
 
-
-// .logo {
-//     width: 500px;
-//     height: 500px;
-// }
-
-
 .main-container {
     text-align: left;
     margin: 30px auto;
     padding: 20px;
     width: 50%;
-    // background-color: rgba(140, 195, 63, 0.1);
 
     .info-image-container {
         display: flex;
@@ -111,6 +102,28 @@
 
         .banner-image {
             height: 100%;
+        }
+
+        .data-container {
+            width: 50%;
+            left: 50px;
+        }
+
+        .banner-title {
+            margin-top: 7%;
+            color: #FFDE59;
+            font-size: 26px;
+            max-width: 100%;
+            margin-left: 20%;
+            line-height: 1;
+        }
+
+        .banner-description {
+            color: white;
+            font-size: 14px;
+            max-width: 80%;
+            text-align: left;
+            margin-top: 10px;
         }
     }
 }
