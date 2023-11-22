@@ -29,3 +29,8 @@ The backend is coded in Java Springboot and uses the MVC design pattern.
 Hosted on render.com
   - backend: Docker runtime
   - frontend: Static site
+
+
+
+
+* legacy-styles branch holds website styles before major revamp on 2023-11-21 *
