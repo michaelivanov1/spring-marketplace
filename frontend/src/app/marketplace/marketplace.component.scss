@@ -1,3 +1,32 @@
+.banner {
+  background-image: url(../../assets/marketplace-banner.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  width: 100%;
+  height: auto;
+  text-align: center;
+
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    padding: 195px 0px;
+
+    h1 {
+      font-size: 50px;
+      color: #0fc263;
+      font-weight: 900;
+      text-transform: uppercase;
+
+      img {
+        width: 42px;
+        height: 28px;
+        margin-top: -60px;
+      }
+    }
+  }
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -49,6 +78,7 @@
         height: 160px;
         margin-bottom: 5px;
       }
+
 
       .product-name {
         text-transform: capitalize;
