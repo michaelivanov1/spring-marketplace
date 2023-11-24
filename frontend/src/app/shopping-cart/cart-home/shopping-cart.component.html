@@ -1,11 +1,118 @@
-<div class="main-container">
-  <div class="your-cart-text" *ngIf="!isCartEmpty">
-    Your Cart ({{ cartItems?.length }} items)
+<div class="main">
+
+  <div class="header-container" *ngIf="!isCartEmpty">
+    <h1 class="header-text">Your Cart</h1>
   </div>
-  <p *ngIf="isCartEmpty" style="font-size: 22px">Your cart is currently empty
-  </p>
+
+  <img *ngIf="isCartEmpty" style="height: 20%; width: 20%" src="../../../assets/empty-cart.gif">
+  <p *ngIf="isCartEmpty" style="font-size: 26px">Your cart is currently empty</p>
   <button *ngIf="isCartEmpty" class="button-market-redirect" (click)="marketplaceRedirect()">Go shopping</button>
-  <div class="cart-summary">
+
+
+  <div *ngIf="!isCartEmpty" class="row">
+    <div class="col-12 col-lg-8 cart-data-container p-0">
+      <div class="cart-data">
+        <!-- <div class="row border-bottom">
+          <div class="col-12 col-sm-6">
+            <h2>{{cartItems?.length}} Items</h2>
+          </div>
+        </div> -->
+        <div class="row cart_title pt-4 pb-2 border-bottom">
+          <div class="col-4">
+            <h4>Product</h4>
+          </div>
+          <div class="col-2">
+            <h4>Quantity</h4>
+          </div>
+          <div class="col-2">
+            <h4>Seller</h4>
+          </div>
+          <div class="col-2">
+            <h4>Price</h4>
+          </div>
+          <div class="col-2">
+            <h4>Total</h4>
+          </div>
+        </div>
+        <div *ngFor="let item of cartItems; let i = index" class="row product-list pb-4 border-bottom"
+          style="margin-top: 20px">
+          <div class="col-4">
+            <div class="row">
+              <div class="col-2 item_center p-0">
+                <div>
+                  <button mat-icon-button (click)="removeCartItem(i)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="col-5 item_center">
+                <img class="product-image" src="../../../assets/leaf.png" />
+              </div>
+              <div class="col-5 item_center">
+                <p class="product-item">{{ item.produce.foodName }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-2 item_center">
+            <p class="product-item">{{item.counter}}</p>
+          </div>
+          <div class="col-2 item_center">
+            <p class="product-item">{{ item.user.displayName }}</p>
+          </div>
+          <div class="col-2 item_center">
+            <p class="product-item">{{
+              item.produce.price + "" | currency : "USD" : "symbol" : "1.2-2"
+              }}</p>
+          </div>
+          <div class="col-2 item_center">
+            <p class="product-item">{{
+              item.counter * item.produce.price + ""
+              | currency : "USD" : "symbol" : "1.2-2"
+              }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4 order-summary p-0" *ngIf="!isCartEmpty">
+      <div class="checkout">
+        <div class="row border-bottom">
+          <div class="col-12">
+            <h1>Order Summary for {{cartItems?.length}} Items</h1>
+          </div>
+        </div>
+        <div class="row pt-4 pb-2 border-bottom">
+          <div class="col-8">
+            <p class="checkoutItem">Subtotal</p>
+          </div>
+          <div class="col-4">
+            <p class="checkoutItem text-end">{{ grandTotal | currency : "USD" : "symbol" : "1.2-2" }}</p>
+          </div>
+          <div class="col-8">
+            <p class="checkoutItem">Sales Tax</p>
+          </div>
+          <div class="col-4">
+            <p class="checkoutItem text-end">{{ grandTotal * 0.13 | currency : "USD" : "symbol" : "1.2-2" }}</p>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-8">
+            <p class="checkoutTotal">Grand Total</p>
+          </div>
+          <div class="col-4">
+            <p class="checkoutTotal text-end">{{ grandTotal * taxRate | currency : "USD" : "symbol" : "1.2-2" }}</p>
+          </div>
+        </div>
+        <button class="checkout-btn" (click)="openConfirmationDialog()">
+          Checkout
+        </button>
+        <button class="clearCart" (click)="clearCartItems()">
+          clear cart
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="cart-summary">
     <div class="user-cart">
       <div *ngIf="!isCartEmpty" class="label-container">
         <p></p>
@@ -54,9 +161,11 @@
         </ng-container>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="totals-container" *ngIf="!isCartEmpty">
+
+
+  <!-- <div class="totals-container" *ngIf="!isCartEmpty">
     <div class="sub-total">
       Subtotal: {{ grandTotal | currency : "USD" : "symbol" : "1.2-2" }}
     </div>
@@ -77,5 +186,4 @@
         <button (click)="clearCartItems()">Clear Cart</button>
       </div>
     </div>
-  </div>
-</div>
+  </div> -->
