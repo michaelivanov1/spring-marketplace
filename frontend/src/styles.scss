@@ -33,6 +33,8 @@ mat-dialog-container {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  padding: 0 !important;
+  max-width: none !important; // override bootstrap's max-width for containers
 }
 
 .content {
@@ -42,7 +44,7 @@ mat-dialog-container {
 .header {
   background-color: #222222;
   color: black;
-  height: 6rem;
+  height: 8rem;
   margin: auto;
 }
 
@@ -53,8 +55,8 @@ mat-dialog-container {
   width: 20vw;
 
   .logo {
-    width: 20rem;
-    height: 20rem;
+    width: 100%;
+    height: auto;
     padding-bottom: 5.5rem;
   }
 }
@@ -73,7 +75,7 @@ mat-dialog-container {
   color: #ffde59;
 }
 
-a {
+body a {
   font-weight: 400;
   color: #0fc263;
   text-decoration: none;
