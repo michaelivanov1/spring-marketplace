@@ -1,4 +1,4 @@
-<div class="main-container">
+<!-- <div class="main-container">
     <div *ngIf="profiles">
         <div class="grid-layout">
             <div class="item-container" *ngFor="let profile of profiles" (click)="navigateToFarmersProfile(profile)">
@@ -19,6 +19,54 @@
                     </div>
                     <div class="profile-date-created">
                         Member since: {{ parseDate(profile.creationDate) | date:'yyyy-MM-dd' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="banner">
+    <div class="overlay">
+        <h1><img src="assets/leaf.png" alt="leaf">Farmers</h1>
+        <h3 style="color: white">Here you can view all of the farmers selling on Spring Marketplace</h3>
+    </div>
+</div>
+
+<div class="container-main">
+    <div class="px-4">
+        <div *ngIf="profiles" class="row py-4">
+            <div *ngFor="let profile of profiles" class="col-lg-4 py-3 col-md-6 col-12">
+                <div (click)="navigateToFarmersProfile(profile)" class="item-card shadow">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="profile-name">
+                                    {{ profile.displayName }}
+                                </div>
+                                <div class="profile-description">
+                                    {{ profile.description != '' ? profile.description : 'This farmer has not set up a
+                                    profile description' }}
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="seller-profile shadow">
+                                    <img class="product-image"
+                                        [src]="profile.profileImage || '../../assets/default-avatar.png'" />
+                                </div>
+                                <p class="listing">
+                                    {{profile.produceListSize}} listings
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 creationDate px-0">
+                            <hr class="mt-0">
+                            <div class="profile-date-created">
+                                Member since: {{ parseDate(profile.creationDate) | date:'yyyy-MM-dd' }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
