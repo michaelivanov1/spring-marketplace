@@ -1,56 +1,121 @@
-.dialog-container {}
+// .dialog-container {}
 
-#file-upload {
+// #file-upload {
+//   color: #00bf63b1;
+// }
+
+// .dialog-fields {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+// }
+
+// .dialog-field {
+//   display: flex;
+//   align-items: center;
+//   margin-bottom: 10px;
+// }
+
+// .dialog-labels {
+//   padding-top: 2px;
+//   width: 120px;
+//   margin-right: 10px;
+// }
+
+// .dialog-data {
+//   flex: 1;
+// }
+
+// input[type="text"],
+// input[type="date"],
+// input[type="number"] {
+//   border: 1px solid #ccc;
+//   border-color: black;
+// }
+
+// @media screen and (max-width: 440px) {
+//   .dialog-container {
+//     display: flex;
+//     flex-direction: column;
+//     overflow: hidden;
+//   }
+
+//   .dialog-fields {
+//     width: 100%;
+//   }
+
+//   .dialog-labels {
+//     width: 100%;
+//     margin-right: 0;
+//   }
+
+//   .dialog-field {
+//     flex-direction: column;
+//     margin-bottom: 10px;
+//   }
+// }
+
+h2 {
   color: #00bf63b1;
+  font-weight: 900;
 }
 
-.dialog-fields {
+.file_upload {
+  width: 100%;
+  height: 200px;
+  background-color: #ffffff;
+  border: 1px dashed #999;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  margin: 0%;
+
+  label {
+    color: #999;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    text-transform: uppercase;
+    margin: auto;
+    cursor: pointer;
+    width: 40%;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  mat-icon {
+    font-size: 50px;
+    margin-right: 30px;
+  }
 }
 
-.dialog-field {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+.confirm:hover {
+  transform: scale(1.02);
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
 }
 
-.dialog-labels {
-  padding-top: 2px;
-  width: 120px;
-  margin-right: 10px;
-}
-
-.dialog-data {
-  flex: 1;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="number"] {
-  border: 1px solid #ccc;
-  border-color: black;
-}
-
-@media screen and (max-width: 440px) {
+@media(max-width: 600px) {
   .dialog-container {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
   }
 
-  .dialog-fields {
-    width: 100%;
+  .file_upload {
+    height: 150px !important;
   }
 
-  .dialog-labels {
-    width: 100%;
-    margin-right: 0;
+  label {
+    font-size: 16px !important;
   }
 
-  .dialog-field {
-    flex-direction: column;
-    margin-bottom: 10px;
+  mat-icon {
+    font-size: 30px !important;
+    margin-right: 8px !important;
   }
 }

@@ -75,6 +75,10 @@ export class ListItemDialogComponent {
     }
   }
 
+  onCancel(): void {
+    this.dialogRef.close()
+  }
+
   onClose(): void {
     const productFormValue = this.productForm.value;
     const updatedProduce: Produce = {

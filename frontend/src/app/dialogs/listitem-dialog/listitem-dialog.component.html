@@ -1,4 +1,4 @@
-<mat-dialog-content class="dialog-container">
+<!-- <mat-dialog-content class="dialog-container">
   <h2 mat-dialog-title>{{ dialogTitle }}</h2>
   <form [formGroup]="productForm" (ngSubmit)="onClose()">
     <div class="dialog-fields">
@@ -65,5 +65,68 @@
     <p style="color: red; margin-top: 10px" *ngIf="productForm.invalid">
       Fill Out Required Fields
     </p>
+  </form>
+</mat-dialog-content> -->
+
+
+<mat-dialog-content class="dialog-container">
+  <div class="row">
+    <div class="col-8">
+      <h2 mat-dialog-title>{{ dialogTitle }}</h2>
+    </div>
+    <div class="col-4 text-end"><mat-icon (click)="onCancel()" style="cursor: pointer;">close</mat-icon></div>
+  </div>
+  <form [formGroup]="productForm" (ngSubmit)="onClose()">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-floating mb-3">
+          <input type="name" class="form-control" formControlName="foodName" matInput required id="floatingInput"
+            placeholder="Food Name">
+          <label for="floatingInput">Food Name</label>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-floating mb-3">
+          <input type="number" class="form-control" formControlName="qoh" matInput required id="floatingInput"
+            placeholder="Quantity">
+          <label for="floatingInput">Quantity</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-floating mb-3">
+          <input type="number" class="form-control" formControlName="price" matInput required id="floatingInput"
+            placeholder="Price">
+          <label for="floatingInput">Price</label>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" [max]="disableFutureDates()" formControlName="harvestDate" matInput
+            required id="floatingInput" placeholder="Harvest Date">
+          <label for="floatingInput">Harvest Date</label>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 file_upload">
+      <!-- <img src="../../../assets/default-avatar.png" alt="" style="width: 60%; height: 100%; display: block;"> -->
+      <label>
+        <div>
+          <mat-icon>cloud_upload</mat-icon>
+          <p>Upload Image</p>
+        </div>
+        <input style="display: none;" id="file-upload" type="file" accept="image/" (change)="onUploadPhoto($event)" />
+      </label>
+    </div>
+
+    <button class="confirm shadow" type="submit" mat-raised-button
+      style="width: 100%; background-color: #00bf63b1;color: #fff; font-weight: 500; text-transform: uppercase;"
+      [disabled]="productForm.invalid">
+      Add Product
+    </button>
+    <!-- <p style="color: red; margin-top: 10px;font-weight: 600;" *ngIf="productForm.invalid">
+      Fill Out Required Fields
+    </p> -->
   </form>
 </mat-dialog-content>

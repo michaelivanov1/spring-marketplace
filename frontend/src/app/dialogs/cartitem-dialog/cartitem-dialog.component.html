@@ -1,4 +1,4 @@
-<div class="main-container">
+<!-- <div class="main-container">
   <div>
     <button (click)="cancel()" mat-icon-button>
       <mat-icon>cancel</mat-icon>
@@ -19,25 +19,47 @@
 
   <div class="qoh-container">
     <button (click)="qohChangeButton('-')">-</button>
-    <input
-      type="text"
-      [value]="counter"
-      size="4"
-      (keypress)="numberOnly($event)"
-      (keydown.backspace)="removeNumber()"
-      (keydown)="validNumber($event)"
-      (keyup)="updateCounterInput()"
-    />
+    <input type="text" [value]="counter" size="4" (keypress)="numberOnly($event)" (keydown.backspace)="removeNumber()"
+      (keydown)="validNumber($event)" (keyup)="updateCounterInput()" />
     <button (click)="qohChangeButton('+')">+</button>
   </div>
 
   <div mat-dialog-actions align="end" class="confirm-container">
-    <button
-      class="add-button mat-raised-button"
-      type="submit"
-      [disabled]="counter == 0"
-      (click)="confirm(produce)"
-    >
+    <button class="add-button mat-raised-button" type="submit" [disabled]="counter == 0" (click)="confirm(produce)">
+      Add to Cart
+    </button>
+  </div>
+</div> -->
+
+<div class="main-container h-60">
+  <div class="row mb-2">
+    <div class="col-12 text-end">
+      <mat-icon (click)="cancel()" mat-icon-button>close</mat-icon>
+    </div>
+  </div>
+
+  <div class="image-container mb-2">
+    <img class="product-image" [src]="rawPicture" alt="${produce.foodName}" />
+  </div>
+
+  <div class="info-container">
+    <p class="product-name">{{ produce.foodName }}</p>
+    <p style="font-weight: 500;font-size: 16px;color:#999999 ;">{{ produce.qoh }}x</p>
+    <p style="font-weight: 550;font-size: 16px;color:#0fc263 ;">
+      {{ subTotal }}
+    </p>
+  </div>
+
+  <div class="qoh-container">
+    <button (click)="qohChangeButton('-')">-</button>
+    <input type="text" [value]="counter" size="4" (keypress)="numberOnly($event)" (keydown.backspace)="removeNumber()"
+      (keydown)="validNumber($event)" (keyup)="updateCounterInput()" />
+    <button (click)="qohChangeButton('+')">+</button>
+  </div>
+
+  <div mat-dialog-actions align="end" class="confirm-container mt-2">
+    <button class="add-button mat-raised-button w-100" type="submit" [disabled]="counter == 0"
+      (click)="confirm(produce)">
       Add to Cart
     </button>
   </div>
