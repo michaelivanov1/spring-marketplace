@@ -1,381 +1,749 @@
-.main-container {
-  max-width: 60vw;
-  margin: auto;
-  margin-bottom: 10px;
-  margin-top: 10px !important;
-  background-image: linear-gradient(to bottom, #ffde5950, rgba(140, 195, 63, 0.1));
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-  border: 1px solid #00000021;
-  font-size: 1rem;
-  font-weight: 400;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
+// .main-container {
+//   max-width: 60vw;
+//   margin: auto;
+//   margin-bottom: 10px;
+//   margin-top: 10px !important;
+//   background-image: linear-gradient(to bottom, #ffde5950, rgba(140, 195, 63, 0.1));
+//   border-radius: 8px;
+//   padding: 1rem;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+//   border: 1px solid #00000021;
+//   font-size: 1rem;
+//   font-weight: 400;
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   align-items: flex-start;
+// }
+
+// .banner-container {
+//   margin-bottom: 10px;
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .banner-image {
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//   width: 60vw;
+//   height: 40vh;
+//   max-width: 100%;
+//   max-height: 100%;
+// }
+
+// .input-field {
+//   border: none;
+//   border-bottom: 1px solid #9b9b9b;
+//   padding: 8px;
+//   font-size: 16px;
+//   box-sizing: border-box;
+//   background-color: rgba(140, 195, 63, 0.1);
+// }
+
+// .input-field::placeholder {
+//   color: transparent;
+// }
+
+// .input-field:focus {
+//   outline: none;
+//   border-color: #00bf63;
+//   box-shadow: 0 0 8px rgba(0, 191, 99, 0.2);
+// }
+
+// .img-container {
+//   height: 40vh;
+//   padding: 10px;
+//   flex: 1;
+//   max-width: 20vw;
+//   padding-right: 20px;
+//   position: relative;
+//   top: -60px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   text-align: center;
+
+//   .profile-image {
+//     width: 200px;
+//     height: 200px;
+//     margin: 0;
+//     border-radius: 50%;
+//     border: 1px solid black;
+//   }
+
+//   .profile-image-loading {
+//     width: 100px;
+//     height: 100px;
+//     margin: 60px auto;
+//     border-radius: 50%;
+//   }
+
+//   input[type="file"] {
+//     display: none;
+//   }
+
+//   .upload-profile-photo {
+//     margin-top: 10px;
+//     border-radius: 4px;
+//     display: inline-block;
+//     padding: 6px 12px;
+//     cursor: pointer;
+//     font-weight: 450;
+//     background-color: #00bf63b1;
+//     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+//     &:hover {
+//       background-color: #17c370;
+//     }
+//   }
+
+//   .delete-account-button {
+//     position: absolute;
+//     height: 35px;
+//     bottom: 10px;
+//     background-color: rgb(199, 217, 199);
+//   }
+
+//   .delete-account-button:hover {
+//     background: rgb(205, 183, 183);
+//     cursor: pointer;
+//   }
+// }
+
+// .account-details-container {
+//   display: flex;
+//   margin-bottom: 20px;
+//   margin-left: 20px;
+//   padding: 10px 10px 10px 30px;
+//   height: 40vh;
+//   border-left: 1px solid #bfbfbf;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   justify-content: flex-start;
+
+//   .display-name-input {
+//     font-size: 30px;
+//     margin-bottom: 10px;
+//   }
+
+//   .primary-info {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+
+//     .info-row {
+//       display: flex;
+//       align-items: center;
+//       height: 40px;
+//     }
+
+//     .item-label {
+//       width: 160px;
+//       text-align: left;
+//     }
+
+//     .item-data {
+//       width: 500px;
+//       flex: 1;
+//       text-align: left;
+//     }
+
+//     // .display-name-input {
+//     //   font-size: 30px;
+//     // }
+//   }
+// }
+
+// .account-description-container {
+//   width: 40vw;
+//   height: 10vh;
+//   margin-top: 4%;
+//   word-wrap: break-word;
+
+//   p {
+//     font-size: 20px;
+//     text-align: left;
+//     line-height: 1.2;
+
+//   }
+
+//   .input-field.description {
+//     border-bottom: 1px solid #9b9b9b;
+//     border-radius: 4px;
+//     width: 100%;
+//     padding: 8px;
+//     font-size: 16px;
+//     box-sizing: border-box;
+//   }
+// }
+
+// .cancel-edit-button {
+//   background-color: #bf6c189f;
+
+//   &:hover {
+//     background-color: #995b1d9f;
+//   }
+// }
+
+// .save-update-profile-button {
+//   background-color: #00bf63b1;
+
+//   &:hover {
+//     background-color: #17c370;
+//   }
+// }
+
+// .down-arrow {
+//   margin-top: 30px;
+//   font-size: 32px;
+//   cursor: pointer;
+// }
+
+// .produce-container {
+//   border: 1px solid black;
+//   max-width: 60vw;
+//   height: 80vh;
+//   overflow-y: auto;
+//   margin: auto;
+//   background-color: rgba(140, 195, 63, 0.1);
+//   border-radius: 8px;
+//   padding: 1rem;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+//   border: 1px solid #00000021;
+//   font-size: 1rem;
+//   font-weight: 400;
+// }
+
+// .list-item-button {
+//   background-color: #00bf63b1;
+//   font-weight: 550;
+
+//   &:hover {
+//     background-color: #17c370;
+//   }
+// }
+
+// .grid-container {
+//   max-height: 70vh;
+//   overflow-y: auto;
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+//   gap: 30px;
+//   max-width: 100vw;
+//   margin: 0 auto;
+//   padding-left: 10px;
+
+//   .grid-item {
+//     position: relative;
+//     width: 220px;
+//     margin-top: 20px;
+//     text-align: center;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     height: 300px;
+//     transition: all .2s ease-in-out;
+
+//     .item-data {
+//       position: relative;
+//       background-color: rgba(140, 195, 63, 0.1);
+//       // border: 1px solid black;
+//       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+
+//       .hover-icons {
+//         position: absolute;
+//         top: 1px;
+//         right: 1px;
+
+//         .edit-item-button,
+//         .delete-item-button {
+//           color: black;
+//         }
+
+//         .edit-item-button:hover,
+//         .delete-item-button:hover {
+//           transition: all .2s ease-in-out;
+//           transform: scale(1.1);
+//         }
+//       }
+
+//       .product-image {
+//         width: 220px;
+//         height: 160px;
+//         margin-bottom: 5px;
+//       }
+
+//       .product-name {
+//         text-transform: capitalize;
+//         font-size: 20px;
+//         font-weight: 550;
+//         margin-bottom: 4px;
+//       }
+
+//       .product-price {
+//         font-weight: 500;
+//         margin: 0;
+//       }
+
+//       .product-qoh {
+//         text-align: left;
+//         margin-left: 6px;
+//         margin-bottom: 0px;
+//         font-weight: 400;
+//       }
+
+//       .product-seller-container {
+//         background-color: rgba(36, 45, 24, 0.212);
+//         height: 60px;
+//         padding-top: 10px;
+
+//         .product-seller,
+//         .product-harvestdate {
+//           font-weight: 550;
+//           font-size: 14px;
+//           margin: 0;
+//         }
+//       }
+//     }
+//   }
+
+//   .grid-item:hover {
+//     transform: scale(1.05);
+//   }
+// }
+
+// @media screen and (max-width: 1460px) {
+//   .account-details-container {
+//     border-left: none;
+//     text-align: center;
+//     align-items: center;
+//     justify-content: center;
+//     margin: 0;
+//     padding: 0;
+//   }
+
+//   .account-description-container {
+//     p {
+//       text-align: center;
+//     }
+//   }
+
+//   .img-container {
+//     top: 0;
+//   }
+// }
+
+// @media screen and (max-width: 1024px) {
+//   .account-details-container {
+//     align-items: center;
+//     justify-content: center;
+//     text-align: center;
+//     margin: 0;
+//     padding: 0;
+//   }
+
+//   .item-label {
+//     display: none;
+//   }
+
+//   .info-row {
+//     width: 50%;
+//   }
+
+//   .input-field::placeholder {
+//     color: #999;
+//   }
+// }
+
+// @media screen and (max-width: 768px) {
+//   .display-name-input {
+//     line-height: 1;
+//   }
+
+//   .account-description-container p {
+//     font-size: 14px;
+//   }
+
+//   .grid-container {
+//     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+//     justify-items: center;
+//     align-items: center;
+//     margin: 0 auto;
+//   }
+
+//   .banner-image {
+//     display: none;
+//   }
+
+//   .upload-profile-photo {
+//     margin-bottom: 20px;
+//   }
+// }
+
+.mt_3 {
+  margin: 8px 0px;
 }
 
-.banner-container {
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
+.list_items {
+  width: 100%;
+  height: auto;
+  padding: 20px 0px;
 }
 
-.banner-image {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 60vw;
-  height: 40vh;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.input-field {
-  border: none;
-  border-bottom: 1px solid #9b9b9b;
-  padding: 8px;
-  font-size: 16px;
-  box-sizing: border-box;
-  background-color: rgba(140, 195, 63, 0.1);
-}
-
-.input-field::placeholder {
-  color: transparent;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: #00bf63;
-  box-shadow: 0 0 8px rgba(0, 191, 99, 0.2);
-}
-
-.img-container {
-  height: 40vh;
-  padding: 10px;
-  flex: 1;
-  max-width: 20vw;
-  padding-right: 20px;
-  position: relative;
-  top: -60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-
-  .profile-image {
-    width: 200px;
-    height: 200px;
-    margin: 0;
-    border-radius: 50%;
-    border: 1px solid black;
-  }
-
-  .profile-image-loading {
-    width: 100px;
-    height: 100px;
-    margin: 60px auto;
-    border-radius: 50%;
-  }
-
-  input[type="file"] {
-    display: none;
-  }
-
-  .upload-profile-photo {
-    margin-top: 10px;
-    border-radius: 4px;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    font-weight: 450;
-    background-color: #00bf63b1;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      background-color: #17c370;
-    }
-  }
-
-  .delete-account-button {
-    position: absolute;
-    height: 35px;
-    bottom: 10px;
-    background-color: rgb(199, 217, 199);
-  }
-
-  .delete-account-button:hover {
-    background: rgb(205, 183, 183);
-    cursor: pointer;
-  }
-}
-
-.account-details-container {
-  display: flex;
-  margin-bottom: 20px;
-  margin-left: 20px;
-  padding: 10px 10px 10px 30px;
-  height: 40vh;
-  border-left: 1px solid #bfbfbf;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-
-  .display-name-input {
-    font-size: 30px;
-    margin-bottom: 10px;
-  }
-
-  .primary-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .info-row {
-      display: flex;
-      align-items: center;
-      height: 40px;
-    }
-
-    .item-label {
-      width: 160px;
-      text-align: left;
-    }
-
-    .item-data {
-      width: 500px;
-      flex: 1;
-      text-align: left;
-    }
-
-    // .display-name-input {
-    //   font-size: 30px;
-    // }
-  }
-}
-
-.account-description-container {
-  width: 40vw;
-  height: 10vh;
-  margin-top: 4%;
-  word-wrap: break-word;
-
-  p {
-    font-size: 20px;
-    text-align: left;
-    line-height: 1.2;
-
-  }
-
-  .input-field.description {
-    border-bottom: 1px solid #9b9b9b;
-    border-radius: 4px;
+.col-12 {
+  img {
     width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-}
-
-.cancel-edit-button {
-  background-color: #bf6c189f;
-
-  &:hover {
-    background-color: #995b1d9f;
-  }
-}
-
-.save-update-profile-button {
-  background-color: #00bf63b1;
-
-  &:hover {
-    background-color: #17c370;
-  }
-}
-
-.down-arrow {
-  margin-top: 30px;
-  font-size: 32px;
-  cursor: pointer;
-}
-
-.produce-container {
-  border: 1px solid black;
-  max-width: 60vw;
-  height: 80vh;
-  overflow-y: auto;
-  margin: auto;
-  background-color: rgba(140, 195, 63, 0.1);
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-  border: 1px solid #00000021;
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-.list-item-button {
-  background-color: #00bf63b1;
-  font-weight: 550;
-
-  &:hover {
-    background-color: #17c370;
-  }
-}
-
-.grid-container {
-  max-height: 70vh;
-  overflow-y: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
-  max-width: 100vw;
-  margin: 0 auto;
-  padding-left: 10px;
-
-  .grid-item {
-    position: relative;
-    width: 220px;
-    margin-top: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     height: 300px;
-    transition: all .2s ease-in-out;
+  }
+}
 
-    .item-data {
+.profile-card {
+  padding: 10px 20px;
+  height: auto;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+  border: none;
+
+  .item-label {
+    width: 100%;
+    text-align: left;
+  }
+
+  .item-data {
+    width: 100%;
+    text-align: left;
+  }
+
+
+  .col-12 {
+    .sellerProfile {
+      width: 170px;
+      height: 170px;
+      text-align: center;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      padding: 4px;
+      margin: 0% auto;
       position: relative;
-      background-color: rgba(140, 195, 63, 0.1);
-      // border: 1px solid black;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+
+      .product-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+      }
+
+      .uploadProfile {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        text-align: center;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        background-color: #fff;
+        cursor: pointer;
+
+        .photoIcon {
+          margin-top: 6px;
+        }
+      }
+    }
+
+    p {
+      text-align: center;
+      margin: 0px;
+      margin-top: 12px;
+    }
+  }
+
+  .col-12 {
+    position: relative;
+
+    .profileName {
+      line-height: 30px;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    .profileDescription {
+      margin: 20px 0px;
+      text-align: center;
+    }
+
+    .profileDateCreated {
+      height: 10%;
+      width: 100%;
+      font-weight: 600;
+      text-align: center;
+    }
+
+  }
+
+  .col-12 {
+
+    #file-upload {
+      display: none;
+    }
+
+    .delete-account-button {
+      text-align: center;
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 4px;
+      padding: 6px 0px;
+      cursor: pointer;
+      width: 40%;
+      margin-left: 30%;
+      font-weight: 450;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: rgb(255, 0, 0, 0.8);
+      color: #fff;
+
+      &:hover {
+        background-color: rgb(255, 0, 0, 0.7);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .col-12 {
+
+    .save-update-profile-button {
+      border-radius: 4px;
+      padding: 6px 12px;
+      text-align: center;
+      cursor: pointer;
+      width: 40%;
+      margin-left: 30%;
+      display: block;
+      font-weight: 450;
+      background-color: #17c370;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      color: #fff;
+      margin-top: 10px;
+
+      &:hover {
+        background-color: #00bf63b1;
+      }
+    }
+
+    .cancel-edit-button {
+      margin-top: 10px;
+      border-radius: 4px;
+      padding: 6px 12px;
+      text-align: center;
+      cursor: pointer;
+      display: block;
+      width: 40%;
+      margin-left: 30%;
+      font-weight: 450;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: rgb(255, 0, 0, 0.8);
+      color: #fff;
+
+      &:hover {
+        background-color: rgb(255, 0, 0, 0.7);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.row {
+  .col-12 {
+    .list-item-button {
+      border-radius: 4px;
+      padding: 6px 12px;
+      text-align: center;
+      cursor: pointer;
+      display: block;
+      font-weight: 450;
+      background-color: #17c370;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      color: #fff;
+
+      &:hover {
+        background-color: #00bf63b1;
+      }
+    }
+  }
+
+  .col-12 {
+    .item-card {
+      // background-color: #fff;
+      position: relative;
+      padding: 0px;
+      border-radius: 12px;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      -ms-border-radius: 12px;
+      -o-border-radius: 12px;
+      height: auto;
+
+      .product-image {
+        width: 100%;
+        height: 315px;
+        display: block;
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        -ms-border-radius: 15px;
+        -o-border-radius: 15px;
+        cursor: pointer;
+
+        &:hover {
+          box-shadow: -20px 30px 50px #9999994D;
+        }
+      }
+
+      .content {
+        .product-name {
+          text-transform: capitalize;
+          font-size: 20px;
+          font-weight: 900;
+          text-align: center;
+          padding-top: 25px;
+          padding-bottom: 15px;
+          margin: 0px;
+        }
+
+        .product-price {
+          text-align: center;
+          color: #0fc263;
+          font-size: 16px;
+          font-weight: 900;
+          padding-bottom: 15px;
+          margin: 0px;
+        }
+
+        .product-qoh {
+          text-align: left;
+          text-align: center;
+          color: #999999;
+          font-size: 16px;
+          font-weight: 900;
+          margin: 0px;
+          padding-bottom: 15px;
+        }
+
+        button {
+          padding: 13px 30px 14px;
+          font-size: 16px;
+          background-color: #0fc263;
+          color: #fff;
+          border: none;
+          text-transform: uppercase;
+          border-radius: 8px;
+          -webkit-border-radius: 8px;
+          -moz-border-radius: 8px;
+          -ms-border-radius: 8px;
+          -o-border-radius: 8px;
+          font-weight: 900;
+          width: 100%;
+          display: block;
+          outline: none;
+        }
+      }
+
+      .product-seller,
+      .product-harvestdate {
+        font-size: 16px;
+        margin: 0;
+        text-align: center;
+        color: #999999;
+        font-weight: 900;
+      }
 
       .hover-icons {
         position: absolute;
-        top: 1px;
-        right: 1px;
+        top: 10px;
+        right: 10px;
 
-        .edit-item-button,
-        .delete-item-button {
+        .edit-item-button {
           color: black;
         }
 
-        .edit-item-button:hover,
-        .delete-item-button:hover {
-          transition: all .2s ease-in-out;
-          transform: scale(1.1);
+        .delete-item-button {
+          color: rgb(255, 0, 0, 0.8);
         }
       }
 
-      .product-image {
-        width: 220px;
-        height: 160px;
-        margin-bottom: 5px;
-      }
-
-      .product-name {
-        text-transform: capitalize;
-        font-size: 20px;
-        font-weight: 550;
-        margin-bottom: 4px;
-      }
-
-      .product-price {
-        font-weight: 500;
-        margin: 0;
-      }
-
-      .product-qoh {
-        text-align: left;
-        margin-left: 6px;
-        margin-bottom: 0px;
-        font-weight: 400;
-      }
-
-      .product-seller-container {
-        background-color: rgba(36, 45, 24, 0.212);
-        height: 60px;
-        padding-top: 10px;
-
-        .product-seller,
-        .product-harvestdate {
-          font-weight: 550;
-          font-size: 14px;
-          margin: 0;
-        }
-      }
     }
-  }
-
-  .grid-item:hover {
-    transform: scale(1.05);
   }
 }
 
-@media screen and (max-width: 1460px) {
-  .account-details-container {
-    border-left: none;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-  }
-
-  .account-description-container {
-    p {
-      text-align: center;
-    }
-  }
-
-  .img-container {
-    top: 0;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .account-details-container {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-  }
-
+@media(max-width: 968px) {
   .item-label {
-    display: none;
+    font-size: 12px;
   }
 
-  .info-row {
-    width: 50%;
-  }
-
-  .input-field::placeholder {
-    color: #999;
+  .item-data {
+    font-size: 12px;
+    padding: 0px;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .display-name-input {
-    line-height: 1;
+@media(max-width: 600px) {
+  .mt_3 {
+    margin: 0px;
   }
 
-  .account-description-container p {
-    font-size: 14px;
-  }
+  .card {
+    .profileName {
+      font-size: 16px !important;
+      font-weight: 600;
+      line-height: 25px !important;
+    }
 
-  .grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    justify-items: center;
-    align-items: center;
-    margin: 0 auto;
-  }
+    .profileDescription {
+      font-size: 10px;
+    }
 
-  .banner-image {
-    display: none;
+    .profileDateCreated {
+      font-size: 10px;
+    }
   }
 
   .upload-profile-photo {
-    margin-bottom: 20px;
+    font-size: 10px;
+    padding: 2px !important;
+  }
+
+  .delete-account-button {
+    font-size: 10px;
+    padding: 2px !important;
+  }
+
+  .save-update-profile-button {
+    font-size: 10px;
+    padding: 2px !important;
+  }
+
+  .cancel-edit-button {
+    font-size: 10px;
+    padding: 2px !important;
+  }
+
+  .item-label {
+    font-size: 8px;
+  }
+
+  .item-data {
+    font-size: 8px;
+    padding: 0px;
   }
 }

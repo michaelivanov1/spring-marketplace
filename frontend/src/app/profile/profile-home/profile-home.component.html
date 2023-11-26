@@ -1,42 +1,21 @@
-<mat-card align="center" style="padding: 0">
+<!-- <mat-card align="center" style="padding: 0">
   <mat-card-content class="main-container">
     <div class="banner-container">
       <img class="banner-image" src="../../../assets/profile-banner.png" />
     </div>
 
     <div class="img-container">
-      <img
-        class="profile-image"
-        *ngIf="profileImageLoaded"
-        [src]="imageSrc || '../../../assets/default-avatar'"
-        alt="User's Profile Pic"
-      />
-      <img
-        class="profile-image-loading"
-        *ngIf="!profileImageLoaded"
-        src="../../../assets/profile-image-loading.gif"
-        alt="Loading Image..."
-      />
+      <img class="profile-image" *ngIf="profileImageLoaded" [src]="imageSrc || '../../../assets/default-avatar'"
+        alt="User's Profile Pic" />
+      <img class="profile-image-loading" *ngIf="!profileImageLoaded" src="../../../assets/profile-image-loading.gif"
+        alt="Loading Image..." />
 
-      <label
-        *ngIf="profileImageLoaded"
-        for="file-upload"
-        class="upload-profile-photo"
-        >Upload Photo
+      <label *ngIf="profileImageLoaded" for="file-upload" class="upload-profile-photo">Upload Photo
       </label>
 
-      <input
-        id="file-upload"
-        type="file"
-        accept="image/"
-        (change)="onUploadPhoto($event)"
-      />
+      <input id="file-upload" type="file" accept="image/" (change)="onUploadPhoto($event)" />
 
-      <button
-        mat-raised-button
-        class="delete-account-button"
-        (click)="openConfirmationDialog()"
-      >
+      <button mat-raised-button class="delete-account-button" (click)="openConfirmationDialog()">
         Delete account
       </button>
     </div>
@@ -52,30 +31,18 @@
       <div class="primary-info">
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Display Name </strong>
-          <input
-            type="text"
-            [(ngModel)]="updatedProfile.displayName"
-            class="input-field item-data"
-            placeholder="Display Name"
-          />
+          <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field item-data"
+            placeholder="Display Name" />
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Phone Num</strong>
-          <input
-            type="text"
-            [(ngModel)]="updatedProfile.phoneNumber"
-            class="input-field item-data"
-            placeholder="Phone Num"
-          />
+          <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field item-data"
+            placeholder="Phone Num" />
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Description </strong>
-          <input
-            type="text"
-            [(ngModel)]="updatedProfile.description"
-            class="input-field item-data"
-            placeholder="Description"
-          />
+          <input type="text" [(ngModel)]="updatedProfile.description" class="input-field item-data"
+            placeholder="Description" />
         </span>
         <span *ngIf="isEditable" class="info-row">
           <strong class="item-label">Email </strong>
@@ -84,19 +51,11 @@
       </div>
 
       <mat-card-actions style="margin: 0">
-        <button
-          class="cancel-edit-button"
-          mat-raised-button
-          *ngIf="isEditable"
-          (click)="cancelEdit()"
-        >
+        <button class="cancel-edit-button" mat-raised-button *ngIf="isEditable" (click)="cancelEdit()">
           Cancel
         </button>
-        <button
-          class="save-update-profile-button"
-          mat-raised-button
-          (click)="isEditable ? saveChanges() : toggleEdit()"
-        >
+        <button class="save-update-profile-button" mat-raised-button
+          (click)="isEditable ? saveChanges() : toggleEdit()">
           {{ isEditable ? "Save" : "Update Profile" }}
         </button>
       </mat-card-actions>
@@ -107,8 +66,6 @@
             {{ userProfile.description }}
           </p>
         </span>
-        <!-- <mat-icon *ngIf="!isEditable" (click)="scrollToSection('produceSection')"
-          class="down-arrow">keyboard_arrow_down</mat-icon> -->
       </div>
     </div>
   </mat-card-content>
@@ -117,44 +74,23 @@
     <div class="produce-container" id="produceSection">
       <h2 style="margin-bottom: 10px; padding: 0px 10px; text-align: left">
         {{ userStandDataExists ? "" : "You have nothing for sale yet!" }}
-        <button
-          mat-raised-button
-          class="list-item-button"
-          (click)="openListItemDialog()"
-        >
+        <button mat-raised-button class="list-item-button" (click)="openListItemDialog()">
           <mat-icon class="icon" style="margin-right: 5px">add</mat-icon>List
           Item
         </button>
       </h2>
 
       <div class="grid-container">
-        <ng-container
-          *ngFor="let produce of userStand.produceList; let i = index"
-        >
-          <div
-            class="grid-item"
-            (mouseenter)="onHover(produce)"
-            (mouseleave)="onLeave()"
-            [ngStyle]="{ cursor: getCursor() }"
-          >
+        <ng-container *ngFor="let produce of userStand.produceList; let i = index">
+          <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
+            [ngStyle]="{ cursor: getCursor() }">
             <div class="item-data">
-              <div
-                class="hover-icons"
-                *ngIf="isHovered && hoveredProduce === produce"
-              >
-                <button
-                  mat-icon-button
-                  class="edit-item-button"
-                  (click)="onEditClick(userStand, produce)"
-                >
+              <div class="hover-icons" *ngIf="isHovered && hoveredProduce === produce">
+                <button mat-icon-button class="edit-item-button" (click)="onEditClick(userStand, produce)">
                   <mat-icon>edit</mat-icon>
                 </button>
 
-                <button
-                  mat-icon-button
-                  class="delete-item-button"
-                  (click)="onDeleteClick(produce)"
-                >
+                <button mat-icon-button class="delete-item-button" (click)="onDeleteClick(produce)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
@@ -180,4 +116,141 @@
       </div>
     </div>
   </mat-card-content>
-</mat-card>
+</mat-card> -->
+
+<div class="px-4">
+  <div class="row py-4">
+    <div class="col-12 col-lg-4 pb-4">
+      <div class="profile-card">
+        <div class="row">
+          <div class="col-12 py-3">
+            <div class="sellerProfile shadow">
+              <img class="product-image" *ngIf="!profileImageLoaded" src="../../../assets/profile-image-loading.gif"
+                alt="Loading Image..." />
+              <img class=" product-image" *ngIf="profileImageLoaded"
+                [src]="imageSrc || '../../../assets/default-avatar.png'" alt="User's Profile Pic" />
+              <label *ngIf="profileImageLoaded" for="file-upload" class="uploadProfile shadow">
+                <mat-icon class="photoIcon">photo_camera</mat-icon>
+              </label>
+              <input id="file-upload" type="file" accept="image/" (change)="onUploadPhoto($event)" />
+            </div>
+          </div>
+          <div class="col-12 py-3 pb-0">
+            <div class="row">
+              <div *ngIf="isEditable" class="col-12 mt_3">
+                <div class="row">
+                  <div class="col-12 mb-2">
+                    <strong class="item-label">Display Name</strong>
+                  </div>
+                  <div class="col-12">
+                    <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field item-data"
+                      placeholder="Display Name" />
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isEditable" class="col-12 mt_3">
+                <div class="row">
+                  <div class="col-12 mb-2">
+                    <strong class="item-label">Phone Num</strong>
+                  </div>
+                  <div class="col-12">
+                    <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field item-data"
+                      placeholder="Phone Num" />
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isEditable" class="col-12 mt_3">
+                <div class="row">
+                  <div class="col-12 mb-2">
+                    <strong class="item-label">Description</strong>
+                  </div>
+                  <div class="col-12">
+                    <input type="text" [(ngModel)]="updatedProfile.description" class="input-field item-data"
+                      placeholder="Description" />
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isEditable" class="col-12 mt_3">
+                <div class="row">
+                  <div class="col-12 mb-2">
+                    <strong class="item-label">Email </strong>
+                  </div>
+                  <div class="col-12">
+                    <label class="item-data">{{ userProfile.email }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!isEditable" class="profileName">
+              {{ userProfile.displayName }}
+            </div>
+            <div *ngIf="!isEditable">
+              <div *ngIf="userProfile.description != ''" class="profileDescription">
+                {{ userProfile.description }}
+              </div>
+            </div>
+            <div *ngIf="!isEditable" class="profileDateCreated">
+              Member since: {{ dateCreatedFormatted }}
+            </div>
+          </div>
+          <div class="col-12 py-3">
+            <label class="save-update-profile-button" mat-raised-button
+              (click)="isEditable ? saveChanges() : toggleEdit()">
+              {{ isEditable ? "Save" : "Update Profile" }}
+            </label>
+            <label class="cancel-edit-button" mat-raised-button *ngIf="isEditable" (click)="cancelEdit()">
+              Cancel
+            </label>
+            <label *ngIf="!isEditable" mat-raised-button class="delete-account-button"
+              (click)="openConfirmationDialog()">
+              Delete account
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-8">
+      <div class="row">
+        <div class="col-12">
+          <button mat-raised-button class="list-item-button" (click)="openListItemDialog()">
+            <mat-icon class="icon" style="margin-right: 5px">add</mat-icon>List
+            Item
+          </button>
+          <h2 *ngIf="!userStandDataExists" style="padding: 30px 0px; text-align: left">
+            You have nothing for sale yet!
+          </h2>
+        </div>
+        <div *ngFor="let produce of userStand.produceList; let i = index" class="col-lg-4 col-md-6 col-12 py-4">
+          <div class="item-card">
+            <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
+              [ngStyle]="{ cursor: getCursor() }">
+              <div class="item-data">
+                <div class="hover-icons" *ngIf="isHovered && hoveredProduce === produce">
+                  <button mat-icon-button class="edit-item-button" (click)="onEditClick(userStand, produce)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+
+                  <button mat-icon-button class="delete-item-button" (click)="onDeleteClick(produce)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+                <img class="product-image" [src]="rawProduceImg[i]" />
+                <div class="content">
+                  <p class="product-name">{{ produce.foodName }}</p>
+                  <p class="product-price">${{ produce.price }}</p>
+                  <p class="product-qoh">
+                    {{ produce.qoh == 0 ? "Out of stock!" : produce.qoh + "x" }}
+                  </p>
+                  <p class="product-harvestdate">
+                    Harvested: {{ produce.harvestDate }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
