@@ -47,8 +47,10 @@
 
 <div class="banner">
   <div class="overlay">
-    <h1><img src="assets/leaf.png" alt="leaf">Marketplace</h1>
-    <h3 style="color: white">The freshest produce is listed right here on Spring Marketplace</h3>
+    <h1><img src="assets/leaf.png" alt="leaf" />Marketplace</h1>
+    <h3 style="color: white">
+      The freshest produce is listed right here on Spring Marketplace
+    </h3>
   </div>
 </div>
 
@@ -57,7 +59,11 @@
     <mat-card-content class="main-container">
       <h2 style="margin-top: 10px; text-align: center" *ngIf="totalCount == 0">
         No items on marketplace
-        <button style="margin-left: 15px" class="button-profile-redirect" (click)="profileRedirect()">
+        <button
+          style="margin-left: 15px"
+          class="button-profile-redirect"
+          (click)="profileRedirect()"
+        >
           Be the first to list an item!
         </button>
       </h2>
@@ -65,19 +71,28 @@
         <ng-container *ngFor="let user of userStandProfiles; let i = index">
           <ng-container *ngFor="let produce of user.produceList; let j = index">
             <div *ngIf="produce.qoh != 0" class="col-lg-3 col-md-6 col-12 py-3">
-              <div class="itemCard" (mouseenter)="onHover()" (mouseleave)="onLeave()"
-                (click)="onProductClick(user, produce, rawPicturesPerProfiles[i][j])">
-                <img class="productImage" [src]="rawPicturesPerProfiles[i][j]" />
+              <div
+                class="itemCard"
+                (mouseenter)="onHover()"
+                (mouseleave)="onLeave()"
+                (click)="
+                  onProductClick(user, produce, rawPicturesPerProfiles[i][j])
+                "
+              >
+                <img
+                  class="productImage"
+                  [src]="rawPicturesPerProfiles[i][j]"
+                />
                 <div class="content">
                   <p class="product-name">{{ produce.foodName }}</p>
                   <p class="product-qoh">{{ produce.qoh }}x</p>
-                  <p class="product-seller">{{user.displayName}}</p>
+                  <p class="product-seller">{{ user.displayName }}</p>
                   <p class="product-price">
-                    {{ produce.price + "" | currency : "USD" : "symbol" : "1.2-2" }}
+                    {{
+                      produce.price + "" | currency : "USD" : "symbol" : "1.2-2"
+                    }}
                   </p>
-                  <button class="addToCart">
-                    Add to cart
-                  </button>
+                  <button class="addToCart">Add to cart</button>
                 </div>
               </div>
             </div>

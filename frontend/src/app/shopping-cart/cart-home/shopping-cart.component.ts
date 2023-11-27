@@ -8,33 +8,41 @@ import { Cart, CartItem } from '../cart';
 import { ProfileService } from '../../profile/profile.service';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
-import {SnackbarComponent} from "@app/snackbar/snackbar.component";
+import { SnackbarComponent } from '@app/snackbar/snackbar.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BASEURL } from '@app/constants';
+import { catchError, forkJoin, of } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  styleUrls: ['./shopping-cart.component.scss'],
 })
-
 export class ShoppingCartComponent implements OnInit {
-  cartItems: { produce: Produce; user: UserStand; counter: number; }[] | null = null;
+  cartItems: { produce: Produce; user: UserStand; counter: number }[] | null =
+    null;
   isCartEmpty: boolean = false;
   grandTotal: number = 0;
   taxRate: number = 1.13;
   decodedToken: any;
   buyersEmail: any;
+  rawpictures: string[] = [];
+  msg: string = '';
 
   constructor(
+    private http: HttpClient,
     public dialog: MatDialog,
     private cartService: CartService,
     private profileService: ProfileService,
     private router: Router,
-    private snackbarService: SnackbarComponent,
-  ) { }
-
+    private snackbarService: SnackbarComponent
+  ) {}
 
   ngOnInit(): void {
-
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
     // grab logged in users email
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
     this.profileService.getOne(this.decodedToken.sub);
@@ -46,9 +54,36 @@ export class ShoppingCartComponent implements OnInit {
       const cartItemsFromStorage = JSON.parse(cartItemsJson);
 
       // check if cartItemsFromStorage is an array and not empty
-      if (Array.isArray(cartItemsFromStorage) && cartItemsFromStorage.length > 0) {
+      if (
+        Array.isArray(cartItemsFromStorage) &&
+        cartItemsFromStorage.length > 0
+      ) {
         this.isCartEmpty = false;
         this.cartItems = cartItemsFromStorage;
+        this.rawpictures = [];
+        const requests = this.cartItems.map((e) =>
+          this.http.get(`${BASEURL}file/${e.produce.produceImage}`, {
+            headers,
+            responseType: 'blob',
+          })
+        );
+        forkJoin(requests)
+          .pipe(
+            catchError((err) => {
+              this.msg = err.message;
+              return of([]);
+            })
+          )
+          .subscribe((responses: any[]) => {
+            responses.forEach((imageData: any, index) => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                const currentImage = reader.result as string;
+                this.rawpictures[index] = currentImage;
+              };
+              reader.readAsDataURL(imageData);
+            });
+          });
       } else {
         this.isCartEmpty = true;
         console.log('cart is empty');
@@ -83,7 +118,7 @@ export class ShoppingCartComponent implements OnInit {
       if (this.cartItems.length === 0) {
         this.isCartEmpty = true;
       }
-
+      this.rawpictures.splice(index, 1);
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
       this.calculateGrandTotal();
       this.snackbarService.open('Removed Item From Cart');
@@ -94,6 +129,7 @@ export class ShoppingCartComponent implements OnInit {
 
   clearCartItems(): void {
     this.isCartEmpty = true;
+    this.rawpictures = [];
     console.log('clear cart items');
     localStorage.removeItem('cartItems');
     this.calculateGrandTotal();
@@ -114,12 +150,14 @@ export class ShoppingCartComponent implements OnInit {
         if (sellerIndex === -1) {
           // if not, add the sellers email and the current item to the arrays
           sellerEmails.push(item.user.email);
-          sellerItems.push([{
-            foodName: item.produce.foodName,
-            qty: item.counter,
-            harvestDate: item.produce.harvestDate,
-            total: item.produce.price * item.counter,
-          }]);
+          sellerItems.push([
+            {
+              foodName: item.produce.foodName,
+              qty: item.counter,
+              harvestDate: item.produce.harvestDate,
+              total: item.produce.price * item.counter,
+            },
+          ]);
         } else {
           // if yes, add the current item to the existing sellers items
           sellerItems[sellerIndex].push({
@@ -131,7 +169,6 @@ export class ShoppingCartComponent implements OnInit {
         }
       }
     }
-
 
     for (let i = 0; i < sellerEmails.length; i++) {
       const sellerEmail = sellerEmails[i];
@@ -155,8 +192,13 @@ export class ShoppingCartComponent implements OnInit {
           this.snackbarService.open('Successfully Placed Order');
         },
         (error) => {
-          console.error(`error adding order to db for seller: ${sellerEmail} `, error);
-          this.snackbarService.open('Something Went Wrong: Order Failed To Be Placed')
+          console.error(
+            `error adding order to db for seller: ${sellerEmail} `,
+            error
+          );
+          this.snackbarService.open(
+            'Something Went Wrong: Order Failed To Be Placed'
+          );
         }
       );
     }
@@ -165,7 +207,7 @@ export class ShoppingCartComponent implements OnInit {
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '250px',
-      data: 'Confirm purchase?'
+      data: 'Confirm purchase?',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
