@@ -17,7 +17,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class OrderComponent implements OnInit {
 
-  //vars
   order?: Observable<Order>;
   msg: string;
   userOrder: Order;
