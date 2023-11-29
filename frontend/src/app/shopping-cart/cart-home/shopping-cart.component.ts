@@ -36,7 +36,7 @@ export class ShoppingCartComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router,
     private snackbarService: SnackbarComponent
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const headers = new HttpHeaders().set(
@@ -211,5 +211,9 @@ export class ShoppingCartComponent implements OnInit {
 
   marketplaceRedirect() {
     this.router.navigate(['/marketplace']);
+  }
+
+  viewOrdersRedirect() {
+    this.router.navigate(['/orders']);
   }
 }
