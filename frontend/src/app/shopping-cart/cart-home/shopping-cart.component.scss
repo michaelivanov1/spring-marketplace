@@ -229,13 +229,9 @@
         width: 100%;
         overflow: hidden;
 
-        .removeItem {
-        }
-
         .removeItem:hover {
           background-color: #e0e0e0;
         }
-
         h1 {
           font-weight: 900;
           font-size: 22px;
@@ -315,7 +311,6 @@
           background-color: #0fc263;
           color: #fff;
         }
-
         .checkout-btn:hover {
           background-color: rgba(0, 191, 99, 0.6);
         }
@@ -329,8 +324,10 @@
           border: none;
           background-color: #ff0000b3;
           color: #fff;
-
-
+        }
+        .clear-cart-btn:hover {
+          background-color: rgba(255, 0, 0, 0.6);
+        }
 
         .view-orders-button {
           width: 50%;
@@ -342,16 +339,12 @@
           color: #fff;
         }
       }
-      .clear-cart-btn:hover {
-        background-color: rgba(255, 0, 0, 0.6);
     }
-
   }
 }
 
 @media (max-width: 1280px) {
   .row {
-
     .cart-data-container {
       margin-left: 0 !important;
       width: 100% !important;
