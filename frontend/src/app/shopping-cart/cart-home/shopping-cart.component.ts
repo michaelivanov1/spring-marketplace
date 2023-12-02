@@ -36,7 +36,7 @@ export class ShoppingCartComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router,
     private snackbarService: SnackbarComponent
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const headers = new HttpHeaders().set(
@@ -86,11 +86,9 @@ export class ShoppingCartComponent implements OnInit {
           });
       } else {
         this.isCartEmpty = true;
-        console.log('cart is empty');
       }
     } else {
       this.isCartEmpty = true;
-      console.log('cart is empty');
     }
 
     this.calculateGrandTotal();
@@ -123,14 +121,12 @@ export class ShoppingCartComponent implements OnInit {
       this.calculateGrandTotal();
       this.snackbarService.open('Removed Item From Cart');
     } else {
-      console.log('cart is empty.');
     }
   }
 
   clearCartItems(): void {
     this.isCartEmpty = true;
     this.rawpictures = [];
-    console.log('clear cart items');
     localStorage.removeItem('cartItems');
     this.calculateGrandTotal();
     this.snackbarService.open('Your Cart Has Been Emptied');
@@ -139,8 +135,6 @@ export class ShoppingCartComponent implements OnInit {
   purchaseCartItems(): void {
     const sellerEmails: String[] = [];
     const sellerItems: CartItem[][] = [];
-
-    console.log('cart items: ' + JSON.stringify(this.cartItems));
 
     if (this.cartItems != null) {
       for (const item of this.cartItems) {
@@ -182,13 +176,11 @@ export class ShoppingCartComponent implements OnInit {
         grandTotal: grandTotal,
         orderProduceList: items,
       };
-      console.log(cartItemsObj);
 
       this.cartService.add(cartItemsObj).subscribe(
         () => {
           localStorage.removeItem('cartItems');
           this.isCartEmpty = true;
-          console.log(`added order to db for seller: ${sellerEmail}`);
           this.snackbarService.open('Successfully Placed Order');
         },
         (error) => {
@@ -219,5 +211,9 @@ export class ShoppingCartComponent implements OnInit {
 
   marketplaceRedirect() {
     this.router.navigate(['/marketplace']);
+  }
+
+  viewOrdersRedirect() {
+    this.router.navigate(['/orders']);
   }
 }

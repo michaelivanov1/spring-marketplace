@@ -1,23 +1,28 @@
-<!-- orders.component.html -->
-
 <div>
   <h2>Your Orders</h2>
   <p><b>This component is currently in progress!</b></p>
   <ul>
-    <!-- <a [routerLink]="'/order/orderid'" class="order-card"]> -->
-      <li class="order-card" *ngFor="let order of orders">Order ID: {{ order.orderId }} <br> Seller Email: {{ order.sellerEmail }} <br> Purchaser Email:
-        {{ order.buyerEmail }} <br> Order Total: {{ order.grandTotal }} <br> Invoice Date: {{ order.invoiceDate }}
-        <br> Produce:
-        <ul>
-          <li *ngFor="let produce of order.orderProduceList">
-            Name: {{ produce.foodName }} <br> Quantity: {{ produce.qty }} <br> Harvest Date: {{ produce.harvestDate }}
-            <br> Total: {{ produce.total }}
-          </li>
-        </ul>
-        {{ this.setImageSource(order.qrcodetxt) }}
-        <img [src]="getSanitizedImageSource()" alt="Base64 Image"/>
+    <ng-container *ngIf="orders.length > 0; else noOrders">
+      <li class="order-card" *ngFor="let order of orders">
+        <ng-container *ngIf="order != null">
+          Order ID: {{ order.orderId }} <br> Seller Email: {{ order.sellerEmail }} <br> Purchaser Email: {{
+          order.buyerEmail }} <br> Order Total: {{ order.grandTotal }} <br> Invoice Date: {{ order.invoiceDate }}
+          <br> Produce Ordered:
+          <ul>
+            <li *ngFor="let produce of order.orderProduceList">
+              Name: {{ produce.foodName }} <br> Quantity: {{ produce.qty }} <br> Harvest Date: {{ produce.harvestDate }}
+              <br> Total: {{ produce.total }}
+            </li>
+          </ul>
+          <!-- {{ this.setImageSource(order.qrcodetxt) }}
+                <img [src]="getSanitizedImageSource()" alt="Base64 Image"/> -->
+        </ng-container>
       </li>
-    <!-- </a> -->
+    </ng-container>
+
+    <ng-template #noOrders>
+      <p>You currently have no orders!</p>
+    </ng-template>
   </ul>
 </div>
 
