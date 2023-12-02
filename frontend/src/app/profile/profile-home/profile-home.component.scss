@@ -417,7 +417,6 @@
     text-align: left;
   }
 
-
   .col-12 {
     .sellerProfile {
       width: 170px;
@@ -461,6 +460,9 @@
           margin-top: 6px;
         }
       }
+      .uploadProfile:hover {
+        background-color: rgb(185, 184, 184);
+      }
     }
 
     p {
@@ -490,11 +492,9 @@
       font-weight: 600;
       text-align: center;
     }
-
   }
 
   .col-12 {
-
     #file-upload {
       display: none;
     }
@@ -521,7 +521,6 @@
   }
 
   .col-12 {
-
     .save-update-profile-button {
       border-radius: 4px;
       padding: 6px 12px;
@@ -606,7 +605,7 @@
         cursor: pointer;
 
         &:hover {
-          box-shadow: -20px 30px 50px #9999994D;
+          box-shadow: -20px 30px 50px #9999994d;
         }
       }
 
@@ -676,17 +675,21 @@
         .edit-item-button {
           color: black;
         }
-
+        .edit-item-button:hover {
+          background-color: #999999;
+        }
         .delete-item-button {
           color: rgb(255, 0, 0, 0.8);
         }
+        .delete-item-button:hover {
+          background-color: #999999;
+        }
       }
-
     }
   }
 }
 
-@media(max-width: 968px) {
+@media (max-width: 968px) {
   .item-label {
     font-size: 12px;
   }
@@ -697,7 +700,7 @@
   }
 }
 
-@media(max-width: 600px) {
+@media (max-width: 600px) {
   .mt_3 {
     margin: 0px;
   }

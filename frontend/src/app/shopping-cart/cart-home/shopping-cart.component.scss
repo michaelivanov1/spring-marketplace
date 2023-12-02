@@ -335,8 +335,11 @@
           text-transform: uppercase;
           margin-top: 12px;
           border: none;
-          background-color: rgba(46, 132, 197, 0.702);
+          background-color: rgba(46, 132, 197, 1);
           color: #fff;
+        }
+        .view-orders-button:hover {
+          background-color: rgba(46, 132, 197, 0.6);
         }
       }
     }

@@ -162,7 +162,10 @@ button.mat-icon-button:hover {
   cursor: pointer;
   font-size: 18px;
 }
-
+.qoh-container button:hover {
+  transition: transform 0.2s;
+  transform: scale(1.1);
+}
 .qoh-container input {
   width: 50px;
   text-align: center;
