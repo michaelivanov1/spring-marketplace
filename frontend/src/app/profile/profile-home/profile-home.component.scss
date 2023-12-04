@@ -687,6 +687,10 @@
 }
 
 @media (max-width: 968px) {
+  .item-card {
+    width: 100% !important;
+  }
+
   .item-label {
     font-size: 12px;
   }
