@@ -91,7 +91,10 @@ h2 {
     margin-right: 30px;
   }
 }
-
+mat-icon:hover {
+  background-color: #e0e0e0;
+  border-radius: 1em;
+}
 .confirm:hover {
   transform: scale(1.02);
   -webkit-transform: scale(1.02);
@@ -100,7 +103,7 @@ h2 {
   -o-transform: scale(1.02);
 }
 
-@media(max-width: 600px) {
+@media (max-width: 600px) {
   .dialog-container {
     display: flex;
     flex-direction: column;

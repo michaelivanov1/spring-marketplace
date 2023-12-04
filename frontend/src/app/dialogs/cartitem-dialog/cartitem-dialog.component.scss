@@ -105,6 +105,10 @@
   width: 300px;
   position: relative;
 }
+mat-icon:hover {
+  background-color: #e0e0e0;
+  border-radius: 1em;
+}
 
 button.mat-icon-button {
   background-color: transparent;
