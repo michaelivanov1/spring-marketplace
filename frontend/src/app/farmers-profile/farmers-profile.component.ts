@@ -5,10 +5,12 @@ import { ProfileService } from '../profile/profile.service';
 import { Profile } from '../profile/profile';
 import { catchError, forkJoin, of, switchMap, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dialog.component';
 import { BASEURL } from '@app/constants';
 import { UserStand } from '@app/user-stand/user-stand';
 import { UserStandService } from '@app/user-stand/user-stand.service';
 import { Produce } from '@app/common-interfaces/produce';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-farmers-profile',
@@ -30,7 +32,7 @@ export class FarmersProfileComponent implements OnInit {
   hoveredProduce: any = null;
   rawProduceImg: string[];
 
-  constructor(private sharedService: SharedService, private profileService: ProfileService, private http: HttpClient, private userStandService: UserStandService) {
+  constructor(private sharedService: SharedService, private profileService: ProfileService, private http: HttpClient, private userStandService: UserStandService, private dialog: MatDialog) {
     this.dateCreatedFormatted = '';
     this.imageSrc = '';
     this.userStandDataExists = false;
@@ -160,6 +162,20 @@ export class FarmersProfileComponent implements OnInit {
             });
         }
       });
+  }
+
+  onProductClick(user: UserStand, produce: any, rawPicture: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.height = '50vh';
+    dialogConfig.autoFocus = false;
+    dialogConfig.data = {
+      user: user,
+      produce: produce,
+      rawPicture: rawPicture,
+    };
+    dialogConfig.panelClass = 'customdialog';
+    const dialogRef = this.dialog.open(CartitemDialogComponent, dialogConfig);
   }
 
   convertToEST(dateString: any): string {
