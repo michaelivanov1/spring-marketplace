@@ -235,7 +235,7 @@
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
-                <img class="product-image" [src]="rawProduceImg[i]" />
+                <img class="product-image" [src]="rawProduceImg[i] || '../../../assets/profile-image-loading.gif'" />
                 <div class="content">
                   <p class="product-name">{{ produce.foodName }}</p>
                   <p class="product-price">${{ produce.price }}</p>
