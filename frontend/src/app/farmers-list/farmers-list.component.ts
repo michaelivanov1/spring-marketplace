@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { SharedService } from '@app/shared.service';
 import { UserStand } from '@app/user-stand/user-stand';
 import { UserStandService } from '@app/user-stand/user-stand.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-farmers-list',
@@ -20,6 +21,8 @@ export class FarmersListComponent implements OnInit {
   profiles: Profile[] = [];
   creationDateFormatted!: Date;
   profileImages: any = [];
+  decodedToken: any;
+  loggedInUser: any;
 
   constructor(
     private profileService: ProfileService,
@@ -31,6 +34,11 @@ export class FarmersListComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
+    this.profileService.getOne(this.decodedToken.sub);
+    this.loggedInUser = this.decodedToken.sub;
+
     this.profileService.get().subscribe(
       (profiles) => {
         this.profiles = profiles;
