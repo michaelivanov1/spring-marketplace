@@ -185,7 +185,7 @@
   -o-border-radius: 8px;
 
   .col-12 {
-    .itemCard {
+    .item-card {
       // background-color: #fff;
       position: relative;
       padding: 0px 15px 30px;
@@ -222,6 +222,7 @@
       }
 
       .productImage {
+        transition: transform 0.3s ease-in-out;
         width: 100%;
         height: 300px;
         display: block;
@@ -234,6 +235,7 @@
 
         &:hover {
           box-shadow: -20px 30px 50px #9999994d;
+          transform: scale(1.03);
         }
       }
 

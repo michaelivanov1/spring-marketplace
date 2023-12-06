@@ -73,10 +73,10 @@
               !user.email.includes(loggedInUser) ? 'auto' : 'none'
             ">
 
-              <div class="itemCard" (mouseenter)="onHover()" (mouseleave)="onLeave()" (click)="
+              <div class="item-card" (mouseenter)="onHover()" (mouseleave)="onLeave()" (click)="
                   onProductClick(user, produce, rawPicturesPerProfiles[i][j])
                 ">
-                <img class="productImage" [src]="rawPicturesPerProfiles[i][j]" />
+                <img class="productImage" [src]="rawPicturesPerProfiles[i][j] || '../../../assets/profile-image-loading.gif'" />
                 <div class="content">
                   <p class="product-name">{{ produce.foodName }}</p>
                   <p class="product-qoh">{{ produce.qoh }}x</p>
