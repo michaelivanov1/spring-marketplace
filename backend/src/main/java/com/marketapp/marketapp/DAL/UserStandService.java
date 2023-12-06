@@ -19,6 +19,7 @@ import java.util.Optional;
 @Service
 public class UserStandService {
 
+    @Autowired
     private UserStandRepository userStandRepository;
 
     public List<UserStand> allUserStands() {
