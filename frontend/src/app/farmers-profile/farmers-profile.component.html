@@ -98,7 +98,7 @@
 
         <div class="col-12 col-lg-8">
             <div class="row">
-
+                <h2>*Buying from user profiles is currently in progress*</h2>
                 <div *ngIf="userStand.produceList.length == 0">
                     <p style="color: rgb(173, 18, 18); font-size: 18px;">This user currently has nothing for sale</p>
                 </div>
@@ -108,7 +108,7 @@
                         <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
                             [ngStyle]="{ cursor: getCursor() }">
                             <div class="item-data">
-                                <img class="product-image" [src]="rawProduceImg[i]" />
+                                <img class="product-image" [src]="rawProduceImg[i] || '../../../assets/profile-image-loading.gif'" />
                                 <div class="content">
                                     <p class="product-name">{{ produce.foodName }}</p>
                                     <p class="product-price">${{ produce.price }}</p>
