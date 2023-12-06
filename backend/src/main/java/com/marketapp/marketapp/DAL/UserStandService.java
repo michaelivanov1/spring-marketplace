@@ -19,7 +19,6 @@ import java.util.Optional;
 @Service
 public class UserStandService {
 
-    @Autowired
     private UserStandRepository userStandRepository;
 
     public List<UserStand> allUserStands() {
@@ -33,7 +32,7 @@ public class UserStandService {
     public UserStand addToUserStand(String email, Produce produce) {
         // find existing stand
         Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
-        UserStand existingUserStand = null;
+        UserStand existingUserStand;
         if (existingUserStandOp.isPresent()) {
             existingUserStand = existingUserStandOp.get();
         } else {
@@ -49,7 +48,7 @@ public class UserStandService {
     public UserStand updateProduceList(String displayName, String email, ArrayList<Produce> produceList) {
         // find existing stand
         Optional<UserStand> existingUserStandOp = userStandRepository.findByEmail(email);
-        UserStand existingUserStand = null;
+        UserStand existingUserStand;
         if (existingUserStandOp.isPresent()) {
             existingUserStand = existingUserStandOp.get();
         } else {

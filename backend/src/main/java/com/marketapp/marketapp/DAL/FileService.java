@@ -1,5 +1,6 @@
 package com.marketapp.marketapp.DAL;
 
+import com.marketapp.marketapp.CustomExceptions.UserStandNotFoundException;
 import com.marketapp.marketapp.ViewModels.FileMetadata;
 import com.marketapp.marketapp.ViewModels.Produce;
 import com.marketapp.marketapp.ViewModels.UserStand;
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,27 +40,32 @@ public class FileService {
         ObjectId fileId = gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename(), metadata);
 
         // store the unique id that was created in profileImage in accounts
+        Map<String, Object> keyMap = new HashMap<>();
         if (type.equals("profile")) {
-            Map<String, Object> keyMap = new HashMap<>();
             keyMap.put("profileImage", uuid);
             userService.updateUserByFields(email, keyMap);
-        } else {
-            Map<String, Object> keyMap = new HashMap<>();
+        }
+        else {
             keyMap.put("produceImage", uuid);
 
             Optional<UserStand> userStand = userStandService.singleUserStandByEmail(email);
-            ArrayList<Produce> produceList = userStand.get().getProduceList();
-            for (Produce p : produceList) {
-                if (p.getFoodName().equals(type)) {
-                    p.setProduceImage(uuid);
-                    String displayName = userStand.get().getDisplayName();
-                    userStandService.updateProduceList(displayName, email, produceList);
-                    break;
+            if (userStand.isPresent()) {
+                ArrayList<Produce> produceList = userStand.get().getProduceList();
+                for (Produce p : produceList) {
+                    if (p.getFoodName().equals(type)) {
+                        p.setProduceImage(uuid);
+                        String displayName = userStand.get().getDisplayName();
+                        userStandService.updateProduceList(displayName, email, produceList);
+                        break;
+                    }
                 }
             }
+            else {
+                throw new UserStandNotFoundException("User stand not found with given email",
+                        HttpStatus.NOT_ACCEPTABLE);
+            }
         }
-
-        return uuid.toString();
+        return uuid;
     }
 
     public GridFSFile findFileByObjectId(String id) {

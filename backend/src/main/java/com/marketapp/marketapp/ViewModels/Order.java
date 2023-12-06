@@ -52,9 +52,6 @@ public class Order {
         this.orderProduceList = orderProduceList;
         this.orderId = UUID.randomUUID().toString();
 
-        //TODO: need to link a frontend page to these eventually
-        //String devUrl = "https://localhost:8080/api/order/id/" + orderId;
-        //String url = "https://spring-marketplace-client.onrender.com/api/order/id/" + orderId;
         String url = "/order/id/" + orderId;
 
         int imageSize = 200;
