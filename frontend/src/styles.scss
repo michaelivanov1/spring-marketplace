@@ -4,6 +4,7 @@
   // font-family: 'Roboto', sans-serif;
   // font-family: 'Noto Sans', sans-serif;
   // font-family: 'Lato', sans-serif;
+  font-family: 'Livvic', sans-serif;
 }
 
 html,
@@ -15,7 +16,8 @@ body {
 
 // currently selected menu item
 .selected-menu-item {
-  border-bottom: 1px solid #ffde59;
+  // border-bottom: 1px solid #ffde59;
+  border-bottom: 1px solid green;
 }
 
 /* override all mat-card instances */
@@ -41,17 +43,30 @@ mat-dialog-container {
   flex: 1;
 }
 
+.info-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  background-color: #3fa458;
+
+  .info-header-text {
+    margin-top: 10px;
+    font-size: 16px;
+    color: white;
+  }
+}
+
 .header {
-  background-color: #222222;
-  color: black;
-  height: 8rem;
+  background-color: white;
+  height: 7rem;
   margin: auto;
 }
 
 .menu-items-left {
   display: flex;
   align-items: center;
-  color: #ffde59;
+  color: black;
   width: 20vw;
 
   .logo {
@@ -72,12 +87,12 @@ mat-dialog-container {
   width: 20vw;
   display: flex;
   justify-content: right;
-  color: #ffde59;
+  color: black;
 }
 
 body a {
   font-weight: 400;
-  color: #0fc263;
+  color: black;
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -89,7 +104,7 @@ a:hover {
 .about {
   background-color: #F1EFDD;
   padding: 50px 300px;
-  margin: 20px auto 0;
+  margin: 60px auto 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -106,7 +121,6 @@ a:hover {
 
   h4 {
     margin: 14px 0;
-    color: #068742;
     font-size: 20px;
     font-weight: 500;
   }
@@ -134,7 +148,7 @@ a:hover {
 
 .footer {
   text-align: center;
-  background-color: #222222;
+  background-color: #3fa458;
   color: white;
   font-family: Roboto, sans-serif;
   font-size: 1.25rem;
@@ -149,7 +163,6 @@ a:hover {
 
   .footer-text {
     text-align: center;
-    color: #ffde59;
   }
 }
 
