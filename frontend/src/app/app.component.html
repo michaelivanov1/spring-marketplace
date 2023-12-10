@@ -1,5 +1,8 @@
 <div class="container">
   <div class="content">
+    <div class="info-header">
+      <p class="info-header-text">Enjoy 20% off on all produce until December 31st!</p>
+    </div>
     <mat-toolbar class="header">
       <div class="menu-items-left">
         <img src="../assets/logo.png" class="logo" />
@@ -11,16 +14,8 @@
           routerLinkActive="selected-menu-item">Profile</a>
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']" (click)="setTitle('Marketplace')"
           routerLinkActive="selected-menu-item">Marketplace</a>
-        <!-- <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['orders']" (click)="setTitle('Orders')"
-           routerLinkActive="selected-menu-item">Orders</a> -->
-        <!-- <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na']" (click)="setTitle('Newsletter')"
-          routerLinkActive="selected-menu-item">Newsletter</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['na2']" (click)="setTitle('Blog')"
-          routerLinkActive="selected-menu-item">Blog</a> -->
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['farmers']" (click)="setTitle('Farmers')"
           routerLinkActive="selected-menu-item">Farmers</a>
-        <!-- <a mat-tab-link [routerLink]="['faq']" (click)="setTitle('Faq')" routerLinkActive="selected-menu-item">FAQ/About
-          Us</a> -->
         <div *ngIf="isSmallScreen"> <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button
             routerLink="/login" (click)="setTitle('Login')" routerLinkActive="selected-menu-item">Login</a>
           <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register"

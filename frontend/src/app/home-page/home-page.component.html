@@ -1,5 +1,5 @@
 <div class="banner-container">
-    <img class="banner-image" src="../../assets/home-banner-images/1.jpg">
+    <img class="banner-image" src="../../assets/home-page/home-banner.jpg">
     <div class="data-container">
         <p class="banner-title">SPRING MARKETPLACE</p>
         <p class="banner-description">An online farmers market connecting consumers with locally sourced, fresh
@@ -9,39 +9,151 @@
 </div>
 
 <div class="main-container">
-
-    <div class="info-image-container" id="infoImageContainer">
-        <img class="info-image" src="../../assets/home-banner-images/info.png">
+    <div class="rich-text-container">
+        <div class="rich-text-image-container">
+            <img class="rich-text-image" src="../../assets/home-page/rich-text.png">
+        </div>
+        <div class="rich-text-description-container">
+            <p class="rich-text-title">Shop Fresh, Shop Organic</p>
+            <p class="rich-text-description">Embrace wholesome goodness with every bite. Shop fresh, shop organic –
+                because your well-being matters.</p>
+            <div class="rich-text-subcontainer">
+                <img class="subcontainer-img" src="../../assets/home-page/subcontainer-img1.png">
+                <p class="subcontainer-description">Pure & Fresh Selection: Immerse yourself in the pure essence of
+                    organic goodness, handpicked for its freshness and quality.</p>
+            </div>
+            <div class="rich-text-subcontainer">
+                <img class="subcontainer-img" src="../../assets/home-page/subcontainer-img2.png">
+                <p class="subcontainer-description">Simple, Healthy, and Incredibly Delicious: Rediscover the joy of
+                    simplicity in your meals, where health meets mouthwatering flavor in every organic bite.</p>
+            </div>
+        </div>
     </div>
 
-    <h1 class="headers">What is Spring Marketplace?</h1>
-    <p>Spring Marketplace is a Full-Stack Produce Market made using <b>Angular</b>, <b>Java Springboot</b>, and <b>MongoDB</b> as the
-        Database.</p>
-    <p>This is a 3 person project that aims to mimic modern day online store applications and their features.</p>
-    <p>Features include Login/Registration w/ hashed passwords, fully customizable profile page, marketplace page,
-        shopping cart,
-        receipt/order viewing, farmers page(s), etc.
-    </p>
-    <br>
-    <p>Feel free to register and check out the features</p>
-    <!-- <a target="_blank" href="https://github.com/michaelivanov1/spring-marketplace">Source code</a> -->
+    <div class="learn-more-container">
+        <h1 class="learn-more-text">Want to learn more about Spring Marketplace?</h1>
+    </div>
 
-    <br>
-    <h1 class="headers">How do I use this app?</h1>
-    <br>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    What is Spring Marketplace?
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="point">
+                <br>
+                <p>
+                    Spring Marketplace is an online Full-Stack Produce Market developed by a team of three individuals.
+                    The primary goal of this project is to emulate the functionalities found in modern online
+                    store applications. The project serves as a comprehensive learning experience, allowing the team to
+                    gain proficiency in both front-end and back-end development.
+                </p>
+                <br>
+                <p>Feel free to <a [routerLink]="['/register']">Register</a> and check out all the features.</p>
+            </div>
+        </mat-expansion-panel>
 
-    <h1 class="headers">Using Spring Marketplace as a Buyer</h1>
-    <p>1. Register</p>
-    <p>2. Start buying on the marketplace</p>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Using Spring Marketplace as a Buyer
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <br>
+            <div class="point">
+                <a [routerLink]="['/register']">1. Register</a>
+            </div>
+            <div class="point">
+                <p>2. Start buying on the marketplace</p>
+            </div>
+        </mat-expansion-panel>
 
-    <h1 class="headers">Using Spring Marketplace as a Seller</h1>
-    <p>1. Register</p>
-    <p>2. Add your info on the profile page</p>
-    <p>3. List items directly from your profile</p>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Using Spring Marketplace as a Seller
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <br>
+            <div class="point">
+                <a [routerLink]="['/register']">1. Register</a>
+            </div>
+            <div class="point">
+                <p>2. Add your info on the profile page</p>
+            </div>
+            <div class="point">
+                <p>3. List items directly from your profile</p>
+            </div>
+        </mat-expansion-panel>
 
-    <h1 class="headers">Buying Produce</h1>
-    <p>1. Browse whats available on the marketplace</p>
-    <p>2. Click the item you would like to purchase and add the desired quantity to the cart</p>
-    <p>3. View your cart by clicking the cart icon</p>
-    <p>4. Click checkout to purchase, or X to remove specific items from cart</p>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Buying Produce
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <br>
+            <div class="point">
+                <p>1. Browse what's available on the marketplace</p>
+            </div>
+            <div class="point">
+                <p>2. Click the item you would like to purchase and add the desired quantity to the cart</p>
+            </div>
+            <div class="point">
+                <p>3. View your cart by clicking the cart icon</p>
+            </div>
+            <div class="point">
+                <p>4. Click checkout to purchase, or X to remove specific items from the cart</p>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    What Technologies are used?
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <br>
+            <div class="point">
+                <p style="font-size: 26px">Frontend</p>
+                <p>Angular</p>
+                <p>Material UI</p>
+                <p>Jwt Decode</p>
+                <p>rxjs</p>
+            </div>
+            <br>
+            <div class="point">
+                <p style="font-size: 26px">Backend</p>
+                <p>Java (Springboot)</p>
+                <p>jsonwebtoken</p>
+                <p>Lombok</p>
+                <p>Jakarta</p>
+            </div>
+            <br>
+            <div class="point">
+                <p style="font-size: 26px">Database</p>
+                <p>MongoDB</p>
+            </div>
+            <br>
+            <div class="point">
+                <p style="font-size: 26px">Hosting (render.com)</p>
+                <p>Backend: Docker runtime</p>
+                <p>Frontend: Static site</p>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title style="color: green">
+                    Let me view the source code!
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <br>
+            <div class="point">
+                <p><a target="_blank" href="https://github.com/michaelivanov1/spring-marketplace">Click me for the
+                        public Spring Marketplace repository</a></p>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>
