@@ -6,7 +6,6 @@ import { RegistrationFinishComponent } from './registration/registration-finish/
 import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingCartComponent } from './shopping-cart/cart-home/shopping-cart.component';
-import { FaqComponent } from './faq/faq.component';
 import { OrderComponent } from "@app/order/order-home/order.component";
 import { FarmersListComponent } from './farmers-list/farmers-list.component';
 import { OrderDetailsComponent } from "@app/order-details/order-details.component";
@@ -29,11 +28,6 @@ const routes: Routes = [
     path: 'marketplace',
     component: MarketplaceComponent,
     title: 'Marketplace',
-  },
-  {
-    path: 'faq',
-    component: FaqComponent,
-    title: 'Faq',
   },
   {
     path: 'shopping-cart',
