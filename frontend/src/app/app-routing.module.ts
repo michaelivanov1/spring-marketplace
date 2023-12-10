@@ -14,10 +14,10 @@ import { HomePageComponent } from './home-page/home-page.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, title: 'Login' },
+  { path: '', component: HomePageComponent, title: 'Home' },
+  { path: 'home', component: HomePageComponent, title: 'Home' },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegistrationComponent, title: 'Register' },
-  { path: 'home', component: HomePageComponent, title: 'Home' },
   { path: 'profile', component: ProfileComponent, title: 'Profile' },
   {
     path: 'registration-finish',
