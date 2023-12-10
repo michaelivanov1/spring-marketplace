@@ -1,42 +1,120 @@
 <div class="container">
   <div class="content">
     <div class="info-header">
-      <p class="info-header-text">Enjoy 20% off on all produce until December 31st!</p>
+      <p class="info-header-text">
+        Enjoy 20% off on all produce until December 31st!
+      </p>
     </div>
     <mat-toolbar class="header">
       <div class="menu-items-left">
         <img src="../assets/logo.png" class="logo" />
       </div>
       <div class="menu-items-center">
-        <a mat-tab-link [routerLink]="['home']" (click)="setTitle('Home')"
-        routerLinkActive="selected-menu-item">Home</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['profile']" (click)="setTitle('Profile')"
-          routerLinkActive="selected-menu-item">Profile</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']" (click)="setTitle('Marketplace')"
-          routerLinkActive="selected-menu-item">Marketplace</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['farmers']" (click)="setTitle('Farmers')"
-          routerLinkActive="selected-menu-item">Farmers</a>
-        <div *ngIf="isSmallScreen"> <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button
-            routerLink="/login" (click)="setTitle('Login')" routerLinkActive="selected-menu-item">Login</a>
-          <a style="color: yellow" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register"
-            (click)="setTitle('Register')" routerLinkActive="selected-menu-item">Register</a>
-          <a style="color: yellow" mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart"
-            (click)="setTitle('Shopping Cart')" routerLinkActive="selected-menu-item">
+        <a
+          mat-tab-link
+          [routerLink]="['home']"
+          (click)="setTitle('Home')"
+          routerLinkActive="selected-menu-item"
+          >Home</a
+        >
+        <a
+          mat-tab-link
+          *ngIf="isLoggedIn()"
+          [routerLink]="['profile']"
+          (click)="setTitle('Profile')"
+          routerLinkActive="selected-menu-item"
+          >Profile</a
+        >
+        <a
+          mat-tab-link
+          *ngIf="isLoggedIn()"
+          [routerLink]="['marketplace']"
+          (click)="setTitle('Marketplace')"
+          routerLinkActive="selected-menu-item"
+          >Marketplace</a
+        >
+        <a
+          mat-tab-link
+          *ngIf="isLoggedIn()"
+          [routerLink]="['farmers']"
+          (click)="setTitle('Farmers')"
+          routerLinkActive="selected-menu-item"
+          >Farmers</a
+        >
+        <div *ngIf="isSmallScreen">
+          <a
+            style="color: #3fa458"
+            mat-tab-link
+            *ngIf="!isLoggedIn()"
+            mat-button
+            routerLink="/login"
+            (click)="setTitle('Login')"
+            routerLinkActive="selected-menu-item"
+            >Login</a
+          >
+          <a
+            style="color: #3fa458"
+            mat-tab-link
+            *ngIf="!isLoggedIn()"
+            mat-button
+            routerLink="/register"
+            (click)="setTitle('Register')"
+            routerLinkActive="selected-menu-item"
+            >Register</a
+          >
+          <a
+            style="color: #3fa458"
+            mat-tab-link
+            *ngIf="isLoggedIn()"
+            mat-button
+            routerLink="/shopping-cart"
+            (click)="setTitle('Shopping Cart')"
+            routerLinkActive="selected-menu-item"
+          >
             <mat-icon>shopping_cart</mat-icon>
           </a>
-          <a style="color: yellow" mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
+          <a
+            style="color: #3fa458"
+            mat-tab-link
+            *ngIf="isLoggedIn()"
+            mat-button
+            (click)="logout()"
+            >Logout</a
+          >
         </div>
       </div>
       <div *ngIf="!isSmallScreen" class="menu-items-right">
-        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login" (click)="setTitle('Login')"
-          routerLinkActive="selected-menu-item">Login</a>
-        <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register" (click)="setTitle('Register')"
-          routerLinkActive="selected-menu-item">Register</a>
-        <a mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart" (click)="setTitle('Shopping Cart')"
-          routerLinkActive="selected-menu-item">
+        <a
+          mat-tab-link
+          *ngIf="!isLoggedIn()"
+          mat-button
+          routerLink="/login"
+          (click)="setTitle('Login')"
+          routerLinkActive="selected-menu-item"
+          >Login</a
+        >
+        <a
+          mat-tab-link
+          *ngIf="!isLoggedIn()"
+          mat-button
+          routerLink="/register"
+          (click)="setTitle('Register')"
+          routerLinkActive="selected-menu-item"
+          >Register</a
+        >
+        <a
+          mat-tab-link
+          *ngIf="isLoggedIn()"
+          mat-button
+          routerLink="/shopping-cart"
+          (click)="setTitle('Shopping Cart')"
+          routerLinkActive="selected-menu-item"
+        >
           <mat-icon>shopping_cart</mat-icon>
         </a>
-        <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
+        <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()"
+          >Logout</a
+        >
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
@@ -44,24 +122,45 @@
 
   <div class="about">
     <div class="about-grid">
-      <img src="../assets/about-section-icons/buy-local.png" width="140" height="120" alt="to add">
+      <img
+        src="../assets/about-section-icons/buy-local.png"
+        width="140"
+        height="120"
+        alt="to add"
+      />
       <h4>Support Local</h4>
-      <p>Picture a virtual farmers' market that you can explore from the cozy confines of your home whenever it suits
-        your schedule.</p>
+      <p>
+        Picture a virtual farmers' market that you can explore from the cozy
+        confines of your home whenever it suits your schedule.
+      </p>
     </div>
 
     <div class="about-grid">
-      <img src="../assets/about-section-icons/sell-goods.png" width="120" height="120" alt="to add">
+      <img
+        src="../assets/about-section-icons/sell-goods.png"
+        width="120"
+        height="120"
+        alt="to add"
+      />
       <h4>Sell Your Own Goods</h4>
-      <p>Do you have fresh produce or goods to offer? Now, you can sell them comfortably from your home or office, with
-        ease and convenience.</p>
+      <p>
+        Do you have fresh produce or goods to offer? Now, you can sell them
+        comfortably from your home or office, with ease and convenience.
+      </p>
     </div>
 
     <div class="about-grid">
-      <img src="../assets/about-section-icons/fresh-guarantee.png" width="140" height="120" alt="to add">
+      <img
+        src="../assets/about-section-icons/fresh-guarantee.png"
+        width="140"
+        height="120"
+        alt="to add"
+      />
       <h4>Fresh Guarantee</h4>
-      <p>We pledge that all our products are delivered to your doorstep at the peak of freshness, ensuring you enjoy the
-        finest quality every time.</p>
+      <p>
+        We pledge that all our products are delivered to your doorstep at the
+        peak of freshness, ensuring you enjoy the finest quality every time.
+      </p>
     </div>
   </div>
 
