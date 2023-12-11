@@ -201,7 +201,7 @@
             <label class="cancel-edit-button" mat-raised-button *ngIf="isEditable" (click)="cancelEdit()">
               Cancel
             </label>
-            <label *ngIf="!isEditable" mat-raised-button class="delete-account-button"
+            <label *ngIf="isEditable" mat-raised-button class="delete-account-button"
               (click)="openConfirmationDialog()">
               Delete account
             </label>
