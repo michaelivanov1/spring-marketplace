@@ -154,15 +154,15 @@ mat-expansion-panel {
 
     a {
         font-size: 18px;
-        color:  #3fa458;
+        color: #3fa458;
     }
 
     .point {
-        margin-bottom: 10px; 
+        margin-bottom: 10px;
     }
-    
+
     .point p {
-        margin: 0; 
+        margin: 0;
     }
 }
 
@@ -192,7 +192,6 @@ a {
 
         .banner-title {
             margin-top: 7%;
-            color: #FFDE59;
             font-size: 26px;
             max-width: 100%;
             margin-left: 20%;
@@ -200,22 +199,91 @@ a {
         }
 
         .banner-description {
-            color: white;
             font-size: 14px;
             max-width: 80%;
             text-align: left;
             margin-top: 10px;
         }
     }
+
+    .rich-text-container {
+        display: flex;
+        align-items: center;
+        height: auto;
+        width: 100% !important;
+
+
+        .rich-text-image-container {
+            margin-right: 0% !important;
+        }
+
+        .rich-text-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+        }
+
+        .rich-text-description-container {
+            flex: 1;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+
+            .rich-text-title {
+                font-size: 22px;
+            }
+
+            .rich-text-description {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+        }
+
+        .rich-text-subcontainer {
+            width: 100%;
+            flex-direction: column;
+
+            .subcontainer-img {
+                display: none;
+            }
+
+            .subcontainer-description {
+                width: 100% !important;
+                padding-left: 0 !important;
+                font-size: 12px !important;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 768px) {
+
+    .rich-text-image-container {
+        display: none;
+    }
+
     .banner-container {
         display: none;
     }
 
     .main-container {
         padding: 0;
-        width: 75%;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    mat-expansion-panel {
+        padding: 20px;
+
+        mat-panel-title {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        p {
+            font-size: 12px;
+        }
     }
 }
