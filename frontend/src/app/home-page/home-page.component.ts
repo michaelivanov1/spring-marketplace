@@ -13,7 +13,7 @@ export class HomePageComponent implements OnInit {
   }
 
   scrollToInfo() {
-    const infoImageContainer = document.getElementById('infoImageContainer');
+    const infoImageContainer = document.getElementById('learn-more-container');
     if (infoImageContainer) {
       infoImageContainer.scrollIntoView({ behavior: 'smooth' });
     }
