@@ -199,6 +199,11 @@ a:hover {
 }
 
 @media screen and (max-width: 480px) {
+  .info-header {
+    height: 5rem;
+    padding: 20px;
+  }
+
   .about-grid {
     flex: 0 1 100%;
     margin-right: 0;
