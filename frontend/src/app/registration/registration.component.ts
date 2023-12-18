@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { ValidateEmail } from '../validators/email.validator';
 import { ValidateDisplayName } from '../validators/displayname.validator';
-import { ValidatePassword } from '../validators/password.validator';
+import {MatchPassword, ValidatePassword} from '../validators/password.validator';
 import { Router } from '@angular/router';
 import { AuthService } from '../authService';
 import { SnackbarComponent } from "@app/snackbar/snackbar.component";
@@ -22,6 +22,7 @@ export class RegistrationComponent {
   displayName: FormControl;
   email: FormControl;
   password: FormControl;
+  passwordConfirm: FormControl;
   hidePassword = true;
   loading: boolean = false;
 
@@ -39,14 +40,29 @@ export class RegistrationComponent {
         Validators.compose([Validators.required, ValidateEmail])
       )),
       (this.password = new FormControl(
-        '',
-        Validators.compose([Validators.required, ValidatePassword])
+        ''
+      )),
+      (this.passwordConfirm = new FormControl(
+        ''
       )),
       (this.registrationForm = new FormGroup({
         displayName: this.displayName,
         email: this.email,
         password: this.password,
+        passwordConfirm: this.passwordConfirm
       }));
+
+    this.password.setValidators([Validators.required, ValidatePassword, MatchPassword(this.passwordConfirm)])
+    this.passwordConfirm.setValidators([Validators.required, ValidatePassword, MatchPassword(this.password)])
+
+    this.password.valueChanges.subscribe(() => {
+      this.passwordConfirm.updateValueAndValidity();
+    });
+
+    this.passwordConfirm.valueChanges.subscribe(() => {
+      this.password.updateValueAndValidity();
+    });
+
   }
 
   onFormSubmit() {

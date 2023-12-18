@@ -57,6 +57,30 @@
             </mat-form-field>
           </div>
 
+          <!-- new stuff -->
+          <div layout="row">
+            <mat-form-field flex>
+              <input matInput placeholder="Confirm Password" type="{{ hidePassword ? 'password' : 'text' }}" required
+                     formControlName="passwordConfirm" />
+              <mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="
+                hidePassword ? 'Hide password' : 'Show password'
+              ">
+                <mat-icon>{{
+                  hidePassword ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+              </mat-icon-button>
+              <mat-error *ngIf="passwordConfirm.errors && (passwordConfirm.dirty || passwordConfirm.touched)" align="end">
+                <p *ngIf="passwordConfirm.hasError('required')">Password is required.</p>
+                <p *ngIf="
+                  !passwordConfirm.hasError('required') &&
+                  passwordConfirm.hasError('invalidPassword')
+                ">
+                  Min characters: 4
+                </p>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
           <div>
             <span>
               <button class="register-button" mat-raised-button type="button" (click)="onFormSubmit()"

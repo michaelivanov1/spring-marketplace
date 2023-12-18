@@ -32,7 +32,6 @@ public class OrderService {
 
     public Order createNewOrder(String buyerEmail, String sellerEmail, double grandTotal, ArrayList<
             OrderProduce> orderProduceList) {
-        //TODO: hardening (check if the incoming produce exists in db, then execute this..)
 
         //update all qoh and qoo for what is in the order list
         int count = 0 ;

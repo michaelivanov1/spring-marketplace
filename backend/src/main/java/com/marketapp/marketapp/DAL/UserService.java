@@ -37,7 +37,6 @@ public class UserService {
         existingUser.setDisplayName(updatedUser.getDisplayName());
         existingUser.setDescription(updatedUser.getDescription());
         existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
-        // existingUser.setProfileImage(updatedUser.getProfileImage());
         existingUser.setCreationDate(existingUser.getCreationDate());
         existingUser.setRole(Role.USER);
 
