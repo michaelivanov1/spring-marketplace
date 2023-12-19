@@ -29,7 +29,6 @@ export class ListItemDialogComponent {
     this.imageName = '';
     this.productForm = this.formBuilder.group({
       produceImage: [data?.produceImage, Validators.required],
-      imageName: [data?.imageName, Validators.required],
       foodName: [data?.foodName || '', Validators.required],
       qoh: [data?.qoh || '', Validators.required],
       harvestDate: [data?.harvestDate || '', Validators.required],
@@ -62,7 +61,6 @@ export class ListItemDialogComponent {
       // only allow file upload if file extension is allowed
       if (allowedExtensions.includes(fileExtension)) {
         this.productForm.get('produceImage')!.setValue(file);
-        this.productForm.get('imageName')!.setValue(file.name);
         const formData = new FormData();
         formData.append('file', file);
       } else {
@@ -76,7 +74,7 @@ export class ListItemDialogComponent {
   }
 
   onCancel(): void {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
   onClose(): void {
@@ -84,7 +82,6 @@ export class ListItemDialogComponent {
     const updatedProduce: Produce = {
       ...this.data,
       produceImage: productFormValue.produceImage,
-      imageName: this.imageName,
       foodName: productFormValue.foodName,
       qoh: productFormValue.qoh,
       harvestDate: productFormValue.harvestDate,

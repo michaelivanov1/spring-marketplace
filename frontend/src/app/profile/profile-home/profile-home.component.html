@@ -125,14 +125,31 @@
         <div class="row">
           <div class="col-12 py-3">
             <div class="sellerProfile shadow">
-              <img class="profile-image" *ngIf="!profileImageLoaded" src="../../../assets/profile-image-loading.gif"
-                alt="Loading Image..." />
-              <img class=" profile-image" *ngIf="profileImageLoaded"
-                [src]="imageSrc || '../../../assets/default-avatar.png'" alt="User's Profile Pic" />
-              <label *ngIf="profileImageLoaded" for="file-upload" class="uploadProfile shadow">
+              <img
+                class="profile-image"
+                *ngIf="!profileImageLoaded"
+                src="../../../assets/profile-image-loading.gif"
+                alt="Loading Image..."
+              />
+              <img
+                class="profile-image"
+                *ngIf="profileImageLoaded"
+                [src]="imageSrc || '../../../assets/default-avatar.png'"
+                alt="User's Profile Pic"
+              />
+              <label
+                *ngIf="profileImageLoaded"
+                for="file-upload"
+                class="uploadProfile shadow"
+              >
                 <mat-icon class="photoIcon">photo_camera</mat-icon>
               </label>
-              <input id="file-upload" type="file" accept="image/" (change)="onUploadPhoto($event)" />
+              <input
+                id="file-upload"
+                type="file"
+                accept="image/"
+                (change)="onUploadPhoto($event)"
+              />
             </div>
           </div>
           <div class="col-12 py-3 pb-0">
@@ -143,8 +160,12 @@
                     <strong class="item-label">Display Name</strong>
                   </div>
                   <div class="col-12">
-                    <input type="text" [(ngModel)]="updatedProfile.displayName" class="input-field item-data"
-                      placeholder="Display Name" />
+                    <input
+                      type="text"
+                      [(ngModel)]="updatedProfile.displayName"
+                      class="input-field item-data"
+                      placeholder="Display Name"
+                    />
                   </div>
                 </div>
               </div>
@@ -154,8 +175,12 @@
                     <strong class="item-label">Phone Num</strong>
                   </div>
                   <div class="col-12">
-                    <input type="text" [(ngModel)]="updatedProfile.phoneNumber" class="input-field item-data"
-                      placeholder="Phone Num" />
+                    <input
+                      type="text"
+                      [(ngModel)]="updatedProfile.phoneNumber"
+                      class="input-field item-data"
+                      placeholder="Phone Num"
+                    />
                   </div>
                 </div>
               </div>
@@ -165,8 +190,12 @@
                     <strong class="item-label">Description</strong>
                   </div>
                   <div class="col-12">
-                    <input type="text" [(ngModel)]="updatedProfile.description" class="input-field item-data"
-                      placeholder="Description" />
+                    <input
+                      type="text"
+                      [(ngModel)]="updatedProfile.description"
+                      class="input-field item-data"
+                      placeholder="Description"
+                    />
                   </div>
                 </div>
               </div>
@@ -185,7 +214,10 @@
               {{ userProfile.displayName }}
             </div>
             <div *ngIf="!isEditable">
-              <div *ngIf="userProfile.description != ''" class="profileDescription">
+              <div
+                *ngIf="userProfile.description != ''"
+                class="profileDescription"
+              >
                 {{ userProfile.description }}
               </div>
             </div>
@@ -194,15 +226,27 @@
             </div>
           </div>
           <div class="col-12 py-3">
-            <label class="save-update-profile-button" mat-raised-button
-              (click)="isEditable ? saveChanges() : toggleEdit()">
+            <label
+              class="save-update-profile-button"
+              mat-raised-button
+              (click)="isEditable ? saveChanges() : toggleEdit()"
+            >
               {{ isEditable ? "Save" : "Update Profile" }}
             </label>
-            <label class="cancel-edit-button" mat-raised-button *ngIf="isEditable" (click)="cancelEdit()">
+            <label
+              class="cancel-edit-button"
+              mat-raised-button
+              *ngIf="isEditable"
+              (click)="cancelEdit()"
+            >
               Cancel
             </label>
-            <label *ngIf="isEditable" mat-raised-button class="delete-account-button"
-              (click)="openConfirmationDialog()">
+            <label
+              *ngIf="isEditable"
+              mat-raised-button
+              class="delete-account-button"
+              (click)="openConfirmationDialog()"
+            >
               Delete account
             </label>
           </div>
@@ -213,29 +257,59 @@
     <div class="col-12 col-lg-8">
       <div class="row">
         <div class="col-12">
-          <button mat-raised-button class="list-item-button" (click)="openListItemDialog()">
-            <mat-icon class="icon">add</mat-icon>List
-            Item
+          <button
+            mat-raised-button
+            class="list-item-button"
+            (click)="openListItemDialog()"
+          >
+            <mat-icon class="icon">add</mat-icon>List Item
           </button>
-          <h2 *ngIf="!userStandDataExists" style="padding: 30px 0px; text-align: left">
+          <h2
+            *ngIf="!userStandDataExists"
+            style="padding: 30px 0px; text-align: left"
+          >
             You have nothing for sale yet!
           </h2>
         </div>
-        <div *ngFor="let produce of userStand.produceList; let i = index" class="col-lg-4 col-md-6 col-12 py-4">
+        <div
+          *ngFor="let produce of userStand.produceList; let i = index"
+          class="col-lg-4 col-md-6 col-12 py-4"
+        >
           <div class="item-card">
-            <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
-              [ngStyle]="{ cursor: getCursor() }">
+            <div
+              class="grid-item"
+              (mouseenter)="onHover(produce)"
+              (mouseleave)="onLeave()"
+              [ngStyle]="{ cursor: getCursor() }"
+            >
               <div class="item-data">
-                <div class="hover-icons" *ngIf="isHovered && hoveredProduce === produce">
-                  <button mat-icon-button class="edit-item-button" (click)="onEditClick(userStand, produce)">
+                <div
+                  class="hover-icons"
+                  *ngIf="isHovered && hoveredProduce === produce"
+                >
+                  <button
+                    mat-icon-button
+                    class="edit-item-button"
+                    (click)="onEditClick(userStand, produce, i)"
+                  >
                     <mat-icon>edit</mat-icon>
                   </button>
 
-                  <button mat-icon-button class="delete-item-button" (click)="onDeleteClick(produce)">
+                  <button
+                    mat-icon-button
+                    class="delete-item-button"
+                    (click)="onDeleteClick(produce)"
+                  >
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
-                <img class="product-image" [src]="rawProduceImg[i] || '../../../assets/profile-image-loading.gif'" />
+                <img
+                  class="product-image"
+                  [src]="
+                    rawProduceImg[i] ||
+                    '../../../assets/profile-image-loading.gif'
+                  "
+                />
                 <div class="content">
                   <p class="product-name">{{ produce.foodName }}</p>
                   <p class="product-price">${{ produce.price }}</p>

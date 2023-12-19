@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
   pictureApiResponse: any;
   profileImageLoaded: Boolean = false;
   rawProduceImg: string[];
+  tempUUID: string = '';
 
   constructor(
     private http: HttpClient,
@@ -283,7 +284,9 @@ export class ProfileComponent implements OnInit {
   }
 
   // handle edit of an existing market listing
-  onEditClick(userStand: UserStand, produce: Produce) {
+  onEditClick(userStand: UserStand, produce: Produce, index: number) {
+    this.tempUUID = produce.produceImage;
+    this.userStand.produceList[index].produceImage = '1';
     const dialogRef = this.dialog.open(ListItemDialogComponent, {
       width: '400px',
       data: produce,
@@ -308,14 +311,16 @@ export class ProfileComponent implements OnInit {
           formData.append('email', this.userProfile.email);
           formData.append('type', updatedProduce.foodName);
 
-          if (this.useRegex(this.userStand.produceList[index].produceImage)) {
+          if (
+            (this.useRegex(this.userStand.produceList[index].produceImage) &&
+              this.userStand.produceList[index].produceImage !== '') ||
+            updatedProduce.produceImage !== '1'
+          ) {
+            updatedProduce.produceImage = '';
             this.http
-              .delete(
-                `${BASEURL}file/${this.userStand.produceList[index].produceImage}`,
-                {
-                  headers,
-                }
-              )
+              .delete(`${BASEURL}file/${this.tempUUID}`, {
+                headers,
+              })
               .pipe(
                 tap(() => {}),
                 catchError((error: any) => {
@@ -326,7 +331,7 @@ export class ProfileComponent implements OnInit {
               .subscribe(() => {
                 const blobData = new Blob(
                   [
-                    Uint8Array.from(atob(updatedProduce.produceImage), (c) =>
+                    Uint8Array.from(updatedProduce.produceImage, (c) =>
                       c.charCodeAt(0)
                     ),
                   ],
@@ -338,12 +343,15 @@ export class ProfileComponent implements OnInit {
                   this.rawProduceImg.splice(index, 1, reader.result as string);
                 };
                 reader.readAsDataURL(formData.get('file') as Blob);
+                // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
               });
+          } else {
+            formData.set('file', 'N/A');
+            this.userStand.produceList[index].produceImage = this.tempUUID;
+            userStand.produceList[index].produceImage = this.tempUUID;
+            updatedProduce.produceImage = this.tempUUID;
           }
-          // update the indexed produce object in userStand.produceList with the updatedProduce from the dialog
-          updatedProduce.produceImage = '';
           userStand.produceList[index] = updatedProduce;
-
           // update the userStand object with the updated produceList
           this.userStand = {
             ...userStand,
@@ -490,10 +498,11 @@ export class ProfileComponent implements OnInit {
           return of(null);
         })
       )
-      .subscribe(() => {
+      .subscribe((data: any) => {
         this.userStandDataExists = true;
+
         // check if it needs to call the file post
-        if (imageHandler !== null) {
+        if (imageHandler.has('file') && imageHandler.get('file') !== 'N/A') {
           this.http
             .post(`${BASEURL}file`, imageHandler, {
               headers,
@@ -501,7 +510,8 @@ export class ProfileComponent implements OnInit {
             })
             .pipe()
             .subscribe(
-              () => {
+              (data: any) => {
+                this.tempUUID = data;
                 this.snackbarService.open('Image Uploaded Successfully');
 
                 //update the frontend(un-optimize)
@@ -522,6 +532,18 @@ export class ProfileComponent implements OnInit {
                 this.snackbarService.open('Error Uploading Image');
               }
             );
+        } else {
+          this.userStandService
+            .getOne(this.decodedToken.sub)
+            .pipe(
+              catchError((err) => {
+                this.msg = err.message;
+                return of(null);
+              })
+            )
+            .subscribe((data: any) => {
+              this.userStand = data;
+            });
         }
       });
   }
