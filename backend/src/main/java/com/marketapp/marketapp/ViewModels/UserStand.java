@@ -38,6 +38,17 @@ public class UserStand {
         this.produceList = produceList;
     }
 
+    public int findIndexOfProduce(String produceName) {
+        int index = 0;
+        for (Produce obj : this.produceList) {
+            if (obj.getFoodName().equals(produceName)) {
+                return index;
+            }
+            index++;
+        }
+        return -1; //means error in which there is no matching produce name
+    }
+
     public UserStand(User user, ArrayList<Produce> produceList) {
 
         this.email = user.getEmail();

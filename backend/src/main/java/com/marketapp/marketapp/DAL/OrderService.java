@@ -34,23 +34,24 @@ public class OrderService {
             OrderProduce> orderProduceList) {
 
         //update all qoh and qoo for what is in the order list
-        int count = 0 ;
         UserStand standProduceComesFrom = userStandRepository.findByEmail(sellerEmail).get();
         ArrayList<Produce> updatedProduceList = standProduceComesFrom.getProduceList();
 
-        for (OrderProduce op : orderProduceList) {
+        for (OrderProduce op : orderProduceList) { //FIXME: only works for one seller at the moment
             int qtyOrdered = op.getQty();
-            int originalQoh = standProduceComesFrom.getProduceList().get(count).getQoh();
-            int originalQoo = standProduceComesFrom.getProduceList().get(count).getQoo();
+            //find index of produce first using foodName
+            int indexOfProduce = standProduceComesFrom.findIndexOfProduce(op.getFoodName());
+
+            int originalQoh = standProduceComesFrom.getProduceList().get(indexOfProduce).getQoh();
+            int originalQoo = standProduceComesFrom.getProduceList().get(indexOfProduce).getQoo();
             int newQoh = originalQoh - qtyOrdered;
             int newQoo = originalQoo + qtyOrdered;
 
-            updatedProduceList.set(count, new Produce(standProduceComesFrom.getProduceList().get(count).getFoodName(),
-                    newQoh, standProduceComesFrom.getProduceList().get(count).getHarvestDate(),
-                    standProduceComesFrom.getProduceList().get(count).getPrice(),
-                    newQoo, standProduceComesFrom.getProduceList().get(count).getProduceImage()));
+            updatedProduceList.set(indexOfProduce, new Produce(standProduceComesFrom.getProduceList().get(indexOfProduce).getFoodName(),
+                    newQoh, standProduceComesFrom.getProduceList().get(indexOfProduce).getHarvestDate(),
+                    standProduceComesFrom.getProduceList().get(indexOfProduce).getPrice(),
+                    newQoo, standProduceComesFrom.getProduceList().get(indexOfProduce).getProduceImage()));
 
-            count++;
         }
         standProduceComesFrom.updateProduceList(updatedProduceList);
         userStandRepository.save(standProduceComesFrom);
