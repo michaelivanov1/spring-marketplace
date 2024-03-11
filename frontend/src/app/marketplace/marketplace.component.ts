@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UserStandService } from '../user-stand/user-stand.service';
 import { UserStand } from '../user-stand/user-stand';
 import { Observable, catchError, forkJoin, of } from 'rxjs';
@@ -25,6 +25,12 @@ export class MarketplaceComponent {
   loggedInUser: any;
   totalCount: Number | undefined;
 
+  searchQuery: string = '';
+  filteredList: any[] = []; // Update this list with your data
+  originalList: any[] = []; // Original list of items
+
+  @Output() searchChange = new EventEmitter<string>();
+
   constructor(
     private userStandService: UserStandService,
     private dialog: MatDialog,
@@ -34,6 +40,7 @@ export class MarketplaceComponent {
     private http: HttpClient
   ) {
     this.rawPicturesPerProfiles = [['']];
+    this.filteredList = [];
   }
 
   ngOnInit(): void {
@@ -120,5 +127,14 @@ export class MarketplaceComponent {
     let regex =
       /[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/i;
     return regex.test(input);
+  }
+
+  onInputChange(): void {
+    this.searchChange.emit(this.searchQuery);
+  }
+
+  clearSearch(): void {
+    this.searchQuery = '';
+    this.onInputChange(); // Emit empty search query
   }
 }
