@@ -30,6 +30,25 @@
         </div>
     </div>
 
+    <div class="marketplace-container">
+        <ng-container *ngFor="let user of userStandProfiles; let i = index">
+            <ng-container *ngFor="let produce of user.produceList; let j = index">
+                <div>
+                    <img class="product-image"
+                        [src]="rawPicturesPerProfiles[i][j] || '../../../assets/profile-image-loading.gif'" />
+                    <div class="content">
+                        <p class="product-name">{{ produce?.foodName }}</p>
+                        <p class="product-qoh">{{ produce?.qoh }}x</p>
+                        <p class="product-seller">Seller: {{ user?.displayName }}</p>
+                        <p class="product-price">{{produce?.price + "" | currency : "USD" : "symbol" : "1.2-2"}}
+                        </p>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+
+
     <div class="learn-more-container" id="learn-more-container">
         <h1 class="learn-more-text">Want to learn more about Spring Marketplace?</h1>
     </div>
