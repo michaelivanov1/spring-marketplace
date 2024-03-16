@@ -1,50 +1,3 @@
-<!-- <div class="banner">
-  <div class="overlay">
-    <h1><img src="assets/leaf.png" alt="leaf">Marketplace</h1>
-    <h3 style="color: white">The freshest produce is listed right here on Spring Marketplace</h3>
-  </div>
-</div>
-
-<div class="grid-container">
-  <h2 style="margin-top: 10px; text-align: center" *ngIf="totalCount == 0">
-    No items on marketplace
-    <button style="margin-left: 15px" class="button-profile-redirect" (click)="profileRedirect()">
-      Be the first to list an item!
-    </button>
-  </h2>
-
-  <ng-container *ngFor="let user of userStandProfiles; let i = index">
-    <ng-container *ngFor="let produce of user.produceList; let j = index">
-      <div *ngIf="produce.qoh != 0" class="grid-item" (mouseenter)="onHover()" (mouseleave)="onLeave()"
-        [ngStyle]="{ cursor: getCursor() }" (click)="onProductClick(user, produce, rawPicturesPerProfiles[i][j])"
-        [style.cursor]="getCursor()" [style.opacity]="!user.email.includes(loggedInUser) ? 1 : 0.8"
-        [style.pointer-events]="
-          !user.email.includes(loggedInUser) ? 'auto' : 'none'
-        ">
-        <div class="item-data">
-          <img class="product-image" [src]="rawPicturesPerProfiles[i][j]" />
-          <p class="product-name">{{ produce.foodName }}</p>
-          <p class="product-price">
-            {{ produce.price + "" | currency : "USD" : "symbol" : "1.2-2" }}
-          </p>
-          <p class="product-qoh">{{ produce.qoh }}x</p>
-          <div class="product-seller-container">
-            <p *ngIf="user.email.includes(loggedInUser)" class="product-seller" style="color: green">
-              Seller: {{ user.displayName }}
-            </p>
-            <p *ngIf="!user.email.includes(loggedInUser)" class="product-seller">
-              Seller: {{ user.displayName }}
-            </p>
-            <p class="product-harvestdate">
-              Harvested: {{ produce.harvestDate }}
-            </p>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-  </ng-container>
-</div> -->
-
 <div class="banner">
   <div class="overlay">
     <h1><img src="assets/leaf.png" alt="leaf" />Marketplace</h1>
@@ -76,7 +29,8 @@
               <div class="item-card" (mouseenter)="onHover()" (mouseleave)="onLeave()" (click)="
                   onProductClick(user, produce, rawPicturesPerProfiles[i][j])
                 ">
-                <img class="productImage" [src]="rawPicturesPerProfiles[i][j] || '../../../assets/profile-image-loading.gif'" />
+                <img class="product-image"
+                  [src]="rawPicturesPerProfiles[i][j] || '../../../assets/profile-image-loading.gif'" />
                 <div class="content">
                   <p class="product-name">{{ produce.foodName }}</p>
                   <p class="product-qoh">{{ produce.qoh }}x</p>
