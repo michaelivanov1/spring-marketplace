@@ -61,6 +61,7 @@ mat-dialog-container {
   background-color: white;
   height: 7rem;
   margin: auto;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .menu-items-left {
@@ -72,7 +73,7 @@ mat-dialog-container {
   .logo {
     width: 100%;
     height: auto;
-    padding-bottom: 5.5rem;
+    padding-bottom: 6rem;
   }
 }
 
@@ -104,7 +105,7 @@ a:hover {
 .about {
   background-color: #f1efdd;
   padding: 50px 300px;
-  margin: 60px auto 0;
+  margin: auto 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

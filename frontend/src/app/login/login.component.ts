@@ -74,6 +74,10 @@ export class LoginComponent {
     );
   }
 
+  handleNewUser() {
+    this.router.navigate(['/register']);
+  }
+
   navigateToProfile() {
     this.router.navigate(['/profile']);
   }
