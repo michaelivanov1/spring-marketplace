@@ -53,6 +53,7 @@
     </h3>
   </div>
 </div>
+<!-- <app-search-bar (searchQueryChange)="updateList($event)"></app-search-bar> -->
 
 <div class="product-items">
   <div class="container">
@@ -67,15 +68,7 @@
           Be the first to list an item!
         </button>
       </h2>
-      <div class="search-container">
-        <input
-          type="text"
-          placeholder="Search..."
-          [(ngModel)]="searchQuery"
-          (input)="onInputChange()"
-        />
-        <button *ngIf="searchQuery" (click)="clearSearch()">X</button>
-      </div>
+
       <div class="row">
         <ng-container *ngFor="let user of userStandProfiles; let i = index">
           <ng-container *ngFor="let produce of user.produceList; let j = index">

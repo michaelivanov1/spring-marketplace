@@ -3,6 +3,7 @@ import { UserStandService } from '../user-stand/user-stand.service';
 import { UserStand } from '../user-stand/user-stand';
 import { Observable, catchError, forkJoin, of } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SearchBarComponent } from '../common-components/search-bar/search-bar.component';
 import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dialog.component';
 import jwt_decode from 'jwt-decode';
 import { ProfileService } from '@app/profile/profile.service';
@@ -24,12 +25,7 @@ export class MarketplaceComponent {
   decodedToken: any;
   loggedInUser: any;
   totalCount: Number | undefined;
-
-  searchQuery: string = '';
-  filteredList: any[] = []; // Update this list with your data
-  originalList: any[] = []; // Original list of items
-
-  @Output() searchChange = new EventEmitter<string>();
+  filteredList: any[] = [];
 
   constructor(
     private userStandService: UserStandService,
@@ -40,7 +36,6 @@ export class MarketplaceComponent {
     private http: HttpClient
   ) {
     this.rawPicturesPerProfiles = [['']];
-    this.filteredList = [];
   }
 
   ngOnInit(): void {
@@ -129,12 +124,13 @@ export class MarketplaceComponent {
     return regex.test(input);
   }
 
-  onInputChange(): void {
-    this.searchChange.emit(this.searchQuery);
-  }
+  // updateList(query: string): void {
+  //   this.filterList(query);
+  // }
 
-  clearSearch(): void {
-    this.searchQuery = '';
-    this.onInputChange(); // Emit empty search query
-  }
+  // filterList(query: string): void {
+  //   this.filteredList = this.userStand.filter((item) =>
+  //     item.name.toLowerCase().includes(query.toLowerCase())
+  //   );
+  // }
 }

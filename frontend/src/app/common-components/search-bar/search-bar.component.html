@@ -1,0 +1,9 @@
+<div class="search-container">
+  <input
+    type="text"
+    ngModel="searchQuery"
+    (input)="filterList()"
+    placeholder="Search..."
+  />
+  <button (click)="clearSearch()">X</button>
+</div>
