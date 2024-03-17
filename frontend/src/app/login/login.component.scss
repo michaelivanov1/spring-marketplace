@@ -1,49 +1,70 @@
 $primary-color: #00bf63;
 
+// override the background image set in global styles.scss
+mat-card {
+  border-radius: 0;
+  background-image: url("../../assets/registration-page/background.jpg") !important;
+}
+
 .main-container {
-  max-width: 35rem;
-  height: 30rem;
-  margin: auto;
-  background-color: rgba(140, 195, 63, 0.1);
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  max-width: 60vw;
+  height: 72vh;
+  margin: 40px auto !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   font-weight: 400;
 }
 
-.form-container {
-  padding: 1rem;
+.image-container {
+  background-image: url("../../assets/registration-page/vegetable-stand.png");
+  background-color: white;
+  background-size: cover;
+  font-size: 20px;
+  padding: 30px 100px;
+  height: 100%;
+  float: left;
+  width: 60%;
+  border-right: 1px solid #959595;
+
+  .image-text {
+    font-size: 42px;
+    line-height: 1.5;
+  }
 }
 
-mat-card-title {
-  font-family: Roboto, sans-serif;
-  font-size: 2.5rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: $primary-color;
-  padding-top: 30px;
+.form-container {
+  float: right;
+  width: 40%;
+  height: 100%;
+  background-color: white;
+}
+
+.login-text {
+  margin: 60px 0;
+  font-family: "Covered By Your Grace", cursive;
+  font-weight: 550;
+  font-size: 20px;
 }
 
 h2 {
   font-size: 1.5rem;
   font-weight: 500;
-  color: $primary-color;
   margin-bottom: 1rem;
 }
 
-button {
+.login-button {
   background-color: $primary-color;
+  margin-top: 20px;
   color: #fff;
   font-family: Roboto, sans-serif;
   font-weight: 500;
   font-size: 1rem;
-  padding: 0.75rem 1.5rem;
+  padding: 2px;
+  width: 40%;
   border: none;
-  border-radius: 4px;
+  border-radius: 30px;
   cursor: pointer;
-  margin-right: 1rem;
   transition: all 0.3s ease;
 
   &:hover {
@@ -51,19 +72,37 @@ button {
   }
 }
 
+.new-user-text {
+  margin-top: 20px;
+  border: none;
+  font-size: 14px;
+}
+
+.new-user-button {
+  transition: all 0.3s ease;
+  background: none;
+  color: $primary-color;
+
+  &:hover {
+    cursor: pointer;
+    font-size: 15px;
+  }
+}
+
 mat-form-field {
-  width: 100%;
+  width: 50%;
   margin-bottom: 1rem;
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"] {
   font-size: 1rem;
   font-weight: 400;
 }
 
 mat-error {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 400;
   color: #d50000;
 }
@@ -79,8 +118,34 @@ mat-icon-button {
   }
 }
 
+@media screen and (max-width: 1280px) {
+  .main-container {
+    max-width: 90vw;
+  }
+}
+
+@media screen and (max-width: 720px) {
+
+  .main-container {
+    max-width: 80vw;
+    opacity: 90%;
+  }
+
+  .image-container {
+    display: none;
+  }
+
+  .form-container {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 412px) {
   .title {
     line-height: 50px;
+  }
+
+  .main-container {
+    height: 40rem;
   }
 }

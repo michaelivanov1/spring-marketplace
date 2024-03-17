@@ -1,9 +1,12 @@
 <mat-card align="center">
     <div class="main-container">
-        <mat-card-title class="title"> Spring Marketplace </mat-card-title>
+
+        <div class="image-container">
+        </div>
+
         <div class="form-container">
             <ng-container *ngIf="!loading">
-                <h2>Please login to your account</h2>
+                <h3 class="login-text">Login to your account</h3>
                 <form [formGroup]="loginForm" (keydown.enter)="onFormSubmit()">
 
                     <div layout="row">
@@ -44,12 +47,22 @@
                     <div>
                         <span>
                             <p *ngIf="loginFailed">{{invalidLoginText}}</p>
-                            <button mat-raised-button type="button" (click)="onFormSubmit()"
+                            <button class="login-button" mat-raised-button type="button" (click)="onFormSubmit()"
                                 [disabled]="!loginForm.valid">
                                 Login
                             </button>
                         </span>
                     </div>
+
+                    <div>
+                        <span>
+                            <div class="new-user-text">
+                                New Here? <a class="new-user-button"
+                                    (click)="handleNewUser()">Register Now</a>
+                            </div>
+                        </span>
+                    </div>
+
                 </form>
             </ng-container>
 
