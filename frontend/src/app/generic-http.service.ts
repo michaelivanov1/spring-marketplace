@@ -60,6 +60,17 @@ export class GenericHttpService<T> {
       .pipe(retry(2), catchError(this.handleError));
   } // getAll
 
+  // uses a guest token for the homepage get all userstands
+  public getGuestToken(guestToken?: string): Observable<T[]> {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${guestToken || localStorage.getItem('jwtToken')}`)
+      .set('Content-Type', 'application/json');
+
+    return this.httpClient
+      .get<T[]>(`${BASEURL}${this.entity}`, { headers });
+  }
+
+
   public getSome(id: any): Observable<T[]> {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)

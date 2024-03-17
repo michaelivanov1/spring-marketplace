@@ -1,10 +1,14 @@
 <mat-card align="center">
   <div class="main-container">
-    <mat-card-title class="title">Spring Marketplace</mat-card-title>
+
+    <div class="image-container">
+    </div>
+
     <div class="form-container">
       <ng-container *ngIf="!loading">
-        <h2>Please register an account</h2>
+        <h3 class="register-text">Register an account</h3>
         <form [formGroup]="registrationForm" (keydown.enter)="onFormSubmit()">
+
           <div layout="row">
             <mat-form-field flex>
               <input matInput placeholder="Display Name" type="text" required formControlName="displayName" />
@@ -92,11 +96,12 @@
 
           <div>
             <span>
-              <button class="already-registered-button" (click)="handleAlreadyRegistered()">
-                Already registered? click here
-              </button>
+              <div class="already-registered-text">
+                Existing User? <a class="already-registered-button" (click)="handleAlreadyRegistered()">Click Here</a>
+              </div>
             </span>
           </div>
+
         </form>
       </ng-container>
 
