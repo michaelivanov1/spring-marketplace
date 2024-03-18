@@ -8,29 +8,18 @@
         <form [formGroup]="registrationForm" (keydown.enter)="onFormSubmit()">
           <div layout="row">
             <mat-form-field flex>
-              <input
-                matInput
-                placeholder="Display Name"
-                type="text"
-                required
-                formControlName="displayName"
-              />
-              <mat-error
-                *ngIf="
+              <input matInput placeholder="Display Name" type="text" required formControlName="displayName" />
+              <mat-error *ngIf="
                   displayName.errors &&
                   (displayName.dirty || displayName.touched)
-                "
-                align="end"
-              >
+                " align="end">
                 <p *ngIf="displayName.hasError('required')">
                   Display name is required.
                 </p>
-                <p
-                  *ngIf="
+                <p *ngIf="
                     !displayName.hasError('required') &&
                     displayName.hasError('invalidDisplayName')
-                  "
-                >
+                  ">
                   Min characters: 4
                 </p>
               </mat-error>
@@ -39,24 +28,13 @@
 
           <div layout="row">
             <mat-form-field flex>
-              <input
-                matInput
-                placeholder="Email"
-                type="email"
-                required
-                formControlName="email"
-              />
-              <mat-error
-                *ngIf="email.errors && (email.dirty || email.touched)"
-                align="end"
-              >
+              <input matInput placeholder="Email" type="email" required formControlName="email" />
+              <mat-error *ngIf="email.errors && (email.dirty || email.touched)" align="end">
                 <p *ngIf="email.hasError('required')">Email is required.</p>
-                <p
-                  *ngIf="
+                <p *ngIf="
                     !email.hasError('required') &&
                     email.hasError('invalidEmail')
-                  "
-                >
+                  ">
                   Needs format - xx&#64;xx.xx
                 </p>
               </mat-error>
@@ -65,37 +43,23 @@
 
           <div layout="row">
             <mat-form-field flex>
-              <input
-                matInput
-                placeholder="Password"
-                type="{{ hidePassword ? 'password' : 'text' }}"
-                required
-                formControlName="password"
-              />
-              <mat-icon-button
-                matSuffix
-                (click)="hidePassword = !hidePassword"
-                [attr.aria-label]="
+              <input matInput placeholder="Password" type="{{ hidePassword ? 'password' : 'text' }}" required
+                formControlName="password" />
+              <mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="
                   hidePassword ? 'Hide password' : 'Show password'
-                "
-              >
+                ">
                 <mat-icon>{{
                   hidePassword ? "visibility_off" : "visibility"
-                }}</mat-icon>
+                  }}</mat-icon>
               </mat-icon-button>
-              <mat-error
-                *ngIf="password.errors && (password.dirty || password.touched)"
-                align="end"
-              >
+              <mat-error *ngIf="password.errors && (password.dirty || password.touched)" align="end">
                 <p *ngIf="password.hasError('required')">
                   Password is required.
                 </p>
-                <p
-                  *ngIf="
+                <p *ngIf="
                     !password.hasError('required') &&
                     password.hasError('invalidPassword')
-                  "
-                >
+                  ">
                   Min characters: 4
                 </p>
               </mat-error>
@@ -104,57 +68,38 @@
 
           <!-- double password verification -->
 
-          <div layout="row">
+          <!-- <div layout="row">
             <mat-form-field flex>
-              <input
-                matInput
-                placeholder="Confirm Password"
-                type="{{ hidePassword ? 'password' : 'text' }}"
-                required
-                formControlName="passwordConfirm"
-              />
-              <mat-icon-button
-                matSuffix
-                (click)="hidePassword = !hidePassword"
-                [attr.aria-label]="
+              <input matInput placeholder="Confirm Password" type="{{ hidePassword ? 'password' : 'text' }}" required
+                formControlName="passwordConfirm" />
+              <mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="
                   hidePassword ? 'Hide password' : 'Show password'
-                "
-              >
+                ">
                 <mat-icon>{{
                   hidePassword ? "visibility_off" : "visibility"
-                }}</mat-icon>
+                  }}</mat-icon>
               </mat-icon-button>
-              <mat-error
-                *ngIf="
+              <mat-error *ngIf="
                   passwordConfirm.errors &&
                   (passwordConfirm.dirty || passwordConfirm.touched)
-                "
-                align="end"
-              >
+                " align="end">
                 <p *ngIf="passwordConfirm.hasError('required')">
                   Password is required.
                 </p>
-                <p
-                  *ngIf="
+                <p *ngIf="
                     !passwordConfirm.hasError('required') &&
                     passwordConfirm.hasError('invalidPassword')
-                  "
-                >
+                  ">
                   Min characters: 4
                 </p>
               </mat-error>
             </mat-form-field>
-          </div>
+          </div> -->
 
           <div>
             <span>
-              <button
-                class="register-button"
-                mat-raised-button
-                type="button"
-                (click)="onFormSubmit()"
-                [disabled]="!registrationForm.valid"
-              >
+              <button class="register-button" mat-raised-button type="button" (click)="onFormSubmit()"
+                [disabled]="!registrationForm.valid">
                 Register
               </button>
             </span>
@@ -164,11 +109,7 @@
             <span>
               <div class="already-registered-text">
                 Existing User?
-                <a
-                  class="already-registered-button"
-                  (click)="handleAlreadyRegistered()"
-                  >Click Here</a
-                >
+                <a class="already-registered-button" (click)="handleAlreadyRegistered()">Click Here</a>
               </div>
             </span>
           </div>
