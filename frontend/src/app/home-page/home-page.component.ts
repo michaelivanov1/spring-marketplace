@@ -2,26 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, catchError, forkJoin, of } from 'rxjs';
 import { UserStand } from '../user-stand/user-stand';
 import { UserStandService } from '../user-stand/user-stand.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BASEURL } from '@app/constants';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-
   userStand?: Observable<UserStand[]>;
   userStandProfiles: UserStand[] = [];
   rawPicturesPerProfiles: string[][];
-  guestToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWNoYWVsQGdtYWlsLmNvbSIsImlhdCI6MTY5Nzk0NDczNSwiZXhwIjoyNDQ1MDQwNDE4ODMzNDQwfQ.AnvCqIvLtKGoN5QUnj-sF-nNVdN8p0UNhGrU8f_HVW8';
+  guestToken =
+    'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWNoYWVsQGdtYWlsLmNvbSIsImlhdCI6MTY5Nzk0NDczNSwiZXhwIjoyNDQ1MDQwNDE4ODMzNDQwfQ.AnvCqIvLtKGoN5QUnj-sF-nNVdN8p0UNhGrU8f_HVW8';
 
-  constructor(private userStandService: UserStandService, private http: HttpClient) {
+  constructor(
+    private userStandService: UserStandService,
+    private http: HttpClient
+  ) {
     this.rawPicturesPerProfiles = [['']];
   }
 
   ngOnInit(): void {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${this.guestToken}`
+    );
 
     this.userStand = this.userStandService.getGuestToken(this.guestToken);
     this.userStand.subscribe((users: UserStand[]) => {
@@ -30,17 +37,12 @@ export class HomePageComponent implements OnInit {
       );
       console.log(this.userStandProfiles);
 
-
-
       this.userStandProfiles.forEach((profile, i) => {
         this.rawPicturesPerProfiles[i] = [];
         const requests = profile.produceList.map((e) => {
-          // Log the image URL before making the request
-          console.log('Image URL:', BASEURL + 'file/' + e.produceImage);
-
           return this.http.get(`${BASEURL}file/${e.produceImage}`, {
-
             responseType: 'blob',
+            headers,
           });
         });
 
@@ -62,7 +64,7 @@ export class HomePageComponent implements OnInit {
             });
           });
       });
-    })
+    });
   }
 
   scrollToInfo() {
@@ -71,5 +73,4 @@ export class HomePageComponent implements OnInit {
       infoImageContainer.scrollIntoView({ behavior: 'smooth' });
     }
   }
-
 }
