@@ -130,8 +130,9 @@
     margin-right: auto;
     width: 80%;
     height: 600px;
-    border: 1px solid black;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 60px; 
 
 
     .product-image {
