@@ -10,6 +10,7 @@ import { BASEURL } from '@app/constants';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
+
 export class HomePageComponent implements OnInit {
   userStand?: Observable<UserStand[]>;
   userStandProfiles: UserStand[] = [];
@@ -35,7 +36,6 @@ export class HomePageComponent implements OnInit {
       this.userStandProfiles = users.filter(
         (user) => user.produceList && user.produceList.length > 0
       );
-      console.log(this.userStandProfiles);
 
       this.userStandProfiles.forEach((profile, i) => {
         this.rawPicturesPerProfiles[i] = [];
