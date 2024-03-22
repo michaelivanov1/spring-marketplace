@@ -12,10 +12,10 @@ import com.marketapp.marketapp.ViewModels.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -30,6 +30,30 @@ public class UserStandController {
     @GetMapping("/user_stand")
     public ResponseEntity<List<UserStand>> getAllUserStands() {
         return new ResponseEntity<List<UserStand>>(userStandService.allUserStands(), HttpStatus.OK);
+    }
+
+    @GetMapping("/user_stand/produce/{value}")
+    public ResponseEntity<List<Produce>> getRandomProduce(@PathVariable String value) {
+        int randValue = Integer.parseInt(value);
+        List<List<Produce>> listOfProduceLists = new ArrayList<>();
+
+        for (int i = 0; i < userStandService.allUserStands().size(); i++) {
+            listOfProduceLists.add(userStandService.allUserStands().get(i).getProduceList());
+        }
+
+        List<Produce> listOfProduce = new ArrayList<>();
+        for (List<Produce> listOfProduceList : listOfProduceLists) {
+            listOfProduce.addAll(listOfProduceList);
+        }
+
+        //extract random elements corresponding to value passed in
+        List<Produce> listOfRandomProduce = new ArrayList<>();
+        Collections.shuffle(listOfProduce);
+        for (int i = 0; i < randValue; i++) {
+            listOfRandomProduce.add(listOfProduce.get(i));
+        }
+
+        return new ResponseEntity<>(listOfRandomProduce, HttpStatus.OK);
     }
 
     @GetMapping("/user_stand/{email}")
