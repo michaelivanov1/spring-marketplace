@@ -70,7 +70,6 @@ export class GenericHttpService<T> {
       .get<T[]>(`${BASEURL}${this.entity}`, { headers });
   }
 
-
   public getSome(id: any): Observable<T[]> {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('jwtToken')}`)
@@ -88,6 +87,15 @@ export class GenericHttpService<T> {
       .get<T>(`${BASEURL}${this.entity}/${id}`, { headers })
       .pipe(retry(2), catchError(this.handleError));
   } // getOne
+
+  public getSpecificProduceQty(amount: Number, guestToken?: string): Observable<T> {
+    const headers = new HttpHeaders()
+    .set('Authorization', `Bearer ${guestToken || localStorage.getItem('jwtToken')}`)
+    .set('Content-Type', 'application/json');
+      return this.httpClient
+      .get<T>(`${BASEURL}${this.entity}/produce/${amount}`, { headers })
+      .pipe(retry(2), catchError(this.handleError));
+  } // get a specified number of random produce 
 
   public delete(email: any): Observable<T> {
     const headers = new HttpHeaders()
