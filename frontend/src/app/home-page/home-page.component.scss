@@ -1,12 +1,12 @@
 .banner-container {
     position: relative;
     width: 100%;
-    height: 750px;
+    height: 83vh;
     text-align: center;
 }
 
 .banner-image {
-    height: 100%;
+    height: 83vh;
     width: 100%;
     border-bottom: 1px solid #ccc;
 }
@@ -43,7 +43,7 @@
     margin-top: 10px;
 }
 
-.banner-learnmore-button {
+.banner-info-button {
     margin-top: 20px;
     background-color: rgb(41, 207, 41);
     height: 40px;
@@ -56,7 +56,7 @@
     transition: all 0.3s ease;
 }
 
-.banner-learnmore-button:hover {
+.banner-info-button:hover {
     background-color: rgb(33, 169, 33);
     cursor: pointer;
     transform: scale(1.1);
@@ -67,6 +67,7 @@
     width: 100%;
 
     .rich-text-container {
+
         margin: 60px auto;
         display: flex;
         width: 80%;
@@ -92,17 +93,17 @@
             text-align: left;
             width: 40%;
             // border: 1px solid red;
-            padding: 60px 30px 60px 30px;
+            padding: 0px 30px 60px 30px;
         }
 
         .rich-text-title {
             margin-bottom: 30px;
-            font-size: 32px;
+            font-size: 42px;
             color: #3fa458;
         }
 
         .rich-text-description {
-            font-size: 17px;
+            font-size: 20px;
             line-height: 1.4;
         }
 
@@ -126,91 +127,145 @@
 }
 
 .marketplace-container {
+
+    padding: 40px;
+    // border: 1px solid black;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
     width: 80%;
-    height: 600px;
+    height: 100vh;
     display: grid;
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 60px; 
+    grid-template-columns: repeat(5, 1fr);
 
 
-    .product-image {
-        transition: transform 0.3s ease-in-out;
-        width: 100%;
-        height: 200px;
-        display: block;
-        border-radius: 15px;
-        -webkit-border-radius: 15px;
-        -moz-border-radius: 15px;
-        -ms-border-radius: 15px;
-        -o-border-radius: 15px;
-        cursor: pointer;
-
-        &:hover {
-            box-shadow: -20px 30px 50px #9999994d;
-            transform: scale(1.03);
-        }
+    .featured-products-text {
+        // margin-left: 30px;
+        // span across all grid columns
+        grid-column: 1 / -1;
+        text-align: left;
+        font-size: 34px;
+        border-bottom: 1px solid #ccc;
     }
 
     .content {
+        margin: 30px auto;
+        //    border: 1px solid black;
+        border: 1px solid #ccc;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: white;
+        width: 80%;
+        transition: transform 0.3s ease-in-out;
 
-        .product-name {
-            text-transform: capitalize;
-            font-size: 20px;
-            font-weight: 900;
-            text-align: center;
-            padding-top: 25px;
-            padding-bottom: 15px;
-            margin: 0px;
+
+        &:hover {
+            // box-shadow: -20px 30px 50px #9999994d;
+            transform: scale(1.03);
+
+            border: 1px solid green;
+            cursor: pointer;
+        }
+    }
+
+    .product-image {
+        // margin: 0 auto;
+        width: 100%;
+        height: 200px;
+        display: block;
+        cursor: pointer;
+
+
+    }
+
+    .product-name {
+        border-top: 1px solid #ccc;
+        text-transform: capitalize;
+        font-size: 20px;
+        font-weight: 900;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin: 0px;
+    }
+
+    .product-price {
+        text-align: center;
+        color: #0fc263;
+        font-size: 16px;
+        font-weight: 900;
+        padding-bottom: 10px;
+        margin: 0px;
+    }
+
+    .product-qoh {
+        text-align: left;
+        text-align: center;
+        color: #999999;
+        font-size: 16px;
+        font-weight: 900;
+        margin: 0px;
+        padding-bottom: 10px;
+    }
+
+    // .product-seller {
+    //     text-align: left;
+    //     text-align: center;
+    //     color: #999999;
+    //     font-size: 16px;
+    //     font-weight: 900;
+    //     margin: 0px;
+    //     padding-bottom: 15px;
+    // }
+
+}
+
+
+.register-now-container {
+   
+    .register-now-text-container {
+        display: block;
+        margin-bottom: 60px;
+        height: 40vh;
+        padding-top: 40px;
+        padding-left: 10%;
+        background-image: linear-gradient(180deg, rgba(106, 150, 31, 0.9), rgba(106, 150, 31, 0.9)), url('https://assets.website-files.com/62297f6fa9b6c86667bb54eb/6295a1b4a142bf3e1f029507_cta-bg.jpg');
+        display: block;
+        text-align: left;
+
+        .register-now-header {
+            font-weight: 500;
+            color: white;
+            font-size: 22px;
         }
 
-        .product-price {
-            text-align: center;
-            color: #0fc263;
-            font-size: 16px;
-            font-weight: 900;
-            padding-bottom: 15px;
-            margin: 0px;
+        .register-now-subheader {
+            font-weight: 500;
+            width: 50%;
+            line-height: 1.3;
+            color: white;
+            font-size: 40px;
         }
 
-        .product-qoh {
-            text-align: left;
-            text-align: center;
-            color: #999999;
-            font-size: 16px;
-            font-weight: 900;
-            margin: 0px;
-            padding-bottom: 15px;
-        }
+        .register-now-button {
+            cursor: pointer;
+            border: 1px solid black;
+            border-radius: 10px;
+            font-size: 18px;
+            padding: 12px;
+            margin-top: 30px;
+            transition: transform 0.3s ease-in-out;
+            background-color: rgb(36, 162, 36);
+            color: white;
 
-        .product-seller {
-            text-align: left;
-            text-align: center;
-            color: #999999;
-            font-size: 16px;
-            font-weight: 900;
-            margin: 0px;
-            padding-bottom: 15px;
+            &:hover {
+                
+            }
         }
     }
 }
 
-.learn-more-container {
-    margin-bottom: 60px;
-    width: 100%;
-    height: 8rem;
-    padding-top: 20px;
-    background-color: #3fa458;
-    justify-content: center;
-    align-items: center;
-    display: flex;
 
-    .learn-more-text {
-        color: white;
-        font-size: 28px;
-    }
-}
 
 mat-expansion-panel {
     padding: 10px;

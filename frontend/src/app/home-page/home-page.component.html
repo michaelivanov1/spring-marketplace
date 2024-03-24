@@ -3,13 +3,37 @@
     <div class="data-container">
         <p class="banner-title">SPRING MARKETPLACE</p>
         <p class="banner-description">An online farmers market connecting consumers with locally sourced, fresh
-            produce for a sustainable and vibrant shopping experience.</p>
-        <button (click)="scrollToInfo()" class="banner-learnmore-button">LEARN MORE</button>
+            produce for a sustainable and vibrant online shopping experience.</p>
+        <button (click)="scrollToInfo()" class="banner-info-button">SHOP NOW</button>
     </div>
 </div>
 
 <div class="main-container">
-    <div class="rich-text-container">
+
+
+    <div class="marketplace-container" id="marketplace-container">
+        <p class="featured-products-text">Featured Products</p>
+        <div *ngFor="let produce of produceList">
+            <div class="content">
+                <img class="product-image" [src]="produce.image || '../../../assets/profile-image-loading.gif'" />
+                <p class="product-name">{{ produce.foodName }}</p>
+                <p class="product-price">${{ produce.price }}</p>
+                <p class="product-qoh">{{ produce.qoh }} in stock</p>
+                <!-- <p class="product-">{{ produce.qoh }}</p> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="register-now-container">
+        <div class="register-now-text-container">
+            <h1 class="register-now-header">Register Now</h1>
+            <h1 class="register-now-subheader">Create an account for free to start buying & selling produce today</h1>
+            <button (click)="redirectToRegistration()" class="register-now-button">Register Now</button>
+        </div>
+    </div>
+    
+
+    <!-- <div class="rich-text-container">
         <div class="rich-text-image-container">
             <img class="rich-text-image" src="../../assets/home-page/rich-text.png">
         </div>
@@ -28,20 +52,18 @@
                     simplicity in your meals, where health meets mouthwatering flavor in every organic bite.</p>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- <div class="marketplace-container">
         <ng-container *ngFor="let user of userStandProfiles; let i = index">
-            <ng-container *ngFor="let produce of user.produceList; let j = index">
-                <div>
-                    <img class="product-image"
-                        [src]="rawPicturesPerProfiles[i][j] || '../../../assets/profile-image-loading.gif'" />
+            <ng-container *ngFor="let produce of user?.produceList; let j = index">
+                <div *ngIf="rawPicturesPerProfiles[i] && rawPicturesPerProfiles[i][j]">
+                    <img class="product-image" [src]="rawPicturesPerProfiles[i][j]" />
                     <div class="content">
                         <p class="product-name">{{ produce?.foodName }}</p>
                         <p class="product-qoh">{{ produce?.qoh }}x</p>
                         <p class="product-seller">Seller: {{ user?.displayName }}</p>
-                        <p class="product-price">{{produce?.price + "" | currency : "USD" : "symbol" : "1.2-2"}}
-                        </p>
+                        <p class="product-price">{{ produce?.price | currency: 'USD': 'symbol': '1.2-2' }}</p>
                     </div>
                 </div>
             </ng-container>
@@ -49,10 +71,9 @@
     </div> -->
 
 
-    <div class="learn-more-container" id="learn-more-container">
-        <h1 class="learn-more-text">Want to learn more about Spring Marketplace?</h1>
-    </div>
 
+
+    <!-- 
     <mat-accordion>
         <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -174,5 +195,5 @@
                         public Spring Marketplace repository</a></p>
             </div>
         </mat-expansion-panel>
-    </mat-accordion>
+    </mat-accordion> -->
 </div>

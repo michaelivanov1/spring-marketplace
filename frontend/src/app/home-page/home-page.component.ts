@@ -3,7 +3,8 @@ import { Observable, catchError, forkJoin, of } from 'rxjs';
 import { UserStand } from '../user-stand/user-stand';
 import { UserStandService } from '../user-stand/user-stand.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BASEURL } from '@app/constants';
+import { BASEURL, GUESTTOKEN } from '@app/constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -14,63 +15,71 @@ import { BASEURL } from '@app/constants';
 export class HomePageComponent implements OnInit {
   userStand?: Observable<UserStand[]>;
   userStandProfiles: UserStand[] = [];
-  rawPicturesPerProfiles: string[][];
-  guestToken =
-    'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWNoYWVsQGdtYWlsLmNvbSIsImlhdCI6MTY5Nzk0NDczNSwiZXhwIjoyNDQ1MDQwNDE4ODMzNDQwfQ.AnvCqIvLtKGoN5QUnj-sF-nNVdN8p0UNhGrU8f_HVW8';
-
+  produceList: any;
+  
   constructor(
     private userStandService: UserStandService,
-    private http: HttpClient
-  ) {
-    this.rawPicturesPerProfiles = [['']];
-  }
+    private http: HttpClient,
+    private router: Router
+  ) {}
+
 
   ngOnInit(): void {
     const headers = new HttpHeaders().set(
       'Authorization',
-      `Bearer ${this.guestToken}`
+      `Bearer ${GUESTTOKEN}`
     );
 
-    this.userStand = this.userStandService.getGuestToken(this.guestToken);
-    this.userStand.subscribe((users: UserStand[]) => {
-      this.userStandProfiles = users.filter(
-        (user) => user.produceList && user.produceList.length > 0
-      );
+    this.userStandService.getSpecificProduceQty(10, GUESTTOKEN).subscribe((produceObject) => {
+      // create a produce array instead of an object
+      const produceArray = Object.values(produceObject);
 
-      this.userStandProfiles.forEach((profile, i) => {
-        this.rawPicturesPerProfiles[i] = [];
-        const requests = profile.produceList.map((e) => {
-          return this.http.get(`${BASEURL}file/${e.produceImage}`, {
-            responseType: 'blob',
-            headers,
-          });
+      // create a produceList object based on produceArray, this time populating only the fields necessary
+      this.produceList = produceArray.map((p: any) => ({
+        foodName: p.foodName,
+        qoh: p.qoh,
+        harvestDate: p.harvestDate,
+        price: p.price,
+        produceImage: p.produceImage
+      }));
+
+      // create an array to store all the image get requests
+      const imageRequests: Observable<Blob>[] = this.produceList.map((produce: any) => {
+        return this.http.get(`${BASEURL}file/${produce.produceImage}`, {
+          responseType: 'blob',
+          headers,
         });
+      });
 
-        forkJoin(requests)
-          .pipe(
-            catchError((err) => {
-              return of([]);
-            })
-          )
-          .subscribe((responses: any[]) => {
-            responses.forEach((imageData: Blob, j) => {
-              this.rawPicturesPerProfiles[i][j] = '';
-              const reader = new FileReader();
-              reader.onload = () => {
-                const currentImage = reader.result as string;
-                this.rawPicturesPerProfiles[i][j] = currentImage;
-              };
-              reader.readAsDataURL(imageData);
-            });
+      // forkJoin to wait for all image requests to complete
+      forkJoin(imageRequests).subscribe({
+        next: (responses: Blob[]) => {
+          responses.forEach((imageData: Blob, index: number) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const currentImage = reader.result as string;
+              // assign the fetched image to the corresponding produce item
+              this.produceList[index].image = currentImage;
+            };
+            reader.readAsDataURL(imageData);
           });
+        },
+        error: (error: any) => {
+          console.error('Error fetching images:', error);
+        }
       });
     });
   }
 
+
   scrollToInfo() {
-    const infoImageContainer = document.getElementById('learn-more-container');
+    const infoImageContainer = document.getElementById('marketplace-container');
     if (infoImageContainer) {
       infoImageContainer.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+
+  redirectToRegistration() {
+    this.router.navigate(['/register']);
   }
 }
