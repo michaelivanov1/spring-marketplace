@@ -82,4 +82,9 @@ export class HomePageComponent implements OnInit {
   redirectToRegistration() {
     this.router.navigate(['/register']);
   }
+
+  // eventually redirect to about component
+  learnMoreClick() {
+    this.router.navigate(['about']);
+  }
 }

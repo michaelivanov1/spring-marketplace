@@ -8,8 +8,6 @@
     </div>
 </div>
 
-<div class="main-container">
-
 
     <div class="marketplace-container" id="marketplace-container">
         <p class="featured-products-text">Featured Products</p>
@@ -24,16 +22,16 @@
         </div>
     </div>
 
-    <div class="register-now-container">
-        <div class="register-now-text-container">
-            <h1 class="register-now-header">Register Now</h1>
-            <h1 class="register-now-subheader">Create an account for free to start buying & selling produce today</h1>
-            <button (click)="redirectToRegistration()" class="register-now-button">Register Now</button>
+    <div class="goal-container">
+        <div class="goal-text-container">
+            <h1 class="goal-header">Our Goal</h1>
+            <h1 class="goal-subheader">is to provide an online marketplace for local farmers and consumers</h1>
+            <button (click)="learnMoreClick()" class="learn-more-button">Learn More</button>
         </div>
     </div>
     
 
-    <!-- <div class="rich-text-container">
+    <div class="rich-text-container">
         <div class="rich-text-image-container">
             <img class="rich-text-image" src="../../assets/home-page/rich-text.png">
         </div>
@@ -52,7 +50,15 @@
                     simplicity in your meals, where health meets mouthwatering flavor in every organic bite.</p>
             </div>
         </div>
-    </div> -->
+    </div>
+
+    <div class="register-now-container">
+        <div class="register-now-text-container">
+            <h1 class="register-now-header">Register Now</h1>
+            <h1 class="register-now-subheader">Create an account for free to start buying & selling produce today</h1>
+            <button (click)="redirectToRegistration()" class="register-now-button">Register Now</button>
+        </div>
+    </div>
 
     <!-- <div class="marketplace-container">
         <ng-container *ngFor="let user of userStandProfiles; let i = index">
@@ -196,4 +202,3 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion> -->
-</div>
