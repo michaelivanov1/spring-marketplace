@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
   userStand?: Observable<UserStand[]>;
   userStandProfiles: UserStand[] = [];
   produceList: any;
-  
+
   constructor(
     private userStandService: UserStandService,
     private http: HttpClient,
