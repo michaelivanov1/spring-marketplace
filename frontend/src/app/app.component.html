@@ -11,20 +11,20 @@
       </div>
       <div class="menu-items-center">
         <a mat-tab-link [routerLink]="['home']" (click)="setTitle('Home')"
-          routerLinkActive="selected-menu-item">Home</a>
+          routerLinkActive="selected-menu-item-navbar">Home</a>
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['profile']" (click)="setTitle('Profile')"
-          routerLinkActive="selected-menu-item">Profile</a>
+          routerLinkActive="selected-menu-item-navbar">Profile</a>
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['marketplace']" (click)="setTitle('Marketplace')"
-          routerLinkActive="selected-menu-item">Marketplace</a>
+          routerLinkActive="selected-menu-item-navbar">Marketplace</a>
         <a mat-tab-link *ngIf="isLoggedIn()" [routerLink]="['farmers']" (click)="setTitle('Farmers')"
-          routerLinkActive="selected-menu-item">Farmers</a>
+          routerLinkActive="selected-menu-item-navbar">Farmers</a>
         <div *ngIf="isSmallScreen">
           <a style="color: #3fa458" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login"
-            (click)="setTitle('Login')" routerLinkActive="selected-menu-item">Login</a>
+            (click)="setTitle('Login')" routerLinkActive="selected-menu-item-navbar">Login</a>
           <a style="color: #3fa458" mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register"
-            (click)="setTitle('Register')" routerLinkActive="selected-menu-item">Register</a>
+            (click)="setTitle('Register')" routerLinkActive="selected-menu-item-navbar">Register</a>
           <a style="color: #3fa458" mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart"
-            (click)="setTitle('Shopping Cart')" routerLinkActive="selected-menu-item">
+            (click)="setTitle('Shopping Cart')" routerLinkActive="selected-menu-item-navbar">
             <mat-icon>shopping_cart</mat-icon>
           </a>
           <a style="color: #3fa458" mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
@@ -32,11 +32,11 @@
       </div>
       <div *ngIf="!isSmallScreen" class="menu-items-right">
         <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/login" (click)="setTitle('Login')"
-          routerLinkActive="selected-menu-item">Login</a>
+          routerLinkActive="selected-menu-item-navbar">Login</a>
         <a mat-tab-link *ngIf="!isLoggedIn()" mat-button routerLink="/register" (click)="setTitle('Register')"
-          routerLinkActive="selected-menu-item">Register</a>
+          routerLinkActive="selected-menu-item-navbar">Register</a>
         <a mat-tab-link *ngIf="isLoggedIn()" mat-button routerLink="/shopping-cart" (click)="setTitle('Shopping Cart')"
-          routerLinkActive="selected-menu-item">
+          routerLinkActive="selected-menu-item-navbar">
           <mat-icon>shopping_cart</mat-icon>
         </a>
         <a mat-tab-link *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</a>
@@ -74,7 +74,31 @@
     </div>
   </div>
 
-  <div class="footer">
-    <p class="footer-text">&copy;Spring Marketplace - 2024</p>
+  <div class="footer-container">
+    <div class="footer-body">
+
+      <!-- <div class="footer-icons">
+        <mat-icon>code</mat-icon>
+      </div> -->
+
+      <div class="footer-nav">
+        <a mat-tab-link [routerLink]="['home']" (click)="setTitle('Home')" class="menu-item"
+          routerLinkActive="selected-menu-item-footer">Home</a>
+        <a mat-tab-link [routerLink]="['profile']" mat-tab-link *ngIf="isLoggedIn()" (click)="setTitle('Profile')"
+          class="menu-item" routerLinkActive="selected-menu-item-footer">Profile</a>
+        <a mat-tab-link [routerLink]="['marketplace']" mat-tab-link *ngIf="isLoggedIn()"
+          (click)="setTitle('Marketplace')" class="menu-item"
+          routerLinkActive="selected-menu-item-footer">Marketplace</a>
+        <a mat-tab-link [routerLink]="['farmers']" mat-tab-link *ngIf="isLoggedIn()" (click)="setTitle('Farmers')"
+          class="menu-item" routerLinkActive="selected-menu-item-footer">Farmers</a>
+        <!-- <a mat-tab-link [routerLink]="['about']" (click)="setTitle('About')" class="menu-item"
+          routerLinkActive="selected-menu-item-footer">About</a> -->
+        <a href="https://github.com/michaelivanov1/spring-marketplace" target="_blank" class="menu-item">Source Code</a>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p class="footer-text">&copy;Spring Marketplace - 2024</p>
+    </div>
   </div>
+
 </div>
