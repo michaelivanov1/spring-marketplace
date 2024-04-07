@@ -1,5 +1,5 @@
 <div class="banner-container">
-    <img class="banner-image" src="../../assets/home-page/home-banner.jpg">
+    <img class="banner-image" src="assets/home-page/home-banner.jpg">
     <div class="data-container">
         <p class="banner-title">SPRING MARKETPLACE</p>
         <p class="banner-description">An online farmers market connecting consumers with locally sourced, fresh
@@ -7,73 +7,73 @@
         <button (click)="scrollToInfo()" class="banner-info-button">SHOP NOW</button>
     </div>
 </div>
-
-<div class="main-container">
-
-
-    <div class="marketplace-container" id="marketplace-container">
-        <p class="featured-products-text">Featured Products</p>
-        <div *ngFor="let produce of produceList">
-            <div class="content">
-                <img class="product-image" [src]="produce.image || '../../../assets/profile-image-loading.gif'" />
-                <p class="product-name">{{ produce.foodName }}</p>
-                <p class="product-price">${{ produce.price }}</p>
-                <p class="product-qoh">{{ produce.qoh }} in stock</p>
-                <!-- <p class="product-">{{ produce.qoh }}</p> -->
-            </div>
-        </div>
-    </div>
-
-    <div class="register-now-container">
-        <div class="register-now-text-container">
-            <h1 class="register-now-header">Register Now</h1>
-            <h1 class="register-now-subheader">Create an account for free to start buying & selling produce today</h1>
-            <button (click)="redirectToRegistration()" class="register-now-button">Register Now</button>
-        </div>
-    </div>
-    
-
-    <!-- <div class="rich-text-container">
-        <div class="rich-text-image-container">
-            <img class="rich-text-image" src="../../assets/home-page/rich-text.png">
-        </div>
-        <div class="rich-text-description-container">
-            <p class="rich-text-title">Shop Fresh, Shop Organic</p>
-            <p class="rich-text-description">Embrace wholesome goodness with every bite. Shop fresh, shop organic –
-                because your well-being matters.</p>
-            <div class="rich-text-subcontainer">
-                <img class="subcontainer-img" src="../../assets/home-page/subcontainer-img1.png">
-                <p class="subcontainer-description">Pure & Fresh Selection: Immerse yourself in the pure essence of
-                    organic goodness, handpicked for its freshness and quality.</p>
-            </div>
-            <div class="rich-text-subcontainer">
-                <img class="subcontainer-img" src="../../assets/home-page/subcontainer-img2.png">
-                <p class="subcontainer-description">Simple, Healthy, and Incredibly Delicious: Rediscover the joy of
-                    simplicity in your meals, where health meets mouthwatering flavor in every organic bite.</p>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- <div class="marketplace-container">
-        <ng-container *ngFor="let user of userStandProfiles; let i = index">
-            <ng-container *ngFor="let produce of user?.produceList; let j = index">
-                <div *ngIf="rawPicturesPerProfiles[i] && rawPicturesPerProfiles[i][j]">
-                    <img class="product-image" [src]="rawPicturesPerProfiles[i][j]" />
-                    <div class="content">
-                        <p class="product-name">{{ produce?.foodName }}</p>
-                        <p class="product-qoh">{{ produce?.qoh }}x</p>
-                        <p class="product-seller">Seller: {{ user?.displayName }}</p>
-                        <p class="product-price">{{ produce?.price | currency: 'USD': 'symbol': '1.2-2' }}</p>
+<div class="featured-produce" id="featured-produce">
+    <div class="main-container">
+        <h2>Featured Produce</h2>
+        <div class="featured_produce__carousel-container">
+            <div class="featured-produce__carousel">
+                <div class="featured-produce__card" *ngFor="let produce of produceList">
+                    <img [src]="produce.image || '/assets/profile-image-loading.gif'" alt />
+                    <div class="featured-produce__card-details">
+                        <div class="featured-produce__card-food-name">{{ produce.foodName }}</div>
+                        <div class="featured-produce__card-food-price">${{ produce.price }}</div>
+                        <div class="featured-produce__card-food-stock">{{ produce.qoh }} in stock</div>
                     </div>
                 </div>
-            </ng-container>
-        </ng-container>
-    </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="info-container">
+    <div class="main-container main-container--extra-padding-top">
+        <h2 class="info-container__header">Our Goal</h2>
+        <h3 class="info-container__subheader">is to provide an online marketplace for local farmers and consumers</h3>
+        <!-- <button (click)="learnMoreClick()" class="info-container__cta">Learn More</button> -->
+    </div>
+</div>
+
+<div class="main-cmp">
+    <div class="main-container">
+        <div>
+            <img class="main-cmp__main-img" src="/assets/home-page/rich-text.png" alt>
+        </div>
+        <div>
+            <h2>Shop Fresh, Shop Organic</h2>
+            <div class="main-cmp__body-copy">
+                <p>Embrace wholesome goodness with every bite. Shop fresh, shop organic – because your well-being
+                    matters.</p>
+            </div>
+            <div class="main-cmp__icon-text-list">
+                <div>
+                    <img src="/assets/home-page/subcontainer-img1.png">
+                    <div class="main-cmp__icon-text-list-blurb">
+                        <p>Pure & Fresh Selection: Immerse yourself in the pure essence of organic goodness, handpicked
+                            for its freshness and quality.</p>
+                    </div>
+                </div>
+                <div>
+                    <img src="/assets/home-page/subcontainer-img2.png">
+                    <div class="main-cmp__icon-text-list-blurb">
+                        <p>Simple, Healthy, and Incredibly Delicious: Rediscover the joy of simplicity in your meals,
+                            where health meets mouthwatering flavor in every organic bite.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="info-container">
+    <div class="main-container">
+        <h2 class="info-container__header">Register Now</h2>
+        <h3 class="info-container__subheader">Create an account for free to start buying & selling produce today</h3>
+        <button (click)="redirectToRegistration()" class="info-container__cta">Register Now</button>
+    </div>
+</div>
 
 
-
-
-    <!-- 
+<!--
     <mat-accordion>
         <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -196,4 +196,3 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion> -->
-</div>

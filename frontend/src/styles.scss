@@ -12,12 +12,17 @@ body {
   background-image: url("assets/background.png");
   margin: 0;
   padding: 0;
+  font-size: 100%;
 }
 
-// currently selected menu item
-.selected-menu-item {
-  // border-bottom: 1px solid #ffde59;
+// currently selected menu item navbar
+.selected-menu-item-navbar {
   border-bottom: 1px solid green;
+}
+
+// currently selected menu item footer
+.selected-menu-item-footer {
+  // font-size: larger;
 }
 
 /* override all mat-card instances */
@@ -103,7 +108,9 @@ a:hover {
 }
 
 .about {
-  background-color: #f1efdd;
+  // background-color: #f1efdd;
+  background-color: white;
+  // border-top: 1px solid #e0e0e0;
   padding: 50px 300px;
   margin: auto 0;
   display: flex;
@@ -146,20 +153,55 @@ a:hover {
   }
 }
 
-.footer {
-  text-align: center;
-  background-color: #3fa458;
-  color: white;
-  font-family: Roboto, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 400;
-  height: 100px;
-  margin: 0rem;
-  width: 100vw;
-  bottom: 0;
+.footer-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  // background-color: black;
+  background-image: linear-gradient(180deg, rgba(106, 150, 31, 0.4), rgba(106, 150, 31, 0.9)), url('/assets/home-page/footer-banner.jpg');
+  color: white;
+  font-size: 1.25em;
+  // font-weight: 400;
+  // height: 20vh;
+  min-height: 20vh;
+  // margin: 0rem;
+  // bottom: 0;
+
+  .footer-body {
+    display: flex;
+    height: 70%;
+    flex: 1;
+    // .footer-icons {
+    //   gap: 3rem;
+   
+    //   justify-content: center;
+      justify-content: center;
+      align-items: center;
+    //   height: 50%;
+    // }
+
+    .footer-nav {
+      // flex-wrap: wrap;
+      gap: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+
+      .menu-item {
+        color: white;
+      }
+    }
+
+  }
+
+  .footer-copyright {
+    // background-color: darkgreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+  }
 
   .footer-text {
     text-align: center;
@@ -167,6 +209,20 @@ a:hover {
 }
 
 @media screen and (max-width: 768px) {
+
+  .footer-container {
+    padding: 20px 0;
+  }
+
+  .footer-nav {
+    gap: 1rem !important;
+    flex-direction: column;
+  }
+
+  .footer-copyright {
+    margin-top: 40px;
+  }
+
   .about-grid {
     flex: 0 1 calc(50% - 20px);
   }
@@ -191,11 +247,6 @@ a:hover {
   a {
     display: block;
     margin: 5px 0;
-  }
-
-  .selected-menu-item {
-    border: none;
-    color: #3fa458;
   }
 }
 

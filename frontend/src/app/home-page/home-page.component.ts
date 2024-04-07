@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
   userStand?: Observable<UserStand[]>;
   userStandProfiles: UserStand[] = [];
   produceList: any;
-  
+
   constructor(
     private userStandService: UserStandService,
     private http: HttpClient,
@@ -71,9 +71,8 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-
   scrollToInfo() {
-    const infoImageContainer = document.getElementById('marketplace-container');
+    const infoImageContainer = document.getElementById('featured-produce');
     if (infoImageContainer) {
       infoImageContainer.scrollIntoView({ behavior: 'smooth' });
     }
@@ -81,5 +80,10 @@ export class HomePageComponent implements OnInit {
 
   redirectToRegistration() {
     this.router.navigate(['/register']);
+  }
+
+  // eventually redirect to about component
+  learnMoreClick() {
+    this.router.navigate(['about']);
   }
 }
