@@ -73,7 +73,7 @@ export class HomePageComponent implements OnInit {
 
 
   scrollToInfo() {
-    const infoImageContainer = document.getElementById('marketplace-container');
+    const infoImageContainer = document.getElementById('featured-produce');
     if (infoImageContainer) {
       infoImageContainer.scrollIntoView({ behavior: 'smooth' });
     }

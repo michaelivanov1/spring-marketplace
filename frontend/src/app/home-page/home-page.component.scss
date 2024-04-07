@@ -436,11 +436,6 @@ a {
     .banner-container {
         display: none;
     }
-
-    .main-container {
-        padding: 0;
-        width: 100%;
-    }
 }
 
 @media screen and (max-width: 480px) {
@@ -458,8 +453,8 @@ a {
     }
 }
 
-.test-cmp {
-  > .test-container {
+.main-cmp {
+  > .main-container {
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -561,7 +556,7 @@ a {
   }
 }
 
-.test-container {
+.main-container {
   margin: 0 auto;
   padding: 100px 15px;
   max-width: 1250px;
