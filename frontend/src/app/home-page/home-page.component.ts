@@ -71,7 +71,6 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-
   scrollToInfo() {
     const infoImageContainer = document.getElementById('featured-produce');
     if (infoImageContainer) {
