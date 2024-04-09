@@ -184,8 +184,55 @@
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 
-  .search-block {
-    .search-control {
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    &__searchbox {
+      background: #fff;
+      display: flex;
+      gap: 5px;
+      justify-content: space-between;
+      border: medium solid black;
+      &:focus {
+        outline: solid;
+      }
+    }
+    &__input {
+      border: none;
+      border-top-left-radius: 360px;
+      border-bottom-left-radius: 360px;
+      &:focus {
+        outline: none;
+      }
+    }
+    &__clear {
+      background: #fff;
+      border: none;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+      }
+    }
+    &__searchbox,
+    &__clear {
+      border-radius: 360px;
+    }
+    &__searchbutton {
+      background: #fff;
+      border-radius: 360px;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 426px) {
+    .search-container {
+      flex-direction: row;
+      gap: 15px;
+      &__searchbox {
+        padding: 10px;
+      }
     }
   }
 

@@ -10,23 +10,30 @@
 <div class="product-items">
   <div class="container">
     <mat-card-content class="main-container">
-      <form (ngSubmit)="performSearch()">
-        <div class="search-container">
+      <div>
+        <form (ngSubmit)="performSearch()" class="search-container">
+          <div class="search-container__searchbox">
+            <input
+              type="text"
+              placeholder="Search..."
+              [(ngModel)]="searchTerm"
+              name="searchTerm"
+              class="search-container__input"
+            />
+            <input
+              (click)="clearSearch()"
+              type="button"
+              value="X"
+              class="search-container__clear"
+            />
+          </div>
           <input
-            type="text"
-            placeholder="Search..."
-            [(ngModel)]="searchTerm"
-            name="searchTerm"
+            type="submit"
+            value="Find Produce"
+            class="search-container__searchbutton"
           />
-          <input type="submit" value="Search" />
-          <input
-            *ngIf="searchTerm"
-            (click)="clearSearch()"
-            type="button"
-            value="X"
-          />
-        </div>
-      </form>
+        </form>
+      </div>
 
       <h2 style="margin-top: 10px; text-align: center" *ngIf="totalCount == 0">
         No items on marketplace
