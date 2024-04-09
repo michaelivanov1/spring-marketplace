@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserStandService } from '../user-stand/user-stand.service';
 import { UserStand } from '../user-stand/user-stand';
 import { Observable, catchError, forkJoin, of } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { SearchBarComponent } from '../common-components/search-bar/search-bar.component';
 import { CartitemDialogComponent } from '../dialogs/cartitem-dialog/cartitem-dialog.component';
 import jwt_decode from 'jwt-decode';
 import { ProfileService } from '@app/profile/profile.service';
@@ -21,11 +20,13 @@ export class MarketplaceComponent {
   selectedProduct: any;
   userStand?: Observable<UserStand[]>;
   userStandProfiles: UserStand[] = [];
+  filteredUserStands: UserStand[] = [];
   rawPicturesPerProfiles: string[][];
+  filteredRawPicturesPerProfiles: string[][] = [];
   decodedToken: any;
   loggedInUser: any;
   totalCount: Number | undefined;
-  filteredList: any[] = [];
+  searchTerm: string = '';
 
   constructor(
     private userStandService: UserStandService,
@@ -36,6 +37,7 @@ export class MarketplaceComponent {
     private http: HttpClient
   ) {
     this.rawPicturesPerProfiles = [['']];
+    this.filteredRawPicturesPerProfiles = [['']];
   }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class MarketplaceComponent {
       this.userStandProfiles = users.filter(
         (user) => user.produceList && user.produceList.length > 0
       );
+      this.filteredUserStands = this.userStandProfiles;
       // get count of items on marketplace
       this.totalCount = this.userStandProfiles.reduce((count, user) => {
         return count + user.produceList.length;
@@ -59,6 +62,7 @@ export class MarketplaceComponent {
 
       this.userStandProfiles.forEach((profile, i) => {
         this.rawPicturesPerProfiles[i] = [];
+        this.filteredRawPicturesPerProfiles[i] = [];
         const requests = profile.produceList.map((e) =>
           this.http.get(`${BASEURL}file/${e.produceImage}`, {
             headers,
@@ -74,10 +78,12 @@ export class MarketplaceComponent {
           .subscribe((responses: any[]) => {
             responses.forEach((imageData: Blob, j) => {
               this.rawPicturesPerProfiles[i][j] = '';
+              this.filteredRawPicturesPerProfiles[i][j] = '';
               const reader = new FileReader();
               reader.onload = () => {
                 const currentImage = reader.result as string;
                 this.rawPicturesPerProfiles[i][j] = currentImage;
+                this.filteredRawPicturesPerProfiles[i][j] = currentImage;
               };
               reader.readAsDataURL(imageData);
             });
@@ -124,13 +130,56 @@ export class MarketplaceComponent {
     return regex.test(input);
   }
 
-  // updateList(query: string): void {
-  //   this.filterList(query);
-  // }
+  performSearch() {
+    if (!this.searchTerm.trim()) {
+      // If search term is empty, reset to default and return
+      this.filteredUserStands = [...this.userStandProfiles];
+      this.filteredRawPicturesPerProfiles = [...this.rawPicturesPerProfiles];
+      return;
+    }
+    this.filteredRawPicturesPerProfiles = [[]];
 
-  // filterList(query: string): void {
-  //   this.filteredList = this.userStand.filter((item) =>
-  //     item.name.toLowerCase().includes(query.toLowerCase())
-  //   );
-  // }
+    // Filter user stands based on produce names matching search term
+    this.filteredUserStands = this.userStandProfiles.map((userStand, i) => {
+      // Filter produce within each user stand to only include those that match the search term
+      const filteredProduces = userStand.produceList.filter((produce, j) => {
+        if (
+          produce.foodName.toLowerCase().includes(this.searchTerm.toLowerCase())
+        ) {
+          const produceNameMatches = produce.foodName;
+          this.filteredRawPicturesPerProfiles[i].push(
+            this.rawPicturesPerProfiles[i][j]
+          );
+        }
+        const produceNameMatches = produce.foodName
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase());
+        return produceNameMatches;
+      });
+      // Create a new user stand object with filtered produces
+      this.filteredRawPicturesPerProfiles.push([]);
+      return {
+        id: userStand.id,
+        email: userStand.email,
+        displayName: userStand.displayName,
+        produceList: filteredProduces,
+      };
+    });
+
+    // Filter the pictures array based on the filtered user stands
+    // this.filteredUserStands.map((filteredUserStand, i) => {
+    //   this.filteredRawPicturesPerProfiles.push([]);
+    //   return filteredUserStand.produceList.map((produce, j) => {
+    //     this.filteredRawPicturesPerProfiles[i].push(
+    //       this.rawPicturesPerProfiles[i][j]
+    //     );
+    //   });
+    // });
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
+    this.filteredUserStands = [...this.userStandProfiles];
+    this.filteredRawPicturesPerProfiles = [...this.rawPicturesPerProfiles];
+  }
 }

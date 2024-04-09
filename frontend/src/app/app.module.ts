@@ -42,7 +42,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     FarmersListComponent,
     OrderDetailsComponent,
     FarmersProfileComponent,
-    HomePageComponent
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,10 +53,9 @@ import { HomePageComponent } from './home-page/home-page.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}
