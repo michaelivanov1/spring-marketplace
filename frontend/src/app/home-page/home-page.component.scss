@@ -286,40 +286,6 @@
 
 
 
-mat-expansion-panel {
-  padding: 10px;
-  margin: 20px auto;
-  width: 50%;
-
-  mat-panel-title {
-    font-size: 22px;
-    padding: 10px;
-  }
-
-  a {
-    font-size: 18px;
-    color: #3fa458;
-  }
-
-  .point {
-    margin-bottom: 10px;
-  }
-
-  .point p {
-    margin: 0;
-  }
-}
-
-p {
-  line-height: 1.2;
-  font-size: 18px;
-}
-
-a {
-  color: purple;
-  font-size: 16px;
-}
-
 @media screen and (max-width: 1024px) {
   .banner-container {
     width: 100%;
@@ -409,21 +375,6 @@ a {
 
   .banner-container {
     display: none;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  mat-expansion-panel {
-    padding: 20px;
-
-    mat-panel-title {
-      font-size: 14px;
-      padding: 10px;
-    }
-
-    p {
-      font-size: 12px;
-    }
   }
 }
 
