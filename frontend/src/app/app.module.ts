@@ -25,6 +25,7 @@ import { OrderComponent } from './order/order-home/order.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { FarmersProfileComponent } from './farmers-profile/farmers-profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     OrderDetailsComponent,
     FarmersProfileComponent,
     HomePageComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
