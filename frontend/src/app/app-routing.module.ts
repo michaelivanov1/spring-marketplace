@@ -11,6 +11,7 @@ import { FarmersListComponent } from './farmers-list/farmers-list.component';
 import { OrderDetailsComponent } from "@app/order-details/order-details.component";
 import { FarmersProfileComponent } from './farmers-profile/farmers-profile.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { AboutComponent } from './about/about.component';
 
 
 const routes: Routes = [
@@ -53,8 +54,12 @@ const routes: Routes = [
     path: 'farmers-profile',
     component: FarmersProfileComponent,
     title: 'Farmers Profile'
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    title: 'About'
   }
-
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
