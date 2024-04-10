@@ -173,10 +173,10 @@ a:hover {
     flex: 1;
     // .footer-icons {
     //   gap: 3rem;
-   
+
     //   justify-content: center;
-      justify-content: center;
-      align-items: center;
+    justify-content: center;
+    align-items: center;
     //   height: 50%;
     // }
 
@@ -209,6 +209,10 @@ a:hover {
 }
 
 @media screen and (max-width: 768px) {
+  .selected-menu-item-navbar {
+    border-bottom: none;
+    color: green;
+  }
 
   .footer-container {
     padding: 20px 0;
