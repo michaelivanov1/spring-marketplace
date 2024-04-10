@@ -64,6 +64,70 @@
 
 
 
+
+// .slider-wrapper {
+//   width: 100vw;
+//   border: 2px solid red;
+//   position: relative;
+// }
+
+// .slider {
+//   display: grid;
+//   grid-auto-flow: column;
+//   scroll-snap-type: x mandatory;
+//   width: 100vw;
+//   height: 83vh;
+//   border: 5px solid #fff;
+//   box-shadow: 0 2px 15px rgba(#000, 0.2), 0 2px 20px rgba(#000, 0.25);
+//   overflow-y: hidden;
+//   overflow-x: auto;
+//   scroll-behavior: smooth;
+//   -ms-overflow-style: none;
+//   scrollbar-width: none;
+
+//   &::-webkit-scrollbar {
+//     display: none;
+//   }
+// }
+
+// .slide {
+//   scroll-snap-align: start;
+//   width: 100vw;
+//   background-size: cover;
+//   background-position: center;
+//   background-repeat: no-repeat;
+// }
+
+// .dots {
+//   position: absolute;
+//   bottom: 20px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   gap: 15px;
+//   z-index: 1;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   a {
+//     $dots-size: 20px;
+
+//     width: $dots-size;
+//     height: $dots-size;
+//     border-radius: 50%;
+//     background-color: black;
+//     opacity: 0.75;
+//     transition: opacity ease 250ms;
+//     cursor: pointer;
+
+//     &:hover {
+//       opacity: 1;
+//     }
+//   }
+// }
+
+
+
 .marketplace-container {
 
   padding: 40px;
