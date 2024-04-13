@@ -133,7 +133,7 @@
 // }
 
 .banner {
-  background-image: url(../../assets/marketplace-banner.jpg);
+  background-image: url(/assets/marketplace-banner.jpg);
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
@@ -187,11 +187,11 @@
   .search-container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.3125em;
     &__searchbox {
       background: #fff;
       display: flex;
-      gap: 5px;
+      gap: 0.3125em;
       justify-content: space-between;
       border: medium solid black;
       &:focus {
@@ -226,12 +226,13 @@
     }
   }
 
-  @media only screen and (min-width: 426px) {
+  @media only screen and (min-width: 470px) {
     .search-container {
       flex-direction: row;
-      gap: 15px;
+      padding-left: 0.75em;
+      gap: 0.9375em;
       &__searchbox {
-        padding: 10px;
+        padding: 0.625em;
       }
     }
   }
