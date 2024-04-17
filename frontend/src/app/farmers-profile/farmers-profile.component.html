@@ -62,69 +62,99 @@
 </mat-card> -->
 
 <div class="px-4">
-    <div class="row py-4">
-        <div class="col-12 col-lg-4 pb-4">
-            <div class="profile-card">
-                <div class="row">
-                    <div class="col-12 py-3">
-                        <div class="sellerProfile shadow">
-                            <img class="profile-image" *ngIf="!profileImageLoaded"
-                                src="../../../assets/profile-image-loading.gif" alt="Loading Image..." />
-                            <img class=" profile-image" *ngIf="profileImageLoaded"
-                                [src]="imageSrc || '../../../assets/default-avatar.png'" alt="User's Profile Pic" />
-                        </div>
-                    </div>
-
-                    <div *ngIf="profile" class="col-12 py-3 pb-0">
-                        <div class="row">
-                            <div class="col-12 mt_3">
-                                <div class="row">
-                                    <div *ngIf="profile" class="profileName">
-                                        {{ profile.displayName }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="profileDescription">
-                                    <p>{{ profile.description != '' ? profile.description : 'This user has not set up a profile description' }}</p>
-                                </div>
-                            </div>                        
-                        </div>
-                    </div>
-                </div>
+  <div class="row py-4">
+    <div class="col-12 col-lg-4 pb-4">
+      <div class="profile-card">
+        <div class="row">
+          <div class="col-12 py-3">
+            <div class="sellerProfile shadow">
+              <img
+                class="profile-image"
+                *ngIf="!profileImageLoaded"
+                src="../../../assets/profile-image-loading.gif"
+                alt="Loading Image..."
+              />
+              <img
+                class="profile-image"
+                *ngIf="profileImageLoaded"
+                [src]="imageSrc || '../../../assets/default-avatar.png'"
+                alt="User's Profile Pic"
+              />
             </div>
-        </div>
+          </div>
 
-        <div class="col-12 col-lg-8">
+          <div *ngIf="profile" class="col-12 py-3 pb-0">
             <div class="row">
-                <h2>*Buying from user profiles is currently in progress*</h2>
-                <div *ngIf="userStand.produceList.length == 0">
-                    <p style="color: rgb(173, 18, 18); font-size: 18px;">This user currently has nothing for sale</p>
+              <div class="col-12 mt_3">
+                <div class="row">
+                  <div *ngIf="profile" class="profileName">
+                    {{ profile.displayName }}
+                  </div>
                 </div>
+              </div>
 
-                <div *ngFor="let produce of userStand.produceList; let i = index" class="col-lg-4 col-md-6 col-12 py-4">
-                    <div class="item-card">
-                        <div class="grid-item" (mouseenter)="onHover(produce)" (mouseleave)="onLeave()"
-                            [ngStyle]="{ cursor: getCursor() }">
-                            <div class="item-data">
-                                <img class="product-image" [src]="rawProduceImg[i] || '../../../assets/profile-image-loading.gif'" />
-                                <div class="content">
-                                    <p class="product-name">{{ produce.foodName }}</p>
-                                    <p class="product-price">${{ produce.price }}</p>
-                                    <p class="product-qoh">
-                                        {{ produce.qoh == 0 ? "Out of stock!" : produce.qoh + "x" }}
-                                    </p>
-                                    <p class="product-harvestdate">
-                                        Harvested: {{ produce.harvestDate }}
-                                    </p>
-                                    <!-- <button class="addToCart">Add to cart</button> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              <div>
+                <div class="profileDescription">
+                  <p>
+                    {{
+                      profile.description != ""
+                        ? profile.description
+                        : "This user has not set up a profile description"
+                    }}
+                  </p>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+
+    <div class="col-12 col-lg-8">
+      <div class="row">
+        <h2>*Buying from user profiles is currently in progress*</h2>
+        <div *ngIf="userStand.produceList.length == 0">
+          <p style="color: rgb(173, 18, 18); font-size: 18px">
+            This user currently has nothing for sale
+          </p>
+        </div>
+
+        <div
+          *ngFor="let produce of userStand.produceList; let i = index"
+          class="col-lg-4 col-md-6 col-12 py-4"
+        >
+          <div class="item-card">
+            <div
+              class="grid-item"
+              (mouseenter)="onHover(produce)"
+              (mouseleave)="onLeave()"
+              [ngStyle]="{ cursor: getCursor() }"
+            >
+              <div class="item-data">
+                <img
+                  class="product-image"
+                  [src]="
+                    rawProduceImg[i] ||
+                    '../../../assets/profile-image-loading.gif'
+                  "
+                  alt="{{ produce.foodName }}"
+                />
+                <div class="content">
+                  <p class="product-name">{{ produce.foodName }}</p>
+                  <p class="product-price">${{ produce.price }}</p>
+                  <p class="product-qoh">
+                    {{ produce.qoh == 0 ? "Out of stock!" : produce.qoh + "x" }}
+                  </p>
+                  <p class="product-harvestdate">
+                    Harvested: {{ produce.harvestDate }}
+                  </p>
+                  <!-- <button class="addToCart">Add to cart</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
