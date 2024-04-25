@@ -52,7 +52,7 @@
 
   .search-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.3125em;
     &__searchbox {
       background: #fff;
@@ -84,10 +84,16 @@
       border-radius: 360px;
     }
     &__searchbutton {
-      background: #fff;
-      border-radius: 360px;
+      border: none;
+      background: none;
       &:hover {
+        border-radius: 360px;
         box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+      }
+      > mat-icon {
+        width: 23px;
+        height: 23px;
+        font-size: 23px;
       }
     }
   }
@@ -99,6 +105,21 @@
       gap: 0.9375em;
       &__searchbox {
         padding: 0.625em;
+      }
+    }
+    .search-container {
+      &__searchbutton {
+        border: none;
+        background: none;
+        &:hover {
+          border-radius: 360px;
+          box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+        }
+        > mat-icon {
+          width: 36px;
+          height: 36px;
+          font-size: 36px;
+        }
       }
     }
   }
