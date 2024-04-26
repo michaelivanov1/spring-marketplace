@@ -43,6 +43,7 @@ export class ProfileComponent implements OnInit {
   profileImageLoaded: Boolean = false;
   rawProduceImg: string[];
   tempUUID: string = '';
+  searchTerm: string;
 
   constructor(
     private http: HttpClient,
@@ -92,6 +93,7 @@ export class ProfileComponent implements OnInit {
     this.userStandDataExists = false;
     this.imageSrc = '';
     this.rawProduceImg = [];
+    this.searchTerm = '';
   }
 
   // grab all users profile data & listings on page init
@@ -748,5 +750,17 @@ export class ProfileComponent implements OnInit {
     let regex =
       /[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/i;
     return regex.test(input);
+  }
+
+  performSearch() {
+    if (!this.searchTerm.trim()) {
+      // If search term is empty, reset to default and return
+
+      return;
+    }
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
   }
 }

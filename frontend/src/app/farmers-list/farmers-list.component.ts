@@ -13,16 +13,17 @@ import jwt_decode from 'jwt-decode';
 @Component({
   selector: 'app-farmers-list',
   templateUrl: './farmers-list.component.html',
-  styleUrls: ['./farmers-list.component.scss']
+  styleUrls: ['./farmers-list.component.scss'],
 })
 export class FarmersListComponent implements OnInit {
-
   profile: Observable<Profile[]> | undefined;
   profiles: Profile[] = [];
+  filterProfiles: Profile[] = [];
   creationDateFormatted!: Date;
   profileImages: any = [];
   decodedToken: any;
   loggedInUser: any;
+  searchTerm: string = '';
 
   constructor(
     private profileService: ProfileService,
@@ -30,33 +31,30 @@ export class FarmersListComponent implements OnInit {
     private router: Router,
     private sharedService: SharedService,
     private userStandService: UserStandService
-  ) { }
-
+  ) {}
 
   ngOnInit(): void {
-
     this.decodedToken = jwt_decode(localStorage.getItem('jwtToken') + '');
     this.profileService.getOne(this.decodedToken.sub);
     this.loggedInUser = this.decodedToken.sub;
 
-    this.profileService.get().subscribe(
-      (profiles) => {
-        this.profiles = profiles;
-        this.fetchProfileImages();
+    this.profileService.get().subscribe((profiles) => {
+      this.profiles = profiles;
+      this.fetchProfileImages();
+      this.filterProfiles = profiles;
+      // grab each profile's produceList size. used to display # of listings
+      for (let i = 0; i < this.profiles.length; i++) {
+        this.profiles[i].produceListSize = 0;
 
-        // grab each profile's produceList size. used to display # of listings
-        for (let i = 0; i < this.profiles.length; i++) {
-          this.profiles[i].produceListSize = 0;
-
-          this.userStandService.getOne(this.profiles[i].email).subscribe(
-            (userStands) => {
-              this.profiles[i].produceListSize! += userStands.produceList.length;
+        this.userStandService
+          .getOne(this.profiles[i].email)
+          .subscribe((userStands) => {
+            if (userStands) {
+              this.profiles[i].produceListSize = userStands.produceList.length;
             }
-          )
-        }
-        console.log(this.profiles.map((p) => p.produceListSize))
+          });
       }
-    );
+    });
   }
 
   fetchProfileImages() {
@@ -67,10 +65,11 @@ export class FarmersListComponent implements OnInit {
           `Bearer ${localStorage.getItem('jwtToken')}`
         );
 
-        this.http.get(`${BASEURL}file/${profile.profileImage}`, {
-          headers,
-          responseType: 'blob',
-        })
+        this.http
+          .get(`${BASEURL}file/${profile.profileImage}`, {
+            headers,
+            responseType: 'blob',
+          })
           .subscribe((data: any) => {
             const reader = new FileReader();
             reader.onload = () => {
@@ -92,4 +91,22 @@ export class FarmersListComponent implements OnInit {
     return new Date(dateString);
   }
 
+  performSearch() {
+    if (!this.searchTerm.trim()) {
+      // If search term is empty, reset to default and return
+      this.filterProfiles = [...this.profiles];
+      return;
+    }
+    this.filterProfiles = this.filterProfiles.filter((profile) => {
+      return profile.displayName
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase());
+    });
+    console.log(this.filterProfiles);
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
+    this.filterProfiles = [...this.profiles];
+  }
 }

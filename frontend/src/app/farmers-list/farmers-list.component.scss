@@ -1,133 +1,207 @@
 .banner {
-    background-image: url(../../assets/farmers-banner.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+  background-image: url(../../assets/farmers-banner.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: auto;
+  text-align: center;
+
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
-    height: auto;
-    text-align: center;
+    padding: 195px 0px;
 
-    .overlay {
-        background-color: rgba(0, 0, 0, 0.7);
-        width: 100%;
-        padding: 195px 0px;
+    h1 {
+      font-size: 50px;
+      color: #0fc263;
+      font-weight: 900;
+      text-transform: uppercase;
 
-        h1 {
-            font-size: 50px;
-            color: #0fc263;
-            font-weight: 900;
-            text-transform: uppercase;
-
-            img {
-                width: 42px;
-                height: 28px;
-                margin-top: -60px;
-            }
-        }
+      img {
+        width: 42px;
+        height: 28px;
+        margin-top: -60px;
+      }
     }
+  }
 }
 
-
 .container-main {
-    .item-card {
-        background-color: rgba(211, 211, 211, 0.306);
-        position: relative;
-        cursor: pointer;
+  .search-container {
+    margin: 0.9375em 0 0 1.9375em;
+    display: flex;
+    flex-direction: row;
+    gap: 0.3125em;
+    &__searchbox {
+      background: #fff;
+      display: flex;
+      gap: 0.3125em;
+      justify-content: space-between;
+      border: medium solid black;
+      &:focus {
+        outline: solid;
+      }
+    }
+    &__input {
+      border: none;
+      border-top-left-radius: 360px;
+      border-bottom-left-radius: 360px;
+      &:focus {
+        outline: none;
+      }
+    }
+    &__clear {
+      background: #fff;
+      border: none;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+      }
+    }
+    &__searchbox,
+    &__clear {
+      border-radius: 360px;
+    }
+    &__searchbutton {
+      border: none;
+      background: none;
+      &:hover {
+        border-radius: 360px;
+        box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+      }
+      > mat-icon {
+        width: 23px;
+        height: 23px;
+        font-size: 23px;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 470px) {
+    .search-container {
+      flex-direction: row;
+      margin: 0.9375em 0 0 0.9375em;
+      padding-left: 0.75em;
+      gap: 0.9375em;
+      &__searchbox {
+        padding: 0.625em;
+      }
+    }
+    .search-container {
+      &__searchbutton {
+        border: none;
+        background: none;
+        &:hover {
+          border-radius: 360px;
+          box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+        }
+        > mat-icon {
+          width: 36px;
+          height: 36px;
+          font-size: 36px;
+        }
+      }
+    }
+  }
+  .item-card {
+    background-color: rgba(211, 211, 211, 0.306);
+    position: relative;
+    cursor: pointer;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    height: 250px;
+    transition: transform 0.3s ease-in-out;
+
+    .content {
+      padding: 10px 20px;
+    }
+
+    .logged-in-user {
+      color: #0fc263;
+    }
+
+    .creationDate {
+      position: absolute;
+      bottom: 10px;
+      left: 0px;
+      right: 0%;
+    }
+
+    .seller-profile {
+      width: 80px;
+      text-align: center;
+      height: 80px;
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      padding: 6px;
+      margin: 0% auto;
+
+      .product-image {
+        width: 100%;
+        height: 100%;
         border-radius: 8px;
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;
         -ms-border-radius: 8px;
         -o-border-radius: 8px;
-        height: 250px;
-        transition: transform 0.3s ease-in-out;
-
-        .content {
-            padding: 10px 20px;
-        }
-
-        .logged-in-user {
-            color: #0fc263;
-        }
-
-        .creationDate {
-            position: absolute;
-            bottom: 10px;
-            left: 0px;
-            right: 0%;
-        }
-
-        .seller-profile {
-            width: 80px;
-            text-align: center;
-            height: 80px;
-            border-radius: 8px;
-            -webkit-border-radius: 8px;
-            -moz-border-radius: 8px;
-            -ms-border-radius: 8px;
-            -o-border-radius: 8px;
-            padding: 6px;
-            margin: 0% auto;
-
-            .product-image {
-                width: 100%;
-                height: 100%;
-                border-radius: 8px;
-                -webkit-border-radius: 8px;
-                -moz-border-radius: 8px;
-                -ms-border-radius: 8px;
-                -o-border-radius: 8px;
-            }
-        }
-
-        .listing {
-            font-weight: 500;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 16px;
-            color: #999999;
-        }
-
-        .profile-name {
-            text-transform: capitalize;
-            font-size: 22px;
-            font-weight: 900;
-            margin-top: 20px;
-        }
-
-        .profile-description {
-            font-weight: 500;
-            margin-top: 20px;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .profile-date-created {
-            font-weight: 900;
-            text-align: center;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
+      }
     }
-    .item-card:hover {
-        transform: scale(1.03);
-        background-color: rgba(211, 211, 211, 0.6);
+
+    .listing {
+      font-weight: 500;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 16px;
+      color: #999999;
     }
+
+    .profile-name {
+      text-transform: capitalize;
+      font-size: 22px;
+      font-weight: 900;
+      margin-top: 20px;
+    }
+
+    .profile-description {
+      font-weight: 500;
+      margin-top: 20px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .profile-date-created {
+      font-weight: 900;
+      text-align: center;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  }
+  .item-card:hover {
+    transform: scale(1.03);
+    background-color: rgba(211, 211, 211, 0.6);
+  }
 }
 
-@media(max-width:600px) {
-    .banner {
-        .overlay {
-            padding: 80px 0px;
+@media (max-width: 600px) {
+  .banner {
+    .overlay {
+      padding: 80px 0px;
 
-            h1 {
-                font-size: 30px !important;
+      h1 {
+        font-size: 30px !important;
 
-                img {
-                    width: 25px;
-                    height: 15px;
-                    margin-top: -40px;
-                }
-            }
+        img {
+          width: 25px;
+          height: 15px;
+          margin-top: -40px;
         }
+      }
     }
+  }
 }

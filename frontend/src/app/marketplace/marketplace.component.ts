@@ -165,16 +165,6 @@ export class MarketplaceComponent {
         produceList: filteredProduces,
       };
     });
-
-    // Filter the pictures array based on the filtered user stands
-    // this.filteredUserStands.map((filteredUserStand, i) => {
-    //   this.filteredRawPicturesPerProfiles.push([]);
-    //   return filteredUserStand.produceList.map((produce, j) => {
-    //     this.filteredRawPicturesPerProfiles[i].push(
-    //       this.rawPicturesPerProfiles[i][j]
-    //     );
-    //   });
-    // });
   }
 
   clearSearch() {
