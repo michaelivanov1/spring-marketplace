@@ -38,7 +38,8 @@
       display: flex;
       gap: 0.3125em;
       justify-content: space-between;
-      border: medium solid black;
+      border: 1px solid black;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
       &:focus {
         outline: solid;
       }
@@ -54,8 +55,17 @@
     &__clear {
       background: #fff;
       border: none;
+
       &:hover {
         box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
+      }
+      &:disabled {
+        visibility: hidden;
+      }
+      > mat-icon {
+        width: 23px;
+        height: 23px;
+        font-size: 23px;
       }
     }
     &__searchbox,
@@ -70,9 +80,9 @@
         box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
       }
       > mat-icon {
-        width: 23px;
-        height: 23px;
-        font-size: 23px;
+        width: 33px;
+        height: 33px;
+        font-size: 33px;
       }
     }
   }

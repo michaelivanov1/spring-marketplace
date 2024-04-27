@@ -11,7 +11,11 @@
   <div class="container">
     <mat-card-content class="main-container">
       <div>
-        <form (ngSubmit)="performSearch()" class="search-container">
+        <form
+          (ngSubmit)="performSearch()"
+          (submit)="(searchTerm)"
+          class="search-container"
+        >
           <div class="search-container__searchbox">
             <input
               type="text"
@@ -20,12 +24,14 @@
               name="searchTerm"
               class="search-container__input"
             />
-            <input
+            <button
+              [disabled]="!searchTerm"
               (click)="clearSearch()"
               type="button"
-              value="X"
               class="search-container__clear"
-            />
+            >
+              <mat-icon>clear</mat-icon>
+            </button>
           </div>
           <button class="search-container__searchbutton" type="submit">
             <mat-icon>search</mat-icon>
