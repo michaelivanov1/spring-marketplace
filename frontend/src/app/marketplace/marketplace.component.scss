@@ -70,11 +70,16 @@
       border: none;
       border-top-left-radius: 360px;
       border-bottom-left-radius: 360px;
+      padding: 0 0 0 1.25em;
       &:focus {
         outline: none;
       }
     }
     &__clear {
+      display: flex;
+      align-items: center;
+      margin: 0 0.625em 0 0;
+      transition: box-shadow 0.2s linear;
       background: #fff;
       border: none;
 
@@ -97,6 +102,9 @@
     &__searchbutton {
       border: none;
       background: none;
+      display: flex;
+      align-items: center;
+      transition: box-shadow 0.2s linear;
       &:hover {
         border-radius: 360px;
         box-shadow: rgba(0, 0, 0, 0.6) 0px 7px 29px 0px;
